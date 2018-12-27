@@ -1,0 +1,22 @@
+{
+    "rulesDirectory": ["tslint-plugin-prettier"],
+    "defaultSeverity": "error",
+    "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+    "jsRules": {},
+    "rules": {
+        "prettier": true,
+        "interface-name": ["never-prefix"],
+        "interface-over-type-literal": false,
+        "member-access": [false],
+        "ordered-imports": false,
+        "no-unused-expression": true,
+        "no-console": [false],
+        "no-var-requires": false,
+        "arrow-parens": false,
+        "object-literal-sort-keys": false,
+        "object-literal-key-quotes": [true, "as-needed"],
+        "only-arrow-functions": false,
+        "jsx-no-multiline-js": false,
+        "jsx-no-lambda": false
+    }
+}

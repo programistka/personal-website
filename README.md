@@ -1,23 +1,28 @@
-# Personal Website
+# Gatsby.js MDX Blog Starter Project
 
-My [personal website](https://www.robertcooper.me/) used to display blog posts, portfolio items, and some other random things. The site is hosted on Netlify and is easily updated with Netlify's continuous deployment system.
+A starter project in [Gatsby.js](https://www.gatsbyjs.org/) with [MDX](https://github.com/mdx-js/mdx).
 
-The information for the API used to display the recent github activity is found [in this repository](https://github.com/robertcoopercode/github-contributions).
+## Features
 
-## Local Development
+* MDX: JavaScript/React in Markdown
+  * see */mdx-example* blog post
+* Prism.js: Syntax Highlighting
+* Pagination
+* Categories
+* Styled Components
 
-To develop the application locally, first clone the repository.
+## Setup
 
-```bash
-$ git clone git@github.com:robertcoopercode/personal-website.git
-```
+* `git clone git@github.com:rwieruch/gatsby-mdx-blog-starter-project.git`
+* `cd gatsby-mdx-blog-starter-project`
+* `npm install`
+* `gatsby develop`
+* visit http://localhost:8000
 
-Next, install the project dependencies using `yarn`.
+## Setup via Gatsby CLI
 
-Now you can run `yarn dev` to automatically watch and compile assets, start a local Express server at `localhost:8080`, and start a Lambda functions server at `localhost:9000`. The Express server is setup to proxy Lambda function requests to `localhost:9000`.
-
-In order to run the API calls in the app, an `.env` file will need to be created with all of the appropriate keys & values. The `.env.example` contains all the environment variable keys.
-
-## Deploy to Production
-
-Deploying to production is as easy as pushing local changes to Github's `master` branch on the repository 🙌.
+* `gatsby new gatsby-mdx-blog-starter-project git@github.com:rwieruch/gatsby-mdx-blog-starter-project.git`
+* `cd gatsby-mdx-blog-starter-project`
+* `npm install`
+* `gatsby develop`
+* visit http://localhost:8000
