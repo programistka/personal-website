@@ -1,9 +1,9 @@
 import Img from 'gatsby-image';
 import React from 'react';
+import posed from 'react-pose';
 import styled from 'styled-components';
 import { graphql } from 'gatsby';
 
-import BlogCard from '../components/BlogCard';
 import Email from '../components/icons/Email';
 import Github from '../components/icons/Github';
 import Layout from '../components/Layout';
@@ -65,6 +65,11 @@ const Headshot = styled(Img)`
     `};
 `;
 
+const AnimatedHeadshot = posed(Headshot)({
+    enter: { x: 0, opacity: 1 },
+    exit: { x: 50, opacity: 0 },
+});
+
 const Intro = styled.div`
     align-self: center;
     letter-spacing: 1.5px;
@@ -80,6 +85,11 @@ const Intro = styled.div`
         max-width: 100%;
     `};
 `;
+
+const AnimatedIntro = posed(Intro)({
+    enter: { x: 0, opacity: 1 },
+    exit: { x: 50, opacity: 0 },
+});
 
 const IntroTitle = styled.span`
     font-family: 'Scope One';
@@ -170,6 +180,11 @@ const ProjectDescription = styled.p`
     line-height: 1.4;
 `;
 
+const AnimatedTitle = posed(Title)({
+    enter: { y: 0, opacity: 1 },
+    exit: { y: 50, opacity: 0 },
+});
+
 export default function Index({
     data: {
         site,
@@ -193,7 +208,7 @@ export default function Index({
                         alt="Robert Cooper's headshot"
                     />
                     {/* Intro */}
-                    <Intro>
+                    <AnimatedIntro>
                         <IntroTitle>I'm Robert Cooper,</IntroTitle>
                         <IntroDescription>
                             a front end web developer that <strong>writes web development</strong>{' '}
@@ -223,18 +238,18 @@ export default function Index({
                                 </Link>
                             </SocialMediaItem>
                         </SocialMedia>
-                    </Intro>
+                    </AnimatedIntro>
                 </HeaderWrapper>
             </Header>
             <PageWrapper>
                 <RecentPosts>
-                    <Title as="h2">Recent Posts</Title>
+                    <AnimatedTitle as="h2">Recent Posts</AnimatedTitle>
                     <BlogList posts={posts} />
                     <Button to="/blog">See all posts</Button>
                 </RecentPosts>
                 <Divider />
                 <Section>
-                    <Title as="h2">Recent Projects</Title>
+                    <AnimatedTitle as="h2">Recent Projects</AnimatedTitle>
                     <Projects>
                         {projects.map(({ node: project }) => (
                             <Project>

@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import posed from 'react-pose';
+
 import { media } from '../styles/common';
 import BlogCard from './BlogCard';
 
@@ -18,13 +20,23 @@ const BlogList = styled.div`
     `};
 `;
 
+const AnimatedBlogList = posed(BlogList)({
+    enter: { y: 0, opacity: 1, staggerChildren: 200 },
+    exit: { y: 50, opacity: 0 },
+});
+
+const AnimatedBlogCard = posed(BlogCard)({
+    enter: { opacity: 1 },
+    exit: { opacity: 0 },
+});
+
 const BlogListComponent = ({ posts }: BlogListComponentProps) => {
     return (
-        <BlogList>
+        <AnimatedBlogList>
             {posts.map(({ node: post }) => (
-                <BlogCard post={post} />
+                <AnimatedBlogCard post={post} />
             ))}
-        </BlogList>
+        </AnimatedBlogList>
     );
 };
 

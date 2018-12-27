@@ -7,6 +7,7 @@ import Layout from '../components/Layout';
 import { Title, Description, fontSize } from '../components/Typography';
 import { PageWrapper, SectionWrapper, Button } from '../components/Common';
 import { colors, media } from '../styles/common';
+import posed from 'react-pose';
 
 const Header = styled(SectionWrapper)`
     text-align: center;
@@ -21,6 +22,11 @@ const Project = styled.div`
         padding: 80px 20px;
     `};
 `;
+
+const AnimatedProject = posed(Project)({
+    enter: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: 50 },
+});
 
 const ProjectTitle = styled.h2`
     font-weight: 400;
@@ -90,7 +96,7 @@ const Projects = ({
                 <Description>Here is a sample of some of my recent work.</Description>
             </Header>
             {projects.map(({ node: project }) => (
-                <Project
+                <AnimatedProject
                     style={{ backgroundColor: project.frontmatter.backgroundColor }}
                     textColor={project.frontmatter.textColor}
                 >
@@ -100,7 +106,7 @@ const Projects = ({
                         <ProjectSubtitle>{project.frontmatter.subtitle}</ProjectSubtitle>
                         <ProjectDescription>{project.frontmatter.description}</ProjectDescription>
                     </PageWrapper>
-                </Project>
+                </AnimatedProject>
             ))}
             <CTASection>
                 <CTATitle as="h2">Interested in working together?</CTATitle>

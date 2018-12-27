@@ -3,7 +3,6 @@ import Helmet from 'react-helmet';
 import React, { Fragment } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { MDXProvider } from '@mdx-js/tag';
-import { graphql } from 'gatsby';
 
 import Montserrat from '../../assets/fonts/Montserrat/Montserrat-Regular.ttf';
 import ScopeOne from '../../assets/fonts/Scope_One/ScopeOne-Regular.ttf';
@@ -13,6 +12,7 @@ import { colors } from '../styles/common';
 
 import Footer from './Footer';
 import Menu from './Menu';
+import posed from 'react-pose';
 
 // tslint:disable:no-unused-expression
 const GlobalStyles = createGlobalStyle`
@@ -98,14 +98,3 @@ export default ({ site, frontmatter = { description: 'test' }, children }) => {
         </Fragment>
     );
 };
-
-// export const pageQuery = graphql`
-//     fragment site on Site {
-//         siteMetadata {
-//             title
-//             description
-//             author
-//             keywords
-//         }
-//     }
-// `;
