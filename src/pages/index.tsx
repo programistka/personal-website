@@ -53,8 +53,6 @@ const HeaderImage = styled(Img)`
 const Headshot = styled(Img)`
     height: 460px;
     width: 460px;
-    flex-shrink: 0;
-    align-self: flex-end;
 
     ${media.medium`
         height: 250px;
@@ -65,10 +63,15 @@ const Headshot = styled(Img)`
     `};
 `;
 
-const AnimatedHeadshot = posed(Headshot)({
-    enter: { x: 0, opacity: 1 },
-    exit: { x: 50, opacity: 0 },
+const AnimatedHeadshot = posed.div({
+    enter: { x: 0, opacity: 1, delay: 500 },
+    exit: { x: -50, opacity: 0 },
 });
+
+const AnimatedHeadshotWrapper = styled(AnimatedHeadshot)`
+    align-self: flex-end;
+    flex-shrink: 0;
+`;
 
 const Intro = styled.div`
     align-self: center;
@@ -203,10 +206,12 @@ export default function Index({
                     style={{ position: 'absolute' }}
                 />
                 <HeaderWrapper>
-                    <Headshot
-                        fluid={homeHeadshot.childImageSharp.fluid}
-                        alt="Robert Cooper's headshot"
-                    />
+                    <AnimatedHeadshotWrapper>
+                        <Headshot
+                            fluid={homeHeadshot.childImageSharp.fluid}
+                            alt="Robert Cooper's headshot"
+                        />
+                    </AnimatedHeadshotWrapper>
                     {/* Intro */}
                     <AnimatedIntro>
                         <IntroTitle>I'm Robert Cooper,</IntroTitle>
