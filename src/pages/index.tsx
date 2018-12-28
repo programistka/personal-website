@@ -59,7 +59,6 @@ const Headshot = styled(Img)`
         width: 250px;
         align-self: center;
         margin-bottom: 40px;
-
     `};
 `;
 
@@ -71,6 +70,10 @@ const AnimatedHeadshot = posed.div({
 const AnimatedHeadshotWrapper = styled(AnimatedHeadshot)`
     align-self: flex-end;
     flex-shrink: 0;
+
+    ${media.medium`
+        align-self: center;
+    `};
 `;
 
 const Intro = styled.div`
