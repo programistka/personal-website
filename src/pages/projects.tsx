@@ -89,27 +89,20 @@ const Projects = ({
                 <Title>Projects</Title>
                 <Description>Here is a sample of some of my recent work.</Description>
             </Header>
-            {projects.map(
-                ({ node: project }, index) =>
-                    console.log(index) || (
-                        <Project
-                            key={project.fields.id}
-                            style={{ backgroundColor: project.frontmatter.backgroundColor }}
-                            textColor={project.frontmatter.textColor}
-                        >
-                            <PageWrapper data-aos={index % 2 === 0 ? 'fade-right' : 'fade-left'}>
-                                <ProjectImage
-                                    fluid={project.frontmatter.image.childImageSharp.fluid}
-                                />
-                                <ProjectTitle>{project.frontmatter.title}</ProjectTitle>
-                                <ProjectSubtitle>{project.frontmatter.subtitle}</ProjectSubtitle>
-                                <ProjectDescription>
-                                    {project.frontmatter.description}
-                                </ProjectDescription>
-                            </PageWrapper>
-                        </Project>
-                    ),
-            )}
+            {projects.map(({ node: project }, index) => (
+                <Project
+                    key={project.fields.id}
+                    style={{ backgroundColor: project.frontmatter.backgroundColor }}
+                    textColor={project.frontmatter.textColor}
+                >
+                    <PageWrapper data-aos={index % 2 === 0 ? 'fade-right' : 'fade-left'}>
+                        <ProjectImage fluid={project.frontmatter.image.childImageSharp.fluid} />
+                        <ProjectTitle>{project.frontmatter.title}</ProjectTitle>
+                        <ProjectSubtitle>{project.frontmatter.subtitle}</ProjectSubtitle>
+                        <ProjectDescription>{project.frontmatter.description}</ProjectDescription>
+                    </PageWrapper>
+                </Project>
+            ))}
             <CTASection data-aos="fade-up">
                 <CTATitle as="h2">Interested in working together?</CTATitle>
                 <Button to="mailto:hi@robertcooper.me">Get in touch</Button>
