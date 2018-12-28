@@ -94,9 +94,9 @@ const PostImage = styled(Img)`
     `};
 `;
 
-const BlogCard = React.forwardRef(({ post }, ref) => {
+const BlogCard = ({ post }) => {
     return (
-        <Post key={post.id} ref={ref}>
+        <Post key={post.id} data-aos="fade-up">
             <PostLink to={post.frontmatter.slug}>
                 <PostDescription>
                     <PostTitle>{post.frontmatter.title}</PostTitle>
@@ -111,6 +111,6 @@ const BlogCard = React.forwardRef(({ post }, ref) => {
             </PostLink>
         </Post>
     );
-});
+};
 
 export default BlogCard;

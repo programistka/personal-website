@@ -50,6 +50,16 @@ const HeaderImage = styled(Img)`
     `};
 `;
 
+const HeadshotWrapper = styled.div`
+    z-index: 1;
+    align-self: flex-end;
+    flex-shrink: 0;
+
+    ${media.medium`
+        align-self: center;
+    `};
+`;
+
 const Headshot = styled(Img)`
     height: 460px;
     width: 460px;
@@ -57,23 +67,7 @@ const Headshot = styled(Img)`
     ${media.medium`
         height: 250px;
         width: 250px;
-        align-self: center;
         margin-bottom: 40px;
-    `};
-`;
-
-const AnimatedHeadshot = posed.div({
-    enter: { x: 0, opacity: 1, delay: 500 },
-    exit: { x: -50, opacity: 0 },
-});
-
-const AnimatedHeadshotWrapper = styled(AnimatedHeadshot)`
-    z-index: 1;
-    align-self: flex-end;
-    flex-shrink: 0;
-
-    ${media.medium`
-        align-self: center;
     `};
 `;
 
@@ -92,11 +86,6 @@ const Intro = styled.div`
         max-width: 100%;
     `};
 `;
-
-const AnimatedIntro = posed(Intro)({
-    enter: { x: 0, opacity: 1 },
-    exit: { x: 50, opacity: 0 },
-});
 
 const IntroTitle = styled.span`
     font-family: 'Scope One';
@@ -187,11 +176,6 @@ const ProjectDescription = styled.p`
     line-height: 1.4;
 `;
 
-const AnimatedTitle = posed(Title)({
-    enter: { y: 0, opacity: 1 },
-    exit: { y: 50, opacity: 0 },
-});
-
 export default function Index({
     data: {
         site,
@@ -205,14 +189,13 @@ export default function Index({
         <Layout site={site}>
             <Header>
                 <HeaderWrapper>
-                    <AnimatedHeadshotWrapper>
+                    <HeadshotWrapper data-aos="fade-right" data-aos-delay="200">
                         <Headshot
                             fluid={homeHeadshot.childImageSharp.fluid}
                             alt="Robert Cooper's headshot"
                         />
-                    </AnimatedHeadshotWrapper>
-                    {/* Intro */}
-                    <AnimatedIntro>
+                    </HeadshotWrapper>
+                    <Intro data-aos="fade-up">
                         <IntroTitle>I'm Robert Cooper,</IntroTitle>
                         <IntroDescription>
                             a front end web developer that <strong>writes web development</strong>{' '}
@@ -242,7 +225,7 @@ export default function Index({
                                 </Link>
                             </SocialMediaItem>
                         </SocialMedia>
-                    </AnimatedIntro>
+                    </Intro>
                 </HeaderWrapper>
                 <HeaderImage
                     fluid={homeHeader.childImageSharp.fluid}
@@ -252,16 +235,18 @@ export default function Index({
             </Header>
             <PageWrapper>
                 <RecentPosts>
-                    <AnimatedTitle as="h2">Recent Posts</AnimatedTitle>
+                    <Title as="h2" data-aos="fade">
+                        Recent Posts
+                    </Title>
                     <BlogList posts={posts} />
                     <Button to="/blog">See all posts</Button>
                 </RecentPosts>
                 <Divider />
                 <Section>
-                    <AnimatedTitle as="h2">Recent Projects</AnimatedTitle>
+                    <Title as="h2">Recent Projects</Title>
                     <Projects>
                         {projects.map(({ node: project }) => (
-                            <Project key={project.fields.id}>
+                            <Project key={project.fields.id} data-aos="fade-right">
                                 <ProjectImage
                                     fixed={project.frontmatter.image.childImageSharp.fixed}
                                 />

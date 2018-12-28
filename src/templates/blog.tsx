@@ -58,8 +58,8 @@ const Blog = ({ data: { site, allMdx }, pageContext: { pagination, categories } 
     return (
         <Layout site={site}>
             <ModifiedPageWrapper>
-                <Title>Blog</Title>
-                <ModifiedDescription>
+                <Title data-aos="fade">Blog</Title>
+                <ModifiedDescription data-aos="fade">
                     I write articles related to front end web development. If you'd like me to write
                     for your publication, <Link to="mailto:hi@robertcooper.me">let's chat</Link>.
                 </ModifiedDescription>

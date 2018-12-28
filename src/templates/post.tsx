@@ -60,6 +60,10 @@ const ModifiedPageWrapper = styled(PageWrapper)`
         margin: 40px 0;
     }
 
+    code {
+        font-size: 14px;
+    }
+
     .gatsby-highlight {
         margin-top: 40px;
         margin-bottom: 40px;

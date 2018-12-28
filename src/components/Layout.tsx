@@ -4,6 +4,12 @@ import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { MDXProvider } from '@mdx-js/tag';
 import { Location } from '@reach/router';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+AOS.init({
+    once: true,
+});
 
 // @ts-ignore
 import Montserrat from '../../assets/fonts/Montserrat/Montserrat-Regular.ttf';
