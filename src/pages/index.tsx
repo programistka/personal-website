@@ -156,7 +156,7 @@ const Project = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 360px;
+    flex-basis: 360px;
     margin: 0 20px;
     margin-bottom: 60px;
 `;
