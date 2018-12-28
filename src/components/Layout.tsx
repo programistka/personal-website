@@ -3,7 +3,6 @@ import Helmet from 'react-helmet';
 import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { MDXProvider } from '@mdx-js/tag';
-import { Location } from '@reach/router';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -21,12 +20,6 @@ import { colors } from '../styles/common';
 
 import Footer from './Footer';
 import Menu from './Menu';
-import posed from 'react-pose';
-
-const Transition = posed.div({
-    enter: { opacity: 1, delay: 300, beforeChildren: true },
-    exit: { opacity: 0 },
-});
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
@@ -81,28 +74,22 @@ export default ({ site, frontmatter = { description: 'test' }, children }) => {
     const description = frontmatterDescription || siteDescription;
 
     return (
-        <Location>
-            {({ location }) => (
-                <>
-                    <GlobalStyles />
-                    <Helmet
-                        title={title}
-                        meta={[
-                            { name: 'description', content: description },
-                            { name: 'keywords', content: keywords },
-                        ]}
-                    >
-                        <html lang="en" />
-                    </Helmet>
-                    <Menu />
-                    <Transition key={location.key}>
-                        <MDXProvider components={mdxComponents}>
-                            <Main>{children}</Main>
-                        </MDXProvider>
-                    </Transition>
-                    <Footer />
-                </>
-            )}
-        </Location>
+        <>
+            <GlobalStyles />
+            <Helmet
+                title={title}
+                meta={[
+                    { name: 'description', content: description },
+                    { name: 'keywords', content: keywords },
+                ]}
+            >
+                <html lang="en" />
+            </Helmet>
+            <Menu />
+            <MDXProvider components={mdxComponents}>
+                <Main>{children}</Main>
+            </MDXProvider>
+            <Footer />
+        </>
     );
 };

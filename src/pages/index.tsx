@@ -1,6 +1,5 @@
 import Img from 'gatsby-image';
 import React from 'react';
-import posed from 'react-pose';
 import styled from 'styled-components';
 import { graphql } from 'gatsby';
 
