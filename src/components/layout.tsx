@@ -1,6 +1,6 @@
 import '../styles/prismjs.css';
 import Helmet from 'react-helmet';
-import React, { Fragment } from 'react';
+import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { MDXProvider } from '@mdx-js/tag';
 
@@ -79,7 +79,7 @@ export default ({ site, frontmatter = { description: 'test' }, children }) => {
     const description = frontmatterDescription || siteDescription;
 
     return (
-        <Fragment>
+        <>
             <GlobalStyles />
             <Helmet
                 title={title}
@@ -91,10 +91,12 @@ export default ({ site, frontmatter = { description: 'test' }, children }) => {
                 <html lang="en" />
             </Helmet>
             <MDXProvider components={mdxComponents}>
-                <Menu />
-                <Main>{children}</Main>
-                <Footer />
+                <>
+                    <Menu />
+                    <Main>{children}</Main>
+                    <Footer />
+                </>
             </MDXProvider>
-        </Fragment>
+        </>
     );
 };

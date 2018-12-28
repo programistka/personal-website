@@ -34,7 +34,7 @@ const BlogListComponent = ({ posts }: BlogListComponentProps) => {
     return (
         <AnimatedBlogList>
             {posts.map(({ node: post }) => (
-                <AnimatedBlogCard post={post} />
+                <AnimatedBlogCard key={post.id} post={post} />
             ))}
         </AnimatedBlogList>
     );

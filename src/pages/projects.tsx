@@ -36,7 +36,7 @@ const ProjectTitle = styled.h2`
     margin-bottom: 0;
 
     ${media.small`
-        font-size: ${fontSize.title.small}
+        font-size: ${fontSize.title.small};
     `};
 `;
 
@@ -54,7 +54,7 @@ const ProjectDescription = styled.p`
     line-height: 1.4;
 
     ${media.small`
-        font-size: ${fontSize.body.small}
+        font-size: ${fontSize.body.small};
     `};
 `;
 
@@ -97,6 +97,7 @@ const Projects = ({
             </Header>
             {projects.map(({ node: project }) => (
                 <AnimatedProject
+                    key={project.fields.id}
                     style={{ backgroundColor: project.frontmatter.backgroundColor }}
                     textColor={project.frontmatter.textColor}
                 >

@@ -12,7 +12,13 @@ const Link = styled.a`
     }
 `;
 
-const LinkComponent = ({ children, to, active = false, ...other }) => {
+type LinkComponentProps = {
+    children: React.ReactChildren;
+    to: string;
+    active: string;
+};
+
+const LinkComponent = ({ children, to, active = 'false', ...other }: LinkComponentProps) => {
     const internal = /^\/(?!\/)/.test(to);
 
     if (internal) {

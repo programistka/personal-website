@@ -204,7 +204,7 @@ export default function Index({
                 />
                 <HeaderWrapper>
                     <Headshot
-                        fixed={homeHeadshot.childImageSharp.fluid}
+                        fluid={homeHeadshot.childImageSharp.fluid}
                         alt="Robert Cooper's headshot"
                     />
                     {/* Intro */}
@@ -252,7 +252,7 @@ export default function Index({
                     <AnimatedTitle as="h2">Recent Projects</AnimatedTitle>
                     <Projects>
                         {projects.map(({ node: project }) => (
-                            <Project>
+                            <Project key={project.fields.id}>
                                 <ProjectImage
                                     fixed={project.frontmatter.image.childImageSharp.fixed}
                                 />
