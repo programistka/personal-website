@@ -18,7 +18,7 @@ const Post = styled.section`
     transition: all 125ms ease-in-out;
 
     ${media.large`
-        height: 500px;
+        height: unset;
         margin: 0 20px 60px;
         flex-basis: 400px;
         flex-grow: 1;
@@ -85,6 +85,11 @@ const PostImage = styled(Img)`
 
     ${media.large`
         height: 250px;
+        width: 100%;
+    `};
+
+    ${media.small`
+        height: 200px;
         width: 100%;
     `};
 `;
