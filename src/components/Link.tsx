@@ -13,9 +13,9 @@ const Link = styled.a`
 `;
 
 type LinkComponentProps = {
-    children: React.ReactChildren;
+    children: any;
     to: string;
-    active: string;
+    active?: string;
 };
 
 const LinkComponent = ({ children, to, active = 'false', ...other }: LinkComponentProps) => {

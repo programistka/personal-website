@@ -66,7 +66,7 @@ const Blog = ({ data: { site, allMdx }, pageContext: { pagination, categories } 
                 {/* <div>
                     Browse posts by categories: <Categories categories={categories} />
                 </div> */}
-                <BlogList posts={posts} />>
+                <BlogList posts={posts} />
                 <Pagination>
                     {nextPagePath && (
                         <PaginationItem>

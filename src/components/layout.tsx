@@ -3,8 +3,11 @@ import Helmet from 'react-helmet';
 import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { MDXProvider } from '@mdx-js/tag';
+import { Location } from '@reach/router';
 
+// @ts-ignore
 import Montserrat from '../../assets/fonts/Montserrat/Montserrat-Regular.ttf';
+// @ts-ignore
 import ScopeOne from '../../assets/fonts/Scope_One/ScopeOne-Regular.ttf';
 
 import mdxComponents from './mdx';
@@ -14,7 +17,11 @@ import Footer from './Footer';
 import Menu from './Menu';
 import posed from 'react-pose';
 
-// tslint:disable:no-unused-expression
+const Transition = posed.div({
+    enter: { opacity: 1, delay: 300, beforeChildren: true },
+    exit: { opacity: 0 },
+});
+
 const GlobalStyles = createGlobalStyle`
   @font-face {
     font-family: 'Montserrat';
@@ -43,7 +50,6 @@ const GlobalStyles = createGlobalStyle`
       margin-top: 0;
   }
 
-  // @ts-ignore
   ${() => {
       /* Override PrismJS Defaults */
       return null;
@@ -56,17 +62,7 @@ const GlobalStyles = createGlobalStyle`
           color: ${colors.link_active};
       }
   }
-
-  /* .gatsby-highlight-code-line {
-    background-color: #4f424c;
-    display: block;
-    margin-right: -1em;
-    margin-left: -1em;
-    padding-right: 1em;
-    padding-left: 1em;
-  } */
 `;
-// tslint:enable:no-unused-expression
 
 const Main = styled.main``;
 
@@ -79,24 +75,28 @@ export default ({ site, frontmatter = { description: 'test' }, children }) => {
     const description = frontmatterDescription || siteDescription;
 
     return (
-        <>
-            <GlobalStyles />
-            <Helmet
-                title={title}
-                meta={[
-                    { name: 'description', content: description },
-                    { name: 'keywords', content: keywords },
-                ]}
-            >
-                <html lang="en" />
-            </Helmet>
-            <MDXProvider components={mdxComponents}>
+        <Location>
+            {({ location }) => (
                 <>
+                    <GlobalStyles />
+                    <Helmet
+                        title={title}
+                        meta={[
+                            { name: 'description', content: description },
+                            { name: 'keywords', content: keywords },
+                        ]}
+                    >
+                        <html lang="en" />
+                    </Helmet>
                     <Menu />
-                    <Main>{children}</Main>
+                    <Transition key={location.key}>
+                        <MDXProvider components={mdxComponents}>
+                            <Main>{children}</Main>
+                        </MDXProvider>
+                    </Transition>
                     <Footer />
                 </>
-            </MDXProvider>
-        </>
+            )}
+        </Location>
     );
 };

@@ -68,6 +68,7 @@ const AnimatedHeadshot = posed.div({
 });
 
 const AnimatedHeadshotWrapper = styled(AnimatedHeadshot)`
+    z-index: 1;
     align-self: flex-end;
     flex-shrink: 0;
 
@@ -203,11 +204,6 @@ export default function Index({
     return (
         <Layout site={site}>
             <Header>
-                <HeaderImage
-                    fluid={homeHeader.childImageSharp.fluid}
-                    alt={'Snowy mountains'}
-                    style={{ position: 'absolute' }}
-                />
                 <HeaderWrapper>
                     <AnimatedHeadshotWrapper>
                         <Headshot
@@ -248,6 +244,11 @@ export default function Index({
                         </SocialMedia>
                     </AnimatedIntro>
                 </HeaderWrapper>
+                <HeaderImage
+                    fluid={homeHeader.childImageSharp.fluid}
+                    alt={'Snowy mountains'}
+                    style={{ position: 'absolute' }}
+                />
             </Header>
             <PageWrapper>
                 <RecentPosts>
