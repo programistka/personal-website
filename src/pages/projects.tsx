@@ -75,14 +75,21 @@ const ProjectImage = styled(Img)`
     `};
 `;
 
-type projectsProps = {};
+type ProjectsProps = {
+    data: {
+        site: any;
+        allMdx: {
+            edges: any;
+        };
+    };
+};
 
 const Projects = ({
     data: {
         site,
         allMdx: { edges: projects },
     },
-}) => {
+}: ProjectsProps) => {
     return (
         <Layout site={site} title="Robert Cooper | Projects">
             <Header data-aos="fade">

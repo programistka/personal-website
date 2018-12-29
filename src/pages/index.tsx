@@ -3,6 +3,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { graphql } from 'gatsby';
 
+import { colors, media } from '../styles/common';
+
+import BlogList from '../components/BlogList';
 import Email from '../components/icons/Email';
 import Github from '../components/icons/Github';
 import Layout from '../components/Layout';
@@ -11,8 +14,6 @@ import LinkedIn from '../components/icons/LinkedIn';
 import Twitter from '../components/icons/Twitter';
 import { PageWrapper, Divider, Button } from '../components/Common';
 import { Title, fontSize } from '../components/Typography';
-import { colors, media } from '../styles/common';
-import BlogList from '../components/BlogList';
 
 const Header = styled.div`
     position: relative;
@@ -175,6 +176,50 @@ const ProjectDescription = styled.p`
     line-height: 1.4;
 `;
 
+const SocialMediaGroup = () => {
+    const items = [
+        {
+            link: 'https://www.linkedin.com/in/robert-cooper/',
+            icon: <LinkedIn />,
+        },
+        {
+            link: 'https://github.com/robertcoopercode',
+            icon: <Github />,
+        },
+        {
+            link: 'https://twitter.com/RobertCooper_RC',
+            icon: <Twitter />,
+        },
+        {
+            link: 'mailto:hi@robertcooper.me',
+            icon: <Email />,
+        },
+    ];
+    return (
+        <SocialMedia>
+            {items.map(item => (
+                <SocialMediaItem>
+                    <Link to={item.link}>{item.icon}</Link>
+                </SocialMediaItem>
+            ))}
+        </SocialMedia>
+    );
+};
+
+type HomePageProps = {
+    data: {
+        site: any;
+        homeHeader: any;
+        homeHeadshot: any;
+        posts: {
+            edges: any;
+        };
+        projects: {
+            edges: any;
+        };
+    };
+};
+
 export default function Index({
     data: {
         site,
@@ -183,7 +228,7 @@ export default function Index({
         posts: { edges: posts },
         projects: { edges: projects },
     },
-}) {
+}: HomePageProps) {
     return (
         <Layout site={site}>
             <Header>
@@ -202,28 +247,7 @@ export default function Index({
                             <strong>consulting services to clients</strong> who need front end
                             development support.
                         </IntroDescription>
-                        <SocialMedia>
-                            <SocialMediaItem>
-                                <Link to="https://www.linkedin.com/in/robert-cooper/">
-                                    <LinkedIn />
-                                </Link>
-                            </SocialMediaItem>
-                            <SocialMediaItem>
-                                <Link to="https://github.com/robertcoopercode">
-                                    <Github />
-                                </Link>
-                            </SocialMediaItem>
-                            <SocialMediaItem>
-                                <Link to="https://twitter.com/RobertCooper_RC">
-                                    <Twitter />
-                                </Link>
-                            </SocialMediaItem>
-                            <SocialMediaItem>
-                                <Link to="mailto:hi@robertcooper.me">
-                                    <Email />
-                                </Link>
-                            </SocialMediaItem>
-                        </SocialMedia>
+                        <SocialMediaGroup />
                     </Intro>
                 </HeaderWrapper>
                 <HeaderImage

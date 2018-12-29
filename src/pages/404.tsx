@@ -1,6 +1,8 @@
 import React from 'react';
-import PageNotFoundVideo from '../../assets/images/page-not-found.mp4';
 import styled from 'styled-components';
+
+import PageNotFoundVideo from '../../assets/images/page-not-found.mp4';
+
 import Layout from '../components/Layout';
 import Title from '../components/mdx/Title';
 
