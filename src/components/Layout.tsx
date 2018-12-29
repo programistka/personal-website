@@ -74,6 +74,8 @@ export default ({
     site,
     frontmatter = { title: null, description: null, banner: { publicURL: null } },
     title: pageTitle = null,
+    hideMenu = false,
+    hideFooter = false,
     children,
 }) => {
     const { title: siteTitle, description: siteDescription, siteUrl } = site.siteMetadata;
@@ -113,11 +115,11 @@ export default ({
                         />
                         <meta property="og:description" content={description} />
                     </Helmet>
-                    <Menu />
+                    {!hideMenu && <Menu />}
                     <MDXProvider components={mdxComponents}>
                         <Main>{children}</Main>
                     </MDXProvider>
-                    <Footer />
+                    {!hideFooter && <Footer />}
                 </>
             )}
         />
