@@ -5,6 +5,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 import { MDXProvider } from '@mdx-js/tag';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { StaticQuery, graphql } from 'gatsby';
 
 if (typeof window !== `undefined`) {
     AOS.init({
@@ -67,31 +68,56 @@ const GlobalStyles = createGlobalStyle`
 
 const Main = styled.main``;
 
-export default ({ site, frontmatter = { description: 'test' }, children }) => {
-    const { title, description: siteDescription, keywords: siteKeywords } = site.siteMetadata;
+export default ({
+    site,
+    frontmatter = { title: null, description: null, banner: { publicURL: null } },
+    title: pageTitle = null,
+    children,
+}) => {
+    const { title: siteTitle, description: siteDescription, siteUrl } = site.siteMetadata;
 
-    const { description: frontmatterDescription } = frontmatter;
+    const {
+        title: frontmatterTitle,
+        description: frontmatterDescription,
+        banner: { publicURL },
+    } = frontmatter;
 
-    const keywords = siteKeywords.join(', ');
+    const title = pageTitle || frontmatterTitle || siteTitle;
     const description = frontmatterDescription || siteDescription;
 
     return (
-        <>
-            <GlobalStyles />
-            <Helmet
-                title={title}
-                meta={[
-                    { name: 'description', content: description },
-                    { name: 'keywords', content: keywords },
-                ]}
-            >
-                <html lang="en" />
-            </Helmet>
-            <Menu />
-            <MDXProvider components={mdxComponents}>
-                <Main>{children}</Main>
-            </MDXProvider>
-            <Footer />
-        </>
+        <StaticQuery
+            query={graphql`
+                query {
+                    file(name: { eq: "social-sharing" }) {
+                        publicURL
+                    }
+                }
+            `}
+            render={data => (
+                <>
+                    <GlobalStyles />
+                    <Helmet title={title}>
+                        <html lang="en" />
+                        <meta name="description" content={description} />
+
+                        <meta name="twitter:card" content="summary_large_image" />
+                        <meta name="twitter:site" content="@RobertCooper_RC" />
+
+                        <meta property="og:title" content={title} />
+                        <meta
+                            property="og:image"
+                            content={`${siteUrl}${publicURL || data.file.publicURL}`}
+                        />
+                        <meta property="og:description" content={description} />
+                    </Helmet>
+                    <Menu />
+                    <MDXProvider components={mdxComponents}>
+                        <Main>{children}</Main>
+                    </MDXProvider>
+                    <Footer />
+                </>
+            )}
+        />
     );
 };

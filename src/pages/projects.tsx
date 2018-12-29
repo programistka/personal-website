@@ -84,7 +84,7 @@ const Projects = ({
     },
 }) => {
     return (
-        <Layout site={site}>
+        <Layout site={site} title="Robert Cooper | Projects">
             <Header data-aos="fade">
                 <Title>Projects</Title>
                 <Description>Here is a sample of some of my recent work.</Description>
@@ -118,7 +118,7 @@ export const pageQuery = graphql`
                 title
                 description
                 author
-                keywords
+                siteUrl
             }
         }
         allMdx(

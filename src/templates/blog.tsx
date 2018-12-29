@@ -38,34 +38,19 @@ const PaginationItem = styled.li`
 
 const PaginationLink = styled(Link)``;
 
-const Categories = ({ categories }) => (
-    <Fragment>
-        <ul>
-            {categories.map(category => (
-                <li key={category}>
-                    <Link to={`/categories/${category}`}>{category}</Link>
-                </li>
-            ))}
-        </ul>
-    </Fragment>
-);
-
-const Blog = ({ data: { site, allMdx }, pageContext: { pagination, categories } }) => {
+const Blog = ({ data: { site, allMdx }, pageContext: { pagination } }) => {
     const { page, nextPagePath, previousPagePath } = pagination;
 
     const posts = page.map(id => allMdx.edges.find(edge => edge.node.id === id));
 
     return (
-        <Layout site={site}>
+        <Layout site={site} title="Robert Cooper | Blog">
             <ModifiedPageWrapper>
                 <Title data-aos="fade">Blog</Title>
                 <ModifiedDescription data-aos="fade">
                     I write articles related to front end web development. If you'd like me to write
                     for your publication, <Link to="mailto:hi@robertcooper.me">let's chat</Link>.
                 </ModifiedDescription>
-                {/* <div>
-                    Browse posts by categories: <Categories categories={categories} />
-                </div> */}
                 <BlogList posts={posts} />
                 <Pagination>
                     {nextPagePath && (
@@ -94,7 +79,7 @@ export const pageQuery = graphql`
                 title
                 description
                 author
-                keywords
+                siteUrl
             }
         }
         allMdx {

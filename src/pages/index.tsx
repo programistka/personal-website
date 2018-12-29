@@ -270,7 +270,7 @@ export const pageQuery = graphql`
                 title
                 description
                 author
-                keywords
+                siteUrl
             }
         }
         homeHeader: file(name: { eq: "home-header" }) {

@@ -5,10 +5,10 @@ import { graphql } from 'gatsby';
 
 import Layout from '../components/Layout';
 import Link from '../components/Link';
-import { colors, media } from '../styles/common';
+import { media } from '../styles/common';
 import styled from 'styled-components';
 import { PageWrapper, Divider } from '../components/Common';
-import { fontSize, Title } from '../components/Typography';
+import { Title } from '../components/Typography';
 
 const ModifiedPageWrapper = styled(PageWrapper)`
     width: 800px;
@@ -208,15 +208,17 @@ export const pageQuery = graphql`
                 title
                 description
                 author
-                keywords
+                siteUrl
             }
         }
         mdx(fields: { id: { eq: $id } }) {
             frontmatter {
                 title
+                description
                 formattedDate: date(formatString: "MMMM DD, YYYY")
                 dateTimeString: date(formatString: "YYYY-MM-DD")
                 banner {
+                    publicURL
                     childImageSharp {
                         fluid(maxWidth: 800) {
                             ...GatsbyImageSharpFluid

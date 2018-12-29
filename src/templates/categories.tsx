@@ -62,7 +62,7 @@ export const pageQuery = graphql`
                 title
                 description
                 author
-                keywords
+                siteUrl
             }
         }
     }

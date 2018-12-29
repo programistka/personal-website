@@ -1,16 +1,10 @@
 module.exports = {
   pathPrefix: '/',
   siteMetadata: {
-    siteUrl: 'https://www.robertcooper.me/',
+    siteUrl: 'https://www.robertcooper.me',
     author: 'Robert Cooper',
     title: 'Robert Cooper',
-    description: `Robert Cooper's personal website`,
-    keywords: [
-      'Software Engineer',
-      'Web Developer',
-      'Consultant',
-      'Freelancer',
-    ],
+    description: `The front end web development blog and project portfolio of Robert Cooper, a Canadian web developer and consultant.`,
   },
   plugins: [
     {
