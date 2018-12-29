@@ -5,10 +5,12 @@ import Link from './Link';
 import { colors } from '../styles/common';
 import { PageWrapper } from './Common';
 
+export const footerHeight = 220;
+
 const Footer = styled.footer`
     background-color: ${colors.footer};
     border-top: 1px solid ${colors.border_light};
-    height: 220px;
+    height: ${footerHeight}px;
 `;
 
 const ModifiedPageWrapper = styled(PageWrapper)`

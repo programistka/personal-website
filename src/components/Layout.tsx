@@ -21,8 +21,8 @@ import ScopeOne from '../../assets/fonts/Scope_One/ScopeOne-Regular.ttf';
 import mdxComponents from './mdx';
 import { colors } from '../styles/common';
 
-import Footer from './Footer';
-import Menu from './Menu';
+import Footer, { footerHeight } from './Footer';
+import Menu, { menuHeight } from './Menu';
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
@@ -66,7 +66,9 @@ const GlobalStyles = createGlobalStyle`
   }
 `;
 
-const Main = styled.main``;
+const Main = styled.main`
+    min-height: calc(100vh - ${footerHeight}px - ${menuHeight}px);
+`;
 
 export default ({
     site,

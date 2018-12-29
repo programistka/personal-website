@@ -7,10 +7,12 @@ import { PageWrapper } from './Common';
 import { colors, media } from '../styles/common';
 import { fontSize } from './Typography';
 
+export const menuHeight = 60;
+
 const Menu = styled.div`
     position: relative;
     z-index: 1;
-    height: 60px;
+    height: ${menuHeight}px;
     padding: 0 20px;
 
     ${media.small`

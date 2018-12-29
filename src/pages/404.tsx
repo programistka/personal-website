@@ -1,8 +1,44 @@
 import React from 'react';
+import PageNotFoundVideo from '../../assets/images/page-not-found.mp4';
+import styled from 'styled-components';
+import Layout from '../components/Layout';
+import Title from '../components/mdx/Title';
 
-export default () => (
-    <div>
-        <h1>NOT FOUND</h1>
-        <p>You just hit a route that doesn't exist... the sadness.</p>
-    </div>
+const PageContent = styled.div`
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+const RandomVideo = styled.video`
+    width: 800px;
+    max-width: 100%;
+    padding: 0 20px;
+    height: auto;
+    margin: auto;
+    display: block;
+`;
+
+export default ({ data: { site } }) => (
+    <Layout site={site}>
+        <PageContent>
+            <Title>Page Not Found</Title>
+        </PageContent>
+        <RandomVideo src={PageNotFoundVideo} autoPlay={true} loop={true} />
+    </Layout>
 );
+
+export const pageQuery = graphql`
+    query {
+        site {
+            siteMetadata {
+                title
+                description
+                author
+                siteUrl
+            }
+        }
+    }
+`;
