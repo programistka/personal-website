@@ -101,6 +101,7 @@ export const pageQuery = graphql`
                         slug
                         categories
                     }
+                    timeToRead
                 }
             }
         }

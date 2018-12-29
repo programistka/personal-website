@@ -65,9 +65,18 @@ const PostTitle = styled.h3`
     `};
 `;
 
-const PostDate = styled.time`
+const MetaInfo = styled.div`
     font-size: 14px;
 `;
+
+const PostDate = styled.time``;
+
+const MetaInfoSeparator = styled.span`
+    display: inline-block;
+    margin: 0 5px;
+`;
+
+const TimeToRead = styled.span``;
 
 const PostExcerpt = styled.p`
     font-size: ${fontSize.body.large};
@@ -100,9 +109,16 @@ const BlogCard = ({ post }) => {
             <PostLink to={post.frontmatter.slug}>
                 <PostDescription>
                     <PostTitle>{post.frontmatter.title}</PostTitle>
-                    <PostDate dateTime={post.frontmatter.dateTimeString}>
-                        {post.frontmatter.formattedDate}
-                    </PostDate>
+                    <MetaInfo>
+                        <PostDate dateTime={post.frontmatter.dateTimeString}>
+                            {post.frontmatter.formattedDate}
+                        </PostDate>
+                        <MetaInfoSeparator>•</MetaInfoSeparator>
+                        <TimeToRead>
+                            🕙
+                            {post.timeToRead} min read
+                        </TimeToRead>
+                    </MetaInfo>
                     <PostExcerpt>{post.frontmatter.description}</PostExcerpt>
                 </PostDescription>
                 {post.frontmatter.banner && (
