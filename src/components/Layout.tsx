@@ -45,7 +45,7 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     font-family: 'Montserrat';
     color: ${colors.text_dark};
-    background-color: ${colors.background_light}
+    background-color: ${colors.background_light};
   }
 
   pre {

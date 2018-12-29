@@ -2,6 +2,7 @@ import Img from 'gatsby-image';
 import MDXRenderer from 'gatsby-mdx/mdx-renderer';
 import React from 'react';
 import { graphql } from 'gatsby';
+import { DiscussionEmbed } from 'disqus-react';
 
 import ScrollProgress from '../utils/scrollProgress';
 
@@ -203,6 +204,12 @@ class Post extends React.Component {
             pageContext: { next, prev },
         } = this.props;
 
+        const disqusShortname = 'robertcoopercode';
+        const disqusConfig = {
+            identifier: mdx.id,
+            title: mdx.frontmatter.title,
+        };
+
         return (
             <Layout site={site} frontmatter={mdx.frontmatter}>
                 <ProgressContainer>
@@ -241,6 +248,7 @@ class Post extends React.Component {
                             )}
                         </OtherPostsWrapper>
                     )}
+                    <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
                 </ModifiedPageWrapper>
             </Layout>
         );
@@ -260,6 +268,7 @@ export const pageQuery = graphql`
             }
         }
         mdx(fields: { id: { eq: $id } }) {
+            id
             frontmatter {
                 title
                 description
