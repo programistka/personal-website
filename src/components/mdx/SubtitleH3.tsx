@@ -12,4 +12,8 @@ export default styled.h3`
     font-family: 'Montserrat';
     font-weight: 400;
     line-height: 1.1;
+
+    * {
+        font-size: 20px !important;
+    }
 `;

@@ -3,9 +3,11 @@ import MDXRenderer from 'gatsby-mdx/mdx-renderer';
 import React from 'react';
 import { graphql } from 'gatsby';
 
+import ScrollProgress from '../utils/scrollProgress';
+
 import Layout from '../components/Layout';
 import Link from '../components/Link';
-import { media } from '../styles/common';
+import { media, colors } from '../styles/common';
 import styled from 'styled-components';
 import { PageWrapper, Divider } from '../components/Common';
 import { Title } from '../components/Typography';
@@ -160,46 +162,92 @@ const CategoryListComponent = ({ list = [] }) => (
     </CategoriesWrapper>
 );
 
-export default function Post({ data: { site, mdx }, pageContext: { next, prev } }) {
-    return (
-        <Layout site={site} frontmatter={mdx.frontmatter}>
-            <ModifiedPageWrapper>
-                <PostTitle>{mdx.frontmatter.title}</PostTitle>
-                <Date dateTime={mdx.frontmatter.dateTimeString}>
-                    {mdx.frontmatter.formattedDate}
-                </Date>
+const ProgressContainer = styled.div`
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 10px;
+`;
 
-                {mdx.frontmatter.banner && (
-                    <FeaturedImage fluid={mdx.frontmatter.banner.childImageSharp.fluid} />
-                )}
+const ProgressBar = styled.div`
+    height: 10px;
+    background: ${colors.background_dark};
+    width: 10%;
+`;
 
-                <MDXRenderer>{mdx.code.body}</MDXRenderer>
+class Post extends React.Component {
+    constructor(props) {
+        super(props);
 
-                <Divider />
+        this.progressBar = React.createRef();
 
-                <CategoryListComponent list={mdx.frontmatter.categories} />
+        this.state = {
+            progress: 0,
+        };
+    }
 
-                {(next || prev) && (
-                    <OtherPostsWrapper>
-                        {prev && (
-                            <NextPostWrapper>
-                                Next: <Link to={prev.fields.slug}>{prev.fields.title}</Link>
-                            </NextPostWrapper>
-                        )}
-                        {next && (
-                            <PreviousPostWrapper>
-                                Previous:{' '}
-                                <PreviousPostLink to={next.fields.slug}>
-                                    {next.fields.title}
-                                </PreviousPostLink>
-                            </PreviousPostWrapper>
-                        )}
-                    </OtherPostsWrapper>
-                )}
-            </ModifiedPageWrapper>
-        </Layout>
-    );
+    componentDidMount() {
+        this.progressObserver = new ScrollProgress((x, y) => {
+            this.progressBar.current.style.width = y * 100 + '%';
+        });
+    }
+
+    componentWillUnmount() {
+        this.progressObserver.destroy();
+    }
+
+    render() {
+        const {
+            data: { site, mdx },
+            pageContext: { next, prev },
+        } = this.props;
+
+        return (
+            <Layout site={site} frontmatter={mdx.frontmatter}>
+                <ProgressContainer>
+                    <ProgressBar ref={this.progressBar} />
+                </ProgressContainer>
+                <ModifiedPageWrapper>
+                    <PostTitle>{mdx.frontmatter.title}</PostTitle>
+                    <Date dateTime={mdx.frontmatter.dateTimeString}>
+                        {mdx.frontmatter.formattedDate}
+                    </Date>
+
+                    {mdx.frontmatter.banner && (
+                        <FeaturedImage fluid={mdx.frontmatter.banner.childImageSharp.fluid} />
+                    )}
+
+                    <MDXRenderer>{mdx.code.body}</MDXRenderer>
+
+                    <Divider />
+
+                    <CategoryListComponent list={mdx.frontmatter.categories} />
+
+                    {(next || prev) && (
+                        <OtherPostsWrapper>
+                            {prev && (
+                                <NextPostWrapper>
+                                    Next: <Link to={prev.fields.slug}>{prev.fields.title}</Link>
+                                </NextPostWrapper>
+                            )}
+                            {next && (
+                                <PreviousPostWrapper>
+                                    Previous:{' '}
+                                    <PreviousPostLink to={next.fields.slug}>
+                                        {next.fields.title}
+                                    </PreviousPostLink>
+                                </PreviousPostWrapper>
+                            )}
+                        </OtherPostsWrapper>
+                    )}
+                </ModifiedPageWrapper>
+            </Layout>
+        );
+    }
 }
+
+export default Post;
 
 export const pageQuery = graphql`
     query($id: String!) {

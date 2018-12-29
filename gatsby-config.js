@@ -73,6 +73,7 @@ module.exports = {
         icon: 'assets/logo.png', // TODO: update this logo
       },
     },
+    'gatsby-plugin-offline',
     {
       resolve: `gatsby-plugin-feed`,
       options: {
@@ -121,6 +122,5 @@ module.exports = {
         trackingId: "UA-80196253-8",
       },
     },
-    'gatsby-plugin-remove-serviceworker',
   ],
 };

@@ -15,7 +15,6 @@ const Post = styled.section`
     margin: 0 20px 80px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: all 125ms ease-in-out;
 
     ${media.large`
         height: unset;
@@ -26,7 +25,8 @@ const Post = styled.section`
     `};
 
     &:hover {
-        box-shadow: 0 4px 16px 2px rgba(0, 0, 0, 0.1);
+        transform: scale(1.02) !important;
+        box-shadow: 0 4px 16px 8px rgba(0, 0, 0, 0.1);
     }
 `;
 
@@ -61,7 +61,7 @@ const PostTitle = styled.h3`
     color: ${colors.text_title};
 
     ${media.large`
-        font-size: 24px
+        font-size: 24px;
     `};
 `;
 
