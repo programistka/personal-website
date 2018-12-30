@@ -220,7 +220,7 @@ type HomePageProps = {
     };
 };
 
-export default function Index({
+export default ({
     data: {
         site,
         homeHeader,
@@ -228,7 +228,7 @@ export default function Index({
         posts: { edges: posts },
         projects: { edges: projects },
     },
-}: HomePageProps) {
+}: HomePageProps) => {
     return (
         <Layout site={site}>
             <Header>
@@ -285,7 +285,7 @@ export default function Index({
             </PageWrapper>
         </Layout>
     );
-}
+};
 
 export const pageQuery = graphql`
     query {

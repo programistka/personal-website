@@ -23,7 +23,13 @@ const RandomVideo = styled.video`
     display: block;
 `;
 
-export default ({ data: { site } }) => (
+type PageNotFoundProps = {
+    data: {
+        site: any;
+    };
+};
+
+export default ({ data: { site } }: PageNotFoundProps) => (
     <Layout site={site}>
         <PageContent>
             <Title>Page Not Found</Title>

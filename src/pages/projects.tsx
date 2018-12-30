@@ -84,7 +84,7 @@ type ProjectsProps = {
     };
 };
 
-const Projects = ({
+export default ({
     data: {
         site,
         allMdx: { edges: projects },
@@ -157,5 +157,3 @@ export const pageQuery = graphql`
         }
     }
 `;
-
-export default Projects;
