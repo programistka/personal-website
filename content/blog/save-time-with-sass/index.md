@@ -3,7 +3,7 @@ slug: '/how-sass-can-save-you-a-lot-of-time'
 date: '2017-10-27'
 title: 'How Sass Can Save You a Lot of Time'
 description: 'Sass is a CSS preprocessor that has a bunch of useful features that will make writting your application styles much easier and more manageable.'
-categories: ['styling', 'ui/ux']
+categories: ['design']
 banner: './images/banner.png'
 ---
 

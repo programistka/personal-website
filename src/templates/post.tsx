@@ -28,6 +28,7 @@ const ModifiedPageWrapper = styled(PageWrapper)`
         display: block;
         margin-top: -25px;
         margin-bottom: 40px;
+        line-height: 1.4;
 
         + h2,
         + h3,
@@ -76,6 +77,11 @@ const ModifiedPageWrapper = styled(PageWrapper)`
     .gatsby-resp-image-wrapper {
         margin: 40px 0;
     }
+
+    img {
+        display: block;
+        margin: 40px 0;
+    }
 `;
 
 const PostTitle = styled(Title)`
@@ -99,6 +105,10 @@ const Date = styled.time`
 
 const FeaturedImage = styled(Img)`
     margin-bottom: 40px;
+
+    img {
+        margin: unset;
+    }
 `;
 
 const CategoriesWrapper = styled.div`
