@@ -15,7 +15,8 @@ const Header = styled(SectionWrapper)`
 const Project = styled.div`
     padding: 120px 20px;
     text-align: center;
-    color: ${props => (props.textColor === 'light' ? colors.text_light : colors.text_dark)};
+    color: ${props =>
+        props.textColor === 'light' ? colors.text_body_dark : colors.text_body_light};
 
     ${media.small`
         padding: 80px 20px;

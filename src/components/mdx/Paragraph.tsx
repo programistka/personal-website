@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colors } from '../../styles/common';
 
 export default styled.p`
     text-align: left;
@@ -6,5 +7,6 @@ export default styled.p`
     line-height: 1.58;
     letter-spacing: -0.003em;
     margin-top: 0;
-    color: #555555;
+    color: ${props =>
+        props.theme.color === 'light' ? colors.text_body_light : colors.text_body_dark};
 `;

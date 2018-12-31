@@ -20,6 +20,8 @@ export const SectionWrapper = styled(PageWrapper)`
 
 export const Divider = styled.hr`
     border: 1px solid ${colors.border_light};
+    border-color: ${props =>
+        props.theme.color === 'light' ? colors.border_light : colors.border_dark};
     margin: 40px;
 `;
 
@@ -27,11 +29,21 @@ export const Button = styled(Link)`
     height: 40px;
     line-height: 37px;
     padding: 0 20px;
-    background-color: ${colors.background_dark};
-    color: ${colors.text_light};
+    background-color: ${props =>
+        props.theme.color === 'light'
+            ? colors.button_inactive_background_light
+            : colors.button_inactive_background_dark};
+    color: ${props =>
+        props.theme.color === 'light'
+            ? colors.button_inactive_text_light
+            : colors.button_inactive_text_dark};
+    border: 2px solid ${colors.button_inactive_border_light};
+    border-color: ${props =>
+        props.theme.color === 'light'
+            ? colors.button_inactive_border_light
+            : colors.button_inactive_border_dark};
     font-size: ${fontSize.body.large};
     display: inline-block;
-    border: 2px solid ${colors.background_dark};
     text-decoration: none;
     transition: all 125ms ease-in-out;
 
@@ -41,7 +53,18 @@ export const Button = styled(Link)`
 
     &:hover {
         text-decoration: none;
-        color: ${colors.text_dark};
-        background: none;
+        background-color: ${props =>
+            props.theme.color === 'light'
+                ? colors.button_active_background_light
+                : colors.button_active_background_dark};
+        color: ${props =>
+            props.theme.color === 'light'
+                ? colors.button_active_text_light
+                : colors.button_active_text_dark};
+        border: 2px solid ${colors.button_active_border_light};
+        border-color: ${props =>
+            props.theme.color === 'light'
+                ? colors.button_active_border_light
+                : colors.button_active_border_dark};
     }
 `;

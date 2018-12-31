@@ -1,21 +1,43 @@
 import { css } from 'styled-components';
 
 export const colors = {
-    text_title: '#03256C',
-    text_light: '#EAEAEA',
-    text_dark: '#2C3137',
+    text_title_light: '#03256C',
+    text_title_dark: '#80B2ED',
 
-    link_inactive: '#2E74C9',
-    link_active: '#03256C',
+    text_body_light: '#2C3137',
+    text_body_dark: '#EAEAEA',
+
+    text_menu_inactive_light: 'rgba(44, 49, 55, .8)',
+    text_menu_inactive_dark: '#80B2ED',
+    text_menu_active_light: 'rgba(44, 49, 55, 1)',
+    text_menu_active_dark: '#EAEAEA',
+
+    link_inactive_light: '#80B2ED',
+    link_active_light: '#03256C',
+    link_inactive_dark: '#80B2ED',
+    link_active_dark: '#EAEAEA',
 
     background_light: '#F9FCFF',
-    background_dark: '#03256C',
+    backgroundSecondary_light: '#FFFFFF',
+    background_dark: '#051221',
+    backgroundSecondary_dark: '#09203A',
 
-    footer: '#fff',
+    button_inactive_text_light: '#EAEAEA',
+    button_inactive_border_light: '#03256C',
+    button_inactive_background_light: '#03256C',
+    button_inactive_text_dark: '#051221',
+    button_inactive_border_dark: '#80B2ED',
+    button_inactive_background_dark: '#80B2ED',
+
+    button_active_text_light: '#03256C',
+    button_active_border_light: '#03256C',
+    button_active_background_light: 'rgba(0, 0, 0, 0)',
+    button_active_text_dark: '#EAEAEA',
+    button_active_border_dark: '#80B2ED',
+    button_active_background_dark: 'rgba(0, 0, 0, 0)',
 
     border_light: `rgba(46, 116, 201, 0.2)`,
-
-    post_background_light: '#fff',
+    border_dark: `rgba(128, 178, 237, 0.2)`,
 };
 
 const sizes = {

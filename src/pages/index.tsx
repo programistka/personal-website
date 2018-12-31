@@ -14,6 +14,7 @@ import LinkedIn from '../components/icons/LinkedIn';
 import Twitter from '../components/icons/Twitter';
 import { PageWrapper, Divider, Button } from '../components/Common';
 import { Title, fontSize } from '../components/Typography';
+import { ThemeContext } from '../utils/context';
 
 const Header = styled.div`
     position: relative;
@@ -48,6 +49,18 @@ const HeaderImage = styled(Img)`
     ${media.medium`
         height: 100%;
     `};
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: ${props =>
+            props.theme.color === 'light' ? colors.background_light : colors.background_dark};
+        opacity: 0.5;
+    }
 `;
 
 const HeadshotWrapper = styled.div`
@@ -90,7 +103,8 @@ const Intro = styled.div`
 const IntroTitle = styled.span`
     font-family: 'Scope One';
     font-size: ${fontSize.title.large};
-    color: ${colors.text_title};
+    color: ${props =>
+        props.theme.color === 'light' ? colors.text_title_light : colors.text_title_dark};
 
     ${media.medium`
         font-size: ${fontSize.title.small};
@@ -100,7 +114,8 @@ const IntroTitle = styled.span`
 const IntroDescription = styled.p`
     line-height: 1.5;
     font-size: 24px;
-    color: ${colors.text_dark};
+    color: ${props =>
+        props.theme.color === 'light' ? colors.text_body_light : colors.text_body_dark};
     max-width: 100%;
 
     ${media.medium`
@@ -162,7 +177,8 @@ const ProjectTitle = styled.h3`
     font-size: 22px;
     font-weight: 400;
     margin: 0 0 10px 0;
-    color: ${colors.text_dark};
+    color: ${props =>
+        props.theme.color === 'light' ? colors.text_title_light : colors.text_title_dark};
 `;
 
 const ProjectImage = styled(Img)`
@@ -176,29 +192,31 @@ const ProjectDescription = styled.p`
     line-height: 1.4;
 `;
 
-const SocialMediaGroup = () => {
+const SocialMediaGroup = ({ theme }) => {
+    const iconFill = theme === 'light' ? colors.text_title_light : colors.text_title_dark;
+
     const items = [
         {
             link: 'https://www.linkedin.com/in/robert-cooper/',
-            icon: <LinkedIn />,
+            icon: <LinkedIn iconFill={iconFill} />,
         },
         {
             link: 'https://github.com/robertcoopercode',
-            icon: <Github />,
+            icon: <Github iconFill={iconFill} />,
         },
         {
             link: 'https://twitter.com/RobertCooper_RC',
-            icon: <Twitter />,
+            icon: <Twitter iconFill={iconFill} />,
         },
         {
             link: 'mailto:hi@robertcooper.me',
-            icon: <Email />,
+            icon: <Email iconFill={iconFill} />,
         },
     ];
     return (
         <SocialMedia>
             {items.map(item => (
-                <SocialMediaItem>
+                <SocialMediaItem key={item.link}>
                     <Link to={item.link}>{item.icon}</Link>
                 </SocialMediaItem>
             ))}
@@ -230,60 +248,71 @@ export default ({
     },
 }: HomePageProps) => {
     return (
-        <Layout site={site}>
-            <Header>
-                <HeaderWrapper>
-                    <HeadshotWrapper data-aos="fade-right" data-aos-delay="200">
-                        <Headshot
-                            fluid={homeHeadshot.childImageSharp.fluid}
-                            alt="Robert Cooper's headshot"
-                        />
-                    </HeadshotWrapper>
-                    <Intro data-aos="fade-up">
-                        <IntroTitle>I'm Robert Cooper,</IntroTitle>
-                        <IntroDescription>
-                            a front end web developer that <strong>writes web development</strong>{' '}
-                            related articles and also provides{' '}
-                            <strong>consulting services to clients</strong> who need front end
-                            development support.
-                        </IntroDescription>
-                        <SocialMediaGroup />
-                    </Intro>
-                </HeaderWrapper>
-                <HeaderImage
-                    fluid={homeHeader.childImageSharp.fluid}
-                    alt={'Snowy mountains'}
-                    style={{ position: 'absolute' }}
-                />
-            </Header>
-            <PageWrapper>
-                <RecentPosts>
-                    <Title as="h2" data-aos="fade">
-                        Recent Posts
-                    </Title>
-                    <BlogList posts={posts} />
-                    <Button to="/blog">See all posts</Button>
-                </RecentPosts>
-                <Divider />
-                <Section>
-                    <Title as="h2">Recent Projects</Title>
-                    <Projects>
-                        {projects.map(({ node: project }) => (
-                            <Project key={project.fields.id} data-aos="fade-right">
-                                <ProjectImage
-                                    fixed={project.frontmatter.image.childImageSharp.fixed}
+        <ThemeContext.Consumer>
+            {({ theme }) => (
+                <Layout site={site}>
+                    <Header>
+                        <HeaderWrapper>
+                            <HeadshotWrapper data-aos="fade-right" data-aos-delay="200">
+                                <Headshot
+                                    fluid={homeHeadshot.childImageSharp.fluid}
+                                    alt="Robert Cooper's headshot"
                                 />
-                                <ProjectTitle>{project.frontmatter.title}</ProjectTitle>
-                                <ProjectDescription>
-                                    {project.frontmatter.description}
-                                </ProjectDescription>
-                            </Project>
-                        ))}
-                    </Projects>
-                    <Button to="/projects">See all projects</Button>
-                </Section>
-            </PageWrapper>
-        </Layout>
+                            </HeadshotWrapper>
+                            <Intro data-aos="fade-up">
+                                <IntroTitle>I'm Robert Cooper,</IntroTitle>
+                                <IntroDescription>
+                                    a front end web developer that{' '}
+                                    <strong>writes web development</strong> related articles and
+                                    also also provides{' '}
+                                    <strong>consulting services to clients</strong> who need front
+                                    end development support.
+                                </IntroDescription>
+                                <SocialMediaGroup theme={theme} />
+                            </Intro>
+                        </HeaderWrapper>
+                        <HeaderImage
+                            fluid={homeHeader.childImageSharp.fluid}
+                            alt={'Snowy mountains'}
+                            style={{ position: 'absolute' }}
+                        />
+                    </Header>
+                    <PageWrapper>
+                        <RecentPosts>
+                            <Title as="h2" data-aos="fade">
+                                Recent Posts
+                            </Title>
+                            <BlogList posts={posts} />
+                            <Button to="/blog" data-aos="fade-up">
+                                See all posts
+                            </Button>
+                        </RecentPosts>
+                        <Divider data-aos="fade" />
+                        <Section>
+                            <Title as="h2" data-aos="fade">
+                                Recent Projects
+                            </Title>
+                            <Projects>
+                                {projects.map(({ node: project }) => (
+                                    <Project key={project.fields.id} data-aos="fade-right">
+                                        <ProjectImage
+                                            fixed={project.frontmatter.image.childImageSharp.fixed}
+                                        />
+                                        <ProjectTitle>{project.frontmatter.title}</ProjectTitle>
+                                        <ProjectDescription>
+                                            {project.frontmatter.description}
+                                        </ProjectDescription>
+                                    </Project>
+                                ))}
+                            </Projects>
+                            <Button to="/projects" data-aos="fade-up">
+                                See all projects
+                            </Button>
+                        </Section>
+                    </PageWrapper>
+                </Layout>
+            )}
+        </ThemeContext.Consumer>
     );
 };
 

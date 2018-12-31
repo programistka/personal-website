@@ -19,7 +19,8 @@ export const Title = styled.h1`
     line-height: 1.1;
     margin: 0 0 40px 0;
     font-family: 'Scope One';
-    color: ${colors.text_title};
+    color: ${props =>
+        props.theme.color === 'light' ? colors.text_title_light : colors.text_title_dark};
 
     ${media.small`
         margin: 0 0 20px 0;

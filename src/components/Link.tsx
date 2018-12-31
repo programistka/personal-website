@@ -5,10 +5,25 @@ import styled from 'styled-components';
 import { colors } from '../styles/common';
 
 const Link = styled.a`
-    color: ${props => (props.active ? colors.link_active : colors.link_inactive)};
+    color: ${props => {
+        if (props.active === 'true') {
+            if (props.theme.color === 'light') {
+                return colors.link_active_light;
+            } else {
+                return colors.link_active_dark;
+            }
+        } else {
+            if (props.theme.color === 'light') {
+                return colors.link_inactive_light;
+            } else {
+                return colors.link_inactive_dark;
+            }
+        }
+    }};
 
     &:hover {
-        color: ${colors.link_active};
+        color: ${props =>
+            props.theme.color === 'light' ? colors.link_active_light : colors.link_active_dark};
     }
 `;
 

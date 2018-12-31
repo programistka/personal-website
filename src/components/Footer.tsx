@@ -8,8 +8,13 @@ import { PageWrapper } from './Common';
 export const footerHeight = 220;
 
 const Footer = styled.footer`
-    background-color: ${colors.footer};
-    border-top: 1px solid ${colors.border_light};
+    background-color: ${props =>
+        props.theme.color === 'light'
+            ? colors.backgroundSecondary_light
+            : colors.backgroundSecondary_dark};
+    border-top: 2px solid ${colors.border_light};
+    border-color: ${props =>
+        props.theme.color === 'light' ? colors.border_light : colors.border_dark};
     height: ${footerHeight}px;
 `;
 
@@ -24,7 +29,8 @@ const ModifiedPageWrapper = styled(PageWrapper)`
 const Title = styled.span`
     font-family: 'Scope One';
     font-size: 24px;
-    color: ${colors.text_title};
+    color: ${props =>
+        props.theme.color === 'light' ? colors.text_title_light : colors.text_title_dark};
     margin-bottom: 20px;
     diplay: inline-block;
 `;

@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import { colors } from '../../styles/common';
 
 export default styled.h3`
-    color: ${colors.text_title};
+    color: ${props =>
+        props.theme.color === 'light' ? colors.text_title_light : colors.text_title_dark};
     display: block;
     text-align: left;
     font-size: 20px;

@@ -1,17 +1,11 @@
-import '../styles/prismjs.css';
+import 'aos/dist/aos.css';
 import Helmet from 'react-helmet';
 import React from 'react';
-import styled, { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { MDXProvider } from '@mdx-js/tag';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
 import { StaticQuery, graphql } from 'gatsby';
 
-if (typeof window !== `undefined`) {
-    AOS.init({
-        once: true,
-    });
-}
+import '../styles/prismjs.css';
 
 // @ts-ignore
 import Montserrat from '../../assets/fonts/Montserrat/Montserrat-Regular.ttf';
@@ -23,6 +17,7 @@ import { colors } from '../styles/common';
 
 import Footer, { footerHeight } from './Footer';
 import Menu, { menuHeight } from './Menu';
+import { ThemeContext } from '../utils/context';
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
@@ -44,8 +39,12 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     font-family: 'Montserrat';
-    color: ${colors.text_dark};
-    background-color: ${colors.background_light};
+    transition: all 200ms linear;
+
+    color: ${props =>
+        props.theme.color === 'light' ? colors.text_body_light : colors.text_body_dark};
+    background-color: ${props =>
+        props.theme.color === 'light' ? colors.background_light : colors.background_dark};
   }
 
   pre {
@@ -58,12 +57,20 @@ const GlobalStyles = createGlobalStyle`
   }}
 
   a {
-      color: ${colors.link_inactive};
+      color: ${colors.link_inactive_light};
 
       &:hover {
-          color: ${colors.link_active};
+          color: ${colors.link_active_light};
       }
   }
+
+    /**
+    * This will hide the focus indicator if the element receives focus via the mouse,
+    * but it will still show up on keyboard focus.
+    */
+    .js-focus-visible :focus:not(.focus-visible) {
+    outline: none;
+    }
 `;
 
 const Main = styled.main`
@@ -99,28 +106,34 @@ export default ({
                 }
             `}
             render={data => (
-                <>
-                    <GlobalStyles />
-                    <Helmet title={title}>
-                        <html lang="en" />
-                        <meta name="description" content={description} />
+                <ThemeContext.Consumer>
+                    {({ theme, toggleTheme }) => (
+                        <ThemeProvider theme={{ color: theme }}>
+                            <>
+                                <GlobalStyles />
+                                <Helmet title={title}>
+                                    <html lang="en" />
+                                    <meta name="description" content={description} />
 
-                        <meta name="twitter:card" content="summary_large_image" />
-                        <meta name="twitter:site" content="@RobertCooper_RC" />
+                                    <meta name="twitter:card" content="summary_large_image" />
+                                    <meta name="twitter:site" content="@RobertCooper_RC" />
 
-                        <meta property="og:title" content={title} />
-                        <meta
-                            property="og:image"
-                            content={`${siteUrl}${publicURL || data.file.publicURL}`}
-                        />
-                        <meta property="og:description" content={description} />
-                    </Helmet>
-                    {!hideMenu && <Menu />}
-                    <MDXProvider components={mdxComponents}>
-                        <Main>{children}</Main>
-                    </MDXProvider>
-                    {!hideFooter && <Footer />}
-                </>
+                                    <meta property="og:title" content={title} />
+                                    <meta
+                                        property="og:image"
+                                        content={`${siteUrl}${publicURL || data.file.publicURL}`}
+                                    />
+                                    <meta property="og:description" content={description} />
+                                </Helmet>
+                                {!hideMenu && <Menu theme={theme} toggleTheme={toggleTheme} />}
+                                <MDXProvider components={mdxComponents}>
+                                    <Main>{children}</Main>
+                                </MDXProvider>
+                                {!hideFooter && <Footer />}
+                            </>
+                        </ThemeProvider>
+                    )}
+                </ThemeContext.Consumer>
             )}
         />
     );

@@ -9,6 +9,8 @@ import { PageWrapper } from '../components/Common';
 import { Title, Description } from '../components/Typography';
 import { media } from '../styles/common';
 
+const Header = styled.div``;
+
 const ModifiedDescription = styled(Description)`
     margin-bottom: 80px;
 
@@ -46,11 +48,14 @@ const Blog = ({ data: { site, allMdx }, pageContext: { pagination } }) => {
     return (
         <Layout site={site} title="Robert Cooper | Blog">
             <ModifiedPageWrapper>
-                <Title data-aos="fade">Blog</Title>
-                <ModifiedDescription data-aos="fade">
-                    I write articles related to front end web development. If you'd like me to write
-                    for your publication, <Link to="mailto:hi@robertcooper.me">let's chat</Link>.
-                </ModifiedDescription>
+                <Header data-aos="fade">
+                    <Title>Blog</Title>
+                    <ModifiedDescription>
+                        I write articles related to front end web development. If you'd like me to
+                        write for your publication,{' '}
+                        <Link to="mailto:hi@robertcooper.me">let's chat</Link>.
+                    </ModifiedDescription>
+                </Header>
                 <BlogList posts={posts} />
                 <Pagination>
                     {nextPagePath && (

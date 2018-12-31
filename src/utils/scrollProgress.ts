@@ -68,7 +68,7 @@ ScrollProgress.prototype._getProgress = function() {
 
 /**
  * Get scroll progress on both axis
- * @method _getProgress
+ * @method _onScroll
  * @returns {undefined}
  */
 ScrollProgress.prototype._onScroll = function() {

@@ -5,7 +5,7 @@ type LinkedInProps = {
     iconFill?: string;
 };
 
-const LinkedIn = ({ iconFill = colors.background_dark }: LinkedInProps) => {
+const LinkedIn = ({ iconFill = colors.text_title_light }: LinkedInProps) => {
     return (
         <svg width="40" height="41" viewBox="0 0 40 41" xmlns="http://www.w3.org/2000/svg">
             <path

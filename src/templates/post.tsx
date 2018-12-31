@@ -70,6 +70,7 @@ const ModifiedPageWrapper = styled(PageWrapper)`
     .gatsby-highlight {
         margin-top: 40px;
         margin-bottom: 40px;
+        ${props => props.theme.color === 'dark' && `border: 2px solid ${colors.border_dark}`};
     }
 
     .gatsby-resp-image-wrapper {
@@ -173,7 +174,8 @@ const ProgressContainer = styled.div`
 
 const ProgressBar = styled.div`
     height: 10px;
-    background: ${colors.background_dark};
+    background: ${props =>
+        props.theme.color === 'light' ? colors.text_title_light : colors.text_title_dark};
     width: 10%;
 `;
 
