@@ -10,26 +10,34 @@ import AOS from 'aos';
  * https://davidwalsh.name/css-focus
  */
 import 'focus-visible';
+import Cookies from 'js-cookie';
 
 import { ThemeContext } from './src/utils/context';
 
 const ThemeWrapperComponent = ({children}) => {
-    const [theme, setTheme] = useState('dark');
+    const [theme, setTheme] = useState(Cookies.get('theme') || 'dark');
 
     const toggleTheme = () => {
-        setTheme(theme === 'light' ? 'dark' : 'light');
+        const newThemeValue = theme === 'light' ? 'dark' : 'light';
+        setTheme(newThemeValue);
+        Cookies.set('theme', newThemeValue);
         AOS.init({
             once: true,
         });
     };
 
     useEffect(() => {
+        if (Cookies.get('theme')) {
+            setTheme(Cookies.get('theme'));
+        } else {
+            Cookies.set('theme', theme);
+        }
         if (typeof window !== `undefined`) {
             AOS.init({
                 once: true,
             });
         }
-    });
+    }, [theme]);
 
     return (
         <ThemeContext.Provider
