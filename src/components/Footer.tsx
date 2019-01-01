@@ -32,7 +32,7 @@ const Title = styled.span`
     color: ${props =>
         props.theme.color === 'light' ? colors.text_title_light : colors.text_title_dark};
     margin-bottom: 20px;
-    diplay: inline-block;
+    display: inline-block;
 `;
 
 const SocialMediaList = styled.ul`

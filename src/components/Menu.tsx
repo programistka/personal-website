@@ -116,7 +116,7 @@ type MenuComponentProps = {
     toggleTheme: (event: Event) => null;
 };
 
-const MenuComponent = props => {
+const MenuComponent = (props: MenuComponentProps) => {
     return (
         <Menu>
             <Location>

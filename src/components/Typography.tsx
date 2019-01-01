@@ -18,7 +18,7 @@ export const Title = styled.h1`
     text-align: center;
     line-height: 1.1;
     margin: 0 0 40px 0;
-    font-family: 'Scope One';
+    font-family: 'Scope One', sans-serif;
     color: ${props =>
         props.theme.color === 'light' ? colors.text_title_light : colors.text_title_dark};
 
