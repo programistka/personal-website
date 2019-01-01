@@ -50,12 +50,6 @@ The home page, being the first place site visitors land when they visit my site,
 
 <span class="caption">The home page elements fade into the page as a user scrolls.</span>
 
-I've included a headshot of myself and I tried to crop out all of the background from the image. Unfortunately, I don't have the design skills required to get rid of some of the white background from my hair and it is prooving to be quite the annoyance every time I see it.
-
-![Lingering white background that remains on Robert's headshot image.](./images/image-4.png)
-
-<span class="caption">Lingering white background that remains on the headshot image 😑</span>
-
 ## Projects
 
 I've created a page to better showcase my past projects. Each app is presented in a similar way, with screenshots of the apps found within desktop/mobile device frames. Each project is also given it's own section with a short description along with keywords indicating the main technologies used for the projects. A call to action section is found at the bottom of the page for any visitors interested in working together on a project.
