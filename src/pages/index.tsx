@@ -264,9 +264,8 @@ export default ({
                                 <IntroDescription>
                                     a front end web developer that{' '}
                                     <strong>writes web development</strong> related articles and
-                                    also also provides{' '}
-                                    <strong>consulting services to clients</strong> who need front
-                                    end development support.
+                                    also provides <strong>consulting services to clients</strong>{' '}
+                                    who need front end development support.
                                 </IntroDescription>
                                 <SocialMediaGroup theme={theme} />
                             </Intro>
