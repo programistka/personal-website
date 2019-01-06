@@ -78,10 +78,15 @@ const PostDate = styled.time``;
 
 const MetaInfoSeparator = styled.span`
     display: inline-block;
-    margin: 0 5px;
+    margin: 0 8px;
 `;
 
 const TimeToRead = styled.span``;
+
+const Clock = styled.span`
+    display: inline-block;
+    margin-right: 5px;
+`;
 
 const PostExcerpt = styled.p`
     font-size: ${fontSize.body.large};
@@ -120,7 +125,7 @@ const BlogCard = ({ post }) => {
                         </PostDate>
                         <MetaInfoSeparator>•</MetaInfoSeparator>
                         <TimeToRead>
-                            🕙
+                            <Clock>🕙</Clock>
                             {post.timeToRead} min read
                         </TimeToRead>
                     </MetaInfo>

@@ -263,9 +263,9 @@ export default ({
                                 <IntroTitle>I'm Robert Cooper,</IntroTitle>
                                 <IntroDescription>
                                     a front end web developer that{' '}
-                                    <strong>writes web development</strong> related articles and
-                                    also provides <strong>consulting services to clients</strong>{' '}
-                                    who need front end development support.
+                                    <strong>writes web development</strong> articles and works as a{' '}
+                                    <strong>freelancer</strong> to clients who need front end
+                                    development support.
                                 </IntroDescription>
                                 <SocialMediaGroup theme={theme} />
                             </Intro>
