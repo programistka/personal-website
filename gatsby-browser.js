@@ -12,7 +12,7 @@ import AOS from 'aos';
 import 'focus-visible';
 import Cookies from 'js-cookie';
 
-import { ThemeContext } from './src/utils/context';
+import { ThemeContext } from './src/utils/context'
 
 const ThemeWrapperComponent = ({children}) => {
     const [theme, setTheme] = useState(Cookies.get('theme') || 'dark');

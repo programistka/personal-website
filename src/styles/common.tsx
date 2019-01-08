@@ -1,4 +1,4 @@
-import { css } from 'styled-components';
+import { css } from '../lib/styled-components';
 
 export const colors = {
     text_title_light: '#03256C',
@@ -40,12 +40,23 @@ export const colors = {
     border_dark: `rgba(128, 178, 237, 0.2)`,
 };
 
-const sizes = {
-    large: 1200,
-    medium: 992,
+const sizes: {
+    small: number;
+    medium: number;
+    large: number;
+} = {
     small: 576,
+    medium: 992,
+    large: 1200,
 };
 
+type Media = {
+    small: () => string;
+    medium: () => string;
+    large: () => string;
+};
+
+// TODO: Add better types
 // Iterate through the sizes and create a media template
 export const media: any = Object.keys(sizes).reduce((acc, label) => {
     acc[label] = (...args) =>

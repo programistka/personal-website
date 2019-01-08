@@ -1,8 +1,9 @@
 import Img from 'gatsby-image';
 import React from 'react';
-import styled from 'styled-components';
 import { graphql } from 'gatsby';
 
+import styled from '../lib/styled-components';
+import { ThemeContext } from '../utils/context';
 import { colors, media } from '../styles/common';
 
 import BlogList from '../components/BlogList';
@@ -12,9 +13,8 @@ import Layout from '../components/Layout';
 import Link from '../components/Link';
 import LinkedIn from '../components/icons/LinkedIn';
 import Twitter from '../components/icons/Twitter';
-import { PageWrapper, Divider, Button } from '../components/Common';
+import { Button, Divider, PageWrapper } from '../components/Common';
 import { Title, fontSize } from '../components/Typography';
-import { ThemeContext } from '../utils/context';
 
 const Header = styled.div`
     position: relative;
@@ -192,7 +192,7 @@ const ProjectDescription = styled.p`
     line-height: 1.4;
 `;
 
-const SocialMediaGroup = ({ theme }) => {
+const SocialMediaGroup = ({ theme }: { theme: 'light' | 'dark' }): React.ReactChild => {
     const iconFill = theme === 'light' ? colors.text_title_light : colors.text_title_dark;
 
     const items = [
@@ -249,7 +249,7 @@ export default ({
 }: HomePageProps) => {
     return (
         <ThemeContext.Consumer>
-            {({ theme }) => (
+            {({ theme }: { theme: 'light' | 'dark' }) => (
                 <Layout site={site}>
                     <Header>
                         <HeaderWrapper>
