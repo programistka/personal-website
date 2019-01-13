@@ -144,7 +144,7 @@ export const Circle = styled.div`
 type ThemeSwitchProps = {
     className: string;
     theme: 'light' | 'dark';
-    onChange: (event: any) => any;
+    onChange: (event: React.MouseEventHandler<HTMLDivElement>) => void;
 };
 
 const ThemeSwitch = ({ className, theme, onChange }: ThemeSwitchProps) => {

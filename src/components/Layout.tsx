@@ -18,6 +18,7 @@ import { colors } from '../styles/common';
 import Footer, { footerHeight } from './Footer';
 import Menu, { menuHeight } from './Menu';
 import { ThemeContext } from '../utils/context';
+import { SiteMetadata } from '../types/SiteMetaData';
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
@@ -77,6 +78,23 @@ const Main = styled.main`
     min-height: calc(100vh - ${footerHeight}px - ${menuHeight}px);
 `;
 
+type LayoutProps = {
+    site: {
+        siteMetadata: SiteMetadata;
+    };
+    children: React.ReactNode;
+    frontmatter?: {
+        title: string | null;
+        description: string | null;
+        banner: {
+            publicURL: string | null;
+        }
+    }
+    title?: string | null;
+    hideMenu?: boolean;
+    hideFooter?: boolean;
+};
+
 export default ({
     site,
     frontmatter = { title: null, description: null, banner: { publicURL: null } },
@@ -84,7 +102,7 @@ export default ({
     hideMenu = false,
     hideFooter = false,
     children,
-}) => {
+}: LayoutProps) => {
     const { title: siteTitle, description: siteDescription, siteUrl } = site.siteMetadata;
 
     const {

@@ -5,8 +5,7 @@ import styled from 'styled-components';
 import Link from './Link';
 import { colors, media } from '../styles/common';
 import { fontSize } from './Typography';
-
-type BlogCardProps = {};
+import { Post as PostType } from '../types/Post';
 
 const Post = styled.section`
     width: calc(100% - 40px);
@@ -113,7 +112,12 @@ const PostImage = styled(Img)`
     `};
 `;
 
-const BlogCard = ({ post }) => {
+type BlogCardProps = {
+    post: PostType["node"];
+};
+
+
+const BlogCard = ({ post }: BlogCardProps) => {
     return (
         <Post key={post.id} data-aos="fade-up">
             <PostLink to={post.frontmatter.slug}>

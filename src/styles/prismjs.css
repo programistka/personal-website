@@ -28,13 +28,11 @@ pre[class*='language-'] {
 }
 
 pre[class*='language-']::-moz-selection {
-
     /* Firefox */
     background: hsl(207, 4%, 16%);
 }
 
 pre[class*='language-']::selection {
-
     /* Safari */
     background: hsl(207, 4%, 16%);
 }
@@ -43,21 +41,21 @@ pre[class*='language-']::selection {
 pre[class*='language-']::-moz-selection,
 pre[class*='language-'] ::-moz-selection {
     text-shadow: none;
-    background: hsla(0, 0%, 100%, .15);
+    background: hsla(0, 0%, 100%, 0.15);
 }
 
 pre[class*='language-']::selection,
 pre[class*='language-'] ::selection {
     text-shadow: none;
-    background: hsla(0, 0%, 100%, .15);
+    background: hsla(0, 0%, 100%, 0.15);
 }
 
 /* Inline code */
 :not(pre) > code[class*='language-'] {
-    border-radius: .3em;
+    border-radius: 0.3em;
     background: #ffe564;
     color: #1a1a1a;
-    padding: .15em .2em .05em;
+    padding: 0.15em 0.2em 0.05em;
     white-space: normal;
 }
 
@@ -133,8 +131,8 @@ pre[data-line] {
     margin-right: -1em;
     margin-left: -1em;
     padding-right: 1em;
-    padding-left: .75em;
-    border-left: .25em solid #f78c6c;
+    padding-left: 0.75em;
+    border-left: 0.25em solid #f78c6c;
 }
 
 .gatsby-highlight {

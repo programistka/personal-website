@@ -1,9 +1,14 @@
+type Coordinates = {
+    x: number;
+    y: number;
+}
+
 /**
  * Fallback noop function
  * @method noop
  * @returns {undefined}
  */
-function noop() {}
+function noop(): void {}
 
 /**
  * ScrollProgress class constructor
@@ -11,7 +16,7 @@ function noop() {}
  * @param {Function} handleUpdate method to call on scroll update
  * @returns {undefined}
  */
-const ScrollProgress = function(handleUpdate) {
+const ScrollProgress = function(handleUpdate: ((x: number, y: number) => void)): void {
     // assign function to call on update
     this._handleUpdate = typeof handleUpdate === 'function' ? handleUpdate : noop;
 
@@ -38,7 +43,7 @@ const ScrollProgress = function(handleUpdate) {
  * @method _getViewportHeight
  * @returns {Number}
  */
-ScrollProgress.prototype._getViewportHeight = function() {
+ScrollProgress.prototype._getViewportHeight = function(): number {
     return document.body.scrollHeight - window.innerHeight;
 };
 
@@ -47,7 +52,7 @@ ScrollProgress.prototype._getViewportHeight = function() {
  * @method _getViewportWidth
  * @returns {Number}
  */
-ScrollProgress.prototype._getViewportWidth = function() {
+ScrollProgress.prototype._getViewportWidth = function(): number {
     return document.body.scrollWidth - window.innerWidth;
 };
 
@@ -56,7 +61,7 @@ ScrollProgress.prototype._getViewportWidth = function() {
  * @method _getProgress
  * @returns {Object}
  */
-ScrollProgress.prototype._getProgress = function() {
+ScrollProgress.prototype._getProgress = function(): Coordinates {
     const x = typeof window.scrollX === 'undefined' ? window.pageXOffset : window.scrollX;
     const y = typeof window.scrollY === 'undefined' ? window.pageYOffset : window.scrollY;
 
@@ -71,7 +76,7 @@ ScrollProgress.prototype._getProgress = function() {
  * @method _onScroll
  * @returns {undefined}
  */
-ScrollProgress.prototype._onScroll = function() {
+ScrollProgress.prototype._onScroll = function(): void {
     this._progress = this._getProgress();
     this._handleUpdate(this._progress.x, this._progress.y);
 };
@@ -81,7 +86,7 @@ ScrollProgress.prototype._onScroll = function() {
  * @method _onResize
  * @returns {undefined}
  */
-ScrollProgress.prototype._onResize = function() {
+ScrollProgress.prototype._onResize = function(): void {
     this._viewportHeight = this._getViewportHeight();
     this._viewportWidth = this._getViewportWidth();
 
@@ -96,7 +101,7 @@ ScrollProgress.prototype._onResize = function() {
  * @method trigger
  * @returns {undefined}
  */
-ScrollProgress.prototype.trigger = function() {
+ScrollProgress.prototype.trigger = function(): void {
     this._handleUpdate(this._progress.x, this._progress.y);
 };
 
@@ -105,7 +110,7 @@ ScrollProgress.prototype.trigger = function() {
  * @method destroy
  * @returns {undefined}
  */
-ScrollProgress.prototype.destroy = function() {
+ScrollProgress.prototype.destroy = function(): void {
     window.removeEventListener('scroll', this._onScroll);
     window.removeEventListener('resize', this._onResize);
     this._handleUpdate = null;

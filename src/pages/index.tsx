@@ -3,7 +3,9 @@ import React from 'react';
 import { graphql } from 'gatsby';
 
 import styled from '../lib/styled-components';
-import { ThemeContext } from '../utils/context';
+import { Post } from '../types/Post';
+import { Project as ProjectType } from '../types/Project';
+import { ThemeContext, ThemeType } from '../utils/context';
 import { colors, media } from '../styles/common';
 
 import BlogList from '../components/BlogList';
@@ -15,6 +17,8 @@ import LinkedIn from '../components/icons/LinkedIn';
 import Twitter from '../components/icons/Twitter';
 import { Button, Divider, PageWrapper } from '../components/Common';
 import { Title, fontSize } from '../components/Typography';
+import { FluidImage } from '../types/Image';
+import { SiteMetadata } from '../types/SiteMetaData';
 
 const Header = styled.div`
     position: relative;
@@ -192,7 +196,7 @@ const ProjectDescription = styled.p`
     line-height: 1.4;
 `;
 
-const SocialMediaGroup = ({ theme }: { theme: 'light' | 'dark' }): React.ReactChild => {
+const SocialMediaGroup = ({ theme }: { theme: 'light' | 'dark' }): JSX.Element => {
     const iconFill = theme === 'light' ? colors.text_title_light : colors.text_title_dark;
 
     const items = [
@@ -226,14 +230,16 @@ const SocialMediaGroup = ({ theme }: { theme: 'light' | 'dark' }): React.ReactCh
 
 type HomePageProps = {
     data: {
-        site: any;
-        homeHeader: any;
-        homeHeadshot: any;
+        site: {
+            siteMetadata: SiteMetadata;
+        };
+        homeHeader: FluidImage;
+        homeHeadshot: FluidImage;
         posts: {
-            edges: any;
+            edges: Post[];
         };
         projects: {
-            edges: any;
+            edges: ProjectType[];
         };
     };
 };
@@ -249,7 +255,7 @@ export default ({
 }: HomePageProps) => {
     return (
         <ThemeContext.Consumer>
-            {({ theme }: { theme: 'light' | 'dark' }) => (
+            {({ theme }: { theme: ThemeType }) => (
                 <Layout site={site}>
                     <Header>
                         <HeaderWrapper>

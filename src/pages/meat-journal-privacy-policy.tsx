@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { graphql } from 'gatsby';
+
+import { SiteMetadata } from '../types/SiteMetaData';
 
 import Layout from '../components/Layout';
 import Link from '../components/Link';
@@ -17,7 +20,7 @@ const LastUpdatedDate = styled.p`
     align-self: center;
 `;
 
-export default ({ data: { site } }) => (
+export default ({ data: { site } }: { data: { site: { siteMetadata: SiteMetadata } } }) => (
     <Layout site={site} hideMenu={true} hideFooter={true}>
         <PageContent>
             <Title>Privacy Policy</Title>

@@ -27,6 +27,40 @@ const groupByCategory = posts =>
         return acc;
     }, {});
 
+const createPaginatedPages = (createPage, posts, pathPrefix, context) => {
+    const pages = posts.reduce((acc, value, index) => {
+        const pageIndex = Math.floor(index / PAGINATION_OFFSET);
+
+        if (!acc[pageIndex]) {
+            acc[pageIndex] = [];
+        }
+
+        acc[pageIndex].push(value.node.id);
+
+        return acc;
+    }, []);
+
+    pages.forEach((page, index) => {
+        const previousPagePath = `${pathPrefix}/${index + 1}`;
+        const nextPagePath = index === 1 ? pathPrefix : `${pathPrefix}/${index - 1}`;
+
+        createPage({
+            path: index > 0 ? `${pathPrefix}/${index}` : `${pathPrefix}`,
+            component: path.resolve(`src/templates/blog.tsx`),
+            context: {
+                pagination: {
+                    page,
+                    nextPagePath: index === 0 ? null : nextPagePath,
+                    previousPagePath: index === pages.length - 1 ? null : previousPagePath,
+                    pageCount: pages.length,
+                    pathPrefix,
+                },
+                ...context,
+            },
+        });
+    });
+};
+
 const createCategoryPages = (createPage, posts) => {
     const categories = pluckCategories(posts);
 
@@ -65,40 +99,6 @@ const createBlog = (createPage, posts) => {
     const categories = pluckCategories(posts);
 
     createPaginatedPages(createPage, posts, '/blog', { categories });
-};
-
-const createPaginatedPages = (createPage, posts, pathPrefix, context) => {
-    const pages = posts.reduce((acc, value, index) => {
-        const pageIndex = Math.floor(index / PAGINATION_OFFSET);
-
-        if (!acc[pageIndex]) {
-            acc[pageIndex] = [];
-        }
-
-        acc[pageIndex].push(value.node.id);
-
-        return acc;
-    }, []);
-
-    pages.forEach((page, index) => {
-        const previousPagePath = `${pathPrefix}/${index + 1}`;
-        const nextPagePath = index === 1 ? pathPrefix : `${pathPrefix}/${index - 1}`;
-
-        createPage({
-            path: index > 0 ? `${pathPrefix}/${index}` : `${pathPrefix}`,
-            component: path.resolve(`src/templates/blog.tsx`),
-            context: {
-                pagination: {
-                    page,
-                    nextPagePath: index === 0 ? null : nextPagePath,
-                    previousPagePath: index === pages.length - 1 ? null : previousPagePath,
-                    pageCount: pages.length,
-                    pathPrefix,
-                },
-                ...context,
-            },
-        });
-    });
 };
 
 exports.createPages = ({ actions, graphql }) =>

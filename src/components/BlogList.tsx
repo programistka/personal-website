@@ -3,10 +3,7 @@ import styled from 'styled-components';
 
 import { media } from '../styles/common';
 import BlogCard from './BlogCard';
-
-type BlogListComponentProps = {
-    posts: any[];
-};
+import { Post } from '../types/Post';
 
 const BlogList = styled.div`
     display: flex;
@@ -18,6 +15,10 @@ const BlogList = styled.div`
         justify-content: center;
     `};
 `;
+
+type BlogListComponentProps = {
+    posts: Post[];
+};
 
 const BlogListComponent = ({ posts }: BlogListComponentProps) => {
     return (

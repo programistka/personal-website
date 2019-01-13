@@ -1,6 +1,6 @@
 {
-    "name": "gatsby-mdx-blog-starter-project",
-    "description": "Gatsby MDX Blog Starter Project",
+    "name": "personal-website",
+    "description": "Robert Cooper's Personal Site",
     "version": "1.0.0",
     "author": "Robert Cooper <hi@robertcooper.me> (https://www.robertcooper.me/)",
     "repository": "https://github.com/robertcoopercode/personal-website/",
@@ -11,7 +11,7 @@
         "core-js": "^2.5.7",
         "disqus-react": "^1.0.5",
         "focus-visible": "^4.1.5",
-        "gatsby": "^2.0.7",
+        "gatsby": "^2.0.91",
         "gatsby-image": "^2.0.8",
         "gatsby-link": "^2.0.1",
         "gatsby-mdx": "^0.2.0",
@@ -32,8 +32,8 @@
         "gatsby-transformer-sharp": "^2.1.1",
         "js-cookie": "^2.2.0",
         "prismjs": "^1.15.0",
-        "react": "^16.7.0-alpha.2",
-        "react-dom": "^16.7.0-alpha.2",
+        "react": "16.7.0-alpha.2",
+        "react-dom": "16.7.0-alpha.2",
         "react-helmet": "~5.2.0",
         "styled-components": "^4.1.3"
     },

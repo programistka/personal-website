@@ -3,6 +3,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { graphql } from 'gatsby';
 
+import { SiteMetadata } from '../types/SiteMetaData';
+import { Project as ProjectType } from '../types/Project';
+
 import Layout from '../components/Layout';
 import { Title, Description, fontSize } from '../components/Typography';
 import { PageWrapper, SectionWrapper, Button } from '../components/Common';
@@ -78,9 +81,11 @@ const ProjectImage = styled(Img)`
 
 type ProjectsProps = {
     data: {
-        site: any;
+        site: {
+            siteMetadata: SiteMetadata;
+        };
         allMdx: {
-            edges: any;
+            edges: ProjectType[];
         };
     };
 };

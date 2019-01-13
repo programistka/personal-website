@@ -10,12 +10,7 @@ const Wrapper = styled.div`
 
 type BlogThemeSwitchProps = {};
 
-const BlogThemeSwitch = () => {
-    const [theme, setTheme] = useState('light');
-    const toggleTheme = () => {
-        setTheme(previousTheme => (previousTheme === 'light' ? 'dark' : 'light'));
-    };
-
+const BlogThemeSwitch = ({}: BlogThemeSwitchProps) => {
     return (
         <Wrapper>
             <Button to="https://github.com/robertcoopercode/personal-website">

@@ -50,7 +50,7 @@ const SocialMediaLink = styled(Link)``;
 
 type FooterProps = {};
 
-const FooterComponent = () => {
+const FooterComponent = ({}: FooterProps) => {
     return (
         <Footer>
             <ModifiedPageWrapper>

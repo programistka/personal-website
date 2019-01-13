@@ -28,7 +28,7 @@ const Link = styled.a`
 `;
 
 type LinkComponentProps = {
-    children: any;
+    children: React.ReactNode;
     to: string;
     active?: string;
 };

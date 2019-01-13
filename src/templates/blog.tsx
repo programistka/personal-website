@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { graphql } from 'gatsby';
 
 import BlogList from '../components/BlogList';
@@ -8,6 +8,8 @@ import styled from 'styled-components';
 import { PageWrapper } from '../components/Common';
 import { Title, Description } from '../components/Typography';
 import { media } from '../styles/common';
+import { SiteMetadata } from '../types/SiteMetaData';
+import { Post } from '../types/Post';
 
 const Header = styled.div``;
 
@@ -40,7 +42,27 @@ const PaginationItem = styled.li`
 
 const PaginationLink = styled(Link)``;
 
-const Blog = ({ data: { site, allMdx }, pageContext: { pagination } }) => {
+type BlogProps = {
+    data: {
+        site: {
+            siteMetadata: SiteMetadata;
+        };
+        allMdx: {
+            edges: Array<{
+                node: Post;
+            }>;
+        };
+    };
+    pageContext: {
+        pagination: {
+            page: Post;
+            nextPagePath: string;
+            previousPagePath: string;
+        };
+    };
+};
+
+const Blog = ({ data: { site, allMdx }, pageContext: { pagination } }: BlogProps) => {
     const { page, nextPagePath, previousPagePath } = pagination;
 
     const posts = page.map(id => allMdx.edges.find(edge => edge.node.id === id));

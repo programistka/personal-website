@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import AOS from 'aos';
 
 /**
@@ -12,32 +12,50 @@ import AOS from 'aos';
 import 'focus-visible';
 import Cookies from 'js-cookie';
 
-import { ThemeContext } from './src/utils/context'
+import { ThemeContext } from './src/utils/context';
 
-const ThemeWrapperComponent = ({children}) => {
+/**
+ * Wrapper component that provides the theme and theme updater function to the entire app
+ * @param {Object} props - Component props
+ * @param {ReactNode} props.children
+ * @returns
+ */
+const ThemeWrapperComponent = ({ children }) => {
+    // Set the default theme state to the value stored in the user's cookie and fallback
+    // to 'dark' if no cookie is found
     const [theme, setTheme] = useState(Cookies.get('theme') || 'dark');
 
+    /**
+     * Toggle between light and dark themes and set the current theme
+     * value as a cookie. Also need to re-initialize the animate on scroll
+     * module to ensure elements don't disappear.
+     * @returns {void}
+     */
     const toggleTheme = () => {
         const newThemeValue = theme === 'light' ? 'dark' : 'light';
         setTheme(newThemeValue);
         Cookies.set('theme', newThemeValue);
+        // TODO: Fix jumping effect caused by AOS.init when switching themes
         AOS.init({
             once: true,
         });
     };
 
-    useEffect(() => {
-        if (Cookies.get('theme')) {
-            setTheme(Cookies.get('theme'));
-        } else {
-            Cookies.set('theme', theme);
-        }
-        if (typeof window !== `undefined`) {
-            AOS.init({
-                once: true,
-            });
-        }
-    }, [theme]);
+    useEffect(
+        () => {
+            if (Cookies.get('theme')) {
+                setTheme(Cookies.get('theme'));
+            } else {
+                Cookies.set('theme', theme);
+            }
+            if (typeof window !== `undefined`) {
+                AOS.init({
+                    once: true,
+                });
+            }
+        },
+        [theme],
+    );
 
     return (
         <ThemeContext.Provider
@@ -49,12 +67,10 @@ const ThemeWrapperComponent = ({children}) => {
             {children}
         </ThemeContext.Provider>
     )
-}
+};
 
-export const wrapRootElement = ({ element }) => {
-    return (
-        <ThemeWrapperComponent>
-            {element}
-        </ThemeWrapperComponent>
-    )
-  }
+export const wrapRootElement = ({ element }) => (
+    <ThemeWrapperComponent>
+        {element}
+    </ThemeWrapperComponent>
+)
