@@ -88,8 +88,8 @@ type LayoutProps = {
         description: string | null;
         banner: {
             publicURL: string | null;
-        }
-    }
+        };
+    };
     title?: string | null;
     hideMenu?: boolean;
     hideFooter?: boolean;

@@ -82,6 +82,22 @@ const ModifiedPageWrapper = styled(PageWrapper)`
         display: block;
         margin: 40px 0;
     }
+
+    ul {
+        list-style: none;
+        line-height: 2;
+        padding-left: 30px;
+    }
+
+    li {
+        position: relative;
+
+        &::before {
+            content: '-';
+            position: absolute;
+            left: -20px;
+        }
+    }
 `;
 
 const PostTitle = styled(Title)`

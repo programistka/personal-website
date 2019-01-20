@@ -113,9 +113,8 @@ const PostImage = styled(Img)`
 `;
 
 type BlogCardProps = {
-    post: PostType["node"];
+    post: PostType['node'];
 };
-
 
 const BlogCard = ({ post }: BlogCardProps) => {
     return (
