@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { colors, media } from '../styles/common';
 
 export const fontSize = {
@@ -19,8 +20,7 @@ export const Title = styled.h1`
     line-height: 1.1;
     margin: 0 0 40px 0;
     font-family: 'Scope One', sans-serif;
-    color: ${props =>
-        props.theme.color === 'light' ? colors.text_title_light : colors.text_title_dark};
+    color: ${props => (props.theme.color === 'light' ? colors.text_title_light : colors.text_title_dark)};
 
     ${media.small`
         margin: 0 0 20px 0;

@@ -1,11 +1,12 @@
 import React from 'react';
 
+import { Divider } from '../Common';
+
 import Paragraph from './Paragraph';
 import SubtitleH2 from './SubtitleH2';
 import SubtitleH3 from './SubtitleH3';
 import SubtitleH4 from './SubtitleH4';
 import Title from './Title';
-import { Divider } from '../Common';
 
 export default {
     h1: props => <Title {...props} />,

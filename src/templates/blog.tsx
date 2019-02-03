@@ -71,9 +71,8 @@ const Blog = ({ data: { site, allMdx }, pageContext: { pagination } }: BlogProps
                 <Header data-aos="fade">
                     <Title>Blog</Title>
                     <ModifiedDescription>
-                        I write articles related to front end web development. If you'd like me to
-                        write for your publication,{' '}
-                        <Link to="mailto:hi@robertcooper.me">let's chat</Link>.
+                        I write articles related to front end web development. If you'd like me to write for your
+                        publication, <Link to="mailto:hi@robertcooper.me">let's chat</Link>.
                     </ModifiedDescription>
                 </Header>
                 <BlogList posts={posts} />

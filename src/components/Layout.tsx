@@ -41,10 +41,8 @@ const GlobalStyles = createGlobalStyle`
     font-family: 'Montserrat', sans-serif;
     transition: all 200ms linear;
 
-    color: ${props =>
-        props.theme.color === 'light' ? colors.text_body_light : colors.text_body_dark};
-    background-color: ${props =>
-        props.theme.color === 'light' ? colors.background_light : colors.background_dark};
+    color: ${props => (props.theme.color === 'light' ? colors.text_body_light : colors.text_body_dark)};
+    background-color: ${props => (props.theme.color === 'light' ? colors.background_light : colors.background_dark)};
   }
 
   pre {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import AOS from 'aos';
+import AOS from 'aos'; // eslint-disable-line
 
 /**
  * Show outline only on keyboard interaction
@@ -66,11 +66,7 @@ const ThemeWrapperComponent = ({ children }) => {
         >
             {children}
         </ThemeContext.Provider>
-    )
+    );
 };
 
-export const wrapRootElement = ({ element }) => (
-    <ThemeWrapperComponent>
-        {element}
-    </ThemeWrapperComponent>
-)
+export const wrapRootElement = ({ element }) => <ThemeWrapperComponent>{element}</ThemeWrapperComponent>;

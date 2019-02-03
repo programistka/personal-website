@@ -201,8 +201,7 @@ const ProgressContainer = styled.div`
 
 const ProgressBar = styled.div`
     height: 10px;
-    background: ${props =>
-        props.theme.color === 'light' ? colors.text_title_light : colors.text_title_dark};
+    background: ${props => (props.theme.color === 'light' ? colors.text_title_light : colors.text_title_dark)};
     width: 10%;
 `;
 
@@ -245,9 +244,7 @@ const Post = (props: PostProps) => {
                     </ProgressContainer>
                     <ModifiedPageWrapper>
                         <PostTitle>{mdx.frontmatter.title}</PostTitle>
-                        <Date dateTime={mdx.frontmatter.dateTimeString}>
-                            {mdx.frontmatter.formattedDate}
-                        </Date>
+                        <Date dateTime={mdx.frontmatter.dateTimeString}>{mdx.frontmatter.formattedDate}</Date>
 
                         {mdx.frontmatter.banner && (
                             <FeaturedImage fluid={mdx.frontmatter.banner.childImageSharp.fluid} />
@@ -269,9 +266,7 @@ const Post = (props: PostProps) => {
                                 {next && (
                                     <PreviousPostWrapper>
                                         Previous:{' '}
-                                        <PreviousPostLink to={next.fields.slug}>
-                                            {next.fields.title}
-                                        </PreviousPostLink>
+                                        <PreviousPostLink to={next.fields.slug}>{next.fields.title}</PreviousPostLink>
                                     </PreviousPostWrapper>
                                 )}
                             </OtherPostsWrapper>

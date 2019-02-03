@@ -2,9 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { Location } from '@reach/router';
 
+import { colors, media } from '../styles/common';
+
 import Link from './Link';
 import { PageWrapper } from './Common';
-import { colors, media } from '../styles/common';
 import { fontSize } from './Typography';
 import ThemeSwitch from './ThemeSwitch';
 
@@ -16,13 +17,10 @@ const Menu = styled.div`
     height: ${menuHeight}px;
     padding: 0 20px;
     background-color: ${props =>
-        props.theme.color === 'light'
-            ? colors.backgroundSecondary_light
-            : colors.backgroundSecondary_dark};
+        props.theme.color === 'light' ? colors.backgroundSecondary_light : colors.backgroundSecondary_dark};
 
     border-bottom: 2px solid ${colors.border_light};
-    border-color: ${props =>
-        props.theme.color === 'light' ? colors.border_light : colors.border_dark};
+    border-color: ${props => (props.theme.color === 'light' ? colors.border_light : colors.border_dark)};
 
     ${media.small`
         height: 180px;
@@ -45,8 +43,7 @@ const MenuTitle = styled.span`
     font-weight: 400;
     font-size: 24px;
     margin: 0 auto 0 0;
-    color: ${props =>
-        props.theme.color === 'light' ? colors.text_title_light : colors.text_title_dark};
+    color: ${props => (props.theme.color === 'light' ? colors.text_title_light : colors.text_title_dark)};
 
     ${media.small`
         margin: 0 0 20px 0;
@@ -130,9 +127,7 @@ const MenuComponent = (props: MenuComponentProps) => {
                                     <NavListItem key={navigation.label}>
                                         <NavLink
                                             to={navigation.to}
-                                            active={(
-                                                navigation.to === location.pathname
-                                            ).toString()}
+                                            active={(navigation.to === location.pathname).toString()}
                                         >
                                             {navigation.label}
                                         </NavLink>

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { Title } from '../Typography';
 
 export default styled(Title)`

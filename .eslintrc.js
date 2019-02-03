@@ -4,7 +4,10 @@ module.exports = {
     extends: ["plugin:prettier/recommended", "plugin:import/errors", "plugin:import/warnings", "plugin:import/typescript"],
     parserOptions: {
         ecmaVersion: 2018,
-        sourceType: 'module'
+        sourceType: 'module',
+        ecmaFeatures: {
+            "jsx": true
+        }
     },
     rules: {
         "prettier/prettier": "error",

@@ -22,8 +22,7 @@ const Link = styled.a`
     }};
 
     &:hover {
-        color: ${props =>
-            props.theme.color === 'light' ? colors.link_active_light : colors.link_active_dark};
+        color: ${props => (props.theme.color === 'light' ? colors.link_active_light : colors.link_active_dark)};
     }
 `;
 

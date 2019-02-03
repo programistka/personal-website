@@ -106,8 +106,7 @@ const Intro = styled.div`
 const IntroTitle = styled.span`
     font-family: 'Scope One';
     font-size: ${fontSize.title.large};
-    color: ${props =>
-        props.theme.color === 'light' ? colors.text_title_light : colors.text_title_dark};
+    color: ${props => (props.theme.color === 'light' ? colors.text_title_light : colors.text_title_dark)};
 
     ${media.medium`
         font-size: ${fontSize.title.small};
@@ -117,8 +116,7 @@ const IntroTitle = styled.span`
 const IntroDescription = styled.p`
     line-height: 1.5;
     font-size: 24px;
-    color: ${props =>
-        props.theme.color === 'light' ? colors.text_body_light : colors.text_body_dark};
+    color: ${props => (props.theme.color === 'light' ? colors.text_body_light : colors.text_body_dark)};
     max-width: 100%;
 
     ${media.medium`
@@ -180,8 +178,7 @@ const ProjectTitle = styled.h3`
     font-size: 22px;
     font-weight: 400;
     margin: 0 0 10px 0;
-    color: ${props =>
-        props.theme.color === 'light' ? colors.text_title_light : colors.text_title_dark};
+    color: ${props => (props.theme.color === 'light' ? colors.text_title_light : colors.text_title_dark)};
 `;
 
 const ProjectImage = styled(Img)`
@@ -259,18 +256,14 @@ export default ({
                     <Header>
                         <HeaderWrapper>
                             <HeadshotWrapper data-aos="fade-right" data-aos-delay="200">
-                                <Headshot
-                                    fluid={homeHeadshot.childImageSharp.fluid}
-                                    alt="Robert Cooper's headshot"
-                                />
+                                <Headshot fluid={homeHeadshot.childImageSharp.fluid} alt="Robert Cooper's headshot" />
                             </HeadshotWrapper>
                             <Intro data-aos="fade-up">
                                 <IntroTitle>I'm Robert Cooper,</IntroTitle>
                                 <IntroDescription>
-                                    a front end web developer that{' '}
-                                    <strong>writes web development</strong> articles and works as a{' '}
-                                    <strong>freelancer</strong> to clients who need front end
-                                    development support.
+                                    a front end web developer that <strong>writes web development</strong> articles and
+                                    works as a <strong>freelancer</strong> to clients who need front end development
+                                    support.
                                 </IntroDescription>
                                 <SocialMediaGroup theme={theme} />
                             </Intro>
@@ -299,13 +292,9 @@ export default ({
                             <Projects>
                                 {projects.map(({ node: project }) => (
                                     <Project key={project.fields.id} data-aos="fade-right">
-                                        <ProjectImage
-                                            fixed={project.frontmatter.image.childImageSharp.fixed}
-                                        />
+                                        <ProjectImage fixed={project.frontmatter.image.childImageSharp.fixed} />
                                         <ProjectTitle>{project.frontmatter.title}</ProjectTitle>
-                                        <ProjectDescription>
-                                            {project.frontmatter.description}
-                                        </ProjectDescription>
+                                        <ProjectDescription>{project.frontmatter.description}</ProjectDescription>
                                     </Project>
                                 ))}
                             </Projects>

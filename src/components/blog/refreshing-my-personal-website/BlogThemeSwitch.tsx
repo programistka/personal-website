@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import ThemeSwitch from '../../ThemeSwitch';
 import styled from 'styled-components';
+
+import ThemeSwitch from '../../ThemeSwitch';
 
 const Wrapper = styled.div`
     display: flex;

@@ -21,8 +21,7 @@ export const SectionWrapper = styled(PageWrapper)`
 
 export const Divider = styled.hr`
     border: 1px solid ${colors.border_light};
-    border-color: ${props =>
-        props.theme.color === 'light' ? colors.border_light : colors.border_dark};
+    border-color: ${props => (props.theme.color === 'light' ? colors.border_light : colors.border_dark)};
     margin: 40px;
 `;
 
@@ -35,14 +34,10 @@ export const Button = styled(Link)`
             ? colors.button_inactive_background_light
             : colors.button_inactive_background_dark};
     color: ${props =>
-        props.theme.color === 'light'
-            ? colors.button_inactive_text_light
-            : colors.button_inactive_text_dark};
+        props.theme.color === 'light' ? colors.button_inactive_text_light : colors.button_inactive_text_dark};
     border: 2px solid ${colors.button_inactive_border_light};
     border-color: ${props =>
-        props.theme.color === 'light'
-            ? colors.button_inactive_border_light
-            : colors.button_inactive_border_dark};
+        props.theme.color === 'light' ? colors.button_inactive_border_light : colors.button_inactive_border_dark};
     font-size: ${fontSize.body.large};
     display: inline-block;
     text-decoration: none;
@@ -59,13 +54,9 @@ export const Button = styled(Link)`
                 ? colors.button_active_background_light
                 : colors.button_active_background_dark};
         color: ${props =>
-            props.theme.color === 'light'
-                ? colors.button_active_text_light
-                : colors.button_active_text_dark};
+            props.theme.color === 'light' ? colors.button_active_text_light : colors.button_active_text_dark};
         border: 2px solid ${colors.button_active_border_light};
         border-color: ${props =>
-            props.theme.color === 'light'
-                ? colors.button_active_border_light
-                : colors.button_active_border_dark};
+            props.theme.color === 'light' ? colors.button_active_border_light : colors.button_active_border_dark};
     }
 `;

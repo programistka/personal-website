@@ -11,9 +11,7 @@ import { fontSize } from './Typography';
 const Post = styled.section`
     width: calc(100% - 40px);
     background-color: ${props =>
-        props.theme.color === 'light'
-            ? colors.backgroundSecondary_light
-            : colors.backgroundSecondary_dark};
+        props.theme.color === 'light' ? colors.backgroundSecondary_light : colors.backgroundSecondary_dark};
     height: 340px;
     margin: 0 20px 80px;
     overflow: hidden;
@@ -45,8 +43,7 @@ const PostLink = styled(Link)`
 
 const PostDescription = styled.div`
     padding: 25px;
-    color: ${props =>
-        props.theme.color === 'light' ? colors.text_body_light : colors.text_body_dark};
+    color: ${props => (props.theme.color === 'light' ? colors.text_body_light : colors.text_body_dark)};
     width: 50%;
     height: 100%;
 
@@ -62,8 +59,7 @@ const PostTitle = styled.h3`
     font-size: 28px;
     margin-top: 25px;
     margin-bottom: 0;
-    color: ${props =>
-        props.theme.color === 'light' ? colors.text_title_light : colors.text_title_dark};
+    color: ${props => (props.theme.color === 'light' ? colors.text_title_light : colors.text_title_dark)};
 
     ${media.large`
         font-size: 24px;
@@ -124,9 +120,7 @@ const BlogCard = ({ post }: BlogCardProps) => {
                 <PostDescription>
                     <PostTitle>{post.frontmatter.title}</PostTitle>
                     <MetaInfo>
-                        <PostDate dateTime={post.frontmatter.dateTimeString}>
-                            {post.frontmatter.formattedDate}
-                        </PostDate>
+                        <PostDate dateTime={post.frontmatter.dateTimeString}>{post.frontmatter.formattedDate}</PostDate>
                         <MetaInfoSeparator>•</MetaInfoSeparator>
                         <TimeToRead>
                             <Clock>🕙</Clock>
@@ -135,9 +129,7 @@ const BlogCard = ({ post }: BlogCardProps) => {
                     </MetaInfo>
                     <PostExcerpt>{post.frontmatter.description}</PostExcerpt>
                 </PostDescription>
-                {post.frontmatter.banner && (
-                    <PostImage fluid={post.frontmatter.banner.childImageSharp.fluid} />
-                )}
+                {post.frontmatter.banner && <PostImage fluid={post.frontmatter.banner.childImageSharp.fluid} />}
             </PostLink>
         </Post>
     );

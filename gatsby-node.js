@@ -1,4 +1,5 @@
 const path = require('path');
+
 const componentWithMDXScope = require('gatsby-mdx/component-with-mdx-scope');
 
 const PAGINATION_OFFSET = 6;
@@ -81,11 +82,7 @@ const createPosts = (createPage, posts) => {
 
         createPage({
             path: node.fields.slug,
-            component: componentWithMDXScope(
-                path.resolve(`./src/templates/post.tsx`),
-                node.code.scope,
-                __dirname,
-            ),
+            component: componentWithMDXScope(path.resolve(`./src/templates/post.tsx`), node.code.scope, __dirname),
             context: {
                 id: node.id,
                 prev,
@@ -104,10 +101,7 @@ const createBlog = (createPage, posts) => {
 exports.createPages = ({ actions, graphql }) =>
     graphql(`
         query {
-            allMdx(
-                sort: { order: DESC, fields: [frontmatter___date] }
-                filter: { fields: { slug: { ne: null } } }
-            ) {
+            allMdx(sort: { order: DESC, fields: [frontmatter___date] }, filter: { fields: { slug: { ne: null } } }) {
                 edges {
                     node {
                         id

@@ -30,10 +30,7 @@ function noop(): void {}
  * @param {Function} handleUpdate method to call on scroll update
  * @returns {undefined}
  */
-const ScrollProgress = (function(
-    this: ScrollProgress,
-    handleUpdate: ((x: number, y: number) => void),
-): void {
+const ScrollProgress = (function(this: ScrollProgress, handleUpdate: ((x: number, y: number) => void)): void {
     // assign function to call on update
     this._handleUpdate = typeof handleUpdate === 'function' ? handleUpdate : noop;
 

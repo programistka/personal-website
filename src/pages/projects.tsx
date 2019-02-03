@@ -17,8 +17,7 @@ const Header = styled(SectionWrapper)`
 const Project = styled.div`
     padding: 120px 20px;
     text-align: center;
-    color: ${props =>
-        props.textColor === 'light' ? colors.text_body_dark : colors.text_body_light};
+    color: ${props => (props.textColor === 'light' ? colors.text_body_dark : colors.text_body_light)};
 
     ${media.small`
         padding: 80px 20px;
@@ -133,10 +132,7 @@ export const pageQuery = graphql`
                 siteUrl
             }
         }
-        allMdx(
-            filter: { fields: { slug: { eq: null } } }
-            sort: { order: DESC, fields: [frontmatter___date] }
-        ) {
+        allMdx(filter: { fields: { slug: { eq: null } } }, sort: { order: DESC, fields: [frontmatter___date] }) {
             edges {
                 node {
                     fields {

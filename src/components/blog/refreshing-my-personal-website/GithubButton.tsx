@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+
 import { Button } from '../../Common';
 
 const Wrapper = styled.div`
@@ -10,12 +11,10 @@ const Wrapper = styled.div`
 
 type BlogThemeSwitchProps = {};
 
-const BlogThemeSwitch = ({}: BlogThemeSwitchProps) => {
+const BlogThemeSwitch = ({  }: BlogThemeSwitchProps) => {
     return (
         <Wrapper>
-            <Button to="https://github.com/robertcoopercode/personal-website">
-                View the source code
-            </Button>
+            <Button to="https://github.com/robertcoopercode/personal-website">View the source code</Button>
         </Wrapper>
     );
 };
