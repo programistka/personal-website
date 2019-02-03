@@ -1,7 +1,21 @@
+interface ScrollProgress {
+    _handleUpdate: (x: number, y: number) => void;
+    _viewportHeight: number;
+    _viewportWidth: number;
+    _getViewportHeight: () => number;
+    _getViewportWidth: () => number;
+    _progress: Coordinates;
+    _getProgress: () => Coordinates;
+    _onScroll: () => void;
+    _onResize: () => void;
+    trigger: () => void;
+    destroy: () => void;
+}
+
 type Coordinates = {
     x: number;
     y: number;
-}
+};
 
 /**
  * Fallback noop function
@@ -16,7 +30,10 @@ function noop(): void {}
  * @param {Function} handleUpdate method to call on scroll update
  * @returns {undefined}
  */
-const ScrollProgress = function(handleUpdate: ((x: number, y: number) => void)): void {
+const ScrollProgress = (function(
+    this: ScrollProgress,
+    handleUpdate: ((x: number, y: number) => void),
+): void {
     // assign function to call on update
     this._handleUpdate = typeof handleUpdate === 'function' ? handleUpdate : noop;
 
@@ -36,7 +53,7 @@ const ScrollProgress = function(handleUpdate: ((x: number, y: number) => void)):
     // add event listeners
     window.addEventListener('scroll', this._onScroll);
     window.addEventListener('resize', this._onResize);
-};
+} as any) as { new (handleUpdate: ((x: number, y: number) => void)): ScrollProgress };
 
 /**
  * Get vertical trajectory of the viewport

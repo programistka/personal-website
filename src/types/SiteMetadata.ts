@@ -3,4 +3,4 @@ export type SiteMetadata = {
     description: string;
     author: string;
     siteUrl: string;
-}
+};

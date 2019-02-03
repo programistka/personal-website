@@ -2,10 +2,11 @@ import Img from 'gatsby-image';
 import React from 'react';
 import styled from 'styled-components';
 
-import Link from './Link';
-import { colors, media } from '../styles/common';
-import { fontSize } from './Typography';
 import { Post as PostType } from '../types/Post';
+import { colors, media } from '../styles/common';
+
+import Link from './Link';
+import { fontSize } from './Typography';
 
 const Post = styled.section`
     width: calc(100% - 40px);

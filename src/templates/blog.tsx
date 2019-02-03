@@ -1,14 +1,14 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
+import styled from '../lib/styled-components';
 import BlogList from '../components/BlogList';
 import Layout from '../components/Layout';
 import Link from '../components/Link';
-import styled from 'styled-components';
 import { PageWrapper } from '../components/Common';
 import { Title, Description } from '../components/Typography';
 import { media } from '../styles/common';
-import { SiteMetadata } from '../types/SiteMetaData';
+import { SiteMetadata } from '../types/SiteMetadata';
 import { Post } from '../types/Post';
 
 const Header = styled.div``;
@@ -36,7 +36,7 @@ const Pagination = styled.ul`
     display: flex;
 `;
 
-const PaginationItem = styled.li`
+const PaginationItem = styled.li<{ position: string }>`
     margin-left: ${props => (props.position === 'right' ? 'auto' : 0)};
 `;
 
@@ -48,14 +48,12 @@ type BlogProps = {
             siteMetadata: SiteMetadata;
         };
         allMdx: {
-            edges: Array<{
-                node: Post;
-            }>;
+            edges: Post[];
         };
     };
     pageContext: {
         pagination: {
-            page: Post;
+            page: string[];
             nextPagePath: string;
             previousPagePath: string;
         };
@@ -65,7 +63,7 @@ type BlogProps = {
 const Blog = ({ data: { site, allMdx }, pageContext: { pagination } }: BlogProps) => {
     const { page, nextPagePath, previousPagePath } = pagination;
 
-    const posts = page.map(id => allMdx.edges.find(edge => edge.node.id === id));
+    const posts = page.map(id => allMdx.edges.find(post => post.node.id === id));
 
     return (
         <Layout site={site} title="Robert Cooper | Blog">
@@ -81,7 +79,7 @@ const Blog = ({ data: { site, allMdx }, pageContext: { pagination } }: BlogProps
                 <BlogList posts={posts} />
                 <Pagination>
                     {nextPagePath && (
-                        <PaginationItem>
+                        <PaginationItem position="left">
                             <PaginationLink to={nextPagePath}>Newer Posts</PaginationLink>
                         </PaginationItem>
                     )}

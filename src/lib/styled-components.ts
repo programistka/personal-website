@@ -1,6 +1,5 @@
 // styled-components.ts
 import * as styledComponents from 'styled-components';
-import { ThemedStyledComponentsModule } from 'styled-components';
 
 import { Theme } from '../utils/context';
 
@@ -10,7 +9,7 @@ const {
     createGlobalStyle,
     keyframes,
     ThemeProvider,
-} = styledComponents as ThemedStyledComponentsModule<Theme>;
+} = styledComponents as styledComponents.ThemedStyledComponentsModule<Theme>;
 
 export { css, createGlobalStyle, keyframes, ThemeProvider };
 export default styled;

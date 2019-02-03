@@ -11,14 +11,13 @@ import '../styles/prismjs.css';
 import Montserrat from '../../assets/fonts/Montserrat/Montserrat-Regular.ttf';
 // @ts-ignore
 import ScopeOne from '../../assets/fonts/Scope_One/ScopeOne-Regular.ttf';
+import { colors } from '../styles/common';
+import { ThemeContext } from '../utils/context';
+import { SiteMetadata } from '../types/SiteMetadata';
 
 import mdxComponents from './mdx';
-import { colors } from '../styles/common';
-
 import Footer, { footerHeight } from './Footer';
 import Menu, { menuHeight } from './Menu';
-import { ThemeContext } from '../utils/context';
-import { SiteMetadata } from '../types/SiteMetaData';
 
 const GlobalStyles = createGlobalStyle`
   @font-face {

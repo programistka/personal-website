@@ -1,23 +1,14 @@
 module.exports = {
-    parser: "typescript-eslint-parser",
-    // TODO: Add
-    // - https://github.com/benmosher/eslint-plugin-import
-    plugins: ["typescript", "prettier"],
-    extends: ["plugin:prettier/recommended"],
+    parser: "@typescript-eslint/parser",
+    plugins: ["prettier", "import"],
+    extends: ["plugin:prettier/recommended", "plugin:import/errors", "plugin:import/warnings", "plugin:import/typescript"],
     parserOptions: {
         ecmaVersion: 2018,
         sourceType: 'module'
     },
     rules: {
         "prettier/prettier": "error",
-        "typescript/class-name-casing": "error",
-        // "typescript/explicit-function-return-type": "error",
-        "typescript/member-ordering": "error",
-        // "no-unused-vars": "error",
-        // "typescript/no-unused-vars": "error",
-        "typescript/no-use-before-define": "error",
-        "typescript/type-annotation-spacing": "error",
-        // "sort-imports": "error",
+        "import/order": ["error", { "newlines-between": "always"}],
     }
 }
 

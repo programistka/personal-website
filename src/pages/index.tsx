@@ -7,7 +7,6 @@ import { Post } from '../types/Post';
 import { Project as ProjectType } from '../types/Project';
 import { ThemeContext, ThemeType } from '../utils/context';
 import { colors, media } from '../styles/common';
-
 import BlogList from '../components/BlogList';
 import Email from '../components/icons/Email';
 import Github from '../components/icons/Github';
@@ -18,7 +17,7 @@ import Twitter from '../components/icons/Twitter';
 import { Button, Divider, PageWrapper } from '../components/Common';
 import { Title, fontSize } from '../components/Typography';
 import { FluidImage } from '../types/Image';
-import { SiteMetadata } from '../types/SiteMetaData';
+import { SiteMetadata } from '../types/SiteMetadata';
 
 const Header = styled.div`
     position: relative;

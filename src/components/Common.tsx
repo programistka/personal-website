@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import Link from './Link';
 
 import { colors, media } from '../styles/common';
+
+import Link from './Link';
 import { fontSize } from './Typography';
 
 export const PageWrapper = styled.div`

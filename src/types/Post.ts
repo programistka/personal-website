@@ -2,7 +2,7 @@ import { FluidImage } from './Image';
 
 export type Post = {
     node: {
-        id: number;
+        id: string;
         frontmatter: {
             title: string;
             description: string;
@@ -11,7 +11,7 @@ export type Post = {
             banner: FluidImage;
             slug: string;
             categories: string[];
-        }
+        };
         timeToRead: number;
-    }
-}
+    };
+};

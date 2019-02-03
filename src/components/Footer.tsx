@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Link from './Link';
 import { colors } from '../styles/common';
+
+import Link from './Link';
 import { PageWrapper } from './Common';
 
 export const footerHeight = 220;

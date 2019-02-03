@@ -2,8 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { media } from '../styles/common';
-import BlogCard from './BlogCard';
 import { Post } from '../types/Post';
+
+import BlogCard from './BlogCard';
 
 const BlogList = styled.div`
     display: flex;
@@ -17,7 +18,7 @@ const BlogList = styled.div`
 `;
 
 type BlogListComponentProps = {
-    posts: Post[];
+    posts: (Post)[];
 };
 
 const BlogListComponent = ({ posts }: BlogListComponentProps) => {

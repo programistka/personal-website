@@ -1,17 +1,18 @@
 import Img from 'gatsby-image';
 import MDXRenderer from 'gatsby-mdx/mdx-renderer';
 import React, { useEffect, useRef } from 'react';
-import { graphql } from 'gatsby';
+import styled from 'styled-components';
 import { DiscussionEmbed } from 'disqus-react';
-
-import ScrollProgress from '../utils/scrollProgress';
+import { graphql } from 'gatsby';
 
 import Layout from '../components/Layout';
 import Link from '../components/Link';
-import { media, colors } from '../styles/common';
-import styled from 'styled-components';
-import { PageWrapper, Divider } from '../components/Common';
+import ScrollProgress from '../utils/scrollProgress';
+import { Divider, PageWrapper } from '../components/Common';
+import { ThemeContext } from '../utils/context';
 import { Title } from '../components/Typography';
+import { colors, media } from '../styles/common';
+import { PageContext } from '../types/PageContext';
 
 const ModifiedPageWrapper = styled(PageWrapper)`
     width: 800px;
@@ -205,7 +206,15 @@ const ProgressBar = styled.div`
     width: 10%;
 `;
 
-const Post = props => {
+type PostProps = {
+    data: {
+        site: any;
+        mdx: any;
+    };
+    pageContext: PageContext;
+};
+
+const Post = (props: PostProps) => {
     const {
         data: { site, mdx },
         pageContext: { next, prev },
@@ -217,7 +226,7 @@ const Post = props => {
         title: mdx.frontmatter.title,
     };
 
-    const progressBar = useRef(null);
+    const progressBar = useRef({ current: { style: { width: 0 } } } as any);
 
     useEffect(() => {
         const progressObserver = new ScrollProgress((x, y) => {
@@ -228,46 +237,50 @@ const Post = props => {
     });
 
     return (
-        <Layout site={site} frontmatter={mdx.frontmatter}>
-            <ProgressContainer>
-                <ProgressBar ref={progressBar} />
-            </ProgressContainer>
-            <ModifiedPageWrapper>
-                <PostTitle>{mdx.frontmatter.title}</PostTitle>
-                <Date dateTime={mdx.frontmatter.dateTimeString}>
-                    {mdx.frontmatter.formattedDate}
-                </Date>
+        <ThemeContext.Consumer>
+            {value => (
+                <Layout site={site} frontmatter={mdx.frontmatter}>
+                    <ProgressContainer>
+                        <ProgressBar ref={progressBar} />
+                    </ProgressContainer>
+                    <ModifiedPageWrapper>
+                        <PostTitle>{mdx.frontmatter.title}</PostTitle>
+                        <Date dateTime={mdx.frontmatter.dateTimeString}>
+                            {mdx.frontmatter.formattedDate}
+                        </Date>
 
-                {mdx.frontmatter.banner && (
-                    <FeaturedImage fluid={mdx.frontmatter.banner.childImageSharp.fluid} />
-                )}
-
-                <MDXRenderer>{mdx.code.body}</MDXRenderer>
-
-                <Divider />
-
-                <CategoryListComponent list={mdx.frontmatter.categories} />
-
-                {(next || prev) && (
-                    <OtherPostsWrapper>
-                        {prev && (
-                            <NextPostWrapper>
-                                Next: <Link to={prev.fields.slug}>{prev.fields.title}</Link>
-                            </NextPostWrapper>
+                        {mdx.frontmatter.banner && (
+                            <FeaturedImage fluid={mdx.frontmatter.banner.childImageSharp.fluid} />
                         )}
-                        {next && (
-                            <PreviousPostWrapper>
-                                Previous:{' '}
-                                <PreviousPostLink to={next.fields.slug}>
-                                    {next.fields.title}
-                                </PreviousPostLink>
-                            </PreviousPostWrapper>
+
+                        <MDXRenderer>{mdx.code.body}</MDXRenderer>
+
+                        <Divider />
+
+                        <CategoryListComponent list={mdx.frontmatter.categories} />
+
+                        {(next || prev) && (
+                            <OtherPostsWrapper>
+                                {prev && (
+                                    <NextPostWrapper>
+                                        Next: <Link to={prev.fields.slug}>{prev.fields.title}</Link>
+                                    </NextPostWrapper>
+                                )}
+                                {next && (
+                                    <PreviousPostWrapper>
+                                        Previous:{' '}
+                                        <PreviousPostLink to={next.fields.slug}>
+                                            {next.fields.title}
+                                        </PreviousPostLink>
+                                    </PreviousPostWrapper>
+                                )}
+                            </OtherPostsWrapper>
                         )}
-                    </OtherPostsWrapper>
-                )}
-                <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
-            </ModifiedPageWrapper>
-        </Layout>
+                        <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
+                    </ModifiedPageWrapper>
+                </Layout>
+            )}
+        </ThemeContext.Consumer>
     );
 };
 
