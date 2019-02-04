@@ -52,6 +52,13 @@ const ThemeWrapperComponent = ({ children }) => {
                 AOS.init({
                     once: true,
                 });
+
+                // Reloads the disqus embed so that it can recalculate which color theme it should
+                // display based on the text color the embed inherits (see https://help.disqus.com/installation/disqus-appearance-tweaks for more details)
+                // TODO: Only run this command on pages that have the disqus embed
+                if (window.DISQUS) {
+                    window.DISQUS.reset({ reload: true });
+                }
             }
         },
         [theme],

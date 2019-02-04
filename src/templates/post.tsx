@@ -1,3 +1,6 @@
+// NOTE: I can't add any types to this file because gatsby-mdx will throw an error
+// when trying to run the dev server. Hopefully this gets fixed in a future version
+// or gatsby-mdx :/
 import Img from 'gatsby-image';
 import MDXRenderer from 'gatsby-mdx/mdx-renderer';
 import React, { useEffect, useRef } from 'react';
@@ -205,15 +208,16 @@ const ProgressBar = styled.div`
     width: 10%;
 `;
 
-type PostProps = {
-    data: {
-        site: any;
-        mdx: any;
-    };
-    pageContext: PageContext;
-};
+// type PostProps = {
+//     data: {
+//         site: any;
+//         mdx: any;
+//     };
+//     pageContext: PageContext;
+// };
 
-const Post = (props: PostProps) => {
+// const Post = (props: PostProps) => {
+const Post = props => {
     const {
         data: { site, mdx },
         pageContext: { next, prev },
@@ -225,7 +229,8 @@ const Post = (props: PostProps) => {
         title: mdx.frontmatter.title,
     };
 
-    const progressBar = useRef({ current: { style: { width: 0 } } } as any);
+    // const progressBar = useRef({ current: { style: { width: 0 } } } as any);
+    const progressBar = useRef({ current: { style: { width: 0 } } });
 
     useEffect(() => {
         const progressObserver = new ScrollProgress((x, y) => {
