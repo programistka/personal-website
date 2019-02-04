@@ -57,7 +57,11 @@ const ThemeWrapperComponent = ({ children }) => {
                 // display based on the text color the embed inherits (see https://help.disqus.com/installation/disqus-appearance-tweaks for more details)
                 // TODO: Only run this command on pages that have the disqus embed
                 if (window.DISQUS) {
-                    window.DISQUS.reset({ reload: true });
+                    // Using a timeout since the reset function needs to run only after the page's CSS color settings
+                    // have changed
+                    setTimeout(() => {
+                        window.DISQUS.reset({ reload: true });
+                    }, 1000);
                 }
             }
         },
