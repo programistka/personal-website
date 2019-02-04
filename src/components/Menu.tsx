@@ -95,7 +95,7 @@ const ModifiedThemeSwitch = styled(ThemeSwitch)`
 `;
 
 // tslint:disable-next-line prettier
-const NAVIGATION = [{ to: '/projects/', label: 'projects' }, { to: '/blog/', label: 'blog' }];
+const NAVIGATION = [{ to: '/blog/', label: 'blog' }, { to: '/projects/', label: 'projects' }];
 
 const MenuTitleComponent = ({ location, children }) => {
     if (location.pathname === '/') {
