@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { graphql } from 'gatsby';
 
-import { SiteMetadata } from '../types/SiteMetadata';
 import Layout from '../components/Layout';
 import Link from '../components/Link';
 import Title from '../components/mdx/Title';
 import { PageWrapper } from '../components/Common';
+import { SiteMetadata } from '../types/SiteMetadata';
 
 const PageContent = styled(PageWrapper)`
     display: flex;

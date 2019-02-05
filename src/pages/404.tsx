@@ -5,7 +5,7 @@ import { graphql } from 'gatsby';
 // TODO: Remove @ts-ignore
 // @ts-ignore
 import PageNotFoundVideo from '../../assets/images/page-not-found.mp4';
-import { SiteMetadata } from '../types/SiteMetaData';
+import { SiteMetadata } from '../types/SiteMetadata';
 import Layout from '../components/Layout';
 import Title from '../components/mdx/Title';
 

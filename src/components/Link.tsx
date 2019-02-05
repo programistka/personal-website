@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { colors } from '../styles/common';
 
-const Link = styled.a`
+const Link = styled.a<{ active: string }>`
     color: ${props => {
         if (props.active === 'true') {
             if (props.theme.color === 'light') {

@@ -42,14 +42,6 @@ module.exports = {
                         },
                     },
                     {
-                        resolve: `gatsby-remark-prismjs`,
-                        options: {
-                            classPrefix: 'language-',
-                            inlineCodeMarker: '>',
-                            aliases: {},
-                        },
-                    },
-                    {
                         resolve: `gatsby-remark-copy-linked-files`,
                     },
                 ],

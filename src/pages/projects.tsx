@@ -3,11 +3,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { graphql } from 'gatsby';
 
-import { SiteMetadata } from '../types/SiteMetadata';
-import { Project as ProjectType } from '../types/Project';
 import Layout from '../components/Layout';
-import { Title, Description, fontSize } from '../components/Typography';
 import { PageWrapper, SectionWrapper, Button } from '../components/Common';
+import { Project as ProjectType } from '../types/Project';
+import { SiteMetadata } from '../types/SiteMetadata';
+import { Title, Description, fontSize } from '../components/Typography';
 import { colors, media } from '../styles/common';
 
 const Header = styled(SectionWrapper)`

@@ -2,11 +2,6 @@ import Img from 'gatsby-image';
 import React from 'react';
 import { graphql } from 'gatsby';
 
-import styled from '../lib/styled-components';
-import { Post } from '../types/Post';
-import { Project as ProjectType } from '../types/Project';
-import { ThemeContext, ThemeType } from '../utils/context';
-import { colors, media } from '../styles/common';
 import BlogList from '../components/BlogList';
 import Email from '../components/icons/Email';
 import Github from '../components/icons/Github';
@@ -14,10 +9,15 @@ import Layout from '../components/Layout';
 import Link from '../components/Link';
 import LinkedIn from '../components/icons/LinkedIn';
 import Twitter from '../components/icons/Twitter';
+import styled from '../lib/styled-components';
 import { Button, Divider, PageWrapper } from '../components/Common';
-import { Title, fontSize } from '../components/Typography';
 import { FluidImage } from '../types/Image';
+import { Post } from '../types/Post';
+import { Project as ProjectType } from '../types/Project';
 import { SiteMetadata } from '../types/SiteMetadata';
+import { ThemeContext, ThemeType } from '../utils/context';
+import { Title, fontSize } from '../components/Typography';
+import { colors, media } from '../styles/common';
 
 const Header = styled.div`
     position: relative;

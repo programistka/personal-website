@@ -57,7 +57,7 @@ type Media = {
 };
 
 // TODO: Add better types
-// Iterate through the sizes and create a media template
+// Iterate through the sizes and create a media query template
 export const media: any = Object.keys(sizes).reduce((acc, label) => {
     acc[label] = (...args) =>
         css`

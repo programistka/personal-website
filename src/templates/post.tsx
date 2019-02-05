@@ -15,7 +15,7 @@ import { Divider, PageWrapper } from '../components/Common';
 import { ThemeContext } from '../utils/context';
 import { Title } from '../components/Typography';
 import { colors, media } from '../styles/common';
-import { PageContext } from '../types/PageContext';
+// import { PageContext } from '../types/PageContext';
 
 const ModifiedPageWrapper = styled(PageWrapper)`
     width: 800px;

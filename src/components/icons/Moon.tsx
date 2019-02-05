@@ -1,8 +1,10 @@
 import React from 'react';
 
-type MoonProps = {};
+type MoonProps = {
+    className?: string;
+};
 
-const Moon = ({ className }) => {
+const Moon = ({ className }: MoonProps) => {
     return (
         <svg
             version="1.1"

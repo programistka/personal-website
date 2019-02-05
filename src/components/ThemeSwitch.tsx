@@ -77,7 +77,7 @@ export const Moon = styled(MoonSVG)`
     }};
 `;
 
-export const Star = styled.div`
+export const Star = styled.div<{ size: number; x: number; y: number; index: number }>`
     border-radius: 100%;
     width: 3px;
     height: 3px;
@@ -144,7 +144,7 @@ export const Circle = styled.div`
 type ThemeSwitchProps = {
     className: string;
     theme: 'light' | 'dark';
-    onChange: (event: React.MouseEventHandler<HTMLDivElement>) => void;
+    onChange: React.MouseEventHandler<HTMLDivElement>;
 };
 
 const ThemeSwitch = ({ className, theme, onChange }: ThemeSwitchProps) => {

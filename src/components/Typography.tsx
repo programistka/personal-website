@@ -1,5 +1,4 @@
-import styled from 'styled-components';
-
+import styled from '../lib/styled-components';
 import { colors, media } from '../styles/common';
 
 export const fontSize = {

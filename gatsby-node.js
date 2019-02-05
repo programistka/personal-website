@@ -1,7 +1,5 @@
 const path = require('path');
 
-const componentWithMDXScope = require('gatsby-mdx/component-with-mdx-scope');
-
 const PAGINATION_OFFSET = 6;
 
 const pluckCategories = posts =>
@@ -82,7 +80,7 @@ const createPosts = (createPage, posts) => {
 
         createPage({
             path: node.fields.slug,
-            component: componentWithMDXScope(path.resolve(`./src/templates/post.tsx`), node.code.scope, __dirname),
+            component: path.resolve(`./src/templates/post.tsx`),
             context: {
                 id: node.id,
                 prev,
