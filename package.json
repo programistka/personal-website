@@ -1,7 +1,7 @@
 {
     "name": "personal-website",
     "description": "Robert Cooper's Personal Site",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "author": "Robert Cooper <hi@robertcooper.me> (https://www.robertcooper.me/)",
     "repository": "https://github.com/robertcoopercode/personal-website/",
     "dependencies": {
