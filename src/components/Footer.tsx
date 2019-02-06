@@ -65,6 +65,9 @@ const FooterComponent = ({  }: FooterProps) => {
                     <SocialMediaListItem>
                         <SocialMediaLink to="mailto:hi@robertcooper.me">Email</SocialMediaLink>
                     </SocialMediaListItem>
+                    <SocialMediaListItem>
+                        <SocialMediaLink to="/rss.xml">RSS</SocialMediaLink>
+                    </SocialMediaListItem>
                 </SocialMediaList>
             </ModifiedPageWrapper>
         </Footer>
