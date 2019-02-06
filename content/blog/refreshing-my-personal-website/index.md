@@ -9,6 +9,7 @@ banner: './images/banner.png'
 
 import BlogThemeSwitch from 'components/blog/refreshing-my-personal-website/BlogThemeSwitch';
 import GithubButton from 'components/blog/refreshing-my-personal-website/GithubButton';
+import Link from "$components/Link";
 
 I've decided to redo my website, yet again. This is the 3rd or 4th iteration of my website.
 
@@ -16,7 +17,7 @@ Here were the motivations and goals for the redesign:
 
 #### 1. Host my blog articles on my own website
 
-I've been writting a lot on both [Medium](https://medium.com/@robertcooper_rc) and a bit on [Dev Community](https://dev.to/robertcoopercode), but I want to have a bit more control in the design and presentation of my blog posts. One of my biggest gripes with Medium is the lack of syntax highlighting for code blocks.
+I've been writting a lot on both <Link to="https://medium.com/@robertcooper_rc">Medium</Link> and a bit on <Link to="https://dev.to/robertcoopercode">Dev Community</Link>, but I want to have a bit more control in the design and presentation of my blog posts. One of my biggest gripes with Medium is the lack of syntax highlighting for code blocks.
 
 #### 2. Better highlight past projects
 
@@ -24,11 +25,11 @@ In 2019, I want to work with a few clients on a part-time basis to supplement th
 
 #### 3. New tech stack
 
-My previous website was using gulp to build HTML pages from templated [pug files](https://pugjs.org/api/getting-started.html). This wasn't that bad since I only had one page on the website, so there wasn't a need to move between pages. However, now that I was going to include a blog, I was going to have to have multiple pages on the website and thus I wanted to use React to get the performance associated with a single page application.
+My previous website was using gulp to build HTML pages from templated <Link to="https://pugjs.org/api/getting-started.html">pug files</Link>. This wasn't that bad since I only had one page on the website, so there wasn't a need to move between pages. However, now that I was going to include a blog, I was going to have to have multiple pages on the website and thus I wanted to use React to get the performance associated with a single page application.
 
 ## Design
 
-So with those three goals in mind I started to research blogs that I admired. I made sure to screenshot and anotate any elements that stood out to me. I gathered all those screenshots in my design app of choice: [Figma](https://www.figma.com/).
+So with those three goals in mind I started to research blogs that I admired. I made sure to screenshot and anotate any elements that stood out to me. I gathered all those screenshots in my design app of choice: <Link to="https://www.figma.com/">Figma</Link>.
 
 ![A collection of screenshots from the blogs and websites that I admire.](./images/image-1.png)
 
@@ -44,7 +45,7 @@ The reason why I create design mockups instead of just coding the site straight 
 
 ## Home Page
 
-The home page, being the first place site visitors land when they visit my site, includes a short description of who I am, the blog articles I've recently written, as well as a preview of the recent projects I've worked on. I made sure to animate elements on the page, using the [animate on scroll library](https://github.com/michalsnik/aos), to make the experience slightly more enjoyable.
+The home page, being the first place site visitors land when they visit my site, includes a short description of who I am, the blog articles I've recently written, as well as a preview of the recent projects I've worked on. I made sure to animate elements on the page, using the <Link to="https://github.com/michalsnik/aos">animate on scroll library</Link>, to make the experience slightly more enjoyable.
 
 ![The home page elements fade into the page as a user scrolls scroll.](./images/image-3.gif)
 
@@ -62,7 +63,7 @@ In the future, I plan to create full pages for each project in order to present 
 
 ## Blog
 
-The blog is where things get exciting technology wise. The website is built with React and [Gatsby](https://www.gatsbyjs.org/). I'm also using [gatsby-mdx](https://gatsby-mdx.netlify.com/) which allows me to write my blog posts using MDX. [MDX](https://github.com/mdx-js/mdx) is a different flavour of Markdown which allows for the use of JSX and React components to coexist with markdown in the same file.
+The blog is where things get exciting technology wise. The website is built with React and <Link to="https://www.gatsbyjs.org/">Gatsby</Link>. I'm also using <Link to="https://gatsby-mdx.netlify.com/">gatsby-mdx</Link> which allows me to write my blog posts using MDX. <Link to="https://github.com/mdx-js/mdx">MDX</Link> is a different flavour of Markdown which allows for the use of JSX and React components to coexist with markdown in the same file.
 
 If I want to include a custom React component into a blog post to make the post more interactive, I can now do that in MDX. As an example, I can embed the theme switcher component I'm using for my website right into this post:
 
@@ -76,17 +77,17 @@ Another feature I've added to my blog is the horizontal progress bar indicating 
 
 <span class="caption">An horizontal progress bar at the top of a blog article indicates how much further a user needs to scroll to reach the bottom of the page.</span>
 
-I've also include a comment section to blog posts using the Disqus embed. This was surprisingly easy to incorporate into the website using [disqus-react](https://github.com/disqus/disqus-react).
+I've also include a comment section to blog posts using the Disqus embed. This was surprisingly easy to incorporate into the website using <Link to="https://github.com/disqus/disqus-react">disqus-react</Link>.
 
 ## Dark / Light Theme
 
-Perhaps my favourite part of the website is the ability to toggle between a dark and light themes. I'm using [Styled Components](https://www.styled-components.com/) to manage the styles on my website and it fortunately has great a [API for managing theming](https://www.styled-components.com/docs/advanced#theming).
+Perhaps my favourite part of the website is the ability to toggle between a dark and light themes. I'm using <Link to="https://www.styled-components.com/">Styled Components</Link> to manage the styles on my website and it fortunately has great a <Link to="https://www.styled-components.com/docs/advanced#theming">API for managing theming</Link>.
 
 ![Toggling between dark and light theme through a toggle switch found in the main menu.](./images/image-7.gif)
 
 <span class="caption">Toggling between dark and light theme.</span>
 
-I'd like to point out that the design and functionality of the theme toggle switch was all taken from [@thekitze](https://twitter.com/thekitze)'s Twizzy App [landing page](https://twizzy.app/). I'm always thankful when talented people like this make their projects open source to allow others to benefit.
+I'd like to point out that the design and functionality of the theme toggle switch was all taken from <Link to="https://twitter.com/thekitze">@thekitze</Link>'s Twizzy App <Link to="https://twizzy.app/">landing page</Link>. I'm always thankful when talented people like this make their projects open source to allow others to benefit.
 
 ---
 

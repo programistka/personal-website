@@ -44,7 +44,7 @@ const LinkComponent = ({ children, to, active = 'false', ...other }: LinkCompone
     }
 
     return (
-        <Link href={to} active={active} {...other}>
+        <Link href={to} active={active} target="_blank" rel="noopener" {...other}>
             {children}
         </Link>
     );

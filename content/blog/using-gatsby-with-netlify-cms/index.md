@@ -9,13 +9,13 @@ banner: './images/banner.jpeg'
 
 import Link from "$components/Link";
 
-The [JAMStack](https://jamstack.org/) is becoming more and more common for building out websites due to its better performance, low cost, high security, and positive developer experience.
+The <Link to="https://jamstack.org/">JAMStack</Link> is becoming more and more common for building out websites due to its better performance, low cost, high security, and positive developer experience.
 
 A great solution to building a site using the JAMStack is to use Gatsby along with Netlify CMS. This post explains what the JAMStack is, how Gatsby and Netlify CMS work and provides a walkthrough for a web app built with Gatsby and Netlify CMS.
 
 ## What is the JAMStack?
 
-The [JAMStack](https://jamstack.org/) refers to a web application that has no server-side component to it, but rather relies on templated **markup** files which are requested through an **API** by client-side **JavaScript** to render content on a page. All of the templated markup is generated prior to deployment so there is no waiting for pages to be built on the fly as is the case for dynamic websites.
+The <Link to="https://jamstack.org/">JAMStack</Link> refers to a web application that has no server-side component to it, but rather relies on templated **markup** files which are requested through an **API** by client-side **JavaScript** to render content on a page. All of the templated markup is generated prior to deployment so there is no waiting for pages to be built on the fly as is the case for dynamic websites.
 
 ## Gatsby and Netlify CMS
 
@@ -31,7 +31,7 @@ Netlify CMS is able to provide the Markup data for a Gatsby website. Netlify CMS
 
 <span class="caption">Netlify CMS provides the data for a Gatsby website.</span>
 
-After Gatsby has generated all web app files from its build process, the web app can then be deployed to a static website host such as [Netlify](https://www.netlify.com/), [Now](https://zeit.co/now), or [Amazon S3](https://aws.amazon.com/s3/).
+After Gatsby has generated all web app files from its build process, the web app can then be deployed to a static website host such as <Link to="https://www.netlify.com/">Netlify</Link>, <Link to="https://zeit.co/now">Now</Link>, or <Link to="https://aws.amazon.com/s3/">Amazon S3</Link>.
 
 ![Diagram showing the flow frome data source (Netlify CMS) to the static site generator (Gatsby) to a hostring platform](./images/image-3.png)
 
@@ -39,13 +39,13 @@ After Gatsby has generated all web app files from its build process, the web app
 
 ## Walkthrough
 
-This walkthrough will explain the main parts of a web app built with Gatsby and Netlify CMS. This walkthrough is based on an [example web app](https://gatsby-netlify-cms-example.netlify.com/) created for a fictional JavaScript meetup group.
+This walkthrough will explain the main parts of a web app built with Gatsby and Netlify CMS. This walkthrough is based on an <Link to="https://gatsby-netlify-cms-example.netlify.com/">example web app</Link> created for a fictional JavaScript meetup group.
 
 ![Landing page of a fictional JavaScript meetup website built with Gatsby and Netlify CMS.](./images/image-4.png)
 
 <span class="caption">Landing page of a fictional JavaScript meetup website built with Gatsby and Netlify CMS.</span>
 
-You can [view the source code for the web app on Github](https://github.com/robertcoopercode/gatsby-netlify-cms) and you can easily deploy your own instance of the app by clicking the “_Deploy to netlify_” button in the README. Clicking the “_Deploy to netlify_” button will direct you to Netlify’s website where it asks you to connect to your Github account so that it can clone the repository and then deploy an instance of the web app. I’d encourage you to use this “_Deploy to netlify_” button while following along with this walkthrough if you’d like to be able to access and explore the Netlify CMS yourself.
+You can <Link to="https://github.com/robertcoopercode/gatsby-netlify-cms">view the source code for the web app on Github</Link> and you can easily deploy your own instance of the app by clicking the “_Deploy to netlify_” button in the README. Clicking the “_Deploy to netlify_” button will direct you to Netlify’s website where it asks you to connect to your Github account so that it can clone the repository and then deploy an instance of the web app. I’d encourage you to use this “_Deploy to netlify_” button while following along with this walkthrough if you’d like to be able to access and explore the Netlify CMS yourself.
 
 ![The “Deploy to netlify” button is found in the example repository’s README and allows a user to quickly deploy the web app to a randomly generated URL.](./images/image-5.png)
 
@@ -57,7 +57,7 @@ You can [view the source code for the web app on Github](https://github.com/robe
 
 ## Accessing the CMS
 
-To be able to access the Netlify CMS at the /admin route of the site, we’ll need to enable Netlify’s [_Git Gateway_](https://github.com/netlify/git-gateway) through their [_Identity_](https://www.netlify.com/docs/identity/) service. Git Gateway allows a user to have contributors added to the CMS without giving them full access to the code repository. Netlify’s [Identity](https://www.netlify.com/docs/identity/) service handles all of the authentications and provides an interface for user management.
+To be able to access the Netlify CMS at the /admin route of the site, we’ll need to enable Netlify’s <Link to="https://github.com/netlify/git-gateway">_Git Gateway_</Link> through their <Link to="https://www.netlify.com/docs/identity/">_Identity_</Link> service. Git Gateway allows a user to have contributors added to the CMS without giving them full access to the code repository. Netlify’s <Link to="https://www.netlify.com/docs/identity/">Identity</Link> service handles all of the authentications and provides an interface for user management.
 
 The next steps are to enable _Identity_ in the Netlify dashboard, invite yourself as a user, and then enable the _Git Gateway_.
 
@@ -77,19 +77,19 @@ After inviting yourself and enabling the _Git Gateway_, you should have received
 
 If you’re trying to find what the domain is used for the web app you deployed with Netlify, it can be found at the top of the overview page in the Netlify Dashboard.
 
-In my case, I’ve customized the domain in settings to be `gatsby-netlify-cms-example.netlify.cms`. Therefore, the way I would access my app’s admin is by going to [https://gatsby-netlify-cms-example.netlify.com/admin](https://gatsby-netlify-cms-example.netlify.com/admin).
+In my case, I’ve customized the domain in settings to be `gatsby-netlify-cms-example.netlify.cms`. Therefore, the way I would access my app’s admin is by going to <Link to="https://gatsby-netlify-cms-example.netlify.com/admin">https://gatsby-netlify-cms-example.netlify.com/admin</Link>.
 
 ![Netlify dashboard that contains information such as the domain of the deployed web app.](./images/image-10.png)
 
 <span class="caption">The domain for the deployed web app is display in the overview section of the Netlify dashboard.</span>
 
-Accessing [https://gatsby-netlify-cms-example.netlify.com/admin](https://gatsby-netlify-cms-example.netlify.com/admin) for the web app prompts a user to login with a username and password as shown here.
+Accessing <Link to="https://gatsby-netlify-cms-example.netlify.com/admin">https://gatsby-netlify-cms-example.netlify.com/admin</Link> for the web app prompts a user to login with a username and password as shown here.
 
 ![Button with text of 'Login with Netlify Identify'](./images/image-11.png)
 
 ## Exploring the CMS
 
-After authenticating into Netlify CMS there should be a page displaying the site’s collections on the left and a list of latest meetups on the right. All of the data that is inputted through the CMS will get stored into a Git repository when saved. Once there is a new commit to the Git repository, Netlify will trigger a Gatsby build of the app and then deploy the app with the new content (this is called [continuous deployment](https://www.netlify.com/docs/continuous-deployment/)).
+After authenticating into Netlify CMS there should be a page displaying the site’s collections on the left and a list of latest meetups on the right. All of the data that is inputted through the CMS will get stored into a Git repository when saved. Once there is a new commit to the Git repository, Netlify will trigger a Gatsby build of the app and then deploy the app with the new content (this is called <Link to="https://www.netlify.com/docs/continuous-deployment/">continuous deployment</Link>).
 
 ![The layout of the Netlify CMS for a web app after a user has passed authentication.](./images/image-12.png)
 
@@ -117,7 +117,7 @@ The `src/` directory contains all of the React components and Sass files that de
 
 The `static/` directory contains the images or files uploaded through the CMS as well as the CMS config. The CMS config file is a `config.yaml` file that determines the type of data that can be added through the CMS interface.
 
-For example, `config.yaml` is where you would specify that you want to define a collection called “meetups” and that each meetup should have a title, date, list of presenters, and location associated with it. Read the documentation for more info on the [configuration file](https://www.netlifycms.org/docs/configuration-options/).
+For example, `config.yaml` is where you would specify that you want to define a collection called “meetups” and that each meetup should have a title, date, list of presenters, and location associated with it. Read the documentation for more info on the <Link to="https://www.netlifycms.org/docs/configuration-options/">configuration file</Link>.
 
 ```yaml
 ...
@@ -193,7 +193,7 @@ export const aboutPageQuery = graphql`
 
 <span class="caption">GraphQL query for the website’s about page.</span>
 
-The names of the queried data in the GraphQL query is based on the names of the fields provided in the `config.yml` file. However, some of the field names are less intuitive, such as `frontmatter` and `markdownRemark`. Fortunately, Gatsby comes with [GraphiQL](https://github.com/graphql/graphiql) where you can explore all of the available data through GraphQL queries in the Gatsby application. GraphiQL also acts as a way to discover the names of all the GraphQL fields through its “Documentation Explorer”. GraphiQL can be accessed when running the web app locally (using `yarn develop`) and then accessing [http://localhost:8000/\_\_\_graphql](http://localhost:8000/___graphql).
+The names of the queried data in the GraphQL query is based on the names of the fields provided in the `config.yml` file. However, some of the field names are less intuitive, such as `frontmatter` and `markdownRemark`. Fortunately, Gatsby comes with <Link to="https://github.com/graphql/graphiql">GraphiQL</Link> where you can explore all of the available data through GraphQL queries in the Gatsby application. GraphiQL also acts as a way to discover the names of all the GraphQL fields through its “Documentation Explorer”. GraphiQL can be accessed when running the web app locally (using `yarn develop`) and then accessing <Link to="http://localhost:8000/___graphql">http://localhost:8000/\_\_\_graphql</Link>.
 
 ![](./images/image-15.png)_GraphiQL is a handy tool to allow a user to explore the available GraphQL queries and see what data gets returned from running different queries._
 
@@ -241,7 +241,7 @@ The above code is a React component for the About page. Notice how the above Rea
 
 Running the web app locally is as simple as installing the project dependencies (yarn) and then running the start script (`yarn develop`).
 
-Running the start script makes the site accessible at [http://localhost:8000/](http://localhost:8000/).
+Running the start script makes the site accessible at <Link to="http://localhost:8000/">http://localhost:8000/</Link>.
 
 One thing to remember while developing is that once content has been added or modified through the CMS, you will need to run `git pull` locally to fetch the latest changes from the CMS.
 
@@ -255,4 +255,4 @@ When deploying, it’s a good idea to make sure the build script ran successfull
 
 ## Conclusion
 
-If you’re interested in learning more about how Gatsby and Netlify CMS work together, you can explore [the source code](https://github.com/robertcoopercode/gatsby-netlify-cms) for the above example application, refer to the [Gatsby](https://www.gatsbyjs.org/docs/) and [Netlify CMS](https://www.netlifycms.org/docs/intro/) documentation, as well as look at a [starter template](https://github.com/netlify-templates/gatsby-starter-netlify-cms) for Gatsby and Netlify CMS.
+If you’re interested in learning more about how Gatsby and Netlify CMS work together, you can explore <Link to="https://github.com/robertcoopercode/gatsby-netlify-cms">the source code</Link> for the above example application, refer to the <Link to="https://www.gatsbyjs.org/docs/">Gatsby</Link> and <Link to="https://www.netlifycms.org/docs/intro/">Netlify CMS</Link> documentation, as well as look at a <Link to="https://github.com/netlify-templates/gatsby-starter-netlify-cms">starter template</Link> for Gatsby and Netlify CMS.

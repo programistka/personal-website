@@ -9,7 +9,7 @@ banner: './images/banner.png'
 
 import Link from "$components/Link";
 
-Based on the [Stack Overflow Developer survey in 2018](https://insights.stackoverflow.com/survey/2018/), TypeScript is more "loved" as a programming language than JavaScript. The reason TypeScript is so loved amongst JavaScript developers is because adding types to JavaScript allows you to spot errors before running your code. The errors provided by the TypeScript compiler will give a good indication of how an error can be fixed. Adding types to JavaScript also allows code editors to provide some more advanced features, such as code completion, project-wide refactoring, and automatic module importing.
+Based on the <Link to="https://insights.stackoverflow.com/survey/2018/">Stack Overflow Developer survey in 2018</Link>, TypeScript is more "loved" as a programming language than JavaScript. The reason TypeScript is so loved amongst JavaScript developers is because adding types to JavaScript allows you to spot errors before running your code. The errors provided by the TypeScript compiler will give a good indication of how an error can be fixed. Adding types to JavaScript also allows code editors to provide some more advanced features, such as code completion, project-wide refactoring, and automatic module importing.
 
 ![Results of the most loved programming languages survey question from the 2018 Stack Overflow Developer Survey](./images/image-1.png)
 
@@ -140,7 +140,7 @@ let breed: string = 'Border Collie';
 
 <span class="caption">string type annotation</span>
 
-If using back ticks, the string is called a [_template literal_](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) and expressions can be interpolated within them.
+If using back ticks, the string is called a <Link to="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals">_template literal_</Link> and expressions can be interpolated within them.
 
 ```typescript
 let punchline: string = 'Because it was free-range.';
@@ -154,7 +154,7 @@ let joke: string = `
 
 ### number
 
-Any floating point number is given the type of `number`. The [four types of number literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Numbers_and_dates#Numbers) that are supported as part of TypeScript are _decimal_, _binary_, _octal_ and _hexadecimal_.
+Any floating point number is given the type of `number`. The <Link to="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Numbers_and_dates#Numbers">four types of number literals</Link> that are supported as part of TypeScript are _decimal_, _binary_, _octal_ and _hexadecimal_.
 
 ```typescript
 let decimalNumber: number = 42;
@@ -432,7 +432,7 @@ dog = {
 
 What seems to be the best practice in terms of using an interface or a type alias is that you should generally just pick either `interface` or `type` in your codebase and be consistent. However, if writing a 3rd party public API that can be used by others, use an `interface` type.
 
-If you want to get a more detailed comparison between the type alias and an interface, I would recommend [this article](https://medium.com/@martin_hotell/interface-vs-type-alias-in-typescript-2-7-2a8f1777af4c) by Matin Hochel.
+If you want to get a more detailed comparison between the type alias and an interface, I would recommend <Link to="https://medium.com/@martin_hotell/interface-vs-type-alias-in-typescript-2-7-2a8f1777af4c">this article</Link> by Martin Hochel.
 
 ### Inline Annotations
 
@@ -579,8 +579,8 @@ interface Person {
 
 For the parts of TypeScript that weren't covered in this article, I recommend the following resources.
 
-[TypeScript Handbook (Official TypeScript docs)](https://www.typescriptlang.org/docs/handbook/basic-types.html)
+<p><Link to="https://www.typescriptlang.org/docs/handbook/basic-types.html">TypeScript Handbook (Official TypeScript docs)</Link></p>
 
-[TypeScript Deep Dive (Online TypeScript Guide)](https://basarat.gitbooks.io/typescript/content/docs/getting-started.html)
+<p><Link to="https://basarat.gitbooks.io/typescript/content/docs/getting-started.html">TypeScript Deep Dive (Online TypeScript Guide)</Link></p>
 
-[Understanding TypeScript's Type Annotation (Great introductory TypeScript article)](http://2ality.com/2018/04/type-notation-typescript.html)
+<p><Link to="http://2ality.com/2018/04/type-notation-typescript.html">Understanding TypeScript's Type Annotation (Great introductory TypeScript article)</Link></p>
