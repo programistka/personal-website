@@ -12,7 +12,6 @@ import Layout from '../components/Layout';
 import Link from '../components/Link';
 import ScrollProgress from '../utils/scrollProgress';
 import { Divider, PageWrapper } from '../components/Common';
-import { ThemeContext } from '../utils/context';
 import { Title } from '../components/Typography';
 import { colors, media } from '../styles/common';
 // import { PageContext } from '../types/PageContext';
@@ -24,7 +23,36 @@ const ModifiedPageWrapper = styled(PageWrapper)`
     ${media.small`
         padding: 40px 20px;
     `};
+`;
 
+const PostTitle = styled(Title)`
+    text-align: left;
+    margin: 0;
+
+    ${media.small`
+        text-align: center;
+        margin-bottom: 5px;
+    `};
+`;
+
+const Date = styled.time`
+    display: block;
+    margin-bottom: 40px;
+
+    ${media.small`
+        text-align: center;
+    `};
+`;
+
+const FeaturedImage = styled(Img)`
+    margin-bottom: 40px;
+
+    img {
+        margin: unset;
+    }
+`;
+
+const MDXContent = styled.div`
     .caption {
         font-weight: 400;
         font-style: italic;
@@ -101,33 +129,6 @@ const ModifiedPageWrapper = styled(PageWrapper)`
             position: absolute;
             left: -20px;
         }
-    }
-`;
-
-const PostTitle = styled(Title)`
-    text-align: left;
-    margin: 0;
-
-    ${media.small`
-        text-align: center;
-        margin-bottom: 5px;
-    `};
-`;
-
-const Date = styled.time`
-    display: block;
-    margin-bottom: 40px;
-
-    ${media.small`
-        text-align: center;
-    `};
-`;
-
-const FeaturedImage = styled(Img)`
-    margin-bottom: 40px;
-
-    img {
-        margin: unset;
     }
 `;
 
@@ -241,46 +242,41 @@ const Post = props => {
     });
 
     return (
-        <ThemeContext.Consumer>
-            {value => (
-                <Layout site={site} frontmatter={mdx.frontmatter}>
-                    <ProgressContainer>
-                        <ProgressBar ref={progressBar} />
-                    </ProgressContainer>
-                    <ModifiedPageWrapper>
-                        <PostTitle>{mdx.frontmatter.title}</PostTitle>
-                        <Date dateTime={mdx.frontmatter.dateTimeString}>{mdx.frontmatter.formattedDate}</Date>
+        <Layout site={site} frontmatter={mdx.frontmatter}>
+            <ProgressContainer>
+                <ProgressBar ref={progressBar} />
+            </ProgressContainer>
+            <ModifiedPageWrapper>
+                <PostTitle>{mdx.frontmatter.title}</PostTitle>
+                <Date dateTime={mdx.frontmatter.dateTimeString}>{mdx.frontmatter.formattedDate}</Date>
 
-                        {mdx.frontmatter.banner && (
-                            <FeaturedImage fluid={mdx.frontmatter.banner.childImageSharp.fluid} />
+                {mdx.frontmatter.banner && <FeaturedImage fluid={mdx.frontmatter.banner.childImageSharp.fluid} />}
+
+                <MDXContent>
+                    <MDXRenderer>{mdx.code.body}</MDXRenderer>
+                </MDXContent>
+
+                <Divider />
+
+                <CategoryListComponent list={mdx.frontmatter.categories} />
+
+                {(next || prev) && (
+                    <OtherPostsWrapper>
+                        {prev && (
+                            <NextPostWrapper>
+                                Next: <Link to={prev.fields.slug}>{prev.fields.title}</Link>
+                            </NextPostWrapper>
                         )}
-
-                        <MDXRenderer>{mdx.code.body}</MDXRenderer>
-
-                        <Divider />
-
-                        <CategoryListComponent list={mdx.frontmatter.categories} />
-
-                        {(next || prev) && (
-                            <OtherPostsWrapper>
-                                {prev && (
-                                    <NextPostWrapper>
-                                        Next: <Link to={prev.fields.slug}>{prev.fields.title}</Link>
-                                    </NextPostWrapper>
-                                )}
-                                {next && (
-                                    <PreviousPostWrapper>
-                                        Previous:{' '}
-                                        <PreviousPostLink to={next.fields.slug}>{next.fields.title}</PreviousPostLink>
-                                    </PreviousPostWrapper>
-                                )}
-                            </OtherPostsWrapper>
+                        {next && (
+                            <PreviousPostWrapper>
+                                Previous: <PreviousPostLink to={next.fields.slug}>{next.fields.title}</PreviousPostLink>
+                            </PreviousPostWrapper>
                         )}
-                        <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
-                    </ModifiedPageWrapper>
-                </Layout>
-            )}
-        </ThemeContext.Consumer>
+                    </OtherPostsWrapper>
+                )}
+                <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
+            </ModifiedPageWrapper>
+        </Layout>
     );
 };
 

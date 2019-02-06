@@ -81,15 +81,18 @@ pre[class*='language-'] ::selection {
     color: rgb(247, 140, 108);
 }
 
-.token.builtin,
 .token.char,
 .token.constant,
 .token.function {
     color: rgb(130, 170, 255);
 }
 
+.token.builtin {
+    color: rgb(173, 219, 103);
+}
+
 .token.punctuation {
-    color: rgb(199, 146, 234);
+    color: rgb(255, 203, 139);
 }
 
 .token.selector,
@@ -102,10 +105,16 @@ pre[class*='language-'] ::selection {
     color: rgb(255, 203, 139);
 }
 
-.token.tag,
-.token.operator,
-.token.keyword {
+.token.tag {
     color: #f78c6c;
+}
+
+.token.operator {
+    color: rgb(199, 146, 234);
+}
+
+.token.keyword {
+    color: rgb(130, 170, 255);
 }
 
 .token.boolean {
