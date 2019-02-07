@@ -209,6 +209,10 @@ const ProgressBar = styled.div`
     width: 10%;
 `;
 
+const CommentsSection = styled.div`
+    margin-top: 40px;
+`;
+
 // type PostProps = {
 //     data: {
 //         site: any;
@@ -274,7 +278,9 @@ const Post = props => {
                         )}
                     </OtherPostsWrapper>
                 )}
-                <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
+                <CommentsSection>
+                    <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
+                </CommentsSection>
             </ModifiedPageWrapper>
         </Layout>
     );

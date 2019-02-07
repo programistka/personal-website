@@ -111,7 +111,7 @@ React Native stills uses JSX as the templating language in the component’s ren
 
 ### Browser Debugging
 
-The JavaScript code in React Native usually gets parsed on a device’s JavaScript engine, called the JavaScript Core. However, if you enable debug mode on a mobile simulator, you will be able to run the JavaScript through a browser’s JS engine and you will therefore have access to tools such as the Chrome debugging tools. This allows you to use `console.log()` statements and read the output in a browser’s console. You can also inspect XHR requests being made and if you’re using Redux, you can take advantage of the [Redux Devtools](https://github.com/zalmoxisus/redux-devtools-extension) as well.
+The JavaScript code in React Native usually gets parsed on a device’s JavaScript engine, called the JavaScript Core. However, if you enable debug mode on a mobile simulator, you will be able to run the JavaScript through a browser’s JS engine and you will therefore have access to tools such as the Chrome debugging tools. This allows you to use `console.log()` statements and read the output in a browser’s console. You can also inspect XHR requests being made and if you’re using Redux, you can take advantage of the <Link to="https://github.com/zalmoxisus/redux-devtools-extension">Redux Devtools</Link> as well.
 
 ![You can use a brower’s debugging tools with React Native when operating the app in “debug mode”](./images/image-6.gif)
 
@@ -125,11 +125,11 @@ JavaScript dependencies can all be managed with `yarn` or `npm` and you will see
 
 ### Base Components
 
-React native comes with a set of built-in components that can be used to render UI elements on the page. These are different than the standard `<div>`, `<p>`, `<input>`, and other DOM elements that are used with React on the web. Some of the React Native built-in components include `<Text>`, `<View>`, `<TextInput>`, and `<Image>`. There are of course [many other](https://facebook.github.io/react-native/docs/components-and-apis.html) and there are also some 3rd party components that can be downloaded from NPM.
+React native comes with a set of built-in components that can be used to render UI elements on the page. These are different than the standard `<div>`, `<p>`, `<input>`, and other DOM elements that are used with React on the web. Some of the React Native built-in components include `<Text>`, `<View>`, `<TextInput>`, and `<Image>`. There are of course <Link to="https://facebook.github.io/react-native/docs/components-and-apis.html">many other</Link> and there are also some 3rd party components that can be downloaded from NPM.
 
 ### Styling
 
-Styling isn’t done with CSS in React Native, however the syntax is quite similar. To apply styles in React Native, a [`StyleSheet`](https://facebook.github.io/react-native/docs/stylesheet) object is created and applied to a component’s `style` attribute. The property and values used in the `StyleSheet` object are similar to what you would find in CSS, but the naming uses camelCase and there are also many features missing in the React Native styles that you would otherwise find in regular CSS.
+Styling isn’t done with CSS in React Native, however the syntax is quite similar. To apply styles in React Native, a <Link to="https://facebook.github.io/react-native/docs/stylesheet">`StyleSheet`</Link> object is created and applied to a component’s `style` attribute. The property and values used in the `StyleSheet` object are similar to what you would find in CSS, but the naming uses camelCase and there are also many features missing in the React Native styles that you would otherwise find in regular CSS.
 
 **Styling on the web:**
 
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
 
 ### Routing & Navigation
 
-React Native has 2 popular choices for implementing native navigation in an application: [React Navigation](https://reactnavigation.org/) & [React Native Navigation](https://wix.github.io/react-native-navigation/#/). Really great original names if you ask me. Personally, React Native Navigation is the solution I prefer since it uses the actual native navigation API associated with iOS and Android, whereas React Navigation’s implementation is done purely in JavaScript.
+React Native has 2 popular choices for implementing native navigation in an application: <Link to="https://reactnavigation.org/">React Navigation</Link> & <Link to="https://wix.github.io/react-native-navigation/#/">React Native Navigation</Link>. Really great original names if you ask me. Personally, React Native Navigation is the solution I prefer since it uses the actual native navigation API associated with iOS and Android, whereas React Navigation’s implementation is done purely in JavaScript.
 
 Honestly, incorporating Navigation on Native can be painful when dealing with complex nested routing and styling navigation related elements isn’t always obvious. Routing React web apps is much simpler.
 
@@ -208,7 +208,7 @@ React Native runs its JavaScript through the device’s _JavaScript Core_, unles
 
 React Native runs on 2 different threads. The _Main_ thread is responsible for rendering the UI and receiving user gestures while the _JavaScript_ thread is responsible for defining the structure of the UI as well as handling the application’s business logic.
 
-The React Native architecture is quite interesting and you can find many good talks on YouTube from the Facebook developers talking about the inner workings of React Native. Here’s two talks worth checking out if you’re interested in learning more: [one](https://www.youtube.com/watch?v=7rDsRXj9-cU), [two](https://www.youtube.com/watch?v=plTTFqbEiEE).
+The React Native architecture is quite interesting and you can find many good talks on YouTube from the Facebook developers talking about the inner workings of React Native. Here’s two talks worth checking out if you’re interested in learning more: <Link to="https://www.youtube.com/watch?v=7rDsRXj9-cU">one</Link>, <Link to="https://www.youtube.com/watch?v=plTTFqbEiEE">two</Link>.
 
 ---
 

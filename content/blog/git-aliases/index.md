@@ -7,9 +7,11 @@ categories: ['git']
 banner: './images/banner.png'
 ---
 
+import Link from "$components/Link";
+
 Leveraging aliases when working with git can help make you more efficient with using the popular version control system. Listed below are some of my absolute favourite and most used aliases when working on a project that uses git.
 
-It should be noted that when i'm talking about aliases, I mean [bash/zsh aliases](http://tldp.org/LDP/abs/html/aliases.html) and not [git aliases](https://git-scm.com/book/en/v2/Git-Basics-Git-Aliases).
+It should be noted that when i'm talking about aliases, I mean <Link to="http://tldp.org/LDP/abs/html/aliases.html">bash/zsh aliases</Link> and not <Link to="https://git-scm.com/book/en/v2/Git-Basics-Git-Aliases">git aliases</Link>.
 
 What's the difference? Bash/Zsh aliases are setup in a `.bashrc` or `.zshrc` file and allows you to assign a command to a shorthand version. For example, you could alias `git log` to be `gl`, which would save you a few characters of typing. Git aliases allow you to similarly assign a git command to a shorthand version, but you still have to type `git` prior to the shorthand. For example, you could alias the `git log` command to be `l` and then you would invoke the command by typing `git l`. All git aliases are set in a `.gitconfig` file which is usually found in a computer's `HOME` directory.
 
@@ -169,7 +171,7 @@ grb origin/master
 grn() { git rebase -i HEAD~"$1"; }
 ```
 
-This is actually a [shell command](http://zsh.sourceforge.net/Intro/intro_4.html) which allows for variables to be passed in as arguments. The `$1` is a placeholder for an argument that gets passed to the `grn` function. This function accepts `N` as an argument, where `N` is the number of commits to perform an interactive rebase on.
+This is actually a <Link to="http://zsh.sourceforge.net/Intro/intro_4.html">shell command</Link> which allows for variables to be passed in as arguments. The `$1` is a placeholder for an argument that gets passed to the `grn` function. This function accepts `N` as an argument, where `N` is the number of commits to perform an interactive rebase on.
 
 **Example:**
 

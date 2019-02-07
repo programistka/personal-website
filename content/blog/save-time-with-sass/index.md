@@ -15,15 +15,15 @@ Sass is a CSS preprocessor that solves a lot of the problems with writing CSS an
 
 ## CSS Preprocessors
 
-CSS preprocessors allow us to use certain features that aren't currently available in CSS. The CSS specification is slowly adopting features that are currently available in preprocessors (such as [variables](https://developers.google.com/web/updates/2016/02/css-variables-why-should-you-care)), but it still has a long way to go to catch up to preprocessors. CSS preprocessors allow you to **cut the lines of code** necessary for writing your CSS and it also allows you to make changes more quickly since you don't have to change repeated instances of CSS.
+CSS preprocessors allow us to use certain features that aren't currently available in CSS. The CSS specification is slowly adopting features that are currently available in preprocessors (such as <Link to="https://developers.google.com/web/updates/2016/02/css-variables-why-should-you-care">variables</Link>), but it still has a long way to go to catch up to preprocessors. CSS preprocessors allow you to **cut the lines of code** necessary for writing your CSS and it also allows you to make changes more quickly since you don't have to change repeated instances of CSS.
 
-[Sass](http://sass-lang.com/) is one of the most popular CSS preprocessors out there and it is widely used in a lot of applications. Sass works by writing your styles in .scss (or .sass) files, which will then get compiled into a regular CSS file. The newly compiled CSS file is what gets loaded to your browser to style your web application. This allows the browser to properly apply the styles to your web page.
+<p><Link to="http://sass-lang.com/">Sass</Link> is one of the most popular CSS preprocessors out there and it is widely used in a lot of applications. Sass works by writing your styles in .scss (or .sass) files, which will then get compiled into a regular CSS file. The newly compiled CSS file is what gets loaded to your browser to style your web application. This allows the browser to properly apply the styles to your web page.</p>
 
 ![Three popular CSS preprocessors are Less, Sass, and Stylus](./images/image-1.png)
 
 <span class="caption">Sass stands for <strong>S</strong>yntactically <strong>A</strong>wesome <strong>S</strong>tyle<strong>S</strong>heets</span>
 
-Of course, Sass is not the only option when it comes to preprocessors. Two other popular options are [Less](http://lesscss.org/) and [Stylus](http://stylus-lang.com/), which come with their own set of features and syntax.
+Of course, Sass is not the only option when it comes to preprocessors. Two other popular options are <Link to="http://lesscss.org/">Less</Link> and <Link to="http://stylus-lang.com/">Stylus</Link>, which come with their own set of features and syntax.
 
 ## Installing and Running Sass
 
@@ -33,7 +33,7 @@ You can install Sass right from your terminal/command prompt. You will need to h
 sudo gem install Sass
 ```
 
-Read more about installing Sass on the Sass [website](http://sass-lang.com/guide).
+Read more about installing Sass on the Sass <Link to="http://sass-lang.com/guide">website</Link>.
 
 There are many tools used to help compile your Sass into CSS in your projects. For example, Node.js works well with build tools such as Grunt and Gulp, which have ways to compile your Sass files. Using Grunt or Gulp allows you to specify which files to watch for changes, allowing your Sass files to be automatically compiled to CSS every time you modify and save a Sass file.
 
@@ -80,13 +80,13 @@ ul li {
 
 <span class="caption">Sassy Sass syntax</span>
 
-There are pros and cons to both syntaxes, as [explained here](http://thesassway.com/editorial/sass-vs-scss-which-syntax-is-better). I **prefer the newer syntax** because it is easier to convert CSS files into Sass files with the newer syntax since all CSS is valid Scss. All the examples to follow will be using the Scss syntax.
+There are pros and cons to both syntaxes, as <Link to="http://thesassway.com/editorial/sass-vs-scss-which-syntax-is-better">explained here</Link>. I **prefer the newer syntax** because it is easier to convert CSS files into Sass files with the newer syntax since all CSS is valid Scss. All the examples to follow will be using the Scss syntax.
 
 ![Visual representation of the 2 syntaxes available in Sass](./images/image-3.png)
 
 <span class="caption">Visual representation of the 2 syntaxes available in Sass (sources: <Link to="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/1200px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg">left</Link> and <Link to="https://i.pinimg.com/564x/3f/b5/36/3fb53666c3eb36e76c6f8094f3e5f7f2--monna-lisa-funny-art.jpg">right</Link></span>
 
-One easy way to familiarize yourself with Sass syntax is through CodePen, since their Pens allow you to use CSS preprocessors. You can also play around online with Sass [here](https://www.Sassmeister.com/) to see how it looks like when compiled to CSS.
+One easy way to familiarize yourself with Sass syntax is through CodePen, since their Pens allow you to use CSS preprocessors. You can also play around online with Sass <Link to="https://www.Sassmeister.com/">here</Link> to see how it looks like when compiled to CSS.
 
 ---
 
@@ -159,7 +159,7 @@ Nesting your CSS selectors in Sass allows you to follow the same visual hierarch
 
 Partials allow you to modularize your Sass. Partials are files that contain Sass snippets to be included in other Sass files. Sass partials are included in other files using the `@import` directive (explained next). Partial files are named with a leading `_` such as `_button.scss` or `_carousel.scss`.
 
-Partials are a great way to organize your Sass and can save you lots of time trying to find the correct styles to modify. This is especially true if you follow a **good file architecture**. One pattern I like to follow for my files and folders is the 7–1 pattern introduced by [Hugo Giraudel](https://sass-guidelin.es/).
+Partials are a great way to organize your Sass and can save you lots of time trying to find the correct styles to modify. This is especially true if you follow a **good file architecture**. One pattern I like to follow for my files and folders is the 7–1 pattern introduced by <Link to="https://sass-guidelin.es/">Hugo Giraudel</Link>.
 
 ```text
 sass/
@@ -378,8 +378,7 @@ Here are four examples that demonstrate some of Sass’s features.
 
 ### Updating Color Variables
 
-<iframe height='500' scrolling='no' title='SASS Variables' src='//codepen.io/robertcooper_rc/embed/rGdzrw/?height=500&theme-id=dark&default-tab=result' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/robertcooper_rc/pen/rGdzrw/'>SASS Variables</a> by Robert (<a href='https://codepen.io/robertcooper_rc'>@robertcooper_rc</a>) on <a href='https://codepen.io'>CodePen</a>.
-</iframe>
+<iframe height='500' scrolling='no' title='SASS Variables' src='//codepen.io/robertcooper_rc/embed/rGdzrw/?height=500&theme-id=dark&default-tab=result' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'></iframe>
 
 This first example uses Sass variables to store the values for both the primary and secondary colors used in the application. The color variables are used all throughout the Sass file so changes to both those variables will result in changes to the styling of many elements on the page.
 
@@ -393,8 +392,7 @@ This first example uses Sass variables to store the values for both the primary 
 
 ### Sass Dropdowns
 
-<iframe height='400' scrolling='no' title='Sass dropdowns' src='//codepen.io/robertcooper_rc/embed/yzEGLG/?height=400&theme-id=dark&default-tab=result' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/robertcooper_rc/pen/yzEGLG/'>Sass dropdowns</a> by Robert (<a href='https://codepen.io/robertcooper_rc'>@robertcooper_rc</a>) on <a href='https://codepen.io'>CodePen</a>.
-</iframe>
+<iframe height='400' scrolling='no' title='Sass dropdowns' src='//codepen.io/robertcooper_rc/embed/yzEGLG/?height=400&theme-id=dark&default-tab=result' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'></iframe>
 
 This example uses Sass variables, nesting, inheritance, and operators. Variables are used to capture color values, dimensions used for the dropdown triangles, animation values, and a standard border radius value. Inheritance is used to apply a clearfix to floated element containers. Operators are used to calculate the size of the dropdown triangles.
 
@@ -428,15 +426,13 @@ There are some Sass features used in this example that I did not cover above, su
 
 ### Sass Waves
 
-<iframe height='400' scrolling='no' title='Sass Waves' src='//codepen.io/robertcooper_rc/embed/xXzayg/?height=400&theme-id=dark&default-tab=result' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/robertcooper_rc/pen/xXzayg/'>Sass Waves</a> by Robert (<a href='https://codepen.io/robertcooper_rc'>@robertcooper_rc</a>) on <a href='https://codepen.io'>CodePen</a>.
-</iframe>
+<iframe height='400' scrolling='no' title='Sass Waves' src='//codepen.io/robertcooper_rc/embed/xXzayg/?height=400&theme-id=dark&default-tab=result' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'></iframe>
 
 This example uses variables, operators, and a Sass “**for” loop**. The “for” loop is another feature I did not introduce above, but it is used in this example to calculate the animation of each dot in the application. This particular “for” loop saves us a lot of typing and calculations. If you look at the lines of code in the compiled CSS for this particular application, it comes out to be 121 lines of code (versus 55 lines of code using Sass).
 
 ### Sass Media Queries
 
-<iframe height='400' scrolling='no' title='Sass Media Queries Mixin' src='//codepen.io/robertcooper_rc/embed/wrxBMy/?height=400&theme-id=dark&default-tab=result' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/robertcooper_rc/pen/wrxBMy/'>Sass Media Queries Mixin</a> by Robert (<a href='https://codepen.io/robertcooper_rc'>@robertcooper_rc</a>) on <a href='https://codepen.io'>CodePen</a>.
-</iframe>
+<iframe height='400' scrolling='no' title='Sass Media Queries Mixin' src='//codepen.io/robertcooper_rc/embed/wrxBMy/?height=400&theme-id=dark&default-tab=result' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'></iframe>
 
 This final example illustrates how useful Sass mixins can be. It uses a mixin to set properties and values on selectors at specified screen widths. Depending on your browser’s width, the elements on the page will have different properties and values applied to them.
 
