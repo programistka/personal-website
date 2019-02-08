@@ -92,7 +92,7 @@ type LayoutProps = {
     hideFooter?: boolean;
 };
 
-export default ({
+export const Layout = ({
     site,
     frontmatter = { title: null, description: null, banner: { publicURL: null } },
     title: pageTitle = null,
@@ -153,3 +153,5 @@ export default ({
         />
     );
 };
+
+export default Layout;

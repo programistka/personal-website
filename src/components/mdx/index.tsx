@@ -10,6 +10,7 @@ import SubtitleH4 from './SubtitleH4';
 import Title from './Title';
 import Code from './Code';
 
+/* eslint-disable react/display-name */
 export default {
     h1: (props: { theme: string }) => <Title {...props} />,
     h2: (props: { theme: string }) => <SubtitleH2 {...props} />,
@@ -26,3 +27,4 @@ export default {
         }
     },
 };
+/* eslint-enable react/display-name */

@@ -99,9 +99,9 @@ const NAVIGATION = [{ to: '/blog/', label: 'blog' }, { to: '/projects/', label: 
 
 const MenuTitleComponent = ({ location, children }) => {
     if (location.pathname === '/') {
-        return <MenuTitle as="h1" children={children} />;
+        return <MenuTitle as="h1">{children}</MenuTitle>;
     } else {
-        return <MenuTitle children={children} />;
+        return <MenuTitle>{children}</MenuTitle>;
     }
 };
 

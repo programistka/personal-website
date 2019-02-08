@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 module.exports = {
     pathPrefix: '/',
     siteMetadata: {
@@ -121,3 +122,4 @@ module.exports = {
         },
     ],
 };
+/* eslint-enable @typescript-eslint/camelcase */

@@ -240,7 +240,7 @@ type HomePageProps = {
     };
 };
 
-export default ({
+export const Home = ({
     data: {
         site,
         homeHeader,
@@ -308,6 +308,8 @@ export default ({
         </ThemeContext.Consumer>
     );
 };
+
+export default Home;
 
 export const pageQuery = graphql`
     query {

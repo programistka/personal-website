@@ -34,7 +34,7 @@ type PageNotFoundProps = {
     };
 };
 
-export default ({ data: { site } }: PageNotFoundProps) => (
+export const PageNotFound = ({ data: { site } }: PageNotFoundProps) => (
     <Layout site={site}>
         <PageContent>
             <Title>Page Not Found</Title>
@@ -42,6 +42,8 @@ export default ({ data: { site } }: PageNotFoundProps) => (
         <RandomVideo src={PageNotFoundVideo} autoPlay={true} loop={true} />
     </Layout>
 );
+
+export default PageNotFound;
 
 export const pageQuery = graphql`
     query {

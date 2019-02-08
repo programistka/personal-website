@@ -20,6 +20,7 @@ import { ThemeContext } from './src/utils/context';
  * @param {ReactNode} props.children
  * @returns
  */
+// eslint-disable-next-line react/prop-types
 const ThemeWrapperComponent = ({ children }) => {
     // Set the default theme state to the value stored in the user's cookie and fallback
     // to 'dark' if no cookie is found
@@ -80,4 +81,5 @@ const ThemeWrapperComponent = ({ children }) => {
     );
 };
 
+// eslint-disable-next-line react/prop-types
 export const wrapRootElement = ({ element }) => <ThemeWrapperComponent>{element}</ThemeWrapperComponent>;

@@ -1,6 +1,3 @@
-// NOTE: I can't add any types to this file because gatsby-mdx will throw an error
-// when trying to run the dev server. Hopefully this gets fixed in a future version
-// or gatsby-mdx :/
 import Img from 'gatsby-image';
 import MDXRenderer from 'gatsby-mdx/mdx-renderer';
 import React, { useEffect, useRef } from 'react';
@@ -14,7 +11,7 @@ import ScrollProgress from '../utils/scrollProgress';
 import { Divider, PageWrapper } from '../components/Common';
 import { Title } from '../components/Typography';
 import { colors, media } from '../styles/common';
-// import { PageContext } from '../types/PageContext';
+import { PageContext } from '../types/PageContext';
 
 const ModifiedPageWrapper = styled(PageWrapper)`
     width: 800px;
@@ -182,7 +179,7 @@ const OtherPostsWrapper = styled.div`
     display: flex;
 `;
 
-const CategoryListComponent = ({ list = [] }) => (
+const CategoryListComponent = ({ list = [] }: { list?: string[] }) => (
     <CategoriesWrapper>
         <CategoriesLabel>Categories:</CategoriesLabel>
         <CategoryList>
@@ -213,16 +210,15 @@ const CommentsSection = styled.div`
     margin-top: 40px;
 `;
 
-// type PostProps = {
-//     data: {
-//         site: any;
-//         mdx: any;
-//     };
-//     pageContext: PageContext;
-// };
+interface PostProps {
+    data: {
+        site: any;
+        mdx: any;
+    };
+    pageContext: PageContext;
+}
 
-// const Post = (props: PostProps) => {
-const Post = props => {
+const Post = (props: PostProps) => {
     const {
         data: { site, mdx },
         pageContext: { next, prev },
@@ -234,8 +230,7 @@ const Post = props => {
         title: mdx.frontmatter.title,
     };
 
-    // const progressBar = useRef({ current: { style: { width: 0 } } } as any);
-    const progressBar = useRef({ current: { style: { width: 0 } } });
+    const progressBar = useRef({ current: { style: { width: 0 } } } as any);
 
     useEffect(() => {
         const progressObserver = new ScrollProgress((x, y) => {

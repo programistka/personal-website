@@ -18,15 +18,17 @@ const BlogList = styled.div`
 `;
 
 type BlogListComponentProps = {
-    posts: (Post)[];
+    posts: (Post | undefined)[];
 };
 
 const BlogListComponent = ({ posts }: BlogListComponentProps) => {
     return (
         <BlogList>
-            {posts.map(({ node: post }) => (
-                <BlogCard key={post.id} post={post} />
-            ))}
+            {posts.map(post => {
+                if (post !== undefined) {
+                    return <BlogCard key={post.node.id} post={post.node} />;
+                }
+            })}
         </BlogList>
     );
 };

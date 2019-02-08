@@ -19,7 +19,7 @@ const LastUpdatedDate = styled.p`
     align-self: center;
 `;
 
-export default ({ data: { site } }: { data: { site: { siteMetadata: SiteMetadata } } }) => (
+export const MeatJournalPrivacyPolicy = ({ data: { site } }: { data: { site: { siteMetadata: SiteMetadata } } }) => (
     <Layout site={site} hideMenu={true} hideFooter={true}>
         <PageContent>
             <Title>Privacy Policy</Title>
@@ -41,6 +41,8 @@ export default ({ data: { site } }: { data: { site: { siteMetadata: SiteMetadata
         </PageContent>
     </Layout>
 );
+
+export default MeatJournalPrivacyPolicy;
 
 export const pageQuery = graphql`
     query {

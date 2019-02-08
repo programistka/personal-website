@@ -18,9 +18,9 @@ const Code = ({ codeString, language, ...props }: { codeString: string; language
                 <div className="gatsby-highlight">
                     <pre className={className}>
                         {tokens.map((line, i) => (
-                            <div {...getLineProps({ line, key: i })}>
+                            <div key={i} {...getLineProps({ line, key: i })}>
                                 {line.map((token: any, key: number) => (
-                                    <span {...getTokenProps({ token, key })} />
+                                    <span key={key} {...getTokenProps({ token, key })} />
                                 ))}
                             </div>
                         ))}
