@@ -69,7 +69,7 @@
     },
     "husky": {
         "hooks": {
-            "pre-commit": "eslint . --ext [\".js, .ts, .tsx\"] --quiet && lint-staged"
+            "pre-commit": "tsc --noEmit && eslint . --ext [\".js, .ts, .tsx\"] --quiet && lint-staged"
         }
     },
     "lint-staged": {
