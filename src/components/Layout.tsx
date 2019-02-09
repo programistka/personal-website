@@ -1,9 +1,10 @@
 import 'aos/dist/aos.css';
 import Helmet from 'react-helmet';
 import React from 'react';
-import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { MDXProvider } from '@mdx-js/tag';
 import { withPrefix } from 'gatsby';
+
+import styled, { createGlobalStyle, ThemeProvider } from '../lib/styled-components';
 
 import '../styles/prismjs.css';
 

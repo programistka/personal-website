@@ -72,6 +72,7 @@ module.exports = {
             resolve: `gatsby-plugin-feed-custom`,
             options: {
                 image_url: 'https://www.robertcooper.me/social-sharing.jpg',
+                language: 'en',
                 feeds: [
                     {
                         serialize: ({ query: { site, allMdx } }) => {

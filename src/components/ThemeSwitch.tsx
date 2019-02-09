@@ -4,6 +4,8 @@
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 
+import { ThemeType } from '../utils/context';
+
 import MoonSVG from './icons/Moon';
 
 const width = 70;
@@ -142,8 +144,8 @@ export const Circle = styled.div`
 `;
 
 type ThemeSwitchProps = {
-    className: string;
-    theme: 'light' | 'dark';
+    className?: string;
+    theme: ThemeType;
     onChange: React.MouseEventHandler<HTMLDivElement>;
 };
 

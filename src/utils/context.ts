@@ -1,6 +1,6 @@
 import React from 'react';
 
-enum ThemeEnum {
+export enum ThemeEnum {
     light = 'light',
     dark = 'dark',
 }
@@ -11,7 +11,7 @@ export type ThemeType = ThemeEnum.light | ThemeEnum.dark;
 // Reference: https://github.com/sw-yx/react-typescript-cheatsheet#context
 interface ProviderStore {
     theme: ThemeType;
-    toggleTheme: () => void;
+    toggleTheme: () => null;
 }
 
 export const ThemeContext = React.createContext({
