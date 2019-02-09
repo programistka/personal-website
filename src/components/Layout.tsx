@@ -3,7 +3,7 @@ import Helmet from 'react-helmet';
 import React from 'react';
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { MDXProvider } from '@mdx-js/tag';
-import { StaticQuery, graphql } from 'gatsby';
+import { withPrefix } from 'gatsby';
 
 import '../styles/prismjs.css';
 
@@ -112,45 +112,34 @@ export const Layout = ({
     const description = frontmatterDescription || siteDescription;
 
     return (
-        <StaticQuery
-            query={graphql`
-                query {
-                    file(name: { eq: "social-sharing" }) {
-                        publicURL
-                    }
-                }
-            `}
-            render={data => (
-                <ThemeContext.Consumer>
-                    {({ theme, toggleTheme }) => (
-                        <ThemeProvider theme={{ color: theme }}>
-                            <>
-                                <GlobalStyles />
-                                <Helmet title={title}>
-                                    <html lang="en" />
-                                    <meta name="description" content={description} />
+        <ThemeContext.Consumer>
+            {({ theme, toggleTheme }) => (
+                <ThemeProvider theme={{ color: theme }}>
+                    <>
+                        <GlobalStyles />
+                        <Helmet title={title}>
+                            <html lang="en" />
+                            <meta name="description" content={description} />
 
-                                    <meta name="twitter:card" content="summary_large_image" />
-                                    <meta name="twitter:site" content="@RobertCooper_RC" />
+                            <meta name="twitter:card" content="summary_large_image" />
+                            <meta name="twitter:site" content="@RobertCooper_RC" />
 
-                                    <meta property="og:title" content={title} />
-                                    <meta
-                                        property="og:image"
-                                        content={`${siteUrl}${publicURL || data.file.publicURL}`}
-                                    />
-                                    <meta property="og:description" content={description} />
-                                </Helmet>
-                                {!hideMenu && <Menu theme={theme} toggleTheme={toggleTheme} />}
-                                <MDXProvider components={mdxComponents}>
-                                    <Main>{children}</Main>
-                                </MDXProvider>
-                                {!hideFooter && <Footer />}
-                            </>
-                        </ThemeProvider>
-                    )}
-                </ThemeContext.Consumer>
+                            <meta property="og:title" content={title} />
+                            <meta
+                                property="og:image"
+                                content={`${siteUrl}${publicURL || withPrefix('/social-sharing.jpg')}`}
+                            />
+                            <meta property="og:description" content={description} />
+                        </Helmet>
+                        {!hideMenu && <Menu theme={theme} toggleTheme={toggleTheme} />}
+                        <MDXProvider components={mdxComponents}>
+                            <Main>{children}</Main>
+                        </MDXProvider>
+                        {!hideFooter && <Footer />}
+                    </>
+                </ThemeProvider>
             )}
-        />
+        </ThemeContext.Consumer>
     );
 };
 

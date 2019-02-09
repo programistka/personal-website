@@ -6,6 +6,7 @@ module.exports = {
         author: 'Robert Cooper',
         title: 'Robert Cooper',
         description: `The front end web development blog and project portfolio of Robert Cooper, a Canadian web developer and consultant.`,
+        imagePath: '/social-sharing.jpg',
     },
     plugins: [
         {
@@ -70,13 +71,13 @@ module.exports = {
         {
             resolve: `gatsby-plugin-feed`,
             options: {
+                image_url: 'https://www.robertcooper.me/social-sharing.jpg',
                 feeds: [
                     {
                         serialize: ({ query: { site, allMdx } }) => {
                             return allMdx.edges.map(edge => {
                                 return {
                                     ...edge.node.frontmatter,
-                                    description: edge.node.excerpt,
                                     url: site.siteMetadata.siteUrl + edge.node.fields.slug,
                                     guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
                                     custom_elements: [{ 'content:encoded': edge.node.html }],
@@ -84,31 +85,32 @@ module.exports = {
                             });
                         },
                         query: `
-                    {
-                      allMdx(
-                        limit: 1000,
-                        sort: {
-                          order: DESC,
-                          fields: [frontmatter___date]
-                        },
-                        filter: { fields: { slug: { ne: null } } }
-                      ) {
-                        edges {
-                          node {
-                            frontmatter {
-                              title
-                              date
+                            {
+                            allMdx(
+                                limit: 1000,
+                                sort: {
+                                order: DESC,
+                                fields: [frontmatter___date]
+                                },
+                                filter: { fields: { slug: { ne: null } } }
+                            ) {
+                                edges {
+                                node {
+                                    frontmatter {
+                                    title
+                                    date
+                                    description
+                                    }
+                                    fields {
+                                    slug
+                                    }
+                                    excerpt
+                                    html
+                                }
+                                }
                             }
-                            fields {
-                              slug
                             }
-                            excerpt
-                            html
-                          }
-                        }
-                      }
-                    }
-                  `,
+                        `,
                         output: `rss.xml`,
                     },
                 ],
