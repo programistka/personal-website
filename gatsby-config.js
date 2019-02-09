@@ -69,7 +69,7 @@ module.exports = {
         },
         'gatsby-plugin-offline',
         {
-            resolve: `gatsby-plugin-feed`,
+            resolve: `gatsby-plugin-feed-custom`,
             options: {
                 image_url: 'https://www.robertcooper.me/social-sharing.jpg',
                 feeds: [
