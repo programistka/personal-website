@@ -1,7 +1,6 @@
 module.exports = {
     parser: "@typescript-eslint/parser",
     plugins: [
-        "prettier",
         "import",
     ],
     extends: [
@@ -21,7 +20,6 @@ module.exports = {
         }
     },
     rules: {
-        "prettier/prettier": "error",
         "@typescript-eslint/camelcase": "warn",
         "import/order": ["error", { "newlines-between": "always"}],
         "import/named": "off",

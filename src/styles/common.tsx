@@ -40,26 +40,20 @@ export const colors = {
     border_dark: `rgba(128, 178, 237, 0.2)`,
 };
 
-const sizes: {
-    small: number;
-    medium: number;
-    large: number;
-} = {
+type Sizes = { [index: string]: number };
+
+const sizes: Sizes = {
     small: 576,
     medium: 992,
     large: 1200,
 };
 
-type Media = {
-    small: () => string;
-    medium: () => string;
-    large: () => string;
-};
+type Media = { [index: string]: any };
 
-// TODO: Add better types
+// TODO: fix this TypeScript error :/
 // Iterate through the sizes and create a media query template
-export const media: any = Object.keys(sizes).reduce((acc, label) => {
-    acc[label] = (...args) =>
+export const media = Object.keys(sizes).reduce((acc: Media, label) => {
+    acc[label] = (...args: any[]) =>
         css`
             @media (max-width: ${sizes[label]}px) {
                 ${css(...args)};

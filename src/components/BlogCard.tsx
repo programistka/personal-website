@@ -2,8 +2,8 @@ import Img from 'gatsby-image';
 import React from 'react';
 import styled from 'styled-components';
 
-import { Post as PostType } from '../types/Post';
 import { colors, media } from '../styles/common';
+import { Post as PostType } from '../types/Post';
 
 import Link from './Link';
 import { fontSize } from './Typography';
