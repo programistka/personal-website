@@ -94,7 +94,13 @@ const MDXContent = styled.div`
     }
 
     code {
+        font-family: Consolas, Menlo, Monaco, source-code-pro, Courier New, monospace;
         font-size: 14px;
+        border-radius: 0;
+        background: rgb(173, 219, 103);
+        color: #1a1a1a;
+        padding: 0.1em 0.25em 0.05em;
+        white-space: normal;
     }
 
     .gatsby-highlight {
