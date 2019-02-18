@@ -9,6 +9,8 @@ banner: './images/banner.png'
 
 import Link from "$components/Link";
 
+![Banner Image.](./images/banner.png)
+
 I recently got my first iPhone app accepted into the Apple App Store. It is quite exciting to be able to have a product i’ve been working on by myself now available for a whole bunch of people to download. I tried to use a structured approach for the whole app creation/release process and I’ve outline that process in this article.
 
 ## Motivation

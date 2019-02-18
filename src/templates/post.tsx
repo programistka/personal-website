@@ -41,13 +41,13 @@ const Date = styled.time`
     `};
 `;
 
-const FeaturedImage = styled(Img)`
-    margin-bottom: 40px;
+// const FeaturedImage = styled(Img)`
+//     margin-bottom: 40px;
 
-    img {
-        margin: unset;
-    }
-`;
+//     img {
+//         margin: unset;
+//     }
+// `;
 
 const MDXContent = styled.div`
     .caption {
@@ -255,7 +255,7 @@ const Post = (props: PostProps) => {
                 <PostTitle>{mdx.frontmatter.title}</PostTitle>
                 <Date dateTime={mdx.frontmatter.dateTimeString}>{mdx.frontmatter.formattedDate}</Date>
 
-                {mdx.frontmatter.banner && <FeaturedImage fluid={mdx.frontmatter.banner.childImageSharp.fluid} />}
+                {/* {mdx.frontmatter.banner && <FeaturedImage fluid={mdx.frontmatter.banner.childImageSharp.fluid} />} */}
 
                 <MDXContent>
                     <MDXRenderer>{mdx.code.body}</MDXRenderer>

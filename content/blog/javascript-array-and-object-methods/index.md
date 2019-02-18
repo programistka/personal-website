@@ -9,6 +9,8 @@ banner: './images/banner.png'
 
 import Link from "$components/Link";
 
+![Banner Image.](./images/banner.png)
+
 I listened to a great <Link to="https://syntax.fm/">Syntax FM podcast</Link> that summarized useful JavaScript array and object methods. These methods help developers write clean and readable code. A lot of these methods reduce the need to reach for utility libraries like <Link to=""></Link>[Lodash](https://lodash.com/).
 
 All the methods in this article are chainable, meaning they can be used in combination with one another and they also don’t mutate data, which is especially important when working with React. With all these array and object methods you’ll find you never have to reach for a `for` or `while` loop ever again.

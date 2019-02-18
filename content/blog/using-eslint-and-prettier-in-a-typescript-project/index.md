@@ -9,6 +9,8 @@ banner: './images/banner.png'
 
 import Link from "$components/Link";
 
+![Banner Image.](./images/banner.png)
+
 When it comes to linting TypeScript code, there are two major linting options to choose from: <Link to="https://palantir.github.io/tslint/">TSLint</Link> and <Link to="https://eslint.org/">ESLint</Link>. TSLint is a linter than can only be used for TypeScript, while ESLint supports both JavaScript and TypeScript.
 
 In the <Link to="https://github.com/Microsoft/TypeScript/issues/29288#developer-productivity-tools-and-integration">TypeScript 2019 Roadmap</Link>, the TypeScript core team explains that **ESLint has a more performant architecture than TSLint** and that they will **only be focusing on ESLint** when providing editor linting integration for TypeScript. For that reason, I would recommend using ESLint for linting TypeScript projects.

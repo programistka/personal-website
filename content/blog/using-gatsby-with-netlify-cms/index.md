@@ -9,6 +9,8 @@ banner: './images/banner.jpeg'
 
 import Link from "$components/Link";
 
+![Banner Image.](./images/banner.jpeg)
+
 The <Link to="https://jamstack.org/">JAMStack</Link> is becoming more and more common for building out websites due to its better performance, low cost, high security, and positive developer experience.
 
 A great solution to building a site using the JAMStack is to use Gatsby along with Netlify CMS. This post explains what the JAMStack is, how Gatsby and Netlify CMS work and provides a walkthrough for a web app built with Gatsby and Netlify CMS.

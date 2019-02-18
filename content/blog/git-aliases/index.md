@@ -9,6 +9,8 @@ banner: './images/banner.png'
 
 import Link from "$components/Link";
 
+![Banner Image.](./images/banner.png)
+
 Leveraging aliases when working with git can help make you more efficient with using the popular version control system. Listed below are some of my absolute favourite and most used aliases when working on a project that uses git.
 
 It should be noted that when i'm talking about aliases, I mean <Link to="http://tldp.org/LDP/abs/html/aliases.html">bash/zsh aliases</Link> and not <Link to="https://git-scm.com/book/en/v2/Git-Basics-Git-Aliases">git aliases</Link>.

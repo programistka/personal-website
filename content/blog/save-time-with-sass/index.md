@@ -9,6 +9,8 @@ banner: './images/banner.png'
 
 import Link from "$components/Link";
 
+![Banner Image.](./images/banner.png)
+
 Sass is a CSS preprocessor that solves a lot of the problems with writing CSS and can be extremely useful to incorporate in your projects. I'll explain what CSS preprocessors are, how you can install Sass, the 2 different Sass syntaxes, some of the main features of Sass and finish off with some cool examples.
 
 ---

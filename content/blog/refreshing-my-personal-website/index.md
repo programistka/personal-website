@@ -11,6 +11,8 @@ import BlogThemeSwitch from 'components/blog/refreshing-my-personal-website/Blog
 import GithubButton from 'components/blog/refreshing-my-personal-website/GithubButton';
 import Link from "$components/Link";
 
+![Banner Image.](./images/banner.png)
+
 I've decided to redo my website, yet again. This is the 3rd or 4th iteration of my website.
 
 Here were the motivations and goals for the redesign:
