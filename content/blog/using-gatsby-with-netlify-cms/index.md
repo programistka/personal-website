@@ -4,12 +4,12 @@ date: '2018-12-04'
 title: 'Using Gatsby With Netlify CMS'
 description: 'This post explains what the JAMStack is, how Gatsby and Netlify CMS work and provides a walkthrough for a web app built with Gatsby and Netlify CMS.'
 categories: ['react', 'gatsby', 'javascript']
-banner: './images/banner.jpeg'
+banner: './images/banner.png'
 ---
 
 import Link from "$components/Link";
 
-![Banner Image.](./images/banner.jpeg)
+![Banner Image.](./images/banner.png)
 
 The <Link to="https://jamstack.org/">JAMStack</Link> is becoming more and more common for building out websites due to its better performance, low cost, high security, and positive developer experience.
 
