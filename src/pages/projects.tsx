@@ -1,20 +1,25 @@
 import Img from 'gatsby-image';
 import React from 'react';
-import styled from 'styled-components';
 import { graphql } from 'gatsby';
 
+import styled from '../lib/styled-components';
 import Layout from '../components/Layout';
 import { PageWrapper, SectionWrapper, Button } from '../components/Common';
 import { Project as ProjectType } from '../types/Project';
 import { SiteMetadata } from '../types/SiteMetadata';
 import { Title, Description, fontSize } from '../components/Typography';
 import { colors, media } from '../styles/common';
+import { ThemeType } from '../utils/context';
+
+type ProjectProps = {
+    textColor: ThemeType;
+};
 
 const Header = styled(SectionWrapper)`
     text-align: center;
 `;
 
-const Project = styled.div`
+const Project = styled.div<ProjectProps>`
     padding: 120px 20px;
     text-align: center;
     color: ${props => (props.textColor === 'light' ? colors.text_body_dark : colors.text_body_light)};

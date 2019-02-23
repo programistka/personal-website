@@ -4,6 +4,7 @@ import React from 'react';
 import { MDXProvider } from '@mdx-js/tag';
 import { withPrefix } from 'gatsby';
 
+// eslint-disable-next-line import/order
 import styled, { createGlobalStyle, ThemeProvider } from '../lib/styled-components';
 
 import '../styles/prismjs.css';

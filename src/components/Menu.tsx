@@ -1,8 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Location } from '@reach/router';
+import { Location, WindowLocation } from '@reach/router';
 
+import styled from '../lib/styled-components';
 import { colors, media } from '../styles/common';
+import { ThemeType } from '../utils/context';
 
 import Link from './Link';
 import { PageWrapper } from './Common';
@@ -85,7 +86,7 @@ const NavLink = styled(Link)`
     text-decoration: none;
 `;
 
-const ModifiedThemeSwitch = styled(ThemeSwitch)`
+const ModifiedThemeSwitch: any = styled(ThemeSwitch)`
     margin-left: 40px;
 
     ${media.small`
@@ -97,7 +98,7 @@ const ModifiedThemeSwitch = styled(ThemeSwitch)`
 // tslint:disable-next-line prettier
 const NAVIGATION = [{ to: '/blog/', label: 'blog' }, { to: '/projects/', label: 'projects' }];
 
-const MenuTitleComponent = ({ location, children }) => {
+const MenuTitleComponent = ({ location, children }: { location: WindowLocation; children: React.ReactNode }) => {
     if (location.pathname === '/') {
         return <MenuTitle as="h1">{children}</MenuTitle>;
     } else {
@@ -106,7 +107,7 @@ const MenuTitleComponent = ({ location, children }) => {
 };
 
 type MenuComponentProps = {
-    theme: 'light' | 'dark';
+    theme: ThemeType;
     toggleTheme: (event: Event) => null;
 };
 
@@ -117,9 +118,7 @@ const MenuComponent = (props: MenuComponentProps) => {
                 {({ location }) => (
                     <ModifiedPageWrapper>
                         <MenuTitleComponent location={location}>
-                            <NavLink to="/" style={{ color: 'inherit' }}>
-                                Robert Cooper
-                            </NavLink>
+                            <NavLink to="/">Robert Cooper</NavLink>
                         </MenuTitleComponent>
                         <Nav>
                             <NavList>

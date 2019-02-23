@@ -54,7 +54,7 @@ Now, you just need to close and re-open your terminal and then you should be run
 Configuration for zsh is done in a `.zshrc` file found in your home directory (i.e. `~`). Whenever a change is made in `.zshrc` and you'd like to see the changes applied to an already open terminal window, you need to run the `source ~/.zshrc` command to propagate the changes to the current terminal session. I've setup 2 aliases to make it easier to edit and update the zsh configuration:
 
 ```bash
-# Open .zshrc to be editor in VS Code
+# Open .zshrc to be edited in VS Code
 alias change="code-insiders ~/.zshrc"
 # Re-run source command on .zshrc to update current terminal session with new settings
 alias update="source ~/.zshrc"

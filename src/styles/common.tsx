@@ -52,10 +52,11 @@ type Media = { [index: string]: any };
 
 // TODO: fix this TypeScript error :/
 // Iterate through the sizes and create a media query template
-export const media = Object.keys(sizes).reduce((acc: Media, label) => {
-    acc[label] = (...args: any[]) =>
+export const media: any = Object.keys(sizes).reduce((acc: Media, label) => {
+    acc[label] = (...args: any) =>
         css`
             @media (max-width: ${sizes[label]}px) {
+                // @ts-ignore
                 ${css(...args)};
             }
         `;

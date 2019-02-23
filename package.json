@@ -64,11 +64,12 @@
         "start": "yarn dev",
         "dev": "rm -rf .cache && gatsby develop",
         "build": "rm -rf .cache && gatsby build",
-        "serve": "gatsby serve"
+        "serve": "gatsby serve",
+        "lint": "tsc --noEmit && eslint . --ext [\".js, .ts, .tsx\"] --quiet"
     },
     "husky": {
         "hooks": {
-            "pre-commit": "tsc --noEmit && eslint . --ext [\".js, .ts, .tsx\"] --quiet && lint-staged"
+            "pre-commit": "tsc --noEmit && lint-staged"
         }
     },
     "lint-staged": {

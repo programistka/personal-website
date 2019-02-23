@@ -1,3 +1,5 @@
+import { ThemeType } from '../utils/context';
+
 import { FixedImage, FluidImage } from './Image';
 
 export type Project = {
@@ -11,7 +13,7 @@ export type Project = {
             subtitle: string;
             description: string;
             image: FixedImage & FluidImage;
-            textColor: string;
+            textColor: ThemeType;
             backgroundColor: string;
         };
     };

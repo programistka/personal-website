@@ -46,7 +46,7 @@ export const StyledThemeSwitch = styled.div`
                 &:hover {
                     background-color: #7babe6;
                 }
-                
+
             `;
         } else {
             return `
@@ -157,7 +157,7 @@ const ThemeSwitch = ({ className, theme, onChange }: ThemeSwitchProps) => {
                     onClick={onChange}
                     role="button"
                     tabIndex={0}
-                    onKeyPress={e => {
+                    onKeyPress={(e: any) => {
                         if (e.which === 13 || e.which === 32) {
                             onChange(e);
                         }
