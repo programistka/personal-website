@@ -8,6 +8,7 @@ banner: './images/banner.png'
 ---
 
 import Link from "$components/Link";
+import Quote from "$components/Quote";
 
 ![Banner Image.](./images/banner.png)
 
@@ -48,7 +49,7 @@ module.exports = {
 };
 ```
 
-**Note:** I prefer using a JavaScript file for the `.eslintrc` file (instead of a JSON file) as it supports comments that can be used to better describe rules.
+<Quote><strong>Note:</strong> I prefer using a JavaScript file for the <code>.eslintrc</code> file (instead of a JSON file) as it supports comments that can be used to better describe rules.</Quote>
 
 If using TypeScript with React, the <Link to="https://www.npmjs.com/package/eslint-plugin-react"><code>eslint-plugin-react</code></Link> dev dependency should be installed and the following configuration can be used:
 

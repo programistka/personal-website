@@ -22,6 +22,11 @@ export const colors = {
     background_dark: '#051221',
     backgroundSecondary_dark: '#09203A',
 
+    quote_background_light: '#cae2ff',
+    quote_highlight_light: '#03256C',
+    quote_background_dark: '#80B2ED',
+    quote_highlight_dark: '#03256C',
+
     button_inactive_text_light: '#EAEAEA',
     button_inactive_border_light: '#03256C',
     button_inactive_background_light: '#03256C',

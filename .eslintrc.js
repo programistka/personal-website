@@ -20,15 +20,15 @@ module.exports = {
         }
     },
     rules: {
-        "@typescript-eslint/camelcase": "warn",
         "import/order": ["error", { "newlines-between": "always"}],
         "import/named": "off",
+        "react/no-unescaped-entities": "off",
+        "@typescript-eslint/camelcase": "warn",
         "@typescript-eslint/array-type": ["error", "array"],
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/no-var-requires": "warn",
         "@typescript-eslint/prefer-interface": "off",
         "@typescript-eslint/no-object-literal-type-assertion": "off",
-        "react/no-unescaped-entities": "off"
     },
     settings: {
         react: {
