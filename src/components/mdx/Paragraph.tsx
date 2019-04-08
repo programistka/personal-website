@@ -5,7 +5,7 @@ import { colors } from '../../styles/common';
 export default styled.p`
     text-align: left;
     font-size: 16px;
-    line-height: 1.58;
+    line-height: 1.7;
     letter-spacing: -0.003em;
     margin-top: 0;
     margin-bottom: 16px;

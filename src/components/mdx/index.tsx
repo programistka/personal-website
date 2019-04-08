@@ -1,6 +1,7 @@
 import React from 'react';
 import { preToCodeBlock } from 'mdx-utils';
 
+import Link from '../Link';
 import { Divider } from '../Common';
 
 import Paragraph from './Paragraph';
@@ -12,6 +13,11 @@ import Code from './Code';
 
 /* eslint-disable react/display-name */
 export default {
+    a: (props: { theme: string; href: string; children: React.ReactChild }) => (
+        <Link to={props.href} {...props}>
+            {props.children}
+        </Link>
+    ),
     h1: (props: { theme: string }) => <Title {...props} />,
     h2: (props: { theme: string }) => <SubtitleH2 {...props} />,
     h3: (props: { theme: string }) => <SubtitleH3 {...props} />,

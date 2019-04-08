@@ -10,7 +10,7 @@ export default styled.div`
     padding: 10px;
     position: relative;
     font-size: 16px;
-    line-height: 1.58;
+    line-height: 1.7;
     letter-spacing: -0.003em;
     color: ${colors.text_body_light};
 

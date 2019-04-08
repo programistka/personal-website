@@ -7,8 +7,8 @@ categories: ['design', 'react', 'gatsby']
 banner: './images/banner.png'
 ---
 
-import BlogThemeSwitch from 'components/blog/refreshing-my-personal-website/BlogThemeSwitch';
-import GithubButton from 'components/blog/refreshing-my-personal-website/GithubButton';
+import BlogThemeSwitch from 'components/mdx/BlogThemeSwitch';
+import GithubButton from 'components/mdx/GithubButton';
 import Link from "$components/Link";
 
 ![Banner Image.](./images/banner.png)
@@ -95,4 +95,4 @@ I'd like to point out that the design and functionality of the theme toggle swit
 
 I hope to continue to make incremental improvements to my website. Some of the things I'd like to add include unit testing, end to end testing, and an RSS feed to the website. There are also a few bugs I need to squash 👞🐜.
 
-<GithubButton />
+<GithubButton link="https://github.com/robertcoopercode/personal-website" text="View the source code" />

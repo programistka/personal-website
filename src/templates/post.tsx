@@ -25,6 +25,7 @@ const ModifiedPageWrapper = styled(PageWrapper)`
 const PostTitle = styled(Title)`
     text-align: left;
     margin: 0;
+    margin-bottom: 10px;
 
     ${media.small`
         text-align: center;
@@ -96,10 +97,9 @@ const MDXContent = styled.div`
     code {
         font-family: Consolas, Menlo, Monaco, source-code-pro, Courier New, monospace;
         font-size: 14px;
-        border-radius: 0;
-        background: rgb(173, 219, 103);
-        color: #1a1a1a;
-        padding: 0.1em 0.25em 0.05em;
+        border-radius: 0.3em;
+        background: ${props => (props.theme.color === 'light' ? 'rgba(255, 229, 100, 0.2)' : '#142b44')};
+        padding: 0.15em 0.2em 0.05em;
         white-space: normal;
     }
 
