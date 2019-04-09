@@ -1,5 +1,5 @@
 ---
-slug: '/testing-stateful-functional-react-components-with-react-testing-library'
+slug: '/testing-stateful-react-function-components-with-react-testing-library'
 date: '2019-04-08'
 title: 'Testing Stateful React Function Components with React Testing Library'
 # Description should be no more than 160 characters in length
