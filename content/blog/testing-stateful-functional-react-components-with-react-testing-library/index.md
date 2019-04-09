@@ -247,7 +247,7 @@ Because the enzyme API makes available a component's [state](https://airbnb.io/e
 
 Enzyme's API doesn't allow for an element to be find by it's text, it only allows for elements to be selected based on a CSS selector, React component constructor, React component display name, or based on a component's props ([see here](https://airbnb.io/enzyme/docs/api/selector.html) for details on Enzyme selectors). Because Enzyme's API basically pushes you to test implementation details for a component, I prefer to stay away from Enzyme and instead use react-testing-library.
 
-## Refactoring Class Components to Functional Components
+## Refactoring Class Components to Function Components
 
 Another advantage of using react-testing-library and not testing for implementation details is that you can easily refactor your class component to a function component without having the also refactor your tests. Think about it, if you're targeting class methods in your tests, those methods will no longer be available when it's being implemented within a function component.
 
