@@ -1,9 +1,9 @@
 ---
 slug: '/testing-stateful-functional-react-components-with-react-testing-library'
 date: '2019-04-08'
-title: 'Testing Stateful Functional React Components with React Testing Library'
+title: 'Testing Stateful React Function Components with React Testing Library'
 # Description should be no more than 160 characters in length
-description: 'Test stateful functional react components build with hooks using react-testing-library to follow best testing practices.'
+description: 'Test stateful React function components build with hooks using react-testing-library to follow best testing practices.'
 categories: ['testing', 'react']
 banner: './images/banner.png'
 ---
@@ -13,9 +13,9 @@ import Quote from "$components/Quote";
 
 ![Banner Image.](./images/banner.png)
 
-With the introduction of React Hooks, there is more of an incentive to write functional components in React since there is no longer a need use classes when building components. When it comes to testing React components, there are two popular libraries that are often reached for: [enzyme](https://github.com/airbnb/enzyme) and [react-testing-library](https://github.com/kentcdodds/react-testing-library). I used to always reach for enzyme when testing my react components, but I've recently made the switch to react-testing-library because the react-testing-library API encourages tests that are completely ignorant of implementation details. Why is this good? Testing implementation details [can lead to both false negatives and false positives](https://kentcdodds.com/blog/testing-implementation-details), which make tests much more unreliable.
+With the introduction of React Hooks, there is more of an incentive to write function components in React since there is no longer a need use classes when building components. When it comes to testing React components, there are two popular libraries that are often reached for: [enzyme](https://github.com/airbnb/enzyme) and [react-testing-library](https://github.com/kentcdodds/react-testing-library). I used to always reach for enzyme when testing my react components, but I've recently made the switch to react-testing-library because the react-testing-library API encourages tests that are completely ignorant of implementation details. Why is this good? Testing implementation details [can lead to both false negatives and false positives](https://kentcdodds.com/blog/testing-implementation-details), which make tests much more unreliable.
 
-In this post, I'll look at an example stateful functional component that is tested with react-testing-library. I'll also write the same component into its class component equivalent and show how the class component can be tested with enzyme.
+In this post, I'll look at an example stateful function component that is tested with react-testing-library. I'll also write the same component into its class component equivalent and show how the class component can be tested with enzyme.
 
 ## Checklist Example
 
@@ -68,8 +68,8 @@ Here's what the component would look like when used:
 ![Checklist with two unchecked items.](./images/image-1.png)
 <span class="caption">Checklist with two unchecked items.</span>
 
-![Checklist with two checked items and a message indidcating all items are checked.](./images/image-2.png)
-<span class="caption">Checklist with two checked items and a message indidcating all items are checked.</span>
+![Checklist with two checked items and a message indication all items are checked.](./images/image-2.png)
+<span class="caption">Checklist with two checked items and a message indicating all items are checked.</span>
 
 Now when I'm thinking of testing this component, I want to make sure that a user is able to properly select a checkbox and also display the completed message when all the items have been checked. Here's how these tests would look like when written with react-testing-library:
 
@@ -123,7 +123,7 @@ There are a few special things of note in these tests. The first being how we ar
 
 react-testing-library doesn't only allow you to target elements by text, but you can also target elements through labels, placeholder text, alt text, title, display value, role, and test id ([see the documentation](https://testing-library.com/docs/dom-testing-library/api-queries#bylabeltext) for details on each of these methods of targeting elements).
 
-Another important thing to notice in these tests is that we aren't looking at the value for the internal component state, nor are we testing any of the functions being used within the component itself. Basically what this means is that we **don't care about testing the implementation** details of our component, but we are more interested in testing how the component will **actually be used by a user**. Actually, it's extremely difficult to test implementation details of a functional component since it's not possible to access the component state, nor can we access any of the functionals that are defined and used inside of the component. However, as a fun exercise, let's look at our checklist component written in as a class component:
+Another important thing to notice in these tests is that we aren't looking at the value for the internal component state, nor are we testing any of the functions being used within the component itself. Basically what this means is that we **don't care about testing the implementation** details of our component, but we are more interested in testing how the component will **actually be used by a user**. Actually, it's extremely difficult to test implementation details of a function component since it's not possible to access the component state, nor can we access any of the functions/methods that are defined and used inside of the component. However, as a fun exercise, let's look at our checklist component written in as a class component:
 
 ```ts
 export class Checklist extends React.Component<ChecklistProps, ChecklistState> {
@@ -245,15 +245,15 @@ describe('Checklist Class Component', () => {
 
 Because the enzyme API makes available a component's [state](https://airbnb.io/enzyme/docs/api/ReactWrapper/state.html) as well as the class methods of component (by accessing the [component's instance](https://airbnb.io/enzyme/docs/api/ReactWrapper/instance.html)), we are now able to test both those things. For example, looking at the test labelled `should check two out the three checklist items`, the `handleChange` method is triggered twice (which should happen when a user clicks two checklist items) and then the value of the state is checked to make sure it has updated appropriately. The problem with this test is that we aren't testing how this component is actually being used. The user doesn't care about the value of a component's internal state or if a function has been called. All a user cares about (in this case) is that they are able to click on two checklist items and that both those checklist items appear as checked to them.
 
-Enzyme's API doesn't allow for an element to be find by it's text, it only allows for elements to be selected based on a CSS selector, React component constructor, React component display name, or based on a component's props ([see here](https://airbnb.io/enzyme/docs/api/selector.html) for details on Enzyme selectors). Because Enzyme's API basically pushes you to test implementation details for a component, I prefer to stay away from Enzyme and instead use react-testing-library instead.
+Enzyme's API doesn't allow for an element to be find by it's text, it only allows for elements to be selected based on a CSS selector, React component constructor, React component display name, or based on a component's props ([see here](https://airbnb.io/enzyme/docs/api/selector.html) for details on Enzyme selectors). Because Enzyme's API basically pushes you to test implementation details for a component, I prefer to stay away from Enzyme and instead use react-testing-library.
 
 ## Refactoring Class Components to Functional Components
 
-Another advantage of using react-testing-library and not testing for implementation details is that you can easily refactor your class component to a functional component without having the also refactor your tests. Think about it, if you're targeting class methods in your tests, those methods will no longer be available when it's being implemented within a functional component.
+Another advantage of using react-testing-library and not testing for implementation details is that you can easily refactor your class component to a function component without having the also refactor your tests. Think about it, if you're targeting class methods in your tests, those methods will no longer be available when it's being implemented within a function component.
 
 ## Demo Repository
 
-I've setup a demo repository, found here, that contains the above example with the checklist and I've also created another example for a component named `SelectTwo`, which is a list of items that only allows for 2 items to be selected at once.
+I've setup a demo repository, that contains the above example with the checklist and I've also created another example for a component named `SelectTwo`, which is a list of items that only allows for 2 items to be selected at once.
 
 <GithubButton link='https://github.com/robertcoopercode/testing-react-components-demo' text='View the repo'/>
 
