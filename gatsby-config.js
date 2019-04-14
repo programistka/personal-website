@@ -5,7 +5,7 @@ module.exports = {
         siteUrl: 'https://www.robertcooper.me',
         author: 'Robert Cooper',
         title: 'Robert Cooper',
-        description: `The front end web development blog and project portfolio of Robert Cooper, a Canadian web developer and consultant.`,
+        description: `The front end web development blog and project portfolio of Robert Cooper, a Canadian web developer based in Montreal 🇨🇦.`,
         imagePath: '/social-sharing.jpg',
     },
     plugins: [
@@ -58,7 +58,7 @@ module.exports = {
         {
             resolve: 'gatsby-plugin-manifest',
             options: {
-                name: 'Front end web developer, writer, and consultant',
+                name: 'Front end web developer and writer',
                 short_name: 'Robert Cooper',
                 start_url: '/',
                 background_color: '#fff',

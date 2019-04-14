@@ -261,9 +261,8 @@ export const Home = ({
                             <Intro data-aos="fade-up">
                                 <IntroTitle>I'm Robert Cooper,</IntroTitle>
                                 <IntroDescription>
-                                    a front end web developer that <strong>writes web development</strong> articles and
-                                    works as a <strong>freelancer</strong> to clients who need front end development
-                                    support.
+                                    a front-end web developer that <strong>builds web apps</strong> and{' '}
+                                    <strong>writes articles</strong> on web development.
                                 </IntroDescription>
                                 <SocialMediaGroup theme={theme} />
                             </Intro>
