@@ -98,7 +98,7 @@ const MDXContent = styled.div`
         font-family: Consolas, Menlo, Monaco, source-code-pro, Courier New, monospace;
         font-size: 14px;
         border-radius: 0.3em;
-        background: ${props => (props.theme.color === 'light' ? 'rgba(255, 229, 100, 0.2)' : '#142b44')};
+        background: ${props => (props.theme.color === 'light' ? colors.inline_code_light : colors.inline_code_dark)};
         padding: 0.15em 0.2em 0.05em;
         white-space: normal;
     }

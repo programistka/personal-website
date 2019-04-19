@@ -22,6 +22,10 @@ export default styled.div`
         }
     }
 
+    code {
+        background: ${colors.inline_code_light} !important;
+    }
+
     ::before {
         position: absolute;
         width: 10px;

@@ -22,6 +22,9 @@ export const colors = {
     background_dark: '#051221',
     backgroundSecondary_dark: '#09203A',
 
+    inline_code_light: 'rgba(255, 229, 100, 0.2)',
+    inline_code_dark: '#142b44',
+
     quote_background_light: '#cae2ff',
     quote_highlight_light: '#03256C',
     quote_background_dark: '#80B2ED',

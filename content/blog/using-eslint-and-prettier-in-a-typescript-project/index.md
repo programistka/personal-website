@@ -124,7 +124,7 @@ module.exports = {
 
 The advantage of having prettier setup as an ESLint rule using `eslint-plugin-prettier` is that code can automatically be fixed using ESLint's `--fix` option.
 
-## Automatically Fixing Code (VS Code)
+## Automatically Fix Code in VS Code
 
 For a good developer experience, it's useful to setup your editor to automatically run ESLint's automatic fix command (i.e. `eslint --fix`) whenever a file is saved. Since i'm using VS Code, here is the config required in the `settings.json` file in VS Code to get automatic fixing whenever saving a file:
 
@@ -155,6 +155,21 @@ If you've also set the `editor.formatOnSave` option to `true` in your `settings.
     "editor.formatOnSave": false,
 },
 ```
+
+## Run ESLint with the CLI
+
+A useful command to add to your [`package.json` scripts](https://docs.npmjs.com/misc/scripts) is a `lint` command that will run the TypeScript compiler and the ESLint linter accross all your files to make sure the code adheres to the compiler settings and formatting/style rules.
+
+```json
+"scripts": {
+    "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
+},
+```
+
+The above script can be run from the command line using `npm run lint` or `yarn lint`. This command will first run the TypeScript compiler and report any TypeScript compiler errors. If there are no TypeScript errors, it will then run ESLint through all the `.js`, `.ts`, and `.tsx` (used with React) files. Any ESLint errors that can be automatically fixed will be fixed with this command, but any other errors will be printed out in the command line.
+
+-   [TypeScript CLI Options](https://www.typescriptlang.org/docs/handbook/compiler-options.html)
+-   [ESLint CLI Options](https://eslint.org/docs/user-guide/command-line-interface)
 
 ---
 
