@@ -1,6 +1,7 @@
 ---
 slug: '/refreshing-my-personal-website'
 date: '2018-12-31'
+updatedAt: '2018-12-31'
 title: 'Refreshing My Personal Website'
 description: "The motivations behind redoing my website and an explanation of some of the main features i've introduced."
 categories: ['design', 'react', 'gatsby']

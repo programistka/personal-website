@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { graphql } from 'gatsby';
-
 import Layout from '../components/Layout';
 import Link from '../components/Link';
 import Title from '../components/mdx/Title';

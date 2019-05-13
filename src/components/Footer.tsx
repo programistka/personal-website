@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
-import { colors } from '../styles/common';
-
+import { colors, textColor, textSize } from '../styles/common';
 import Link from './Link';
 import { PageWrapper } from './Common';
 
@@ -10,9 +8,9 @@ export const footerHeight = 220;
 
 const Footer = styled.footer`
     background-color: ${props =>
-        props.theme.color === 'light' ? colors.backgroundSecondary_light : colors.backgroundSecondary_dark};
-    border-top: 2px solid ${colors.border_light};
-    border-color: ${props => (props.theme.color === 'light' ? colors.border_light : colors.border_dark)};
+        props.theme.color === 'light' ? colors.backgroundSecondaryLight : colors.backgroundSecondaryDark};
+    border-top: 2px solid ${colors.borderLight};
+    border-color: ${props => (props.theme.color === 'light' ? colors.borderLight : colors.borderDark)};
     height: ${footerHeight}px;
 `;
 
@@ -25,9 +23,9 @@ const ModifiedPageWrapper = styled(PageWrapper)`
 `;
 
 const Title = styled.span`
-    font-family: 'Scope One';
-    font-size: 24px;
-    color: ${props => (props.theme.color === 'light' ? colors.text_title_light : colors.text_title_dark)};
+    ${textColor.title};
+    ${textSize.large};
+    text-transform: uppercase;
     margin-bottom: 20px;
     display: inline-block;
 `;
@@ -53,9 +51,6 @@ const FooterComponent = ({  }: FooterProps) => {
             <ModifiedPageWrapper>
                 <Title>Robert Cooper</Title>
                 <SocialMediaList>
-                    <SocialMediaListItem>
-                        <SocialMediaLink to="https://www.linkedin.com/in/robert-cooper/">LinkedIn</SocialMediaLink>
-                    </SocialMediaListItem>
                     <SocialMediaListItem>
                         <SocialMediaLink to="https://github.com/robertcoopercode">Github</SocialMediaLink>
                     </SocialMediaListItem>

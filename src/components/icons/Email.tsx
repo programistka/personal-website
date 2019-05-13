@@ -1,12 +1,11 @@
 import React from 'react';
-
 import { colors } from '../../styles/common';
 
 type EmailProps = {
     iconFill?: string;
 };
 
-const Email = ({ iconFill = colors.text_title_light }: EmailProps) => {
+const Email = ({ iconFill = colors.textTitleLight }: EmailProps) => {
     return (
         <svg width="40" height="30" viewBox="0 0 40 30" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path

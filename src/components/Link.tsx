@@ -1,28 +1,27 @@
 import GatsbyLink from 'gatsby-link';
 import React from 'react';
 import styled from 'styled-components';
-
 import { colors } from '../styles/common';
 
 const Link = styled.a<{ active: string; to?: string }>`
     color: ${props => {
         if (props.active === 'true') {
             if (props.theme.color === 'light') {
-                return colors.link_active_light;
+                return colors.linkActiveLight;
             } else {
-                return colors.link_active_dark;
+                return colors.linkActiveDark;
             }
         } else {
             if (props.theme.color === 'light') {
-                return colors.link_inactive_light;
+                return colors.linkInactiveLight;
             } else {
-                return colors.link_inactive_dark;
+                return colors.linkInactiveDark;
             }
         }
     }};
 
     &:hover {
-        color: ${props => (props.theme.color === 'light' ? colors.link_active_light : colors.link_active_dark)};
+        color: ${props => (props.theme.color === 'light' ? colors.linkActiveLight : colors.linkActiveDark)};
     }
 `;
 

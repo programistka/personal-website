@@ -1,13 +1,10 @@
 import styled from 'styled-components';
-
-import { colors } from '../../styles/common';
+import { textColor, textSize } from '../../styles/common';
 
 export default styled.p`
+    ${textColor.body};
+    ${textSize.normal};
     text-align: left;
-    font-size: 16px;
-    line-height: 1.7;
-    letter-spacing: -0.003em;
     margin-top: 0;
     margin-bottom: 16px;
-    color: ${props => (props.theme.color === 'light' ? colors.text_body_light : colors.text_body_dark)};
 `;

@@ -1,12 +1,11 @@
 import React from 'react';
-
 import { colors } from '../../styles/common';
 
 type GithubProps = {
     iconFill?: string;
 };
 
-const Github = ({ iconFill = colors.text_title_light }: GithubProps) => {
+const Github = ({ iconFill = colors.textTitleLight }: GithubProps) => {
     return (
         <svg width="40" height="41" viewBox="0 0 40 41" xmlns="http://www.w3.org/2000/svg">
             <path

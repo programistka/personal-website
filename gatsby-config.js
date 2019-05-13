@@ -38,14 +38,55 @@ module.exports = {
                     {
                         resolve: 'gatsby-remark-images',
                         options: {
+                            quality: 80,
                             maxWidth: 800,
                             sizeByPixelDensity: true,
                             backgroundColor: 'none',
+                            withWebp: true,
                         },
                     },
                     {
                         resolve: `gatsby-remark-copy-linked-files`,
                     },
+                    {
+                        resolve: 'gatsby-remark-prismjs',
+                        options: {
+                            classPrefix: 'language-',
+                            noInlineHighlight: true,
+                            aliases: {},
+                        },
+                    },
+                    // TODO: It would be awesome to get this plugin to work so I don't have to manually
+                    // run ffmpeg locally for my videos
+                    // {
+                    //     resolve: `gatsby-remark-videos`,
+                    //     options: {
+                    //         pipelines: [
+                    //             {
+                    //                 name: 'vp9',
+                    //                 transcode: chain =>
+                    //                     chain
+                    //                         .videoCodec('libvpx-vp9')
+                    //                         .noAudio()
+                    //                         .outputOptions(['-crf 20', '-b:v 0']),
+                    //                 maxHeight: 720,
+                    //                 maxWidth: 1000,
+                    //                 fileExtension: 'webm',
+                    //             },
+                    //             {
+                    //                 name: 'h264',
+                    //                 transcode: chain =>
+                    //                     chain
+                    //                         .videoCodec('libx264')
+                    //                         .noAudio()
+                    //                         .videoBitrate('1000k'),
+                    //                 maxHeight: 720,
+                    //                 maxWidth: 1000,
+                    //                 fileExtension: 'mp4',
+                    //             },
+                    //         ],
+                    //     },
+                    // },
                 ],
             },
         },

@@ -175,6 +175,15 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
         });
 
         createNodeField({
+            name: 'editLink',
+            node,
+            value: `https://github.com/robertcoopercode/personal-website/edit/master${node.fileAbsolutePath.replace(
+                __dirname,
+                '',
+            )}`,
+        });
+
+        createNodeField({
             name: 'banner',
             node,
             banner: node.frontmatter.banner,

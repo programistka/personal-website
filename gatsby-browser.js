@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import AOS from 'aos'; // eslint-disable-line
-
 /**
  * Show outline only on keyboard interaction
  *
@@ -11,7 +9,6 @@ import AOS from 'aos'; // eslint-disable-line
  */
 import 'focus-visible';
 import Cookies from 'js-cookie';
-
 import { ThemeContext } from './src/utils/context';
 
 /**
@@ -36,10 +33,6 @@ const ThemeWrapperComponent = ({ children }) => {
         const newThemeValue = theme === 'light' ? 'dark' : 'light';
         setTheme(newThemeValue);
         Cookies.set('theme', newThemeValue);
-        // TODO: Fix jumping effect caused by AOS.init when switching themes
-        AOS.init({
-            once: true,
-        });
     };
 
     useEffect(
@@ -50,10 +43,6 @@ const ThemeWrapperComponent = ({ children }) => {
                 Cookies.set('theme', theme);
             }
             if (typeof window !== `undefined`) {
-                AOS.init({
-                    once: true,
-                });
-
                 // Reloads the disqus embed so that it can recalculate which color theme it should
                 // display based on the text color the embed inherits (see https://help.disqus.com/installation/disqus-appearance-tweaks for more details)
                 // TODO: Only run this command on pages that have the disqus embed

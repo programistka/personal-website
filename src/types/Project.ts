@@ -1,5 +1,4 @@
 import { ThemeType } from '../utils/context';
-
 import { FixedImage, FluidImage } from './Image';
 
 export type Project = {

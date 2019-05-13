@@ -1,38 +1,25 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-
+import Fade from 'react-reveal/Fade';
 import styled from '../lib/styled-components';
 import BlogList from '../components/BlogList';
 import Layout from '../components/Layout';
 import Link from '../components/Link';
-import { PageWrapper } from '../components/Common';
-import { Title, Description } from '../components/Typography';
+import { PaddedPageWrapper } from '../components/Common';
+import { Title } from '../components/Typography';
 import { media } from '../styles/common';
 import { SiteMetadata } from '../types/SiteMetadata';
 import { Post } from '../types/Post';
 
-const Header = styled.div``;
+const StyledTitle = styled(Title)`
+    margin-bottom: 100px;
 
-const ModifiedDescription = styled(Description)`
-    margin-bottom: 80px;
-
-    ${media.small`
+    ${media.medium`
         margin-bottom: 60px;
     `};
 `;
 
-const ModifiedPageWrapper = styled(PageWrapper)`
-    padding: 80px 0;
-
-    ${media.small`
-        padding: 40px 0;
-    `};
-`;
-
 const Pagination = styled.ul`
-    margin: 0;
-    padding: 0;
-    list-style: none;
     display: flex;
 `;
 
@@ -67,11 +54,10 @@ const Blog = ({ data: { site, allMdx }, pageContext: { pagination } }: BlogProps
 
     return (
         <Layout site={site} title="Robert Cooper | Blog">
-            <ModifiedPageWrapper>
-                <Header data-aos="fade">
-                    <Title>Blog</Title>
-                    <ModifiedDescription>I write stuff about web development.</ModifiedDescription>
-                </Header>
+            <PaddedPageWrapper>
+                <Fade top>
+                    <StyledTitle>Blog</StyledTitle>
+                </Fade>
                 <BlogList posts={posts} />
                 <Pagination>
                     {nextPagePath && (
@@ -86,7 +72,7 @@ const Blog = ({ data: { site, allMdx }, pageContext: { pagination } }: BlogProps
                         </PaginationItem>
                     )}
                 </Pagination>
-            </ModifiedPageWrapper>
+            </PaddedPageWrapper>
         </Layout>
     );
 };

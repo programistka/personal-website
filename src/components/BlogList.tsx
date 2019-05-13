@@ -1,9 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import { media } from '../styles/common';
 import { Post } from '../types/Post';
-
 import BlogCard from './BlogCard';
 
 const BlogList = styled.div`

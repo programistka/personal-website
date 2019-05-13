@@ -9,7 +9,7 @@ banner: './images/banner.png'
 ---
 
 import GithubButton from 'components/mdx/GithubButton';
-import Quote from "$components/Quote";
+import Quote from "$components/mdx/Quote";
 
 ![Banner Image.](./images/banner.png)
 
@@ -21,9 +21,9 @@ In this post, I'll look at an example stateful function component that is tested
 
 Here's a checklist component that allows a user to check off items and display a message after all the items have been checked.
 
-<Quote>Note: All these examples are written in TypeScript.</Quote>
+> **Note:** All these examples are written in TypeScript.
 
-```ts
+```tsx
 export const Checklist = ({ items }: ChecklistProps) => {
     const [checklistItems, setChecklistItems] = useState(items);
 
@@ -73,7 +73,7 @@ Here's what the component would look like when used:
 
 Now when I'm thinking of testing this component, I want to make sure that a user is able to properly select a checkbox and also display the completed message when all the items have been checked. Here's how these tests would look like when written with react-testing-library:
 
-```ts
+```tsx
 afterEach(cleanup);
 
 const mockItems = [
@@ -125,7 +125,7 @@ react-testing-library doesn't only allow you to target elements by text, but you
 
 Another important thing to notice in these tests is that we aren't looking at the value for the internal component state, nor are we testing any of the functions being used within the component itself. Basically what this means is that we **don't care about testing the implementation** details of our component, but we are more interested in testing how the component will **actually be used by a user**. Actually, it's extremely difficult to test implementation details of a function component since it's not possible to access the component state, nor can we access any of the functions/methods that are defined and used inside of the component. However, as a fun exercise, let's look at our checklist component written in as a class component:
 
-```ts
+```tsx
 export class Checklist extends React.Component<ChecklistProps, ChecklistState> {
     state = {
         checklistItems: this.props.items,
@@ -176,7 +176,7 @@ export class Checklist extends React.Component<ChecklistProps, ChecklistState> {
 
 Now, let's use enzyme to test our checklist class component. However, this time we will be testing the implementation details of our component.
 
-```ts
+```tsx
 const mockItems = [
     {
         description: 'first item',

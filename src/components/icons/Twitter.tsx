@@ -1,12 +1,11 @@
 import React from 'react';
-
 import { colors } from '../../styles/common';
 
 type TwitterProps = {
     iconFill?: string;
 };
 
-const Twitter = ({ iconFill = colors.text_title_light }: TwitterProps) => {
+const Twitter = ({ iconFill = colors.textTitleLight }: TwitterProps) => {
     return (
         <svg width="40" height="41" viewBox="0 0 40 41" xmlns="http://www.w3.org/2000/svg">
             <path

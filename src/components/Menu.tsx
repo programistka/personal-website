@@ -1,13 +1,10 @@
 import React from 'react';
 import { Location, WindowLocation } from '@reach/router';
-
 import styled from '../lib/styled-components';
-import { colors, media } from '../styles/common';
+import { colors, media, textColor, textSize } from '../styles/common';
 import { ThemeType } from '../utils/context';
-
 import Link from './Link';
 import { PageWrapper } from './Common';
-import { fontSize } from './Typography';
 import ThemeSwitch from './ThemeSwitch';
 
 export const menuHeight = 60;
@@ -18,10 +15,10 @@ const Menu = styled.div`
     height: ${menuHeight}px;
     padding: 0 20px;
     background-color: ${props =>
-        props.theme.color === 'light' ? colors.backgroundSecondary_light : colors.backgroundSecondary_dark};
+        props.theme.color === 'light' ? colors.backgroundSecondaryLight : colors.backgroundSecondaryDark};
 
-    border-bottom: 2px solid ${colors.border_light};
-    border-color: ${props => (props.theme.color === 'light' ? colors.border_light : colors.border_dark)};
+    border-bottom: 2px solid ${colors.borderLight};
+    border-color: ${props => (props.theme.color === 'light' ? colors.borderLight : colors.borderDark)};
 
     ${media.small`
         height: 180px;
@@ -40,15 +37,13 @@ const ModifiedPageWrapper = styled(PageWrapper)`
 `;
 
 const MenuTitle = styled.span`
-    font-family: 'Scope One';
-    font-weight: 400;
-    font-size: 24px;
+    ${textColor.title};
+    ${textSize.normal};
+    text-transform: uppercase;
     margin: 0 auto 0 0;
-    color: ${props => (props.theme.color === 'light' ? colors.text_title_light : colors.text_title_dark)};
 
     ${media.small`
         margin: 0 0 20px 0;
-        font-size: 28px;
     `};
 `;
 
@@ -66,12 +61,8 @@ const NavList = styled.ul`
 `;
 
 const NavListItem = styled.li`
+    ${textSize.normal};
     padding: 0 35px;
-    font-size: ${fontSize.body.large};
-
-    ${media.small`
-        font-size: ${fontSize.body.small};
-    `};
 
     &:first-child {
         padding-left: 0;
@@ -87,7 +78,9 @@ const NavLink = styled(Link)`
 `;
 
 const ModifiedThemeSwitch: any = styled(ThemeSwitch)`
-    margin-left: 40px;
+    margin-left: 50px;
+    display: flex;
+    align-items: center;
 
     ${media.small`
         margin-left: 0;

@@ -3,31 +3,30 @@
 
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-
 import { ThemeType } from '../utils/context';
-
+import { transitionDuration } from '../styles/common';
 import MoonSVG from './icons/Moon';
 
-const width = 70;
-const circleWidth = 27;
-const sideOffset = 5;
-const transitionTime = 200;
+const width = 56;
+const height = 26;
+const circleWidth = height - 6;
+const sideOffset = 4;
 
-export const Wrapper = styled.div({
-    display: 'inline-block',
-    borderRadius: 17,
-    overflow: 'hidden',
-    willChange: 'transform',
-});
+export const Wrapper = styled.div`
+    display: inline-block;
+    border-radius: ${height / 2}px;
+    overflow: hidden;
+    will-change: transform;
+`;
 
 export const StyledThemeSwitch = styled.div`
     display: flex;
     align-items: center;
     position: relative;
-    height: 35px;
+    height: ${height}px;
     width: ${width}px;
-    border-radius: 17px;
-    transition: all ${transitionTime}ms linear;
+    border-radius: ${height / 2}px;
+    transition: all ${transitionDuration.normal} linear;
 
     &:hover {
         transform: scale(1.05);
@@ -62,7 +61,7 @@ export const StyledThemeSwitch = styled.div`
 
 export const Moon = styled(MoonSVG)`
     position: absolute;
-    transition: all ${transitionTime}ms ease-in;
+    transition: all ${transitionDuration.normal} ease-in;
     width: 13px;
     height: 13px;
     fill: white;
@@ -90,8 +89,8 @@ export const Star = styled.div<{ size: number; x: number; y: number; index: numb
         transition: all ${50 * index}ms linear;
         width: ${size}px;
         height: ${size}px;
-        top: ${8 + y}px;
-        left: ${8 + x}px;
+        top: ${2 + y}px;
+        left: ${4 + x}px;
 
         ${theme.color === 'light' &&
             `
@@ -113,8 +112,8 @@ export const Circle = styled.div`
     border-radius: 100%;
     width: ${circleWidth}px;
     overflow: hidden;
-    height: 27px;
-    transition: all ${transitionTime}ms ease-in;
+    height: ${circleWidth}px;
+    transition: all ${transitionDuration.normal} ease-in;
 
     ${({ theme }) => {
         const translateX = theme.color === 'light' ? sideOffset : width - circleWidth - sideOffset;

@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import { Button } from '../Common';
 
 const Wrapper = styled.div`

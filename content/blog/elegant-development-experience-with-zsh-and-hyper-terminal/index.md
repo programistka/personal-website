@@ -1,6 +1,7 @@
 ---
 slug: '/elegant-development-experience-with-zsh-and-hyper-terminal'
 date: '2019-02-18'
+updatedAt: '2019-05-13'
 title: 'Elegant Development Experience With Zsh and Hyper Terminal'
 # Description should be no more than 160 characters in length
 description: 'Developers spend a lot of time working in their terminals and a great development experience can be achieved in the terminal when using zsh and Hyper.'
@@ -9,7 +10,7 @@ banner: './images/banner.png'
 ---
 
 import Link from "$components/Link";
-import Quote from "$components/Quote";
+import Quote from "$components/mdx/Quote";
 
 ![Banner Image.](./images/banner.png)
 
@@ -269,13 +270,7 @@ function precmd () {
 
 ### Terminal Performance
 
-Not everything is ☀️ and 🌈 when using Hyper.
-
-One of the downsides of building out the app with JavaScript and packaging it with Electron is that it does not perform as well as other terminal applications when it comes to memory consumption and speed. For example, I've tried using <Link to="https://github.com/jwilm/alacritty">Alacritty</Link> which is another terminal app and it is "GPU-accelerated". Alacritty is a faster terminal application compared to Hyper terminal (faster scrolling, navigation, low RAM usage, and more).
-
-The fans on my computer usually get noisy when I start running/building apps through Hyper and sometimes Hyper becomes completely unresponsive which requires it to be restarted. These slightly annoying issues were not present when I was using <Link to="https://www.iterm2.com/">iTerm2</Link>. However, I **REALLY ENJOY** the look and feel that comes with Hyper and the ability to customize the UI just the way I want. Also, the tab and pane management in Hyper is exactly what I need from a terminal app.
-
-I could see Hyper not being a good choice for someone who uses VIM in their terminal as their primary code editor, as you will want the speed to be as fast as possible while navigating your code.
+Hyper has recently updated their terminal to [version 3](https://github.com/zeit/hyper/releases/tag/3.0.0) which comes with a major performance boost. This was for a long time one of the biggest problems with using Hyper since it relied on a DOM renderer which is inherently slow. This would cause the terminal to run slowly and crash when trying to run some CPU intensive commands. However, with the new renderer based on WebGL, the performance is greatly improved.
 
 ---
 

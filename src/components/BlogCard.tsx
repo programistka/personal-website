@@ -1,21 +1,20 @@
 import Img from 'gatsby-image';
 import React from 'react';
 import styled from 'styled-components';
-
-import { colors, media } from '../styles/common';
+import Fade from 'react-reveal/Fade';
+import { colors, media, transitionDuration, textColor, textSize } from '../styles/common';
 import { Post as PostType } from '../types/Post';
-
 import Link from './Link';
-import { fontSize } from './Typography';
 
 const Post = styled.section`
     width: calc(100% - 40px);
     background-color: ${props =>
-        props.theme.color === 'light' ? colors.backgroundSecondary_light : colors.backgroundSecondary_dark};
+        props.theme.color === 'light' ? colors.backgroundSecondaryLight : colors.backgroundSecondaryDark};
     height: 340px;
     margin: 0 20px 80px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all ease-in-out ${transitionDuration.slow};
 
     ${media.large`
         height: unset;
@@ -42,8 +41,8 @@ const PostLink = styled(Link)`
 `;
 
 const PostDescription = styled.div`
+    ${textColor.body};
     padding: 25px;
-    color: ${props => (props.theme.color === 'light' ? colors.text_body_light : colors.text_body_dark)};
     width: 50%;
     height: 100%;
 
@@ -54,20 +53,20 @@ const PostDescription = styled.div`
 `;
 
 const PostTitle = styled.h3`
-    font-family: 'Scope One';
+    ${textColor.title};
     font-weight: 400;
+    line-height: 1.5;
     font-size: 28px;
-    margin-top: 25px;
-    margin-bottom: 0;
-    color: ${props => (props.theme.color === 'light' ? colors.text_title_light : colors.text_title_dark)};
+    margin-top: 0;
+    margin-bottom: 5px;
 
-    ${media.large`
+    ${media.medium`
         font-size: 24px;
     `};
 `;
 
 const MetaInfo = styled.div`
-    font-size: 14px;
+    ${textSize.small};
 `;
 
 const PostDate = styled.time``;
@@ -85,13 +84,7 @@ const Clock = styled.span`
 `;
 
 const PostExcerpt = styled.p`
-    font-size: ${fontSize.body.large};
-    letter-spacing: 0.2px;
-    line-height: 1.5;
-
-    ${media.large`
-        font-size: ${fontSize.body.small};
-    `};
+    ${textSize.normal};
 `;
 
 const PostImage = styled(Img)`
@@ -115,23 +108,27 @@ type BlogCardProps = {
 
 const BlogCard = ({ post }: BlogCardProps) => {
     return (
-        <Post key={post.id} data-aos="fade-up">
-            <PostLink to={post.frontmatter.slug}>
-                <PostDescription>
-                    <PostTitle>{post.frontmatter.title}</PostTitle>
-                    <MetaInfo>
-                        <PostDate dateTime={post.frontmatter.dateTimeString}>{post.frontmatter.formattedDate}</PostDate>
-                        <MetaInfoSeparator>•</MetaInfoSeparator>
-                        <TimeToRead>
-                            <Clock>🕙</Clock>
-                            {post.timeToRead} min read
-                        </TimeToRead>
-                    </MetaInfo>
-                    <PostExcerpt>{post.frontmatter.description}</PostExcerpt>
-                </PostDescription>
-                {post.frontmatter.banner && <PostImage fluid={post.frontmatter.banner.childImageSharp.fluid} />}
-            </PostLink>
-        </Post>
+        <Fade bottom key={post.id}>
+            <Post>
+                <PostLink to={post.frontmatter.slug}>
+                    <PostDescription>
+                        <PostTitle>{post.frontmatter.title}</PostTitle>
+                        <MetaInfo>
+                            <PostDate dateTime={post.frontmatter.dateTimeString}>
+                                {post.frontmatter.formattedDate}
+                            </PostDate>
+                            <MetaInfoSeparator>•</MetaInfoSeparator>
+                            <TimeToRead>
+                                <Clock>🕙</Clock>
+                                {post.timeToRead} min read
+                            </TimeToRead>
+                        </MetaInfo>
+                        <PostExcerpt>{post.frontmatter.description}</PostExcerpt>
+                    </PostDescription>
+                    {post.frontmatter.banner && <PostImage fluid={post.frontmatter.banner.childImageSharp.fluid} />}
+                </PostLink>
+            </Post>
+        </Fade>
     );
 };
 

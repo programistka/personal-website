@@ -1,50 +1,32 @@
-import 'aos/dist/aos.css';
 import Helmet from 'react-helmet';
 import React from 'react';
-import { MDXProvider } from '@mdx-js/tag';
+import { MDXProvider } from '@mdx-js/react';
 import { withPrefix } from 'gatsby';
-
-// eslint-disable-next-line import/order
 import styled, { createGlobalStyle, ThemeProvider } from '../lib/styled-components';
-
+import Inter from '../../assets/fonts/Inter/Inter';
 import '../styles/prismjs.css';
-
-// @ts-ignore
-import Montserrat from '../../assets/fonts/Montserrat/Montserrat-Regular.ttf';
-// @ts-ignore
-import ScopeOne from '../../assets/fonts/Scope_One/ScopeOne-Regular.ttf';
-import { colors } from '../styles/common';
+import { colors, textColor, textSize } from '../styles/common';
 import { ThemeContext } from '../utils/context';
 import { SiteMetadata } from '../types/SiteMetadata';
-
 import mdxComponents from './mdx';
 import Footer, { footerHeight } from './Footer';
 import Menu, { menuHeight } from './Menu';
 
 const GlobalStyles = createGlobalStyle`
-  @font-face {
-    font-family: 'Montserrat';
-    src: url(${Montserrat});
-  }
-
-  @font-face {
-    font-family: 'Scope One';
-    font-weight: 400;
-    src: url(${ScopeOne});
-  }
+  ${Inter};
 
   * {
       box-sizing: border-box;
   }
 
   html, body {
+    ${textSize.normal};
+    ${textColor.body};
     margin: 0;
     padding: 0;
-    font-family: 'Montserrat', sans-serif;
-    transition: all 200ms linear;
+    font-family: 'Inter', sans-serif;
 
-    color: ${props => (props.theme.color === 'light' ? colors.text_body_light : colors.text_body_dark)};
-    background-color: ${props => (props.theme.color === 'light' ? colors.background_light : colors.background_dark)};
+    background-color: ${props => (props.theme.color === 'light' ? colors.backgroundLight : colors.backgroundDark)};
   }
 
   pre {
@@ -52,15 +34,24 @@ const GlobalStyles = createGlobalStyle`
   }
 
   ${() => {
-      /* Override PrismJS Defaults */
       return null;
   }}
 
+  strong {
+      font-weight: 600;
+  }
+
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
   a {
-      color: ${colors.link_inactive_light};
+      color: ${colors.linkInactiveLight};
 
       &:hover {
-          color: ${colors.link_active_light};
+          color: ${colors.linkActiveLight};
       }
   }
 

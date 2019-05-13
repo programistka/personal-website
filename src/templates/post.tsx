@@ -1,70 +1,71 @@
-import Img from 'gatsby-image';
 import MDXRenderer from 'gatsby-mdx/mdx-renderer';
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { DiscussionEmbed } from 'disqus-react';
 import { graphql } from 'gatsby';
-
 import Layout from '../components/Layout';
 import Link from '../components/Link';
 import ScrollProgress from '../utils/scrollProgress';
-import { Divider, PageWrapper } from '../components/Common';
+import { Divider, PaddedPageWrapper } from '../components/Common';
 import { Title } from '../components/Typography';
-import { colors, media } from '../styles/common';
+import { colors, media, textSize } from '../styles/common';
 import { PageContext } from '../types/PageContext';
+import { css } from '../lib/styled-components';
 
-const ModifiedPageWrapper = styled(PageWrapper)`
+const StyledPaddedPageWrapper = styled(PaddedPageWrapper)`
     width: 800px;
-    padding: 80px 20px;
+`;
 
-    ${media.small`
-        padding: 40px 20px;
-    `};
+const ProgressContainer = styled.div`
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 10px;
+`;
+
+const ProgressBar = styled.div`
+    height: 10px;
+    background: ${props => (props.theme.color === 'light' ? colors.textTitleLight : colors.textTitleDark)};
 `;
 
 const PostTitle = styled(Title)`
     text-align: left;
     margin: 0;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 
     ${media.small`
         text-align: center;
-        margin-bottom: 5px;
     `};
 `;
 
 const Date = styled.time`
     display: block;
     margin-bottom: 40px;
+    font-style: italic;
 
     ${media.small`
         text-align: center;
     `};
 `;
 
-// const FeaturedImage = styled(Img)`
-//     margin-bottom: 40px;
-
-//     img {
-//         margin: unset;
-//     }
-// `;
-
 const MDXContent = styled.div`
     .caption {
-        font-weight: 400;
         font-style: italic;
         text-align: center;
         display: block;
         margin-top: -25px;
         margin-bottom: 40px;
-        line-height: 1.4;
 
         + h2,
         + h3,
         + h4,
         + h5 {
             margin-top: 0;
+        }
+
+        bold {
+            font-weight: 600;
         }
     }
 
@@ -96,9 +97,9 @@ const MDXContent = styled.div`
 
     code {
         font-family: Consolas, Menlo, Monaco, source-code-pro, Courier New, monospace;
-        font-size: 14px;
+        font-size: 16px;
         border-radius: 0.3em;
-        background: ${props => (props.theme.color === 'light' ? colors.inline_code_light : colors.inline_code_dark)};
+        background: ${props => (props.theme.color === 'light' ? colors.inlineCodeLight : colors.inlineCodeDark)};
         padding: 0.15em 0.2em 0.05em;
         white-space: normal;
     }
@@ -106,11 +107,15 @@ const MDXContent = styled.div`
     .gatsby-highlight {
         margin-top: 40px;
         margin-bottom: 40px;
-        ${props => props.theme.color === 'dark' && `border: 2px solid ${colors.border_dark}`};
+        ${props => props.theme.color === 'dark' && `border: 2px solid ${colors.borderDark}`};
     }
 
     .gatsby-resp-image-wrapper {
         margin: 40px 0;
+    }
+
+    .token-line {
+        line-height: 1.8;
     }
 
     img {
@@ -118,19 +123,27 @@ const MDXContent = styled.div`
         margin: 40px 0;
     }
 
+    ol,
     ul {
-        list-style: none;
-        line-height: 2;
-        padding-left: 30px;
+        line-height: 1.7;
+        padding-left: 15px;
+
+        li {
+            margin-bottom: 8px;
+        }
     }
 
-    li {
-        position: relative;
+    ul {
+        list-style: none;
 
-        &::before {
-            content: '-';
-            position: absolute;
-            left: -20px;
+        li {
+            position: relative;
+
+            &::before {
+                content: '-';
+                position: absolute;
+                left: -20px;
+            }
         }
     }
 `;
@@ -139,7 +152,7 @@ const CategoriesWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 `;
 
 const CategoriesLabel = styled.span`
@@ -147,7 +160,7 @@ const CategoriesLabel = styled.span`
     margin-bottom: 10px;
 `;
 
-const CategoryList = styled.ul`
+const StyledCategoryList = styled.ul`
     display: flex;
     list-style: none;
     margin: 0;
@@ -158,22 +171,22 @@ const CategoryListItem = styled.li`
     padding: 0 10px;
 `;
 
-const CategoryLink = styled(Link)``;
-
-const NextPostWrapper = styled.span`
+const PostWrapperStyles = css`
     display: flex;
     flex-direction: column;
-    margin-right: 20px;
     line-height: 1.5;
+`;
+
+const NextPostWrapper = styled.span`
+    ${PostWrapperStyles};
+    margin-right: 20px;
     max-width: 50%;
 `;
 
 const PreviousPostWrapper = styled.span`
-    display: flex;
-    flex-direction: column;
+    ${PostWrapperStyles};
     align-items: flex-end;
     margin-left: auto;
-    line-height: 1.5;
     max-width: 50%;
 `;
 
@@ -185,36 +198,29 @@ const OtherPostsWrapper = styled.div`
     display: flex;
 `;
 
-const CategoryListComponent = ({ list = [] }: { list?: string[] }) => (
-    <CategoriesWrapper>
-        <CategoriesLabel>Categories:</CategoriesLabel>
-        <CategoryList>
-            {list.map(category => (
-                <CategoryListItem key={category}>
-                    <CategoryLink to={`/categories/${category}`}>{category}</CategoryLink>
-                </CategoryListItem>
-            ))}
-        </CategoryList>
-    </CategoriesWrapper>
-);
-
-const ProgressContainer = styled.div`
-    z-index: 1;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 10px;
-`;
-
-const ProgressBar = styled.div`
-    height: 10px;
-    background: ${props => (props.theme.color === 'light' ? colors.text_title_light : colors.text_title_dark)};
-    width: 10%;
-`;
-
 const CommentsSection = styled.div`
     margin-top: 40px;
 `;
+
+const EditPostWrapper = styled.div`
+    ${textSize.small};
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 40px;
+`;
+
+const CategoryList = ({ list = [] }: { list?: string[] }) => (
+    <CategoriesWrapper>
+        <CategoriesLabel>Categories:</CategoriesLabel>
+        <StyledCategoryList>
+            {list.map(category => (
+                <CategoryListItem key={category}>
+                    <Link to={`/categories/${category}`}>{category}</Link>
+                </CategoryListItem>
+            ))}
+        </StyledCategoryList>
+    </CategoriesWrapper>
+);
 
 interface PostProps {
     data: {
@@ -235,27 +241,38 @@ const Post = (props: PostProps) => {
         identifier: mdx.id,
         title: mdx.frontmatter.title,
     };
+    const { editLink } = mdx.fields;
 
     const progressBar = useRef({ current: { style: { width: 0 } } } as any);
 
     useEffect(() => {
         const progressObserver = new ScrollProgress((x, y) => {
-            progressBar.current.style.width = y * 100 + '%';
+            progressBar.current.style.width = `${y * 100}%`;
         });
 
         return () => progressObserver.destroy();
     });
+
+    const postUpdatedSinceFirstPublic =
+        mdx.frontmatter.formattedUpdatedAtDate !== mdx.frontmatter.formattedPublicationDate &&
+        mdx.frontmatter.formattedUpdatedAtDate !== null;
 
     return (
         <Layout site={site} frontmatter={mdx.frontmatter}>
             <ProgressContainer>
                 <ProgressBar ref={progressBar} />
             </ProgressContainer>
-            <ModifiedPageWrapper>
+            <StyledPaddedPageWrapper>
                 <PostTitle>{mdx.frontmatter.title}</PostTitle>
-                <Date dateTime={mdx.frontmatter.dateTimeString}>{mdx.frontmatter.formattedDate}</Date>
-
-                {/* {mdx.frontmatter.banner && <FeaturedImage fluid={mdx.frontmatter.banner.childImageSharp.fluid} />} */}
+                {postUpdatedSinceFirstPublic ? (
+                    <Date dateTime={mdx.frontmatter.updatedAtDate}>
+                        updated on {mdx.frontmatter.formattedUpdatedAtDate}
+                    </Date>
+                ) : (
+                    <Date dateTime={mdx.frontmatter.publicationDate}>
+                        published on {mdx.frontmatter.formattedPublicationDate}
+                    </Date>
+                )}
 
                 <MDXContent>
                     <MDXRenderer>{mdx.code.body}</MDXRenderer>
@@ -263,7 +280,12 @@ const Post = (props: PostProps) => {
 
                 <Divider />
 
-                <CategoryListComponent list={mdx.frontmatter.categories} />
+                <EditPostWrapper>
+                    See a typo?&nbsp;
+                    <Link to={editLink}>Edit post on GitHub</Link>
+                </EditPostWrapper>
+
+                <CategoryList list={mdx.frontmatter.categories} />
 
                 {(next || prev) && (
                     <OtherPostsWrapper>
@@ -282,7 +304,7 @@ const Post = (props: PostProps) => {
                 <CommentsSection>
                     <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
                 </CommentsSection>
-            </ModifiedPageWrapper>
+            </StyledPaddedPageWrapper>
         </Layout>
     );
 };
@@ -304,8 +326,11 @@ export const pageQuery = graphql`
             frontmatter {
                 title
                 description
-                formattedDate: date(formatString: "MMMM DD, YYYY")
-                dateTimeString: date(formatString: "YYYY-MM-DD")
+                formattedPublicationDate: date(formatString: "MMMM DD, YYYY")
+                publicationDate: date(formatString: "YYYY-MM-DD")
+                formattedUpdatedAtDate: updatedAt(formatString: "MMMM DD, YYYY")
+                updatedAtDate: updatedAt(formatString: "MMMM DD, YYYY")
+                # This banner is used in the layout component
                 banner {
                     publicURL
                     childImageSharp {
@@ -316,6 +341,9 @@ export const pageQuery = graphql`
                 }
                 slug
                 categories
+            }
+            fields {
+                editLink
             }
             code {
                 body
