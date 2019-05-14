@@ -1,9 +1,4 @@
 {
-    "name": "personal-website",
-    "description": "Robert Cooper's Personal Site",
-    "version": "2.0.0",
-    "author": "Robert Cooper <hi@robertcooper.me> (https://www.robertcooper.me/)",
-    "repository": "https://github.com/robertcoopercode/personal-website/",
     "dependencies": {
         "@mdx-js/mdx": "^1.0.18",
         "@mdx-js/react": "^1.0.16",
@@ -59,18 +54,6 @@
         "typescript": "~3.2.1",
         "typescript-eslint-parser": "^22.0.0"
     },
-    "keywords": [
-        "gatsby"
-    ],
-    "license": "MIT",
-    "main": "n/a",
-    "scripts": {
-        "start": "yarn dev",
-        "dev": "rm -rf .cache && gatsby develop",
-        "build": "rm -rf .cache && gatsby build",
-        "serve": "gatsby serve",
-        "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix && tsc --noEmit"
-    },
     "husky": {
         "hooks": {
             "pre-commit": "tsc --noEmit && lint-staged"
@@ -81,5 +64,12 @@
             "eslint . --fix",
             "git add"
         ]
+    },
+    "scripts": {
+        "start": "yarn dev",
+        "dev": "rm -rf .cache && gatsby develop",
+        "build": "rm -rf .cache && gatsby build",
+        "serve": "gatsby serve",
+        "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix && tsc --noEmit"
     }
 }
