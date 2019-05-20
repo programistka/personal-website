@@ -1,11 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
 import Link from '../components/Link';
 import Title from '../components/mdx/Title';
 import { PageWrapper } from '../components/Common';
-import { SiteMetadata } from '../types/SiteMetadata';
 
 const PageContent = styled(PageWrapper)`
     display: flex;
@@ -18,8 +16,8 @@ const LastUpdatedDate = styled.p`
     align-self: center;
 `;
 
-export const MeatJournalPrivacyPolicy = ({ data: { site } }: { data: { site: { siteMetadata: SiteMetadata } } }) => (
-    <Layout site={site} hideMenu={true} hideFooter={true}>
+export const MeatJournalPrivacyPolicy = () => (
+    <Layout hideMenu={true} hideFooter={true}>
         <PageContent>
             <Title>Privacy Policy</Title>
             <LastUpdatedDate>Last Updated: 02/10/2018</LastUpdatedDate>
@@ -42,16 +40,3 @@ export const MeatJournalPrivacyPolicy = ({ data: { site } }: { data: { site: { s
 );
 
 export default MeatJournalPrivacyPolicy;
-
-export const pageQuery = graphql`
-    query {
-        site {
-            siteMetadata {
-                title
-                description
-                author
-                siteUrl
-            }
-        }
-    }
-`;

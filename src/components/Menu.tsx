@@ -63,6 +63,7 @@ const NavList = styled.ul`
 const NavListItem = styled.li`
     ${textSize.normal};
     padding: 0 35px;
+    margin: 0;
 
     &:first-child {
         padding-left: 0;
@@ -70,6 +71,10 @@ const NavListItem = styled.li`
 
     &:last-child {
         padding-right: 0;
+    }
+
+    &::before {
+        content: '';
     }
 `;
 

@@ -14,6 +14,7 @@ export type Project = {
             image: FixedImage & FluidImage;
             textColor: ThemeType;
             backgroundColor: string;
+            detailsPageLink?: string;
         };
     };
 };

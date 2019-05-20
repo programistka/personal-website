@@ -8,7 +8,6 @@ import Link from '../components/Link';
 import { PaddedPageWrapper } from '../components/Common';
 import { Title } from '../components/Typography';
 import { media } from '../styles/common';
-import { SiteMetadata } from '../types/SiteMetadata';
 import { Post } from '../types/Post';
 
 const StyledTitle = styled(Title)`
@@ -31,9 +30,6 @@ const PaginationLink = styled(Link)``;
 
 type BlogProps = {
     data: {
-        site: {
-            siteMetadata: SiteMetadata;
-        };
         allMdx: {
             edges: Post[];
         };
@@ -47,13 +43,13 @@ type BlogProps = {
     };
 };
 
-const Blog = ({ data: { site, allMdx }, pageContext: { pagination } }: BlogProps) => {
+const Blog = ({ data: { allMdx }, pageContext: { pagination } }: BlogProps) => {
     const { page, nextPagePath, previousPagePath } = pagination;
 
     const posts = page.map(id => allMdx.edges.find(post => post.node.id === id));
 
     return (
-        <Layout site={site} title="Robert Cooper | Blog">
+        <Layout title="Robert Cooper | Blog">
             <PaddedPageWrapper>
                 <Fade top>
                     <StyledTitle>Blog</StyledTitle>
@@ -81,14 +77,6 @@ export default Blog;
 
 export const pageQuery = graphql`
     query {
-        site {
-            siteMetadata {
-                title
-                description
-                author
-                siteUrl
-            }
-        }
         allMdx {
             edges {
                 node {

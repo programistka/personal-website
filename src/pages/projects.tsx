@@ -4,9 +4,8 @@ import { graphql } from 'gatsby';
 import Fade from 'react-reveal/Fade';
 import styled from '../lib/styled-components';
 import Layout from '../components/Layout';
-import { PageWrapper, SectionWrapper } from '../components/Common';
+import { PageWrapper, LightButton } from '../components/Common';
 import { Project as ProjectType } from '../types/Project';
-import { SiteMetadata } from '../types/SiteMetadata';
 import { Title } from '../components/Typography';
 import { colors, media, textSize } from '../styles/common';
 import { ThemeType } from '../utils/context';
@@ -29,6 +28,10 @@ const ProjectTitle = styled(Title)`
     color: inherit;
     margin-top: 40px;
     margin-bottom: 0;
+
+    ${media.small`
+        margin-top: 20px;
+    `};
 `;
 
 const ProjectSubtitle = styled.span`
@@ -54,11 +57,12 @@ const ProjectImage = styled(Img)`
     `};
 `;
 
+const ProjectButton = styled(LightButton)`
+    margin-top: 40px;
+`;
+
 type ProjectsProps = {
     data: {
-        site: {
-            siteMetadata: SiteMetadata;
-        };
         allMdx: {
             edges: ProjectType[];
         };
@@ -67,12 +71,11 @@ type ProjectsProps = {
 
 export const Projects = ({
     data: {
-        site,
         allMdx: { edges: projects },
     },
 }: ProjectsProps) => {
     return (
-        <Layout site={site} title="Robert Cooper | Projects">
+        <Layout title="Robert Cooper | Projects">
             {projects.map(({ node: project }, index) => (
                 <Project
                     key={project.fields.id}
@@ -85,6 +88,9 @@ export const Projects = ({
                             <ProjectTitle as="h2">{project.frontmatter.title}</ProjectTitle>
                             <ProjectSubtitle>{project.frontmatter.subtitle}</ProjectSubtitle>
                             <ProjectDescription>{project.frontmatter.description}</ProjectDescription>
+                            {project.frontmatter.detailsPageLink && (
+                                <ProjectButton to={project.frontmatter.detailsPageLink}>Read more</ProjectButton>
+                            )}
                         </PageWrapper>
                     </Fade>
                 </Project>
@@ -97,14 +103,6 @@ export default Projects;
 
 export const pageQuery = graphql`
     query {
-        site {
-            siteMetadata {
-                title
-                description
-                author
-                siteUrl
-            }
-        }
         allMdx(filter: { fields: { slug: { eq: null } } }, sort: { order: DESC, fields: [frontmatter___date] }) {
             edges {
                 node {
@@ -118,6 +116,7 @@ export const pageQuery = graphql`
                         description
                         backgroundColor
                         textColor
+                        detailsPageLink
                         image {
                             childImageSharp {
                                 fluid(maxWidth: 500) {

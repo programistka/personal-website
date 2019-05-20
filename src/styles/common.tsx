@@ -51,6 +51,15 @@ const sizes: Sizes = {
     large: 1200,
 };
 
+export const pageWidth = {
+    small: css`
+        width: 800px;
+    `,
+    large: css`
+        width: 1200px;
+    `,
+};
+
 export const transitionDuration = {
     slow: '0.2s',
     normal: '0.125s',

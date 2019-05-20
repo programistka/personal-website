@@ -1,7 +1,7 @@
 import Helmet from 'react-helmet';
 import React from 'react';
 import { MDXProvider } from '@mdx-js/react';
-import { withPrefix } from 'gatsby';
+import { withPrefix, StaticQuery, graphql } from 'gatsby';
 import styled, { createGlobalStyle, ThemeProvider } from '../lib/styled-components';
 import Inter from '../../assets/fonts/Inter/Inter';
 import '../styles/prismjs.css';
@@ -41,10 +41,31 @@ const GlobalStyles = createGlobalStyle`
       font-weight: 600;
   }
 
+  ol,
   ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      line-height: 1.7;
+      padding-left: 15px;
+
+      li {
+          margin-bottom: 8px;
+      }
+  }
+
+  ul {
+      list-style: none;
+
+      li {
+          position: relative;
+
+          &::before {
+              content: '-';
+              position: absolute;
+              left: -20px;
+          }
+      }
   }
 
   a {
@@ -62,6 +83,25 @@ const GlobalStyles = createGlobalStyle`
     .js-focus-visible :focus:not(.focus-visible) {
     outline: none;
     }
+
+    .caption {
+        font-style: italic;
+        text-align: center;
+        display: block;
+        margin-top: -25px;
+        margin-bottom: 40px;
+
+        + h2,
+        + h3,
+        + h4,
+        + h5 {
+            margin-top: 0;
+        }
+
+        bold {
+            font-weight: 600;
+        }
+    }
 `;
 
 const Main = styled.main`
@@ -69,9 +109,6 @@ const Main = styled.main`
 `;
 
 type LayoutProps = {
-    site: {
-        siteMetadata: SiteMetadata;
-    };
     children: React.ReactNode;
     frontmatter?: {
         title: string | null;
@@ -86,51 +123,68 @@ type LayoutProps = {
 };
 
 export const Layout = ({
-    site,
     frontmatter = { title: null, description: null, banner: { publicURL: null } },
     title: pageTitle = null,
     hideMenu = false,
     hideFooter = false,
     children,
 }: LayoutProps) => {
-    const { title: siteTitle, description: siteDescription, siteUrl } = site.siteMetadata;
-
-    const {
-        title: frontmatterTitle,
-        description: frontmatterDescription,
-        banner: { publicURL },
-    } = frontmatter;
-
-    const title = pageTitle || frontmatterTitle || siteTitle;
-    const description = frontmatterDescription || siteDescription;
-
     return (
         <ThemeContext.Consumer>
             {({ theme, toggleTheme }) => (
-                <ThemeProvider theme={{ color: theme }}>
-                    <>
-                        <GlobalStyles />
-                        <Helmet title={title}>
-                            <html lang="en" />
-                            <meta name="description" content={description} />
+                <StaticQuery
+                    query={graphql`
+                        query {
+                            site {
+                                siteMetadata {
+                                    title
+                                    description
+                                    author
+                                    siteUrl
+                                }
+                            }
+                        }
+                    `}
+                    render={data => {
+                        const { title: siteTitle, description: siteDescription, siteUrl } = data.site.siteMetadata;
 
-                            <meta name="twitter:card" content="summary_large_image" />
-                            <meta name="twitter:site" content="@RobertCooper_RC" />
+                        const {
+                            title: frontmatterTitle,
+                            description: frontmatterDescription,
+                            banner: { publicURL },
+                        } = frontmatter;
 
-                            <meta property="og:title" content={title} />
-                            <meta
-                                property="og:image"
-                                content={`${siteUrl}${publicURL || withPrefix('/social-sharing.jpg')}`}
-                            />
-                            <meta property="og:description" content={description} />
-                        </Helmet>
-                        {!hideMenu && <Menu theme={theme} toggleTheme={toggleTheme} />}
-                        <MDXProvider components={mdxComponents}>
-                            <Main>{children}</Main>
-                        </MDXProvider>
-                        {!hideFooter && <Footer />}
-                    </>
-                </ThemeProvider>
+                        const title = pageTitle || frontmatterTitle || siteTitle;
+                        const description = frontmatterDescription || siteDescription;
+
+                        return (
+                            <ThemeProvider theme={{ color: theme }}>
+                                <>
+                                    <GlobalStyles />
+                                    <Helmet title={title}>
+                                        <html lang="en" />
+                                        <meta name="description" content={description} />
+
+                                        <meta name="twitter:card" content="summary_large_image" />
+                                        <meta name="twitter:site" content="@RobertCooper_RC" />
+
+                                        <meta property="og:title" content={title} />
+                                        <meta
+                                            property="og:image"
+                                            content={`${siteUrl}${publicURL || withPrefix('/social-sharing.jpg')}`}
+                                        />
+                                        <meta property="og:description" content={description} />
+                                    </Helmet>
+                                    {!hideMenu && <Menu theme={theme} toggleTheme={toggleTheme} />}
+                                    <MDXProvider components={mdxComponents}>
+                                        <Main>{children}</Main>
+                                    </MDXProvider>
+                                    {!hideFooter && <Footer />}
+                                </>
+                            </ThemeProvider>
+                        );
+                    }}
+                />
             )}
         </ThemeContext.Consumer>
     );

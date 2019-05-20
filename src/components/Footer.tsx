@@ -39,6 +39,11 @@ const SocialMediaList = styled.ul`
 
 const SocialMediaListItem = styled.li`
     padding: 0 7px;
+    margin: 0;
+
+    &::before {
+        content: '';
+    }
 `;
 
 const SocialMediaLink = styled(Link)``;

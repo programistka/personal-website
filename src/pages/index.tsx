@@ -12,7 +12,6 @@ import { Button, Divider, PageWrapper } from '../components/Common';
 import { FluidImage } from '../types/Image';
 import { Post } from '../types/Post';
 import { Project as ProjectType } from '../types/Project';
-import { SiteMetadata } from '../types/SiteMetadata';
 import { ThemeContext, ThemeType } from '../utils/context';
 import { Title } from '../components/Typography';
 import { colors, media, textSize, textColor } from '../styles/common';
@@ -113,6 +112,7 @@ const SocialMedia = styled.ul`
     display: flex;
     align-items: center;
     margin: 0 -10px;
+    padding: 0;
 
     ${media.medium`
         justify-content: center;
@@ -125,6 +125,10 @@ const SocialMedia = styled.ul`
 
 const SocialMediaItem = styled.li`
     margin: 0 10px;
+
+    &:before {
+        content: '';
+    }
 `;
 
 const Section = styled.div`
@@ -205,9 +209,6 @@ const SocialMediaGroup = ({ theme }: { theme: 'light' | 'dark' }): JSX.Element =
 
 type HomePageProps = {
     data: {
-        site: {
-            siteMetadata: SiteMetadata;
-        };
         homeHeader: FluidImage;
         homeHeadshot: FluidImage;
         posts: {
@@ -221,7 +222,6 @@ type HomePageProps = {
 
 export const Home = ({
     data: {
-        site,
         homeHeader,
         homeHeadshot,
         posts: { edges: posts },
@@ -231,7 +231,7 @@ export const Home = ({
     return (
         <ThemeContext.Consumer>
             {({ theme }: { theme: ThemeType }) => (
-                <Layout site={site}>
+                <Layout>
                     <Header>
                         <HeaderWrapper>
                             <HeadshotWrapper>
@@ -297,14 +297,6 @@ export default Home;
 
 export const pageQuery = graphql`
     query {
-        site {
-            siteMetadata {
-                title
-                description
-                author
-                siteUrl
-            }
-        }
         homeHeader: file(name: { eq: "home-header" }) {
             childImageSharp {
                 fluid(maxWidth: 2000) {

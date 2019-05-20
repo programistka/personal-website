@@ -6,8 +6,9 @@ description: 'A website for a local developer meetup group in Montreal where upc
 image: './images/main.png'
 backgroundColor: '#27263A'
 textColor: 'light'
+detailsPageLink: '/project/react-montreal'
 ---
 
-import Link from "$components/Link";
+import Link from "\$components/Link";
 
 This section can be used in case I want to create individual pages for each project.

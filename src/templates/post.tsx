@@ -8,12 +8,12 @@ import Link from '../components/Link';
 import ScrollProgress from '../utils/scrollProgress';
 import { Divider, PaddedPageWrapper } from '../components/Common';
 import { Title } from '../components/Typography';
-import { colors, media, textSize } from '../styles/common';
+import { colors, media, textSize, pageWidth } from '../styles/common';
 import { PageContext } from '../types/PageContext';
 import { css } from '../lib/styled-components';
 
 const StyledPaddedPageWrapper = styled(PaddedPageWrapper)`
-    width: 800px;
+    ${pageWidth.small}
 `;
 
 const ProgressContainer = styled.div`
@@ -50,25 +50,6 @@ const Date = styled.time`
 `;
 
 const MDXContent = styled.div`
-    .caption {
-        font-style: italic;
-        text-align: center;
-        display: block;
-        margin-top: -25px;
-        margin-bottom: 40px;
-
-        + h2,
-        + h3,
-        + h4,
-        + h5 {
-            margin-top: 0;
-        }
-
-        bold {
-            font-weight: 600;
-        }
-    }
-
     hr {
         + h2,
         + h3,
@@ -102,6 +83,10 @@ const MDXContent = styled.div`
         background: ${props => (props.theme.color === 'light' ? colors.inlineCodeLight : colors.inlineCodeDark)};
         padding: 0.15em 0.2em 0.05em;
         white-space: normal;
+
+        ${media.small`
+          font-size: 14px;
+        `}
     }
 
     .gatsby-highlight {
@@ -121,30 +106,6 @@ const MDXContent = styled.div`
     img {
         display: block;
         margin: 40px 0;
-    }
-
-    ol,
-    ul {
-        line-height: 1.7;
-        padding-left: 15px;
-
-        li {
-            margin-bottom: 8px;
-        }
-    }
-
-    ul {
-        list-style: none;
-
-        li {
-            position: relative;
-
-            &::before {
-                content: '-';
-                position: absolute;
-                left: -20px;
-            }
-        }
     }
 `;
 
@@ -224,7 +185,6 @@ const CategoryList = ({ list = [] }: { list?: string[] }) => (
 
 interface PostProps {
     data: {
-        site: any;
         mdx: any;
     };
     pageContext: PageContext;
@@ -232,7 +192,7 @@ interface PostProps {
 
 const Post = (props: PostProps) => {
     const {
-        data: { site, mdx },
+        data: { mdx },
         pageContext: { next, prev },
     } = props;
 
@@ -258,7 +218,7 @@ const Post = (props: PostProps) => {
         mdx.frontmatter.formattedUpdatedAtDate !== null;
 
     return (
-        <Layout site={site} frontmatter={mdx.frontmatter}>
+        <Layout frontmatter={mdx.frontmatter}>
             <ProgressContainer>
                 <ProgressBar ref={progressBar} />
             </ProgressContainer>
@@ -313,14 +273,6 @@ export default Post;
 
 export const pageQuery = graphql`
     query($id: String!) {
-        site {
-            siteMetadata {
-                title
-                description
-                author
-                siteUrl
-            }
-        }
         mdx(fields: { id: { eq: $id } }) {
             id
             frontmatter {

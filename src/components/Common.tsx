@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { colors, media, transitionDuration, textSize } from '../styles/common';
+import { colors, media, transitionDuration, textSize, pageWidth } from '../styles/common';
 import Link from './Link';
 
 export const PageWrapper = styled.div`
-    width: 1200px;
+    ${pageWidth.large}
     max-width: 100%;
     margin: auto;
 `;
@@ -53,5 +53,17 @@ export const Button = styled(Link)`
         border: 2px solid ${colors.buttonActiveBorderLight};
         border-color: ${props =>
             props.theme.color === 'light' ? colors.buttonActiveBorderLight : colors.buttonActiveBorderDark};
+    }
+`;
+
+export const LightButton = styled(Button)`
+    background-color: ${colors.buttonInactiveBackgroundDark};
+    color: ${colors.buttonInactiveTextDark};
+    border-color: ${colors.buttonInactiveBorderDark};
+
+    &:hover {
+        background-color: ${colors.buttonActiveBackgroundDark};
+        color: ${colors.buttonActiveTextDark};
+        border-color: ${colors.buttonActiveBorderDark};
     }
 `;
