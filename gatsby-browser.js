@@ -18,7 +18,7 @@ import { ThemeContext } from './src/utils/context';
  * @returns
  */
 // eslint-disable-next-line react/prop-types
-const ThemeWrapperComponent = ({ children }) => {
+const ThemeProvider = ({ children }) => {
     // Set the default theme state to the value stored in the user's cookie and fallback
     // to 'dark' if no cookie is found
     const [theme, setTheme] = useState(Cookies.get('theme') || 'dark');
@@ -68,4 +68,4 @@ const ThemeWrapperComponent = ({ children }) => {
 };
 
 // eslint-disable-next-line react/prop-types
-export const wrapRootElement = ({ element }) => <ThemeWrapperComponent>{element}</ThemeWrapperComponent>;
+export const wrapRootElement = ({ element }) => <ThemeProvider>{element}</ThemeProvider>;

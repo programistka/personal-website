@@ -6,8 +6,8 @@ import styled, { createGlobalStyle, ThemeProvider } from '../lib/styled-componen
 import Inter from '../../assets/fonts/Inter/Inter';
 import PrismJSStyles from '../styles/prismjs';
 import { colors, textColor, textSize } from '../styles/common';
-import { ThemeContext } from '../utils/context';
 import { SiteMetadata } from '../types/SiteMetadata';
+import { useTheme } from '../utils/context';
 import mdxComponents from './mdx';
 import Footer, { footerHeight } from './Footer';
 import Menu, { menuHeight } from './Menu';
@@ -130,65 +130,63 @@ export const Layout = ({
     hideFooter = false,
     children,
 }: LayoutProps) => {
+    const { theme, toggleTheme } = useTheme();
+
     return (
-        <ThemeContext.Consumer>
-            {({ theme, toggleTheme }) => (
-                <StaticQuery
-                    query={graphql`
-                        query {
-                            site {
-                                siteMetadata {
-                                    title
-                                    description
-                                    author
-                                    siteUrl
-                                }
-                            }
+        <StaticQuery
+            query={graphql`
+                query {
+                    site {
+                        siteMetadata {
+                            title
+                            description
+                            author
+                            siteUrl
                         }
-                    `}
-                    render={data => {
-                        const { title: siteTitle, description: siteDescription, siteUrl } = data.site.siteMetadata;
+                    }
+                }
+            `}
+            render={data => {
+                const { title: siteTitle, description: siteDescription, siteUrl } = data.site.siteMetadata;
 
-                        const {
-                            title: frontmatterTitle,
-                            description: frontmatterDescription,
-                            banner: { publicURL },
-                        } = frontmatter;
+                const {
+                    title: frontmatterTitle,
+                    description: frontmatterDescription,
+                    banner: { publicURL },
+                } = frontmatter;
 
-                        const title = pageTitle || frontmatterTitle || siteTitle;
-                        const description = frontmatterDescription || siteDescription;
+                const title = pageTitle || frontmatterTitle || siteTitle;
+                const description = frontmatterDescription || siteDescription;
 
-                        return (
-                            <ThemeProvider theme={{ color: theme }}>
-                                <>
-                                    <GlobalStyles />
-                                    <Helmet title={title}>
-                                        <html lang="en" />
-                                        <meta name="description" content={description} />
+                return (
+                    <ThemeProvider theme={{ color: theme }}>
+                        <>
+                            <GlobalStyles />
+                            <Helmet title={title}>
+                                <html lang="en" />
+                                <meta name="description" content={description} />
 
-                                        <meta name="twitter:card" content="summary_large_image" />
-                                        <meta name="twitter:site" content="@RobertCooper_RC" />
+                                <meta name="twitter:card" content="summary_large_image" />
+                                <meta name="twitter:site" content="@RobertCooper_RC" />
 
-                                        <meta property="og:title" content={title} />
-                                        <meta
-                                            property="og:image"
-                                            content={`${siteUrl}${publicURL || withPrefix('/social-sharing.jpg')}`}
-                                        />
-                                        <meta property="og:description" content={description} />
-                                        <meta property="og:type" content="website" />
-                                    </Helmet>
-                                    {!hideMenu && <Menu theme={theme} toggleTheme={toggleTheme} />}
-                                    <MDXProvider components={mdxComponents}>
-                                        <Main>{children}</Main>
-                                    </MDXProvider>
-                                    {!hideFooter && <Footer />}
-                                </>
-                            </ThemeProvider>
-                        );
-                    }}
-                />
-            )}
-        </ThemeContext.Consumer>
+                                <meta property="og:title" content={title} />
+                                <meta
+                                    property="og:image"
+                                    content={`${siteUrl}${publicURL || withPrefix('/social-sharing.jpg')}`}
+                                />
+                                <meta property="og:description" content={description} />
+                                <meta property="og:type" content="website" />
+                            </Helmet>
+                            {!hideMenu && <Menu theme={theme} toggleTheme={toggleTheme} />}
+                            <MDXProvider components={mdxComponents}>
+                                <Main>{children}</Main>
+                            </MDXProvider>
+                            {!hideFooter && <Footer />}
+                        </>
+                    </ThemeProvider>
+                );
+            }}
+        />
     );
 };
 

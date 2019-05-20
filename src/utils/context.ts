@@ -7,17 +7,20 @@ export enum ThemeEnum {
 
 export type ThemeType = ThemeEnum.light | ThemeEnum.dark;
 
-// TODO: Figure out how to hook up types into Context
-// Reference: https://github.com/sw-yx/react-typescript-cheatsheet#context
-interface ProviderStore {
+interface ContextValue {
     theme: ThemeType;
     toggleTheme: () => null;
 }
 
-export const ThemeContext = React.createContext({
-    theme: 'dark',
-    toggleTheme: () => null,
-} as ProviderStore);
+const ThemeContext = React.createContext<ContextValue | undefined>(undefined);
+
+export const useTheme = () => {
+    const context = React.useContext(ThemeContext);
+    if (!context) {
+        throw new Error('useTheme must be within a ThemeContext');
+    }
+    return context;
+};
 
 export interface Theme {
     color: string;

@@ -12,7 +12,7 @@ import { Button, Divider, PageWrapper } from '../components/Common';
 import { FluidImage } from '../types/Image';
 import { Post } from '../types/Post';
 import { Project as ProjectType } from '../types/Project';
-import { ThemeContext, ThemeType } from '../utils/context';
+import { ThemeType, useTheme } from '../utils/context';
 import { Title } from '../components/Typography';
 import { colors, media, textSize, textColor } from '../styles/common';
 
@@ -228,68 +228,63 @@ export const Home = ({
         projects: { edges: projects },
     },
 }: HomePageProps) => {
+    const { theme } = useTheme();
+
     return (
-        <ThemeContext.Consumer>
-            {({ theme }: { theme: ThemeType }) => (
-                <Layout>
-                    <Header>
-                        <HeaderWrapper>
-                            <HeadshotWrapper>
-                                <Fade left>
-                                    <Headshot
-                                        fluid={homeHeadshot.childImageSharp.fluid}
-                                        alt="Robert Cooper's headshot"
-                                    />
+        <Layout>
+            <Header>
+                <HeaderWrapper>
+                    <HeadshotWrapper>
+                        <Fade left>
+                            <Headshot fluid={homeHeadshot.childImageSharp.fluid} alt="Robert Cooper's headshot" />
+                        </Fade>
+                    </HeadshotWrapper>
+                    <Intro>
+                        <Fade right>
+                            <IntroDescription>
+                                I'm <strong>Robert Cooper</strong>, a front-end web developer that builds web apps and
+                                writes articles on web development ✌🏻
+                            </IntroDescription>
+                            <SocialMediaGroup theme={theme} />
+                        </Fade>
+                    </Intro>
+                </HeaderWrapper>
+                <HeaderImage
+                    fluid={homeHeader.childImageSharp.fluid}
+                    alt={'Snowy mountains'}
+                    style={{ position: 'absolute' }}
+                />
+            </Header>
+            <PageWrapper>
+                <RecentPosts>
+                    <Fade top>
+                        <StyledTitle as="h2">Recent Posts</StyledTitle>
+                    </Fade>
+                    <BlogList posts={posts} />
+                    <Fade top>
+                        <Button to="/blog">See all posts</Button>
+                    </Fade>
+                </RecentPosts>
+                <Divider />
+                <Section>
+                    <StyledTitle as="h2">Recent Projects</StyledTitle>
+                    <Projects>
+                        {projects.map(({ node: project }) => (
+                            <Project key={project.fields.id}>
+                                <Fade top>
+                                    <ProjectImage fixed={project.frontmatter.image.childImageSharp.fixed} />
+                                    <ProjectTitle>{project.frontmatter.title}</ProjectTitle>
+                                    <ProjectDescription>{project.frontmatter.description}</ProjectDescription>
                                 </Fade>
-                            </HeadshotWrapper>
-                            <Intro>
-                                <Fade right>
-                                    <IntroDescription>
-                                        I'm <strong>Robert Cooper</strong>, a front-end web developer that builds web
-                                        apps and writes articles on web development ✌🏻
-                                    </IntroDescription>
-                                    <SocialMediaGroup theme={theme} />
-                                </Fade>
-                            </Intro>
-                        </HeaderWrapper>
-                        <HeaderImage
-                            fluid={homeHeader.childImageSharp.fluid}
-                            alt={'Snowy mountains'}
-                            style={{ position: 'absolute' }}
-                        />
-                    </Header>
-                    <PageWrapper>
-                        <RecentPosts>
-                            <Fade top>
-                                <StyledTitle as="h2">Recent Posts</StyledTitle>
-                            </Fade>
-                            <BlogList posts={posts} />
-                            <Fade top>
-                                <Button to="/blog">See all posts</Button>
-                            </Fade>
-                        </RecentPosts>
-                        <Divider />
-                        <Section>
-                            <StyledTitle as="h2">Recent Projects</StyledTitle>
-                            <Projects>
-                                {projects.map(({ node: project }) => (
-                                    <Project key={project.fields.id}>
-                                        <Fade top>
-                                            <ProjectImage fixed={project.frontmatter.image.childImageSharp.fixed} />
-                                            <ProjectTitle>{project.frontmatter.title}</ProjectTitle>
-                                            <ProjectDescription>{project.frontmatter.description}</ProjectDescription>
-                                        </Fade>
-                                    </Project>
-                                ))}
-                            </Projects>
-                            <Fade top>
-                                <Button to="/projects">See all projects</Button>
-                            </Fade>
-                        </Section>
-                    </PageWrapper>
-                </Layout>
-            )}
-        </ThemeContext.Consumer>
+                            </Project>
+                        ))}
+                    </Projects>
+                    <Fade top>
+                        <Button to="/projects">See all projects</Button>
+                    </Fade>
+                </Section>
+            </PageWrapper>
+        </Layout>
     );
 };
 
