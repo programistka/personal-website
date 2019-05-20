@@ -77,7 +77,7 @@ const MDXContent = styled.div`
         margin: 40px 0;
     }
 
-    code {
+    code:not([class*='language-']) {
         font-family: Consolas, Menlo, Monaco, source-code-pro, Courier New, monospace;
         font-size: 16px;
         border-radius: 0.3em;
