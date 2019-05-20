@@ -131,6 +131,11 @@ const StyledCategoryList = styled.ul`
 
 const CategoryListItem = styled.li`
     padding: 0 10px;
+    margin: 0;
+
+    &:before {
+        content: '';
+    }
 `;
 
 const PostWrapperStyles = css`
