@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { DiscussionEmbed } from 'disqus-react';
 import { graphql } from 'gatsby';
+import Helmet from 'react-helmet';
 import Layout from '../components/Layout';
 import Link from '../components/Link';
 import ScrollProgress from '../utils/scrollProgress';
@@ -219,6 +220,20 @@ const Post = (props: PostProps) => {
 
     return (
         <Layout frontmatter={mdx.frontmatter}>
+            <Helmet>
+                <meta property="og:type" content="article" />
+                <meta property="article:author" content="Robert Cooper" />
+                <meta property="article:published_time" content={mdx.frontmatter.publicationDate} />
+                <meta
+                    property="article:modified_time"
+                    content={
+                        postUpdatedSinceFirstPublic ? mdx.frontmatter.updatedAtDate : mdx.frontmatter.publicationDate
+                    }
+                />
+                {mdx.frontmatter.categories.map((category: string) => (
+                    <meta property="article:tag" content={category} />
+                ))}
+            </Helmet>
             <ProgressContainer>
                 <ProgressBar ref={progressBar} />
             </ProgressContainer>

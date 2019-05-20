@@ -35,28 +35,25 @@ const ThemeWrapperComponent = ({ children }) => {
         Cookies.set('theme', newThemeValue);
     };
 
-    useEffect(
-        () => {
-            if (Cookies.get('theme')) {
-                setTheme(Cookies.get('theme'));
-            } else {
-                Cookies.set('theme', theme);
+    useEffect(() => {
+        if (Cookies.get('theme')) {
+            setTheme(Cookies.get('theme'));
+        } else {
+            Cookies.set('theme', theme);
+        }
+        if (typeof window !== `undefined`) {
+            // Reloads the disqus embed so that it can recalculate which color theme it should
+            // display based on the text color the embed inherits (see https://help.disqus.com/installation/disqus-appearance-tweaks for more details)
+            // TODO: Only run this command on pages that have the disqus embed
+            if (window.DISQUS) {
+                // Using a timeout since the reset function needs to run only after the page's CSS color settings
+                // have changed
+                setTimeout(() => {
+                    window.DISQUS.reset({ reload: true });
+                }, 1000);
             }
-            if (typeof window !== `undefined`) {
-                // Reloads the disqus embed so that it can recalculate which color theme it should
-                // display based on the text color the embed inherits (see https://help.disqus.com/installation/disqus-appearance-tweaks for more details)
-                // TODO: Only run this command on pages that have the disqus embed
-                if (window.DISQUS) {
-                    // Using a timeout since the reset function needs to run only after the page's CSS color settings
-                    // have changed
-                    setTimeout(() => {
-                        window.DISQUS.reset({ reload: true });
-                    }, 1000);
-                }
-            }
-        },
-        [theme],
-    );
+        }
+    }, [theme]);
 
     return (
         <ThemeContext.Provider

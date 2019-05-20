@@ -174,6 +174,7 @@ export const Layout = ({
                                             content={`${siteUrl}${publicURL || withPrefix('/social-sharing.jpg')}`}
                                         />
                                         <meta property="og:description" content={description} />
+                                        <meta property="og:type" content="website" />
                                     </Helmet>
                                     {!hideMenu && <Menu theme={theme} toggleTheme={toggleTheme} />}
                                     <MDXProvider components={mdxComponents}>
