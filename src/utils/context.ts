@@ -1,4 +1,5 @@
 import React from 'react';
+import Cookies from 'js-cookie';
 
 export enum ThemeEnum {
     light = 'light',
@@ -12,12 +13,15 @@ interface ContextValue {
     toggleTheme: () => null;
 }
 
-const ThemeContext = React.createContext<ContextValue | undefined>(undefined);
+export const ThemeContext = React.createContext<ContextValue>({
+    theme: (Cookies.get('theme') as ThemeEnum) || ThemeEnum.dark,
+    toggleTheme: () => null,
+});
 
 export const useTheme = () => {
     const context = React.useContext(ThemeContext);
     if (!context) {
-        throw new Error('useTheme must be within a ThemeContext');
+        throw new Error('useTheme must be within a ThemeProvider');
     }
     return context;
 };

@@ -6,7 +6,6 @@ import styled, { createGlobalStyle, ThemeProvider } from '../lib/styled-componen
 import Inter from '../../assets/fonts/Inter/Inter';
 import PrismJSStyles from '../styles/prismjs';
 import { colors, textColor, textSize } from '../styles/common';
-import { SiteMetadata } from '../types/SiteMetadata';
 import { useTheme } from '../utils/context';
 import mdxComponents from './mdx';
 import Footer, { footerHeight } from './Footer';

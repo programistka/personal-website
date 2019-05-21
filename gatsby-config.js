@@ -100,10 +100,10 @@ module.exports = {
             resolve: 'gatsby-plugin-manifest',
             options: {
                 name: 'Front end web developer and writer',
-                short_name: 'Robert Cooper',
+                short_name: 'Robert',
                 start_url: '/',
-                background_color: '#fff',
-                theme_color: '#114fe6', // TODO: Check how these colors manifest themselves 👻
+                background_color: '#F9FCFF',
+                theme_color: '#09203A',
                 display: 'standalone',
                 icon: 'assets/logo.png',
             },
