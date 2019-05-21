@@ -8,10 +8,10 @@ import { PageWrapper, LightButton } from '../components/Common';
 import { Project as ProjectType } from '../types/Project';
 import { Title } from '../components/Typography';
 import { colors, media, textSize } from '../styles/common';
-import { ThemeType } from '../utils/context';
+import { ThemeEnum } from '../utils/context';
 
 type ProjectProps = {
-    textColor: ThemeType;
+    textColor: ThemeEnum;
 };
 
 const Project = styled.div<ProjectProps>`

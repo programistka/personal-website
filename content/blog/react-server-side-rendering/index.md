@@ -74,7 +74,7 @@ NextJS is a framework used to build server-side rendered React applications. It 
 NextJS provides an elegant solution for the routing of your application, ways to code split your JavaScript, the ability to prefetch pages, and other server-side related stuff. Pages and routes are defined by creating a React component file in a **pages** directory. For example, creating a `profile.jsx` file inside the **pages** directory will make a page accessible at the **/profile** route in the browser.
 
 ![NextJS pages directory](./images/image-1.png)
-<span class="caption">NextJS pages are all in the <bold>pages</bold> directory and the filename corresponds to the page's route pathname</span>
+<span class="caption">NextJS pages are all in the <strong>pages</strong> directory and the filename corresponds to the page's route pathname</span>
 
 The following video demonstrates the code splitting provided by NextJS. Automatically, each page in NextJS is code-splitted, which means that every time you navigate to a page, you only load the JavaScript required for the page to run. Notice how on each new page navigation, a new JavaScript bundle is being loaded.
 

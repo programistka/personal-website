@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ThemeSwitch from '../ThemeSwitch';
-import { ThemeType, ThemeEnum } from '../../utils/context';
+import { ThemeEnum } from '../../utils/context';
 
 const Wrapper = styled.div`
     display: flex;
@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 type BlogThemeSwitchProps = {};
 
 const BlogThemeSwitch: BlogThemeSwitchProps = () => {
-    const [theme, setTheme] = useState<ThemeType>(ThemeEnum.light);
+    const [theme, setTheme] = useState<ThemeEnum>(ThemeEnum.light);
     const toggleTheme = () => {
         setTheme(previousTheme => (previousTheme === ThemeEnum.light ? ThemeEnum.dark : ThemeEnum.light));
     };

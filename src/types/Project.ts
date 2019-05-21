@@ -1,4 +1,4 @@
-import { ThemeType } from '../utils/context';
+import { ThemeEnum } from '../utils/context';
 import { FixedImage, FluidImage } from './Image';
 
 export type Project = {
@@ -12,7 +12,7 @@ export type Project = {
             subtitle: string;
             description: string;
             image: FixedImage & FluidImage;
-            textColor: ThemeType;
+            textColor: ThemeEnum;
             backgroundColor: string;
             detailsPageLink?: string;
         };

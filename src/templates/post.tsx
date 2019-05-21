@@ -236,7 +236,7 @@ const Post = (props: PostProps) => {
                     }
                 />
                 {mdx.frontmatter.categories.map((category: string) => (
-                    <meta property="article:tag" content={category} />
+                    <meta key={category} property="article:tag" content={category} />
                 ))}
             </Helmet>
             <ProgressContainer>

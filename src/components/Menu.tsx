@@ -2,7 +2,7 @@ import React from 'react';
 import { Location, WindowLocation } from '@reach/router';
 import styled from '../lib/styled-components';
 import { colors, media, textColor, textSize } from '../styles/common';
-import { ThemeType } from '../utils/context';
+import { useTheme } from '../utils/context';
 import Link from './Link';
 import { PageWrapper } from './Common';
 import ThemeSwitch from './ThemeSwitch';
@@ -104,12 +104,9 @@ const MenuTitleComponent = ({ location, children }: { location: WindowLocation; 
     }
 };
 
-type MenuComponentProps = {
-    theme: ThemeType;
-    toggleTheme: (event: Event) => null;
-};
+const MenuComponent = () => {
+    const { theme, toggleTheme } = useTheme();
 
-const MenuComponent = (props: MenuComponentProps) => {
     return (
         <Menu>
             <Location>
@@ -132,7 +129,7 @@ const MenuComponent = (props: MenuComponentProps) => {
                                 ))}
                             </NavList>
                         </Nav>
-                        <ModifiedThemeSwitch theme={props.theme} onChange={props.toggleTheme} />
+                        <ModifiedThemeSwitch theme={theme} onChange={toggleTheme} />
                     </ModifiedPageWrapper>
                 )}
             </Location>

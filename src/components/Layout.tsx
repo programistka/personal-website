@@ -6,7 +6,6 @@ import styled, { createGlobalStyle, ThemeProvider } from '../lib/styled-componen
 import Inter from '../../assets/fonts/Inter/Inter';
 import PrismJSStyles from '../styles/prismjs';
 import { colors, textColor, textSize } from '../styles/common';
-import { useTheme } from '../utils/context';
 import mdxComponents from './mdx';
 import Footer, { footerHeight } from './Footer';
 import Menu, { menuHeight } from './Menu';
@@ -26,7 +25,8 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     font-family: 'Inter', sans-serif;
 
-    background-color: ${props => (props.theme.color === 'light' ? colors.backgroundLight : colors.backgroundDark)};
+    background-color: ${props =>
+        props.theme && props.theme.color === 'light' ? colors.backgroundLight : colors.backgroundDark};
   }
 
   pre {
@@ -97,10 +97,6 @@ const GlobalStyles = createGlobalStyle`
         + h5 {
             margin-top: 0;
         }
-
-        bold {
-            font-weight: 600;
-        }
     }
 `;
 
@@ -129,8 +125,6 @@ export const Layout = ({
     hideFooter = false,
     children,
 }: LayoutProps) => {
-    const { theme, toggleTheme } = useTheme();
-
     return (
         <StaticQuery
             query={graphql`
@@ -158,31 +152,29 @@ export const Layout = ({
                 const description = frontmatterDescription || siteDescription;
 
                 return (
-                    <ThemeProvider theme={{ color: theme }}>
-                        <>
-                            <GlobalStyles />
-                            <Helmet title={title}>
-                                <html lang="en" />
-                                <meta name="description" content={description} />
+                    <>
+                        <GlobalStyles />
+                        <Helmet title={title}>
+                            <html lang="en" />
+                            <meta name="description" content={description} />
 
-                                <meta name="twitter:card" content="summary_large_image" />
-                                <meta name="twitter:site" content="@RobertCooper_RC" />
+                            <meta name="twitter:card" content="summary_large_image" />
+                            <meta name="twitter:site" content="@RobertCooper_RC" />
 
-                                <meta property="og:title" content={title} />
-                                <meta
-                                    property="og:image"
-                                    content={`${siteUrl}${publicURL || withPrefix('/social-sharing.jpg')}`}
-                                />
-                                <meta property="og:description" content={description} />
-                                <meta property="og:type" content="website" />
-                            </Helmet>
-                            {!hideMenu && <Menu theme={theme} toggleTheme={toggleTheme} />}
-                            <MDXProvider components={mdxComponents}>
-                                <Main>{children}</Main>
-                            </MDXProvider>
-                            {!hideFooter && <Footer />}
-                        </>
-                    </ThemeProvider>
+                            <meta property="og:title" content={title} />
+                            <meta
+                                property="og:image"
+                                content={`${siteUrl}${publicURL || withPrefix('/social-sharing.jpg')}`}
+                            />
+                            <meta property="og:description" content={description} />
+                            <meta property="og:type" content="website" />
+                        </Helmet>
+                        {!hideMenu && <Menu />}
+                        <MDXProvider components={mdxComponents}>
+                            <Main>{children}</Main>
+                        </MDXProvider>
+                        {!hideFooter && <Footer />}
+                    </>
                 );
             }}
         />

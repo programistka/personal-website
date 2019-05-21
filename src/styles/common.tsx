@@ -116,9 +116,10 @@ export const textSize = {
 
 export const textColor = {
     body: css`
-        color: ${props => (props.theme.color === 'light' ? colors.textBodyLight : colors.textBodyDark)};
+        color: ${props => (props.theme && props.theme.color === 'light' ? colors.textBodyLight : colors.textBodyDark)};
     `,
     title: css`
-        color: ${props => (props.theme.color === 'light' ? colors.textTitleLight : colors.textTitleDark)};
+        color: ${props =>
+            props.theme && props.theme.color === 'light' ? colors.textTitleLight : colors.textTitleDark};
     `,
 };

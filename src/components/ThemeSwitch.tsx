@@ -3,7 +3,6 @@
 
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { ThemeType } from '../utils/context';
 import { transitionDuration } from '../styles/common';
 import MoonSVG from './icons/Moon';
 
@@ -144,7 +143,7 @@ export const Circle = styled.div`
 
 type ThemeSwitchProps = {
     className?: string;
-    theme: ThemeType;
+    theme: ThemeEnum;
     onChange: React.MouseEventHandler<HTMLDivElement>;
 };
 

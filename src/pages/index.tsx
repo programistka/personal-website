@@ -12,7 +12,7 @@ import { Button, Divider, PageWrapper } from '../components/Common';
 import { FluidImage } from '../types/Image';
 import { Post } from '../types/Post';
 import { Project as ProjectType } from '../types/Project';
-import { ThemeType, useTheme } from '../utils/context';
+import { useTheme } from '../utils/context';
 import { Title } from '../components/Typography';
 import { colors, media, textSize, textColor } from '../styles/common';
 
@@ -183,7 +183,8 @@ const StyledTitle = styled(Title)`
     `};
 `;
 
-const SocialMediaGroup = ({ theme }: { theme: 'light' | 'dark' }): JSX.Element => {
+const SocialMediaGroup = (): JSX.Element => {
+    const { theme } = useTheme();
     const iconFill = theme === 'light' ? colors.textTitleLight : colors.textTitleDark;
     const items = [
         {
@@ -228,8 +229,6 @@ export const Home = ({
         projects: { edges: projects },
     },
 }: HomePageProps) => {
-    const { theme } = useTheme();
-
     return (
         <Layout>
             <Header>
@@ -245,7 +244,7 @@ export const Home = ({
                                 I'm <strong>Robert Cooper</strong>, a front-end web developer that builds web apps and
                                 writes articles on web development ✌🏻
                             </IntroDescription>
-                            <SocialMediaGroup theme={theme} />
+                            <SocialMediaGroup />
                         </Fade>
                     </Intro>
                 </HeaderWrapper>
