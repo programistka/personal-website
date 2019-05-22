@@ -67,3 +67,15 @@ export const LightButton = styled(Button)`
         border-color: ${colors.buttonActiveBorderDark};
     }
 `;
+
+export const DarkButton = styled(Button)`
+    background-color: ${colors.buttonInactiveBackgroundLight};
+    color: ${colors.buttonInactiveTextLight};
+    border-color: ${colors.buttonInactiveBorderLight};
+
+    &:hover {
+        background-color: ${colors.buttonActiveBackgroundLight};
+        color: ${colors.buttonActiveTextLight};
+        border-color: ${colors.buttonActiveBorderLight};
+    }
+`;

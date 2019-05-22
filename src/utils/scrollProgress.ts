@@ -30,7 +30,7 @@ function noop(): void {}
  * @param {Function} handleUpdate method to call on scroll update
  * @returns {undefined}
  */
-const ScrollProgress = (function(this: ScrollProgress, handleUpdate: ((x: number, y: number) => void)): void {
+const ScrollProgress = (function(this: ScrollProgress, handleUpdate: (x: number, y: number) => void): void {
     // assign function to call on update
     this._handleUpdate = typeof handleUpdate === 'function' ? handleUpdate : noop;
 
@@ -50,7 +50,7 @@ const ScrollProgress = (function(this: ScrollProgress, handleUpdate: ((x: number
     // add event listeners
     window.addEventListener('scroll', this._onScroll);
     window.addEventListener('resize', this._onResize);
-} as any) as { new (handleUpdate: ((x: number, y: number) => void)): ScrollProgress };
+} as any) as { new (handleUpdate: (x: number, y: number) => void): ScrollProgress };
 
 /**
  * Get vertical trajectory of the viewport

@@ -1,7 +1,6 @@
 import Img from 'gatsby-image';
 import React from 'react';
 import { graphql } from 'gatsby';
-import Fade from 'react-reveal/Fade';
 import styled from '../../lib/styled-components';
 import Layout from '../../components/Layout';
 import { PageWrapper, PaddedPageWrapper, Divider, Button } from '../../components/Common';

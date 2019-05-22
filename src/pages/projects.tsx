@@ -4,7 +4,7 @@ import { graphql } from 'gatsby';
 import Fade from 'react-reveal/Fade';
 import styled from '../lib/styled-components';
 import Layout from '../components/Layout';
-import { PageWrapper, LightButton } from '../components/Common';
+import { PageWrapper, LightButton, DarkButton } from '../components/Common';
 import { Project as ProjectType } from '../types/Project';
 import { Title } from '../components/Typography';
 import { colors, media, textSize } from '../styles/common';
@@ -57,7 +57,11 @@ const ProjectImage = styled(Img)`
     `};
 `;
 
-const ProjectButton = styled(LightButton)`
+const LightProjectButton = styled(LightButton)`
+    margin-top: 40px;
+`;
+
+const DarkProjectButton = styled(DarkButton)`
     margin-top: 40px;
 `;
 
@@ -67,6 +71,16 @@ type ProjectsProps = {
             edges: ProjectType[];
         };
     };
+};
+
+const renderProjectButton = ({ to, theme }: { to: string; theme: ThemeEnum }) => {
+    let Button;
+    if (theme === ThemeEnum.dark) {
+        Button = DarkProjectButton;
+    } else {
+        Button = LightProjectButton;
+    }
+    return <Button to={to}>Read more</Button>;
 };
 
 export const Projects = ({
@@ -88,9 +102,11 @@ export const Projects = ({
                             <ProjectTitle as="h2">{project.frontmatter.title}</ProjectTitle>
                             <ProjectSubtitle>{project.frontmatter.subtitle}</ProjectSubtitle>
                             <ProjectDescription>{project.frontmatter.description}</ProjectDescription>
-                            {project.frontmatter.detailsPageLink && (
-                                <ProjectButton to={project.frontmatter.detailsPageLink}>Read more</ProjectButton>
-                            )}
+                            {project.frontmatter.detailsPageLink &&
+                                renderProjectButton({
+                                    to: project.frontmatter.detailsPageLink,
+                                    theme: project.frontmatter.textColor,
+                                })}
                         </PageWrapper>
                     </Fade>
                 </Project>
