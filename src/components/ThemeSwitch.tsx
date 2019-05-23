@@ -4,6 +4,7 @@
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { transitionDuration } from '../styles/common';
+import { ThemeEnum } from '../utils/context';
 import MoonSVG from './icons/Moon';
 
 const width = 56;

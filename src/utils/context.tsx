@@ -11,10 +11,13 @@ interface ContextValue {
     toggleTheme: () => void;
 }
 
-export const ThemeContext = React.createContext<ContextValue | undefined>({ theme: ThemeEnum.dark });
+export const ThemeContext = React.createContext<ContextValue | undefined>({
+    theme: ThemeEnum.dark,
+    toggleTheme: () => null,
+});
 
 export const useTheme = () => {
-    const context = React.useContext(ThemeContext);
+    const context = React.useContext<ContextValue | undefined>(ThemeContext);
     if (!context) {
         throw new Error('useTheme must be within a ThemeProvider');
     }
