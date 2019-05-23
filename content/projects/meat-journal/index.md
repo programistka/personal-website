@@ -7,6 +7,7 @@ image: './images/main.png'
 backgroundColor: '#F9CD5C'
 textColor: 'dark'
 detailsPageLink: '/project/meat-journal'
+banner: './images/meat-journal-social-sharing.png'
 ---
 
 import Link from "\$components/Link";

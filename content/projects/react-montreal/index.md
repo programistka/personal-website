@@ -7,6 +7,7 @@ image: './images/main.png'
 backgroundColor: '#27263A'
 textColor: 'light'
 detailsPageLink: '/project/react-montreal'
+banner: './images/react-montreal-social-sharing.png'
 ---
 
 import Link from "\$components/Link";

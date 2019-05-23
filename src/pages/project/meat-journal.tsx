@@ -135,7 +135,7 @@ export const Project = ({
     },
 }: ProjectsProps) => {
     return (
-        <Layout title="Robert Cooper | Meat Journal">
+        <Layout title="Robert Cooper | Meat Journal" frontmatter={project}>
             <Header backgroundColor={project.backgroundColor}>
                 <StyledPageWrapper>
                     <LeftSection>
@@ -242,6 +242,9 @@ export const pageQuery = graphql`
                             ...GatsbyImageSharpFluid
                         }
                     }
+                }
+                banner {
+                    publicURL
                 }
             }
         }

@@ -120,7 +120,7 @@ export const Project = ({
     },
 }: ProjectsProps) => {
     return (
-        <Layout title="Robert Cooper | React Montreal">
+        <Layout title="Robert Cooper | React Montreal" frontmatter={project}>
             <Header backgroundColor={project.backgroundColor}>
                 <StyledPageWrapper>
                     <LeftSection>
@@ -223,6 +223,9 @@ export const pageQuery = graphql`
                             ...GatsbyImageSharpFluid
                         }
                     }
+                }
+                banner {
+                    publicURL
                 }
             }
         }

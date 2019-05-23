@@ -15,6 +15,9 @@ export type Project = {
             textColor: ThemeEnum;
             backgroundColor: string;
             detailsPageLink?: string;
+            banner: {
+                publicURL: string | null;
+            };
         };
     };
 };
