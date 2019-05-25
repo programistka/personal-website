@@ -93,7 +93,8 @@ const MDXContent = styled.div`
     .gatsby-highlight {
         margin-top: 40px;
         margin-bottom: 40px;
-        ${props => props.theme.color === 'dark' && `border: 2px solid ${colors.borderDark}`};
+        /* I can't get this styles to load on initial app load :( */
+        /* ${props => props.theme.color === 'dark' && `border: 2px solid ${colors.borderDark}`}; */
     }
 
     .gatsby-resp-image-wrapper {

@@ -159,6 +159,7 @@ const PrismJSStyles = css`
         background: #011627;
         -webkit-overflow-scrolling: touch;
         overflow: auto;
+        border: 2px solid rgba(128, 178, 237, 0.2);
     }
 
     .gatsby-highlight pre[class*='language-'] {

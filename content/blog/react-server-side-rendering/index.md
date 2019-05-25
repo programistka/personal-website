@@ -12,7 +12,7 @@ import Video from "$components/mdx/Video";
 import Youtube from "$components/mdx/Youtube";
 import Comparison from "./Comparison";
 
-![Banner Image.](./images/banner.png)
+![Should You Build a Server-side Rendered React Application?](./images/banner.png)
 
 Server-side rendering isn't something new, but it's something that's not understood by everybody, especially with the prevalence of client-side rendered apps. I'm going to talk about server-side rendered (SSR) React applications and give my opinion on whether it's worth implementing SSR in a React app.
 
