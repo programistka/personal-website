@@ -23,17 +23,17 @@ const PrismJSStyles = css`
         -moz-hyphens: none;
         -ms-hyphens: none;
         hyphens: none;
-        font-size: 16px;
+        font-size: 1rem;
 
         ${media.small`
-          font-size: 14px;
+          font-size: .875rem;
         `}
     }
 
     /* Code blocks */
     pre[class*='language-'] {
         overflow: auto;
-        padding: 1em;
+        padding: 1rem;
     }
 
     pre[class*='language-']::-moz-selection {

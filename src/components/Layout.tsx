@@ -5,7 +5,7 @@ import { withPrefix, StaticQuery, graphql } from 'gatsby';
 import styled, { createGlobalStyle, ThemeProvider } from '../lib/styled-components';
 import Inter from '../../assets/fonts/Inter/Inter';
 import PrismJSStyles from '../styles/prismjs';
-import { colors, textColor, textSize } from '../styles/common';
+import { colors, textColor, textSize, media } from '../styles/common';
 import mdxComponents from './mdx';
 import Footer, { footerHeight } from './Footer';
 import Menu, { menuHeight } from './Menu';
@@ -24,9 +24,13 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     font-family: 'Inter', sans-serif;
-
     background-color: ${props =>
         props.theme && props.theme.color === 'light' ? colors.backgroundLight : colors.backgroundDark};
+    font-size: 16px;
+
+    ${media.small`
+      font-size: 14px;
+    `}
   }
 
   pre {

@@ -7,6 +7,8 @@ import BlogCard from './BlogCard';
 const BlogList = styled.div`
     display: flex;
     flex-direction: column;
+    margin-left: -20px;
+    margin-right: -20px;
 
     ${media.large`
         flex-direction: row;

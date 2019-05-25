@@ -7,18 +7,17 @@ import { Post as PostType } from '../types/Post';
 import Link from './Link';
 
 const Post = styled.section`
-    width: calc(100% - 40px);
-    background-color: ${props =>
-        props.theme.color === 'light' ? colors.backgroundSecondaryLight : colors.backgroundSecondaryDark};
+    width: 100%;
     height: 340px;
-    margin: 0 20px 80px;
+    margin: 0 0 80px;
+    padding: 0 20px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: all ease-in-out ${transitionDuration.slow};
 
     ${media.large`
-        height: unset;
-        margin: 0 20px 60px;
+        height: calc(100% - 60px);
+        margin: 0 0 60px;
         flex-basis: 400px;
         flex-grow: 1;
         max-width: 500px;
@@ -34,6 +33,8 @@ const PostLink = styled(Link)`
     display: flex;
     text-decoration: none;
     height: 100%;
+    background-color: ${props =>
+        props.theme.color === 'light' ? colors.backgroundSecondaryLight : colors.backgroundSecondaryDark};
 
     ${media.large`
         flex-direction: column-reverse;

@@ -20,10 +20,15 @@ const StyledTitle = styled(Title)`
 
 const Pagination = styled.ul`
     display: flex;
+    padding: 0;
 `;
 
 const PaginationItem = styled.li<{ position: string }>`
     margin-left: ${props => (props.position === 'right' ? 'auto' : 0)};
+
+    &:before {
+        display: none;
+    }
 `;
 
 const PaginationLink = styled(Link)``;
