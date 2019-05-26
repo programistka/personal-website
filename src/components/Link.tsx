@@ -1,4 +1,4 @@
-import GatsbyLink from 'gatsby-link';
+import { Link as GatsbyLink } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
 import { colors } from '../styles/common';

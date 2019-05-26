@@ -40,7 +40,6 @@ module.exports = {
                         options: {
                             quality: 80,
                             maxWidth: 800,
-                            sizeByPixelDensity: true,
                             backgroundColor: 'none',
                             withWebp: true,
                         },
