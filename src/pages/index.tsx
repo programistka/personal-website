@@ -149,11 +149,14 @@ const Projects = styled.div`
     margin-bottom: 20px;
 `;
 
+const ProjectWrapper = styled.div`
+    flex-basis: 360px;
+`;
+
 const Project = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex-basis: 360px;
     margin: 0 20px;
     margin-bottom: 60px;
 `;
@@ -234,18 +237,14 @@ export const Home = ({
             <Header>
                 <HeaderWrapper>
                     <HeadshotWrapper>
-                        <Fade left>
-                            <Headshot fluid={homeHeadshot.childImageSharp.fluid} alt="Robert Cooper's headshot" />
-                        </Fade>
+                        <Headshot fluid={homeHeadshot.childImageSharp.fluid} alt="Robert Cooper's headshot" />
                     </HeadshotWrapper>
                     <Intro>
-                        <Fade right>
-                            <IntroDescription>
-                                I'm <strong>Robert Cooper</strong>, a front-end web developer that builds web apps and
-                                writes articles on web development ✌🏻
-                            </IntroDescription>
-                            <SocialMediaGroup />
-                        </Fade>
+                        <IntroDescription>
+                            I'm <strong>Robert Cooper</strong>, a front-end web developer that builds web apps and
+                            writes articles on web development ✌🏻
+                        </IntroDescription>
+                        <SocialMediaGroup />
                     </Intro>
                 </HeaderWrapper>
                 <HeaderImage
@@ -260,25 +259,31 @@ export const Home = ({
                         <StyledTitle as="h2">Recent Posts</StyledTitle>
                     </Fade>
                     <BlogList posts={posts} />
-                    <Fade top>
+                    <Fade bottom>
                         <Button to="/blog">See all posts</Button>
                     </Fade>
                 </RecentPosts>
-                <Divider />
+                <Fade>
+                    <Divider />
+                </Fade>
                 <Section>
-                    <StyledTitle as="h2">Recent Projects</StyledTitle>
+                    <Fade top>
+                        <StyledTitle as="h2">Recent Projects</StyledTitle>
+                    </Fade>
                     <Projects>
                         {projects.map(({ node: project }) => (
-                            <Project key={project.fields.id}>
-                                <Fade top>
-                                    <ProjectImage fixed={project.frontmatter.image.childImageSharp.fixed} />
-                                    <ProjectTitle>{project.frontmatter.title}</ProjectTitle>
-                                    <ProjectDescription>{project.frontmatter.description}</ProjectDescription>
+                            <ProjectWrapper>
+                                <Fade top key={project.fields.id}>
+                                    <Project>
+                                        <ProjectImage fixed={project.frontmatter.image.childImageSharp.fixed} />
+                                        <ProjectTitle>{project.frontmatter.title}</ProjectTitle>
+                                        <ProjectDescription>{project.frontmatter.description}</ProjectDescription>
+                                    </Project>
                                 </Fade>
-                            </Project>
+                            </ProjectWrapper>
                         ))}
                     </Projects>
-                    <Fade top>
+                    <Fade bottom>
                         <Button to="/projects">See all projects</Button>
                     </Fade>
                 </Section>
