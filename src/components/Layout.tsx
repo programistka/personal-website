@@ -26,11 +26,6 @@ const GlobalStyles = createGlobalStyle`
     font-family: 'Inter', sans-serif;
     background-color: ${props =>
         props.theme && props.theme.color === 'light' ? colors.backgroundLight : colors.backgroundDark};
-    font-size: 16px;
-
-    ${media.small`
-      font-size: 14px;
-    `}
   }
 
   pre {
