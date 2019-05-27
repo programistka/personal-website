@@ -68,7 +68,9 @@ The above aliases can be added to the `.zshrc` file. With these aliases, the `ch
 
 For a complete look at my Zsh configuration, you can <Link to="https://gist.github.com/robertcoopercode/d761345c35d59c4d831bb8af0c9982d1">take a look at this gist</Link>.
 
-<Quote><strong>Note:</strong> A lot of people like to use <Link to="https://github.com/robbyrussell/oh-my-zsh">oh-my-zsh</Link> with Zsh since it facilitates the setup of themes as well as the addition of functionality through the oh-my-zsh plugin system. I've moved away from using oh-my-zsh as I've found that it comes along with a lot of bloat that I don't use.</Quote>
+<Quote>
+<strong>Note:</strong> A lot of people like to use <Link to="https://github.com/robbyrussell/oh-my-zsh">oh-my-zsh</Link> with Zsh since it facilitates the setup of themes as well as the addition of functionality through the oh-my-zsh plugin system. I've moved away from using oh-my-zsh as I've found that it comes along with a lot of bloat that I don't use.
+</Quote>
 
 ### Prompt
 

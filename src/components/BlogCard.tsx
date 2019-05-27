@@ -11,9 +11,6 @@ const Post = styled.section`
     height: 340px;
     margin: 0 0 80px;
     padding: 0 20px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: all ease-in-out ${transitionDuration.slow};
 
     ${media.large`
         height: calc(100% - 60px);
@@ -22,11 +19,6 @@ const Post = styled.section`
         flex-grow: 1;
         max-width: 500px;
     `};
-
-    &:hover {
-        transform: scale(1.02) !important;
-        box-shadow: 0 4px 16px 8px rgba(0, 0, 0, 0.1);
-    }
 `;
 
 const PostLink = styled(Link)`
@@ -35,10 +27,17 @@ const PostLink = styled(Link)`
     height: 100%;
     background-color: ${props =>
         props.theme.color === 'light' ? colors.backgroundSecondaryLight : colors.backgroundSecondaryDark};
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all ease-in-out ${transitionDuration.slow};
 
     ${media.large`
         flex-direction: column-reverse;
     `};
+
+    &:hover {
+        transform: scale(1.02) !important;
+        box-shadow: 0 4px 16px 8px rgba(0, 0, 0, 0.1);
+    }
 `;
 
 const PostDescription = styled.div`
