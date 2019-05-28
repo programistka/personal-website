@@ -32,7 +32,7 @@ type LinkComponentProps = {
 };
 
 const LinkComponent = ({ children, to, active = 'false', ...other }: LinkComponentProps) => {
-    const internal = /^\/(?!\/)/.test(to);
+    const internal = /^\/(?!\/)(?!static\/)/.test(to);
 
     if (internal) {
         return (
