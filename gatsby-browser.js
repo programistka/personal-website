@@ -10,7 +10,7 @@ require('./src/styles/prismjs.css');
  * https://github.com/WICG/focus-visible
  * https://davidwalsh.name/css-focus
  */
-// import 'focus-visible';
+import 'focus-visible';
 
 const Wrapper = ({ children }) => {
     const { theme } = useTheme();

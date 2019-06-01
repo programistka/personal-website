@@ -77,9 +77,9 @@ const GlobalStyles = createGlobalStyle`
     * This will hide the focus indicator if the element receives focus via the mouse,
     * but it will still show up on keyboard focus.
     */
-    /* .js-focus-visible :focus:not(.focus-visible) {
+    .js-focus-visible :focus:not(.focus-visible) {
     outline: none;
-    } */
+    }
 
     .caption {
         font-style: italic;
