@@ -10,7 +10,7 @@ const Post = styled.section`
     width: 100%;
     height: 340px;
     margin: 0 0 80px;
-    padding: 0 20px;
+    /* padding: 0 20px; */
 
     ${media.large`
         height: calc(100% - 60px);

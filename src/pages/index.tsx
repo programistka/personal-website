@@ -135,7 +135,7 @@ const Section = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 80px 0;
+    padding: 80px 20px;
 `;
 
 const RecentPosts = styled(Section)`
@@ -147,17 +147,20 @@ const Projects = styled.div`
     flex-wrap: wrap;
     justify-content: center;
     margin-bottom: 20px;
+    margin-left: -20px;
+    margin-right: -20px;
 `;
 
 const ProjectWrapper = styled.div`
     flex-basis: 360px;
+    max-width: 100%;
 `;
 
 const Project = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0 20px;
+    padding: 0 20px;
     margin-bottom: 60px;
 `;
 
@@ -170,6 +173,8 @@ const ProjectTitle = styled.h3`
 
 const ProjectImage = styled(Img)`
     margin-bottom: 20px;
+    width: 240px;
+    max-width: 100%;
 `;
 
 const ProjectDescription = styled.p`
@@ -275,7 +280,7 @@ export const Home = ({
                             <ProjectWrapper>
                                 <Fade top key={project.fields.id}>
                                     <Project>
-                                        <ProjectImage fixed={project.frontmatter.image.childImageSharp.fixed} />
+                                        <ProjectImage fluid={project.frontmatter.image.childImageSharp.fluid} />
                                         <ProjectTitle>{project.frontmatter.title}</ProjectTitle>
                                         <ProjectDescription>{project.frontmatter.description}</ProjectDescription>
                                     </Project>
@@ -354,8 +359,8 @@ export const pageQuery = graphql`
                         description
                         image {
                             childImageSharp {
-                                fixed(width: 240) {
-                                    ...GatsbyImageSharpFixed
+                                fluid(maxWidth: 240) {
+                                    ...GatsbyImageSharpFluid
                                 }
                             }
                         }
