@@ -4,7 +4,6 @@ import { MDXProvider } from '@mdx-js/react';
 import { withPrefix, StaticQuery, graphql } from 'gatsby';
 import styled, { createGlobalStyle } from '../lib/styled-components';
 import Inter from '../../assets/fonts/Inter/Inter';
-import PrismJSStyles from '../styles/prismjs';
 import { colors, textColor, textSize } from '../styles/common';
 import mdxComponents from './mdx';
 import Footer, { footerHeight } from './Footer';
@@ -12,7 +11,6 @@ import Menu, { menuHeight } from './Menu';
 
 const GlobalStyles = createGlobalStyle`
   ${Inter};
-  ${PrismJSStyles};
 
   * {
       box-sizing: border-box;

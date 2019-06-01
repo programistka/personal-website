@@ -91,12 +91,7 @@ module.exports = {
         },
         'gatsby-plugin-sharp',
         'gatsby-transformer-sharp',
-        {
-            resolve: 'gatsby-plugin-styled-components',
-            optionns: {
-                minify: false,
-            },
-        },
+        'gatsby-plugin-styled-components',
         'gatsby-plugin-catch-links',
         'gatsby-plugin-react-helmet',
         'gatsby-plugin-typescript',
