@@ -9,6 +9,7 @@ const BlogList = styled.div`
     flex-direction: column;
     margin-left: -20px;
     margin-right: -20px;
+    width: 100%;
 
     ${media.large`
         flex-direction: row;
