@@ -9,7 +9,7 @@ banner: './images/banner.png'
 ---
 
 import GithubButton from 'components/mdx/GithubButton';
-import Quote from "$components/mdx/Quote";
+import Quote from "\$components/mdx/Quote";
 
 ![Banner Image.](./images/banner.png)
 
@@ -23,43 +23,51 @@ Here's a checklist component that allows a user to check off items and display a
 
 > **Note:** All these examples are written in TypeScript.
 
+<!-- prettier-ignore -->
 ```tsx
 export const Checklist = ({ items }: ChecklistProps) => {
-    const [checklistItems, setChecklistItems] = useState(items);
+  const [checklistItems, setChecklistItems] = useState(items);
 
-    const handleClick = (itemIndex: number) => {
-        const toggledItem = { ...checklistItems[itemIndex] };
-        toggledItem.completed = !toggledItem.completed;
-        setChecklistItems([...checklistItems.slice(0, itemIndex), toggledItem, ...checklistItems.slice(itemIndex + 1)]);
-    };
+  const handleClick = (itemIndex: number) => {
+    const toggledItem = { ...checklistItems[itemIndex] };
+    toggledItem.completed = !toggledItem.completed;
+    setChecklistItems([
+      ...checklistItems.slice(0, itemIndex),
+      toggledItem,
+      ...checklistItems.slice(itemIndex + 1)
+    ]);
+  };
 
-    // Determine if all tasks are completed
-    const allTasksCompleted = checklistItems.every(({ completed }) => completed);
+  // Determine if all tasks are completed
+  const allTasksCompleted = checklistItems.every(({ completed }) => completed);
 
-    return (
-        <div>
-            <form>
-                {checklistItems.map((item, index) => (
-                    <React.Fragment key={item.description}>
-                        <input
-                            onChange={() => handleClick(index)}
-                            type="checkbox"
-                            className="checkbox"
-                            checked={item.completed ? true : false}
-                            id={item.description}
-                        />
-                        <label htmlFor={item.description}>{item.description}</label>
-                    </React.Fragment>
-                ))}
-            </form>
-            <TasksCompletedMessage className="xs-text-4 text-green xs-mt2" visible={allTasksCompleted}>
-                All tasks completed{' '}
-                <span role="img" aria-label="checkmark">
-                    ✅
-                </span>
-            </TasksCompletedMessage>
-        </div>
-    );
+  return (
+    <div>
+      <form>
+        {checklistItems.map((item, index) => (
+          <React.Fragment key={item.description}>
+            <input
+              onChange={() => handleClick(index)}
+              type="checkbox"
+              className="checkbox"
+              checked={item.completed ? true : false}
+              id={item.description}
+            />
+            <label htmlFor={item.description}>{item.description}</label>
+          </React.Fragment>
+        ))}
+      </form>
+      <TasksCompletedMessage
+        className="xs-text-4 text-green xs-mt2"
+        visible={allTasksCompleted}
+      >
+        All tasks completed{" "}
+        <span role="img" aria-label="checkmark">
+          ✅
+        </span>
+      </TasksCompletedMessage>
+    </div>
+  );
 };
 ```
 
@@ -73,49 +81,54 @@ Here's what the component would look like when used:
 
 Now when I'm thinking of testing this component, I want to make sure that a user is able to properly select a checkbox and also display the completed message when all the items have been checked. Here's how these tests would look like when written with react-testing-library:
 
+<!-- prettier-ignore -->
 ```tsx
 afterEach(cleanup);
 
 const mockItems = [
-    {
-        description: 'first item',
-        completed: false,
-    },
-    {
-        description: 'second item',
-        completed: false,
-    },
-    {
-        description: 'third item',
-        completed: false,
-    },
+  {
+    description: "first item",
+    completed: false
+  },
+  {
+    description: "second item",
+    completed: false
+  },
+  {
+    description: "third item",
+    completed: false
+  }
 ];
 
-describe('Checklist', () => {
-    it('should check two out the three checklist items', () => {
-        const { getByText, getByLabelText } = render(<Checklist items={mockItems} />);
+describe("Checklist", () => {
+  it("should check two out the three checklist items", () => {
+    const { getByText, getByLabelText } = render(
+      <Checklist items={mockItems} />
+    );
 
-        fireEvent.click(getByText('first item'));
-        fireEvent.click(getByText('second item'));
+    fireEvent.click(getByText("first item"));
+    fireEvent.click(getByText("second item"));
 
-        expect(getByLabelText('first item').checked).toBe(true);
-        expect(getByLabelText('second item').checked).toBe(true);
-        expect(getByLabelText('third item').checked).toBe(false);
-        expect(getByText('All tasks completed')).not.toBeVisible();
-    });
+    expect(getByLabelText("first item").checked).toBe(true);
+    expect(getByLabelText("second item").checked).toBe(true);
+    expect(getByLabelText("third item").checked).toBe(false);
+    expect(getByText("All tasks completed")).not.toBeVisible();
+  });
 
-    it('should display a message when all items are completed', () => {
-        const { getByText, getByLabelText } = render(<Checklist items={mockItems} />);
+  it("should display a message when all items are completed", () => {
+    const { getByText, getByLabelText } = render(
+      <Checklist items={mockItems} />
+    );
 
-        fireEvent.click(getByText('first item'));
-        fireEvent.click(getByText('second item'));
-        fireEvent.click(getByText('third item'));
+    fireEvent.click(getByText("first item"));
+    fireEvent.click(getByText("second item"));
+    fireEvent.click(getByText("third item"));
 
-        expect(getByLabelText('first item').checked).toBe(true);
-        expect(getByLabelText('second item').checked).toBe(true);
-        expect(getByLabelText('third item').checked).toBe(true);
-        expect(getByText('All tasks completed')).toBeVisible();
-    });
+    expect(getByLabelText("first item").checked).toBe(true);
+    expect(getByLabelText("second item").checked).toBe(true);
+    expect(getByLabelText("third item").checked).toBe(true);
+    expect(getByText("All tasks completed")).toBeVisible();
+  });
 });
 ```
 
@@ -125,121 +138,128 @@ react-testing-library doesn't only allow you to target elements by text, but you
 
 Another important thing to notice in these tests is that we aren't looking at the value for the internal component state, nor are we testing any of the functions being used within the component itself. Basically what this means is that we **don't care about testing the implementation** details of our component, but we are more interested in testing how the component will **actually be used by a user**. Actually, it's extremely difficult to test implementation details of a function component since it's not possible to access the component state, nor can we access any of the functions/methods that are defined and used inside of the component. However, as a fun exercise, let's look at our checklist component written in as a class component:
 
+<!-- prettier-ignore -->
 ```tsx
 export class Checklist extends React.Component<ChecklistProps, ChecklistState> {
-    state = {
-        checklistItems: this.props.items,
-    };
+  state = {
+    checklistItems: this.props.items
+  };
 
-    handleChange = (itemIndex: number) => {
-        const toggledItem = { ...this.state.checklistItems[itemIndex] };
-        toggledItem.completed = !toggledItem.completed;
-        this.setState({
-            checklistItems: [
-                ...this.state.checklistItems.slice(0, itemIndex),
-                toggledItem,
-                ...this.state.checklistItems.slice(itemIndex + 1),
-            ],
-        });
-    };
+  handleChange = (itemIndex: number) => {
+    const toggledItem = { ...this.state.checklistItems[itemIndex] };
+    toggledItem.completed = !toggledItem.completed;
+    this.setState({
+      checklistItems: [
+        ...this.state.checklistItems.slice(0, itemIndex),
+        toggledItem,
+        ...this.state.checklistItems.slice(itemIndex + 1)
+      ]
+    });
+  };
 
-    render() {
-        // Determine if all tasks are completed
-        const allTasksCompleted = this.state.checklistItems.every(({ completed }) => completed);
-        return (
-            <div>
-                <form>
-                    {this.state.checklistItems.map((item, index) => (
-                        <React.Fragment key={item.description}>
-                            <input
-                                onChange={() => this.handleChange(index)}
-                                type="checkbox"
-                                className="checkbox"
-                                checked={item.completed ? true : false}
-                                id={item.description}
-                            />
-                            <label htmlFor={item.description}>{item.description}</label>
-                        </React.Fragment>
-                    ))}
-                </form>
-                <TasksCompletedMessage className="xs-text-4 text-green xs-mt2" visible={allTasksCompleted}>
-                    All tasks completed{' '}
-                    <span role="img" aria-label="checkmark">
-                        ✅
-                    </span>
-                </TasksCompletedMessage>
-            </div>
-        );
-    }
+  render() {
+    // Determine if all tasks are completed
+    const allTasksCompleted = this.state.checklistItems.every(
+      ({ completed }) => completed
+    );
+    return (
+      <div>
+        <form>
+          {this.state.checklistItems.map((item, index) => (
+            <React.Fragment key={item.description}>
+              <input
+                onChange={() => this.handleChange(index)}
+                type="checkbox"
+                className="checkbox"
+                checked={item.completed ? true : false}
+                id={item.description}
+              />
+              <label htmlFor={item.description}>{item.description}</label>
+            </React.Fragment>
+          ))}
+        </form>
+        <TasksCompletedMessage
+          className="xs-text-4 text-green xs-mt2"
+          visible={allTasksCompleted}
+        >
+          All tasks completed{" "}
+          <span role="img" aria-label="checkmark">
+            ✅
+          </span>
+        </TasksCompletedMessage>
+      </div>
+    );
+  }
 }
 ```
 
 Now, let's use enzyme to test our checklist class component. However, this time we will be testing the implementation details of our component.
 
+<!-- prettier-ignore -->
 ```tsx
 const mockItems = [
-    {
-        description: 'first item',
-        completed: false,
-    },
-    {
-        description: 'second item',
-        completed: false,
-    },
-    {
-        description: 'third item',
-        completed: false,
-    },
+  {
+    description: "first item",
+    completed: false
+  },
+  {
+    description: "second item",
+    completed: false
+  },
+  {
+    description: "third item",
+    completed: false
+  }
 ];
 
-describe('Checklist Class Component', () => {
-    it('should render all 3 list items', () => {
-        const wrapper = mount(<Checklist items={mockItems} />);
+describe("Checklist Class Component", () => {
+  it("should render all 3 list items", () => {
+    const wrapper = mount(<Checklist items={mockItems} />);
 
-        expect(wrapper.find('label').length).toBe(3);
+    expect(wrapper.find("label").length).toBe(3);
+  });
+
+  describe("handleChange", () => {
+    it("should check two out the three checklist items", () => {
+      const wrapper = mount(<Checklist items={mockItems} />);
+      const instance = wrapper.instance();
+
+      instance.handleChange(0);
+      instance.handleChange(1);
+
+      expect(wrapper.state("checklistItems")).toEqual([
+        {
+          description: "first item",
+          completed: true
+        },
+        {
+          description: "second item",
+          completed: true
+        },
+        {
+          description: "third item",
+          completed: false
+        }
+      ]);
     });
 
-    describe('handleChange', () => {
-        it('should check two out the three checklist items', () => {
-            const wrapper = mount(<Checklist items={mockItems} />);
-            const instance = wrapper.instance();
+    it("should display a message when all items are completed", () => {
+      const wrapper = mount(<Checklist items={mockItems} />);
+      const instance = wrapper.instance();
 
-            instance.handleChange(0);
-            instance.handleChange(1);
+      instance.handleChange(0);
+      instance.handleChange(1);
+      instance.handleChange(2);
+      wrapper.update();
 
-            expect(wrapper.state('checklistItems')).toEqual([
-                {
-                    description: 'first item',
-                    completed: true,
-                },
-                {
-                    description: 'second item',
-                    completed: true,
-                },
-                {
-                    description: 'third item',
-                    completed: false,
-                },
-            ]);
-        });
-
-        it('should display a message when all items are completed', () => {
-            const wrapper = mount(<Checklist items={mockItems} />);
-            const instance = wrapper.instance();
-
-            instance.handleChange(0);
-            instance.handleChange(1);
-            instance.handleChange(2);
-            wrapper.update();
-
-            expect(
-                wrapper
-                    .find('.text-green')
-                    .first()
-                    .props().visible,
-            ).toBe(true);
-        });
+      expect(
+        wrapper
+          .find(".text-green")
+          .first()
+          .props().visible
+      ).toBe(true);
     });
+  });
 });
 ```
 

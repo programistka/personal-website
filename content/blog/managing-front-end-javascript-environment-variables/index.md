@@ -64,20 +64,22 @@ Environment variables are injected into applications at build/compile time, whic
 
 When using _webpack_, environment variables can be set using the [_DefinePlugin_](https://webpack.js.org/plugins/define-plugin/). _DefinePlugin_ allows global variables to be set and made available in JavaScript code. To use _DefinePlugin_, add it to a `webpack.config` file's plugins array:
 
+<!-- prettier-ignore -->
 ```javascript
-const webpack = require('webpack');
+const webpack = require("webpack");
 
 module.exports = () => ({
-    plugins: [
-        new webpack.DefinePlugin({
-            'process.env.MY_VALUE': JSON.stringify('aCoolValue'),
-        }),
-    ],
+  plugins: [
+    new webpack.DefinePlugin({
+      "process.env.MY_VALUE": JSON.stringify("aCoolValue")
+    })
+  ]
 });
 ```
 
 In the above example, the environment variable can be accessed in JavaScript using `process.env.MY_VALUE`. It should be noted that the _DefinePlugin_ does a search and replace of the JavaScript where it will look up any references to `process.env.MY_VALUE` and replace it with `'aCoolValue'`. This means that `MY_VALUE` isn't a property on the `process.env` object and therefore `MY_VALUE` cannot be accessed by destructuring the `process.env` object:
 
+<!-- prettier-ignore -->
 ```javascript
 const { MY_VALUE } = process.env; // This won't work ❌
 ```
@@ -86,11 +88,14 @@ const { MY_VALUE } = process.env; // This won't work ❌
 
 There are many ways to specify different environments with _webpack_. A simple way is to pass the path of the `webpack.config` file that corresponds with the environment you would like to build:
 
+<!-- prettier-ignore -->
 ```json
-"scripts": {
-  "build:development": "webpack --config webpack.config.development.js",
-  "build:staging": "webpack --config webpack.config.staging.js",
-  "build:production": "webpack --config webpack.config.production.js",
+{
+  "scripts": {
+    "build:development": "webpack --config webpack.config.development.js",
+    "build:staging": "webpack --config webpack.config.staging.js",
+    "build:production": "webpack --config webpack.config.production.js"
+  }
 }
 ```
 
@@ -185,12 +190,13 @@ To take a _staging_ environment as an example:
 -   Add _env-cmd_ as a project dependency (`npm install env-cmd --save`)
 -   Create script commands for the `staging` environment
 
+<!-- prettier-ignore -->
 ```json
 {
-    "scripts": {
-        "start:staging": "env-cmd .env.staging npm start",
-        "build:staging": "env-cmd .env.staging npm run build"
-    }
+  "scripts": {
+    "start:staging": "env-cmd .env.staging npm start",
+    "build:staging": "env-cmd .env.staging npm run build"
+  }
 }
 ```
 

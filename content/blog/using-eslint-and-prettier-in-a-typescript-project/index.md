@@ -32,20 +32,21 @@ yarn add eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin --dev
 
 Next, add an `.eslintrc.js` configuration file in the root project directory. Here is a sample configuration for a TypeScript project:
 
+<!-- prettier-ignore -->
 ```javascript
 module.exports = {
-    parser: '@typescript-eslint/parser', // Specifies the ESLint parser
-    extends: [
-        'plugin:@typescript-eslint/recommended', // Uses the recommended rules from the @typescript-eslint/eslint-plugin
-    ],
-    parserOptions: {
-        ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
-        sourceType: 'module', // Allows for the use of imports
-    },
-    rules: {
-        // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
-        // e.g. "@typescript-eslint/explicit-function-return-type": "off",
-    },
+  parser: "@typescript-eslint/parser", // Specifies the ESLint parser
+  extends: [
+    "plugin:@typescript-eslint/recommended" // Uses the recommended rules from the @typescript-eslint/eslint-plugin
+  ],
+  parserOptions: {
+    ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
+    sourceType: "module" // Allows for the use of imports
+  },
+  rules: {
+    // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
+    // e.g. "@typescript-eslint/explicit-function-return-type": "off",
+  }
 };
 ```
 
@@ -53,30 +54,32 @@ module.exports = {
 
 If using TypeScript with React, the <Link to="https://www.npmjs.com/package/eslint-plugin-react"><code>eslint-plugin-react</code></Link> dev dependency should be installed and the following configuration can be used:
 
+<!-- prettier-ignore -->
 ```javascript
 module.exports = {
-    parser: '@typescript-eslint/parser', // Specifies the ESLint parser
-    extends: [
-        'plugin:react/recommended', // Uses the recommended rules from @eslint-plugin-react
-        'plugin:@typescript-eslint/recommended', // Uses the recommended rules from @typescript-eslint/eslint-plugin
-    ],
-    parserOptions: {
-        ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
-        sourceType: 'module', // Allows for the use of imports
-        ecmaFeatures: {
-            jsx: true, // Allows for the parsing of JSX
-        },
-    },
-    rules: {
-        // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
-        // e.g. "@typescript-eslint/explicit-function-return-type": "off",
-    },
-    settings: {
-        react: {
-            version: 'detect', // Tells eslint-plugin-react to automatically detect the version of React to use
-        },
-    },
+  parser: "@typescript-eslint/parser", // Specifies the ESLint parser
+  extends: [
+    "plugin:react/recommended", // Uses the recommended rules from @eslint-plugin-react
+    "plugin:@typescript-eslint/recommended" // Uses the recommended rules from @typescript-eslint/eslint-plugin
+  ],
+  parserOptions: {
+    ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
+    sourceType: "module", // Allows for the use of imports
+    ecmaFeatures: {
+      jsx: true // Allows for the parsing of JSX
+    }
+  },
+  rules: {
+    // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
+    // e.g. "@typescript-eslint/explicit-function-return-type": "off",
+  },
+  settings: {
+    react: {
+      version: "detect" // Tells eslint-plugin-react to automatically detect the version of React to use
+    }
+  }
 };
+
 ```
 
 Ultimately it's up to you to decide what rules you would like to extend from and which ones to use within the `rules` object in your `.eslintrc.js` file.
@@ -95,30 +98,32 @@ yarn add prettier eslint-config-prettier eslint-plugin-prettier --dev
 
 In order to configure prettier, a `.prettierrc.js` file is required at the root project directory. Here is a sample `.prettierrc.js` file:
 
+<!-- prettier-ignore -->
 ```javascript
 module.exports = {
-    semi: true,
-    trailingComma: 'all',
-    singleQuote: true,
-    printWidth: 120,
-    tabWidth: 4,
+  semi: true,
+  trailingComma: "all",
+  singleQuote: true,
+  printWidth: 120,
+  tabWidth: 4
 };
 ```
 
 Next, the `.eslintrc.js` file needs to be updated:
 
+<!-- prettier-ignore -->
 ```javascript
 module.exports = {
-    parser: '@typescript-eslint/parser', // Specifies the ESLint parser
-    extends: [
-        'plugin:@typescript-eslint/recommended', // Uses the recommended rules from the @typescript-eslint/eslint-plugin
-        'prettier/@typescript-eslint', // Uses eslint-config-prettier to disable ESLint rules from @typescript-eslint/eslint-plugin that would conflict with prettier
-        'plugin:prettier/recommended', // Enables eslint-plugin-prettier and eslint-config-prettier. This will display prettier errors as ESLint errors. Make sure this is always the last configuration in the extends array.
-    ],
-    parserOptions: {
-        ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
-        sourceType: 'module', // Allows for the use of imports
-    },
+  parser: "@typescript-eslint/parser", // Specifies the ESLint parser
+  extends: [
+    "plugin:@typescript-eslint/recommended", // Uses the recommended rules from the @typescript-eslint/eslint-plugin
+    "prettier/@typescript-eslint", // Uses eslint-config-prettier to disable ESLint rules from @typescript-eslint/eslint-plugin that would conflict with prettier
+    "plugin:prettier/recommended" // Enables eslint-plugin-prettier and eslint-config-prettier. This will display prettier errors as ESLint errors. Make sure this is always the last configuration in the extends array.
+  ],
+  parserOptions: {
+    ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
+    sourceType: "module" // Allows for the use of imports
+  }
 };
 ```
 
@@ -128,42 +133,51 @@ The advantage of having prettier setup as an ESLint rule using `eslint-plugin-pr
 
 For a good developer experience, it's useful to setup your editor to automatically run ESLint's automatic fix command (i.e. `eslint --fix`) whenever a file is saved. Since i'm using VS Code, here is the config required in the `settings.json` file in VS Code to get automatic fixing whenever saving a file:
 
+<!-- prettier-ignore -->
 ```json
-"eslint.autoFixOnSave": true,
-"eslint.validate": [
+{
+  "eslint.autoFixOnSave": true,
+  "eslint.validate": [
     "javascript",
     "javascriptreact",
-    {"language": "typescript", "autoFix": true },
-    {"language": "typescriptreact", "autoFix": true }
-],
+    { "language": "typescript", "autoFix": true },
+    { "language": "typescriptreact", "autoFix": true }
+  ]
+}
 ```
 
 If you've also set the `editor.formatOnSave` option to `true` in your `settings.json`, you'll need to add the following config to prevent running 2 formatting commands on save for JavaScript and TypeScript files:
 
+<!-- prettier-ignore -->
 ```json
-"editor.formatOnSave": true,
-"[javascript]": {
-    "editor.formatOnSave": false,
-},
-"[javascriptreact]": {
-    "editor.formatOnSave": false,
-},
-"[typescript]": {
-    "editor.formatOnSave": false,
-},
-"[typescriptreact]": {
-    "editor.formatOnSave": false,
-},
+{
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.formatOnSave": false
+  },
+  "[javascriptreact]": {
+    "editor.formatOnSave": false
+  },
+  "[typescript]": {
+    "editor.formatOnSave": false
+  },
+  "[typescriptreact]": {
+    "editor.formatOnSave": false
+  }
+}
 ```
 
 ## Run ESLint with the CLI
 
 A useful command to add to your [`package.json` scripts](https://docs.npmjs.com/misc/scripts) is a `lint` command that will run the TypeScript compiler and the ESLint linter accross all your files to make sure the code adheres to the compiler settings and formatting/style rules.
 
+<!-- prettier-ignore -->
 ```json
-"scripts": {
+{
+  "scripts": {
     "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
-},
+  }
+}
 ```
 
 The above script can be run from the command line using `npm run lint` or `yarn lint`. This command will first run the TypeScript compiler and report any TypeScript compiler errors. If there are no TypeScript errors, it will then run ESLint through all the `.js`, `.ts`, and `.tsx` (used with React) files. Any ESLint errors that can be automatically fixed will be fixed with this command, but any other errors will be printed out in the command line.
