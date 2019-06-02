@@ -225,7 +225,7 @@ const Post = (props: PostProps) => {
         mdx.frontmatter.formattedUpdatedAtDate !== null;
 
     return (
-        <Layout frontmatter={mdx.frontmatter}>
+        <Layout frontmatter={mdx.frontmatter} isPost>
             <Helmet>
                 <meta property="og:type" content="article" />
                 <meta property="article:author" content="Robert Cooper" />
@@ -302,7 +302,7 @@ export const pageQuery = graphql`
                 formattedPublicationDate: date(formatString: "MMMM DD, YYYY")
                 publicationDate: date(formatString: "YYYY-MM-DD")
                 formattedUpdatedAtDate: updatedAt(formatString: "MMMM DD, YYYY")
-                updatedAtDate: updatedAt(formatString: "MMMM DD, YYYY")
+                updatedAtDate: updatedAt(formatString: "YYYY-MM-DD")
                 # This banner is used in the layout component
                 banner {
                     publicURL

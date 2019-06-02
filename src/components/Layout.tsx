@@ -109,10 +109,14 @@ type LayoutProps = {
         banner: {
             publicURL: string | null;
         };
+        slug?: string;
+        publicationDate?: string;
+        updatedAtDate?: string;
     };
     title?: string | null;
     hideMenu?: boolean;
     hideFooter?: boolean;
+    isPost?: boolean;
 };
 
 export const Layout = ({
@@ -121,6 +125,7 @@ export const Layout = ({
     hideMenu = false,
     hideFooter = false,
     children,
+    isPost = false,
 }: LayoutProps) => {
     return (
         <StaticQuery
@@ -143,10 +148,45 @@ export const Layout = ({
                     title: frontmatterTitle,
                     description: frontmatterDescription,
                     banner: { publicURL },
+                    slug,
+                    publicationDate,
+                    updatedAtDate,
                 } = frontmatter;
 
                 const title = pageTitle || frontmatterTitle || siteTitle;
                 const description = frontmatterDescription || siteDescription;
+
+                let schemaArticle = null;
+                if (isPost) {
+                    schemaArticle = {
+                        '@context': 'http://schema.org',
+                        '@type': 'Article',
+                        author: {
+                            '@type': 'Person',
+                            name: 'Robert Cooper',
+                        },
+                        datePublished: publicationDate,
+                        dateModified: updatedAtDate ? updatedAtDate : publicationDate,
+                        description: frontmatterDescription,
+                        headline: frontmatterTitle,
+                        inLanguage: 'en-US',
+                        url: `${siteUrl}${slug}`,
+                        name: frontmatterTitle,
+                        image: {
+                            '@type': 'ImageObject',
+                            url: `${siteUrl}${publicURL}`,
+                        },
+                        mainEntityOfPage: `${siteUrl}${slug}`,
+                        publisher: {
+                            '@type': 'Organization',
+                            name: 'Robert Cooper',
+                            logo: {
+                                '@type': 'ImageObject',
+                                url: `${siteUrl}/logo.png`,
+                            },
+                        },
+                    };
+                }
 
                 return (
                     <>
@@ -171,6 +211,12 @@ export const Layout = ({
                             <Main>{children}</Main>
                         </MDXProvider>
                         {!hideFooter && <Footer />}
+                        {isPost && (
+                            <script
+                                type="application/ld+json"
+                                dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaArticle) }}
+                            />
+                        )}
                     </>
                 );
             }}
