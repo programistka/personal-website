@@ -7,6 +7,8 @@ import SubtitleH2 from './SubtitleH2';
 import SubtitleH3 from './SubtitleH3';
 import SubtitleH4 from './SubtitleH4';
 import Title from './Title';
+import Video from './Video';
+import Youtube from './Youtube';
 
 /* eslint-disable react/display-name */
 export default {
@@ -22,5 +24,7 @@ export default {
     p: (props: { theme: string }) => <Paragraph {...props} />,
     hr: (props: { theme: string }) => <Divider {...props} />,
     blockquote: (props: { theme: string }) => <Quote {...props} />,
+    Video: (props: { src: string }) => <Video {...props} />,
+    Youtube: (props: { src: string }) => <Youtube {...props} />,
 };
 /* eslint-enable react/display-name */

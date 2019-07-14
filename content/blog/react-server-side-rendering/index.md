@@ -8,8 +8,6 @@ categories: ['react']
 banner: './images/banner.png'
 ---
 
-import Video from "$components/mdx/Video";
-import Youtube from "$components/mdx/Youtube";
 import Comparison from "./Comparison";
 
 ![Should You Build a Server-side Rendered React Application?](./images/banner.png)

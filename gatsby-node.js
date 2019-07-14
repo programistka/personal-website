@@ -99,7 +99,10 @@ const createBlog = (createPage, posts) => {
 exports.createPages = ({ actions, graphql }) =>
     graphql(`
         query {
-            allMdx(sort: { order: DESC, fields: [frontmatter___date] }, filter: { fields: { slug: { ne: null } } }) {
+            posts: allMdx(
+                sort: { order: DESC, fields: [frontmatter___date] }
+                filter: { fields: { slug: { ne: null } } }
+            ) {
                 edges {
                     node {
                         id
@@ -122,7 +125,7 @@ exports.createPages = ({ actions, graphql }) =>
         }
 
         // Projects are filtered out at the GraphQL query level
-        const { edges: posts } = data.allMdx;
+        const { edges: posts } = data.posts;
 
         createBlog(actions.createPage, posts);
         createPosts(actions.createPage, posts);

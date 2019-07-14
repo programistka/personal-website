@@ -14,7 +14,7 @@ import { Post } from '../types/Post';
 import { Project as ProjectType } from '../types/Project';
 import { useTheme } from '../utils/context';
 import { Title } from '../components/Typography';
-import { colors, media, textSize, textColor } from '../styles/common';
+import { colors, media, textSize, textColor, transitionDuration } from '../styles/common';
 
 const Header = styled.div`
     position: relative;
@@ -143,12 +143,10 @@ const RecentPosts = styled(Section)`
 `;
 
 const Projects = styled.div`
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 20px;
     justify-content: center;
-    margin-bottom: 20px;
-    margin-left: -20px;
-    margin-right: -20px;
 `;
 
 const ProjectWrapper = styled.div`
@@ -156,11 +154,23 @@ const ProjectWrapper = styled.div`
     max-width: 100%;
 `;
 
+const LinkedProject = styled(Link)`
+    text-decoration: none;
+    color: inherit;
+    transition: all ease-in-out ${transitionDuration.slow};
+    display: block;
+
+    &:hover {
+        transform: scale(1.02);
+        color: inherit;
+    }
+`;
+
 const Project = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 20px;
+    padding: 20px;
     margin-bottom: 60px;
 `;
 
@@ -229,6 +239,20 @@ type HomePageProps = {
     };
 };
 
+const WrappedProject = ({
+    projectPageLink,
+    children,
+}: {
+    projectPageLink: string | undefined;
+    children: React.ReactNode;
+}) => {
+    if (projectPageLink) {
+        return <LinkedProject to={`${projectPageLink}`}>{children}</LinkedProject> as any;
+    } else {
+        return children;
+    }
+};
+
 export const Home = ({
     data: {
         homeHeader,
@@ -277,14 +301,16 @@ export const Home = ({
                     </Fade>
                     <Projects>
                         {projects.map(({ node: project }) => (
-                            <ProjectWrapper>
-                                <Fade top key={project.fields.id}>
-                                    <Project>
-                                        <ProjectImage fluid={project.frontmatter.image.childImageSharp.fluid} />
-                                        <ProjectTitle>{project.frontmatter.title}</ProjectTitle>
-                                        <ProjectDescription>{project.frontmatter.description}</ProjectDescription>
-                                    </Project>
-                                </Fade>
+                            <ProjectWrapper key={project.fields.id}>
+                                <WrappedProject projectPageLink={project.frontmatter.detailsPageLink}>
+                                    <Fade top>
+                                        <Project>
+                                            <ProjectImage fluid={project.frontmatter.image.childImageSharp.fluid} />
+                                            <ProjectTitle>{project.frontmatter.title}</ProjectTitle>
+                                            <ProjectDescription>{project.frontmatter.description}</ProjectDescription>
+                                        </Project>
+                                    </Fade>
+                                </WrappedProject>
                             </ProjectWrapper>
                         ))}
                     </Projects>
@@ -357,6 +383,7 @@ export const pageQuery = graphql`
                         title
                         subtitle
                         description
+                        detailsPageLink
                         image {
                             childImageSharp {
                                 fluid(maxWidth: 240) {
