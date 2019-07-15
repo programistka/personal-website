@@ -168,6 +168,7 @@ const PostLink = styled(Link)<{ type: 'next' | 'prev' }>`
         css`
             margin-bottom: 20px;
             align-items: flex-end;
+            text-align: right;
         `}
 
     &:hover {
