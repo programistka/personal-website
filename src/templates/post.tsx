@@ -1,7 +1,6 @@
 import MDXRenderer from 'gatsby-mdx/mdx-renderer';
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { DiscussionEmbed } from 'disqus-react';
 import { graphql } from 'gatsby';
 import Helmet from 'react-helmet';
 import Layout from '../components/Layout';
@@ -9,7 +8,7 @@ import Link from '../components/Link';
 import ScrollProgress from '../utils/scrollProgress';
 import { Divider, PaddedPageWrapper } from '../components/Common';
 import { Title } from '../components/Typography';
-import { colors, media, textSize, pageWidth } from '../styles/common';
+import { colors, media, textSize, pageWidth, transitionDuration } from '../styles/common';
 import { PageContext } from '../types/PageContext';
 import { css } from '../lib/styled-components';
 
@@ -142,32 +141,43 @@ const CategoryListItem = styled.li`
 const PostWrapperStyles = css`
     display: flex;
     flex-direction: column;
+    width: 100%;
     line-height: 1.5;
+    border-radius: 3px;
+    border: 2px solid ${({ theme }) => (theme.color === 'light' ? colors.borderLight : colors.borderDark)};
+    padding: 10px 20px;
+    transition: border-color ease-in-out ${transitionDuration.normal};
+
+    &:hover {
+        border-color: ${({ theme }) => (theme.color === 'light' ? colors.linkInactiveLight : colors.linkInactiveDark)};
+    }
 `;
 
-const NextPostWrapper = styled.span`
+const PostLabel = styled.span`
+    font-weight: 600;
+`;
+
+const PostLinkTitle = styled.span``;
+
+const PostLink = styled(Link)<{ type: 'next' | 'prev' }>`
     ${PostWrapperStyles};
-    margin-right: 20px;
-    max-width: 50%;
-`;
+    color: inherit;
+    text-decoration: none;
+    ${({ type }) =>
+        type === 'next' &&
+        css`
+            margin-bottom: 20px;
+            align-items: flex-end;
+        `}
 
-const PreviousPostWrapper = styled.span`
-    ${PostWrapperStyles};
-    align-items: flex-end;
-    margin-left: auto;
-    max-width: 50%;
-`;
-
-const PreviousPostLink = styled(Link)`
-    text-align: right;
+    &:hover {
+        color: inherit;
+    }
 `;
 
 const OtherPostsWrapper = styled.div`
     display: flex;
-`;
-
-const CommentsSection = styled.div`
-    margin-top: 40px;
+    flex-direction: column;
 `;
 
 const EditPostWrapper = styled.div`
@@ -203,11 +213,6 @@ const Post = (props: PostProps) => {
         pageContext: { next, prev },
     } = props;
 
-    const disqusShortname = 'robertcoopercode';
-    const disqusConfig = {
-        identifier: mdx.id,
-        title: mdx.frontmatter.title,
-    };
     const { editLink } = mdx.fields;
 
     const progressBar = useRef({ current: { style: { width: 0 } } } as any);
@@ -271,20 +276,19 @@ const Post = (props: PostProps) => {
                 {(next || prev) && (
                     <OtherPostsWrapper>
                         {prev && (
-                            <NextPostWrapper>
-                                Next: <Link to={prev.fields.slug}>{prev.fields.title}</Link>
-                            </NextPostWrapper>
+                            <PostLink type="next" to={prev.fields.slug}>
+                                <PostLabel>Next:</PostLabel>
+                                <PostLinkTitle>{prev.fields.title}</PostLinkTitle>
+                            </PostLink>
                         )}
                         {next && (
-                            <PreviousPostWrapper>
-                                Previous: <PreviousPostLink to={next.fields.slug}>{next.fields.title}</PreviousPostLink>
-                            </PreviousPostWrapper>
+                            <PostLink type="prev" to={next.fields.slug}>
+                                <PostLabel>Previous:</PostLabel>
+                                <PostLinkTitle>{next.fields.title}</PostLinkTitle>
+                            </PostLink>
                         )}
                     </OtherPostsWrapper>
                 )}
-                <CommentsSection>
-                    <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
-                </CommentsSection>
             </StyledPaddedPageWrapper>
         </Layout>
     );

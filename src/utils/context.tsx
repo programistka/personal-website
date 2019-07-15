@@ -49,18 +49,6 @@ export const ContextThemeProvider = ({ children }: { children: React.ReactNode }
         if (Cookies.get('theme') !== theme) {
             setTheme(Cookies.get('theme') as ThemeEnum);
         }
-        // Reloads the disqus embed so that it can recalculate which color theme it should
-        // display based on the text color the embed inherits (see https://help.disqus.com/installation/disqus-appearance-tweaks for more details)
-        // TODO: Only run this command on pages that have the disqus embed
-        if (typeof window !== `undefined`) {
-            if ((window as any).DISQUS) {
-                // Using a timeout since the reset function needs to run only after the page's CSS color settings
-                // have changed
-                setTimeout(() => {
-                    (window as any).DISQUS.reset({ reload: true });
-                }, 1000);
-            }
-        }
     }, [theme]);
 
     return (
