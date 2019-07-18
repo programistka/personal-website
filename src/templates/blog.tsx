@@ -9,6 +9,7 @@ import { PaddedPageWrapper } from '../components/Common';
 import { Title } from '../components/Typography';
 import { media } from '../styles/common';
 import { Post } from '../types/Post';
+import Newsletter from '../components/Newsletter';
 
 const StyledTitle = styled(Title)`
     margin-bottom: 100px;
@@ -32,6 +33,10 @@ const PaginationItem = styled.li<{ position: string }>`
 `;
 
 const PaginationLink = styled(Link)``;
+
+const NewsletterWrapper = styled.div`
+    margin-top: 40px;
+`;
 
 type BlogProps = {
     data: {
@@ -73,6 +78,9 @@ const Blog = ({ data: { allMdx }, pageContext: { pagination } }: BlogProps) => {
                         </PaginationItem>
                     )}
                 </Pagination>
+                <NewsletterWrapper>
+                    <Newsletter />
+                </NewsletterWrapper>
             </PaddedPageWrapper>
         </Layout>
     );

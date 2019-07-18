@@ -4,7 +4,7 @@ import styled from '../lib/styled-components';
 import { colors, media, textColor, textSize } from '../styles/common';
 import { useTheme } from '../utils/context';
 import Link from './Link';
-import { PageWrapper } from './Common';
+import { PageWrapper, ConstrainedPageWidth } from './Common';
 import ThemeSwitch from './ThemeSwitch';
 
 export const menuHeight = 60;
@@ -25,7 +25,8 @@ const Menu = styled.div`
     `};
 `;
 
-const ModifiedPageWrapper = styled(PageWrapper)`
+const ModifiedPageWrapper = styled.div`
+    ${ConstrainedPageWidth};
     display: flex;
     align-items: center;
     height: 100%;

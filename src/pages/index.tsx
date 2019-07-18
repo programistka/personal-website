@@ -8,13 +8,14 @@ import Layout from '../components/Layout';
 import Link from '../components/Link';
 import Twitter from '../components/icons/Twitter';
 import styled from '../lib/styled-components';
-import { Button, Divider, PageWrapper } from '../components/Common';
+import { Button, Divider, PageWrapper, ButtonStyles } from '../components/Common';
 import { FluidImage } from '../types/Image';
 import { Post } from '../types/Post';
 import { Project as ProjectType } from '../types/Project';
 import { useTheme } from '../utils/context';
 import { Title } from '../components/Typography';
 import { colors, media, textSize, textColor, transitionDuration } from '../styles/common';
+import Newsletter from '../components/Newsletter';
 
 const Header = styled.div`
     position: relative;
@@ -29,6 +30,10 @@ const Header = styled.div`
         padding-top: calc(140px + 20px);
         padding-bottom: 80px;
     `};
+`;
+
+const StyledPageWrapper = styled(PageWrapper)`
+    padding: 40px 0;
 `;
 
 const HeaderWrapper = styled(PageWrapper)`
@@ -282,7 +287,7 @@ export const Home = ({
                     style={{ position: 'absolute' }}
                 />
             </Header>
-            <PageWrapper>
+            <StyledPageWrapper>
                 <RecentPosts>
                     <Fade top>
                         <StyledTitle as="h2">Recent Posts</StyledTitle>
@@ -318,7 +323,13 @@ export const Home = ({
                         <Button to="/projects">See all projects</Button>
                     </Fade>
                 </Section>
-            </PageWrapper>
+                <Fade>
+                    <Divider />
+                </Fade>
+                <Section>
+                    <Newsletter />
+                </Section>
+            </StyledPageWrapper>
         </Layout>
     );
 };

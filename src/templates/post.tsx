@@ -11,6 +11,7 @@ import { Title } from '../components/Typography';
 import { colors, media, textSize, pageWidth, transitionDuration } from '../styles/common';
 import { PageContext } from '../types/PageContext';
 import { css } from '../lib/styled-components';
+import Newsletter from '../components/Newsletter';
 
 const StyledPaddedPageWrapper = styled(PaddedPageWrapper)`
     ${pageWidth.small}
@@ -179,6 +180,11 @@ const PostLink = styled(Link)<{ type: 'next' | 'prev' }>`
 const OtherPostsWrapper = styled.div`
     display: flex;
     flex-direction: column;
+    margin-bottom: 80px;
+
+    ${media.small`
+        margin-bottom: 40px;
+    `};
 `;
 
 const EditPostWrapper = styled.div`
@@ -290,6 +296,7 @@ const Post = (props: PostProps) => {
                         )}
                     </OtherPostsWrapper>
                 )}
+                <Newsletter />
             </StyledPaddedPageWrapper>
         </Layout>
     );

@@ -1,11 +1,15 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { colors, media, transitionDuration, textSize, pageWidth } from '../styles/common';
 import Link from './Link';
 
-export const PageWrapper = styled.div`
+export const ConstrainedPageWidth = css`
     ${pageWidth.large}
     max-width: 100%;
     margin: auto;
+`;
+
+export const PageWrapper = styled.div`
+    ${ConstrainedPageWidth};
 `;
 
 export const PaddedPageWrapper = styled(PageWrapper)`
@@ -30,7 +34,7 @@ export const Divider = styled.hr`
     margin: 40px;
 `;
 
-export const Button = styled(Link)`
+export const ButtonStyles = css`
     ${textSize.normal};
     height: 40px;
     line-height: 37px;
@@ -54,6 +58,10 @@ export const Button = styled(Link)`
         border-color: ${props =>
             props.theme.color === 'light' ? colors.buttonActiveBorderLight : colors.buttonActiveBorderDark};
     }
+`;
+
+export const Button = styled(Link)`
+    ${ButtonStyles};
 `;
 
 export const LightButton = styled(Button)`

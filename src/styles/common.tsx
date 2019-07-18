@@ -41,6 +41,9 @@ export const colors = {
 
     borderLight: `rgba(46, 116, 201, 0.2)`,
     borderDark: `rgba(128, 178, 237, 0.2)`,
+
+    inputBorderLight: `rgba(46, 116, 201, 0.2)`,
+    inputBorderDark: `rgba(128, 178, 237, 0.2)`,
 };
 
 type Sizes = { [index: string]: number };

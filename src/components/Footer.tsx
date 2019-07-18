@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { colors, textColor, textSize } from '../styles/common';
+import { colors } from '../styles/common';
 import Link from './Link';
 import { PageWrapper } from './Common';
 
-export const footerHeight = 220;
+export const footerHeight = 120;
 
 const Footer = styled.footer`
     background-color: ${props =>
@@ -20,14 +20,6 @@ const ModifiedPageWrapper = styled(PageWrapper)`
     display: flex;
     flex-direction: column;
     align-items: center;
-`;
-
-const Title = styled.span`
-    ${textColor.title};
-    ${textSize.large};
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    display: inline-block;
 `;
 
 const SocialMediaList = styled.ul`
@@ -56,7 +48,6 @@ const FooterComponent = ({  }: FooterProps) => {
     return (
         <Footer>
             <ModifiedPageWrapper>
-                <Title>Robert Cooper</Title>
                 <SocialMediaList>
                     <SocialMediaListItem>
                         <SocialMediaLink to="https://github.com/robertcoopercode">Github</SocialMediaLink>
