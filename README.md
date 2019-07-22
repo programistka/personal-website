@@ -26,4 +26,6 @@ ffmpeg -i input.mov -c:v libvpx-vp9 -crf 50 -b:v 0 -b:a 128k -c:a libopus output
 ffmpeg -i input.mov -qscale 0 output.mp4
 ```
 
+> Note: If the above command errors with "height not divisible by 2", use the following command: `ffmpeg -i input.mov -qscale 0 -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" output.mp4` (source: https://www.reck.dk/ffmpeg-libx264-height-not-divisible-by-2/)
+
 Documentation on ffmpeg can be [found here](https://ffmpeg.org/ffmpeg.html).

@@ -9,6 +9,7 @@ import SubtitleH4 from './SubtitleH4';
 import Title from './Title';
 import Video from './Video';
 import Youtube from './Youtube';
+import Sandbox from './Sandbox';
 
 /* eslint-disable react/display-name */
 export default {
@@ -26,5 +27,6 @@ export default {
     blockquote: (props: { theme: string }) => <Quote {...props} />,
     Video: (props: { src: string }) => <Video {...props} />,
     Youtube: (props: { src: string }) => <Youtube {...props} />,
+    Sandbox: (props: { src: string; title: string }) => <Sandbox {...props} />,
 };
 /* eslint-enable react/display-name */

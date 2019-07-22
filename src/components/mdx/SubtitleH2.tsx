@@ -9,4 +9,8 @@ export default styled.h2`
     margin-top: 30px;
     margin-bottom: 20px;
     font-weight: 400;
+
+    * {
+        font-size: 28px !important;
+    }
 `;
