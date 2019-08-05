@@ -113,7 +113,7 @@ ffmpeg -i input-name.gif -b:v 0 -crf 25 output.mp4
 
 Notice how the `-crf` value passed to the MPEG4 command is lower than that of the value passed to the WebM command, which might make you think you're getting a higher quality video with MPEG4. However, since we're using different encoders between both WebM and MPEG4 conversions, the `-crf` values are not comparable. You need to evaluate quality by watching the outputted video.
 
-When converting the Fogel GIF that I used earlier in the article to WebM and MPEG4 using the above commands, I get a WebM file size of 59 KB and and MPEG4 file size of 133 KB. To demonstrate the visual quality of both videos, i've added them below, with the WebM video first and the MPEG4 video second. Of course, if you're viewing the WebM video on an unsupported browser, it sadly won't work for you.
+When converting the Fogel GIF that I used earlier in the article to WebM and MPEG4 using the above commands, I get a WebM file size of 59 KB and and MPEG4 file size of 105 KB. To demonstrate the visual quality of both videos, i've added them below, with the WebM video first and the MPEG4 video second. Of course, if you're viewing the WebM video on an unsupported browser, it sadly won't work for you.
 
 <VideoComparison/>
 
