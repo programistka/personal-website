@@ -5,12 +5,12 @@ export default styled.h2`
     ${textColor.title};
     display: block;
     text-align: left;
-    font-size: 28px;
+    font-size: 2.8rem;
     margin-top: 30px;
     margin-bottom: 20px;
     font-weight: 400;
 
     * {
-        font-size: 28px !important;
+        font-size: 2.8rem !important;
     }
 `;

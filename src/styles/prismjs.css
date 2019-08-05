@@ -134,16 +134,6 @@ pre[data-line] {
     position: relative;
 }
 
-.gatsby-highlight-code-line {
-    background-color: hsla(207, 95%, 15%, 1);
-    display: block;
-    margin-right: -1em;
-    margin-left: -1em;
-    padding-right: 1em;
-    padding-left: 0.75em;
-    border-left: 0.25em solid #80b2ed;
-}
-
 .gatsby-highlight {
     margin: 0.5em 0;
     padding: 1em;
@@ -154,18 +144,22 @@ pre[data-line] {
     border: 2px solid rgba(128, 178, 237, 0.2);
 }
 
-/**
- * Remove the default PrismJS theme background-color, border-radius, margin,
- * padding and overflow.
- * 1. Make the element just wide enough to fit its content.
- * 2. Always fill the visible space in .gatsby-highlight.
- * 3. Adjust the position of the line numbers
- */
+/* Line highlighting makes the font way too big on mobile safari :( Don't know how to fix this bug */
+/* .gatsby-highlight-code-line {
+    background-color: hsla(207, 95%, 15%, 1);
+    display: block;
+    margin-right: -1em;
+    margin-left: -1em;
+    padding-right: 1em;
+    padding-left: 0.75em;
+    border-left: 0.25em solid #80b2ed;
+}
+
 .gatsby-highlight pre[class*='language-'] {
     background-color: transparent;
     margin: 0;
     padding: 0;
     overflow: initial;
-    float: left; /* 1 */
-    min-width: 100%; /* 2 */
-}
+    float: left;
+    min-width: 100%;
+} */

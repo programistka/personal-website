@@ -10,7 +10,7 @@ export default styled.div`
     margin-top: 20px;
     padding: 10px;
     position: relative;
-    font-size: 16px;
+    font-size: 1.6rem;
     line-height: 1.7;
 
     a {

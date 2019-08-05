@@ -86,33 +86,33 @@ export const media: any = Object.keys(sizes).reduce((acc: Media, label) => {
 
 export const textSize = {
     small: css`
-        font-size: 14px;
+        font-size: 1.4rem;
     `,
     normal: css`
-        font-size: 18px;
+        font-size: 1.8rem;
         line-height: 1.8;
         font-weight: 400;
 
         ${media.small`
-            font-size: 16px;
+            font-size: 1.6rem;
         `};
     `,
     large: css`
         line-height: 1.5;
-        font-size: 24px;
+        font-size: 2.4rem;
         font-weight: 400;
 
         ${media.small`
-            font-size: 20px;
+            font-size: 2rem;
         `};
     `,
     xlarge: css`
-        font-size: 36px;
+        font-size: 3.6rem;
         font-weight: 400;
         line-height: 1.4;
 
         ${media.small`
-          font-size: 28px;
+          font-size: 2.8rem;
         `};
     `,
 };

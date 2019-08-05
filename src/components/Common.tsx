@@ -36,6 +36,8 @@ export const Divider = styled.hr`
 
 export const ButtonStyles = css`
     ${textSize.normal};
+    text-align: center;
+    white-space: nowrap;
     height: 40px;
     line-height: 37px;
     padding: 0 20px;
@@ -43,6 +45,8 @@ export const ButtonStyles = css`
         props.theme.color === 'light' ? colors.buttonInactiveBackgroundLight : colors.buttonInactiveBackgroundDark};
     color: ${props => (props.theme.color === 'light' ? colors.buttonInactiveTextLight : colors.buttonInactiveTextDark)};
     border: 2px solid ${colors.buttonInactiveBorderLight};
+    border-radius: 0;
+    -webkit-appearance: none;
     border-color: ${props =>
         props.theme.color === 'light' ? colors.buttonInactiveBorderLight : colors.buttonInactiveBorderDark};
     display: inline-block;
@@ -50,6 +54,7 @@ export const ButtonStyles = css`
     transition: all ${transitionDuration.normal} ease-in-out;
 
     &:hover {
+        cursor: pointer;
         text-decoration: none;
         background-color: ${props =>
             props.theme.color === 'light' ? colors.buttonActiveBackgroundLight : colors.buttonActiveBackgroundDark};

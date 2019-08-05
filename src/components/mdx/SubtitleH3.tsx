@@ -5,13 +5,13 @@ export default styled.h3`
     ${textColor.title};
     display: block;
     text-align: left;
-    font-size: 20px;
+    font-size: 2rem;
     margin-top: 30px;
     margin-bottom: 20px;
     font-family: 'Inter';
     font-weight: 400;
 
     * {
-        font-size: 20px !important;
+        font-size: 2rem !important;
     }
 `;

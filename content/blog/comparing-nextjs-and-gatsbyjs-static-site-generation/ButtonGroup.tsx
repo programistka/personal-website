@@ -3,25 +3,33 @@ import { Button } from '../../../src/components/Common';
 import styled from '../../../src/lib/styled-components';
 
 const Wrapper = styled.div`
-    display: grid;
-    grid-template: 1fr / 1fr 1fr;
-    grid-gap: 20px;
-    margin: 40px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    padding: 40px;
+`;
+
+const ButtonRow = styled.div`
+    margin: -20px;
 `;
 
 const ButtonWrapper = styled.div`
     display: flex;
     justify-content: center;
+    margin: 20px;
 `;
 
 const ButtonGroup = ({ items }) => {
     return (
         <Wrapper>
-            {items.map(item => (
-                <ButtonWrapper key={item.name}>
-                    <Button to={item.link}>{item.name}</Button>
-                </ButtonWrapper>
-            ))}
+            <ButtonRow>
+                {items.map(item => (
+                    <ButtonWrapper key={item.name}>
+                        <Button to={item.link}>{item.name}</Button>
+                    </ButtonWrapper>
+                ))}
+            </ButtonRow>
         </Wrapper>
     );
 };

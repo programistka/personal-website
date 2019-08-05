@@ -16,7 +16,12 @@ const GlobalStyles = createGlobalStyle`
       box-sizing: border-box;
   }
 
-  html, body {
+  html {
+    font-size: 10px;
+  }
+
+  body {
+    line-height: 1.8;
     ${textSize.normal};
     ${textColor.body};
     margin: 0;
@@ -195,6 +200,7 @@ export const Layout = ({
                             <html lang="en" />
                             <meta name="description" content={description} />
 
+                            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
                             <meta name="twitter:card" content="summary_large_image" />
                             <meta name="twitter:site" content="@RobertCooper_RC" />
 

@@ -56,12 +56,12 @@ const PostTitle = styled.h3`
     ${textColor.title};
     font-weight: 400;
     line-height: 1.5;
-    font-size: 28px;
+    font-size: 2.8rem;
     margin-top: 0;
     margin-bottom: 5px;
 
     ${media.medium`
-        font-size: 24px;
+        font-size: 2.4rem;
     `};
 `;
 

@@ -79,14 +79,14 @@ const MDXContent = styled.div`
 
     code:not([class*='language-']) {
         font-family: Consolas, Menlo, Monaco, source-code-pro, Courier New, monospace;
-        font-size: 16px;
+        font-size: 1.6rem;
         border-radius: 0.3em;
         background: ${props => (props.theme.color === 'light' ? colors.inlineCodeLight : colors.inlineCodeDark)};
         padding: 0.15em 0.2em 0.05em;
         white-space: normal;
 
         ${media.small`
-          font-size: 14px;
+          font-size: 1.4rem;
         `}
     }
 
@@ -125,6 +125,8 @@ const CategoriesLabel = styled.span`
 
 const StyledCategoryList = styled.ul`
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     list-style: none;
     margin: 0;
     padding: 0;
