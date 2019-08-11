@@ -11,7 +11,6 @@ import Video from './Video';
 import Youtube from './Youtube';
 import Sandbox from './Sandbox';
 
-/* eslint-disable react/display-name */
 export default {
     a: (props: { theme: string; href: string; children: React.ReactChild }) => (
         <Link to={props.href} {...props}>
@@ -24,10 +23,14 @@ export default {
     h4: (props: { theme: string }) => <SubtitleH4 {...props} />,
     p: (props: { theme: string }) => <Paragraph {...props} />,
     hr: (props: { theme: string }) => <Divider {...props} />,
-    blockquote: (props: { theme: string }) => <Quote {...props} />,
+    blockquote: (props: { theme: string; className?: string; children: React.ReactChild }) =>
+        props.className && props.className === 'twitter-tweet' ? (
+            <blockquote className={props.className}>{props.children}</blockquote>
+        ) : (
+            <Quote {...props} />
+        ),
     Video: (props: { src: string }) => <Video {...props} />,
     Youtube: (props: { src: string }) => <Youtube {...props} />,
     Sandbox: (props: { src: string; title: string }) => <Sandbox {...props} />,
     Link: (props: { to: string; children: React.ReactNode }) => <Link {...props} />,
 };
-/* eslint-enable react/display-name */

@@ -35,3 +35,7 @@ ffmpeg -i mclovin.gif -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" -pix_fmt yuv420p -
 The `-vf` option was for the divisible by 2 error and the `-pix_fmt yuv420p -profile:v main -level 4.0` was all for safari compatibility.
 
 Documentation on ffmpeg can be [found here](https://ffmpeg.org/ffmpeg.html).
+
+## Netlify Dev
+
+To test how the website will function when deployed on Netlify, run the `netlify dev --live` command. This is useful for debugging behaviour on mobile.

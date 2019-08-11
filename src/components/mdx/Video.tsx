@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { supportsVideoType, VideoFormats } from '../../utils/supportsVideoType';
 
 type VideoProps = {
     src: string;
@@ -15,11 +14,7 @@ const StyledVideo = styled.video`
 const Video = ({ src }: VideoProps) => {
     return (
         <StyledVideo autoPlay loop muted playsInline>
-            {supportsVideoType(VideoFormats.webm) ? (
-                <source src={`${src}.webm`} type="video/webm" />
-            ) : (
-                <source src={`${src}.mp4`} type="video/mp4" />
-            )}
+            <source src={`${src}.mp4`} type="video/mp4" />
         </StyledVideo>
     );
 };

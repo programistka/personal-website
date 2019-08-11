@@ -1,41 +1,50 @@
 import { css } from '../lib/styled-components';
 
+export const primitiveColors = {
+    aero: '#80B2ED',
+    deutziaWhite: '#F9FCFF',
+    draculaOrchid: '#2C3137',
+    oldGloryBlue: '#03256C',
+    vapor: '#EAEAEA',
+    white: '#FFFFFF',
+};
+
 export const colors = {
-    textTitleLight: '#03256C',
-    textTitleDark: '#80B2ED',
+    textTitleLight: primitiveColors.oldGloryBlue,
+    textTitleDark: primitiveColors.aero,
 
-    textBodyLight: '#2C3137',
-    textBodyDark: '#EAEAEA',
+    textBodyLight: primitiveColors.draculaOrchid,
+    textBodyDark: primitiveColors.vapor,
 
-    linkInactiveLight: '#80B2ED',
-    linkActiveLight: '#03256C',
-    linkInactiveDark: '#80B2ED',
-    linkActiveDark: '#EAEAEA',
+    linkInactiveLight: primitiveColors.aero,
+    linkActiveLight: primitiveColors.oldGloryBlue,
+    linkInactiveDark: primitiveColors.aero,
+    linkActiveDark: primitiveColors.vapor,
 
-    backgroundLight: '#F9FCFF',
+    backgroundLight: primitiveColors.deutziaWhite,
     backgroundDark: '#051221',
-    backgroundSecondaryLight: '#FFFFFF',
+    backgroundSecondaryLight: primitiveColors.white,
     backgroundSecondaryDark: '#09203A',
 
     inlineCodeLight: 'rgba(255, 229, 100, 0.2)',
     inlineCodeDark: '#142b44',
 
-    quoteHighlightLight: '#03256C',
-    quoteHighlightDark: '#03256C',
+    quoteHighlightLight: primitiveColors.oldGloryBlue,
+    quoteHighlightDark: primitiveColors.oldGloryBlue,
     quoteBackgroundLight: '#cae2ff',
-    quoteBackgroundDark: '#80B2ED',
+    quoteBackgroundDark: primitiveColors.aero,
 
-    buttonInactiveTextLight: '#EAEAEA',
+    buttonInactiveTextLight: primitiveColors.vapor,
     buttonInactiveTextDark: '#051221',
-    buttonInactiveBorderLight: '#03256C',
-    buttonInactiveBorderDark: '#80B2ED',
-    buttonInactiveBackgroundLight: '#03256C',
-    buttonInactiveBackgroundDark: '#80B2ED',
+    buttonInactiveBorderLight: primitiveColors.oldGloryBlue,
+    buttonInactiveBorderDark: primitiveColors.aero,
+    buttonInactiveBackgroundLight: primitiveColors.oldGloryBlue,
+    buttonInactiveBackgroundDark: primitiveColors.aero,
 
-    buttonActiveTextLight: '#03256C',
-    buttonActiveTextDark: '#EAEAEA',
-    buttonActiveBorderLight: '#03256C',
-    buttonActiveBorderDark: '#80B2ED',
+    buttonActiveTextLight: primitiveColors.oldGloryBlue,
+    buttonActiveTextDark: primitiveColors.vapor,
+    buttonActiveBorderLight: primitiveColors.oldGloryBlue,
+    buttonActiveBorderDark: primitiveColors.aero,
     buttonActiveBackgroundLight: 'rgba(0, 0, 0, 0)',
     buttonActiveBackgroundDark: 'rgba(0, 0, 0, 0)',
 

@@ -1,4 +1,4 @@
-import MDXRenderer from 'gatsby-mdx/mdx-renderer';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { graphql } from 'gatsby';
@@ -108,6 +108,10 @@ const MDXContent = styled.div`
     img {
         display: block;
         margin: 40px 0;
+    }
+
+    .twitter-tweet {
+        margin: auto;
     }
 `;
 
@@ -270,7 +274,7 @@ const Post = (props: PostProps) => {
                 )}
 
                 <MDXContent>
-                    <MDXRenderer>{mdx.code.body}</MDXRenderer>
+                    <MDXRenderer>{mdx.body}</MDXRenderer>
                 </MDXContent>
 
                 <Divider />
@@ -332,9 +336,7 @@ export const pageQuery = graphql`
             fields {
                 editLink
             }
-            code {
-                body
-            }
+            body
         }
     }
 `;

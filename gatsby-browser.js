@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ContextThemeProvider, useTheme } from './src/utils/context';
 import { ThemeProvider } from './src/lib/styled-components';
-require('./src/styles/prismjs.css');
 /**
  * Show outline only on keyboard interaction
  *

@@ -101,7 +101,7 @@ export const pageQuery = graphql`
                         dateTimeString: date(formatString: "YYYY-MM-DD")
                         banner {
                             childImageSharp {
-                                fluid(maxHeight: 340) {
+                                fluid(maxHeight: 340, quality: 100) {
                                     ...GatsbyImageSharpFluid
                                 }
                             }

@@ -1,6 +1,6 @@
 const path = require('path');
 
-const PAGINATION_OFFSET = 6;
+const PAGINATION_OFFSET = 10;
 
 const pluckCategories = posts =>
     Object.keys(
@@ -111,9 +111,6 @@ exports.createPages = ({ actions, graphql }) =>
                             title
                             slug
                             categories
-                        }
-                        code {
-                            scope
                         }
                     }
                 }

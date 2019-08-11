@@ -1,60 +1,59 @@
 /* eslint-disable @typescript-eslint/camelcase */
 module.exports = {
-    pathPrefix: '/',
+    pathPrefix: `/`,
     siteMetadata: {
-        siteUrl: 'https://www.robertcooper.me',
-        author: 'Robert Cooper',
-        title: 'Robert Cooper',
+        siteUrl: `https://www.robertcooper.me`,
+        author: `Robert Cooper`,
+        title: `Robert Cooper`,
         description: `The front end web development blog and project portfolio of Robert Cooper, a Canadian web developer based in Montreal 🇨🇦.`,
-        imagePath: '/social-sharing.jpg',
+        imagePath: `/social-sharing.jpg`,
     },
     plugins: [
         {
-            resolve: 'gatsby-source-filesystem',
+            resolve: `gatsby-source-filesystem`,
             options: {
                 path: `${__dirname}/content/blog`,
-                name: 'blog',
+                name: `blog`,
             },
         },
         {
-            resolve: 'gatsby-source-filesystem',
+            resolve: `gatsby-source-filesystem`,
             options: {
                 path: `${__dirname}/content/projects`,
-                name: 'projects',
+                name: `projects`,
             },
         },
         {
-            resolve: 'gatsby-source-filesystem',
+            resolve: `gatsby-source-filesystem`,
             options: {
                 path: `${__dirname}/assets/images`,
-                name: 'images',
+                name: `images`,
             },
         },
         {
-            resolve: `gatsby-mdx`,
+            resolve: `gatsby-plugin-mdx`,
             options: {
                 extensions: ['.mdx', '.md'],
                 gatsbyRemarkPlugins: [
                     {
-                        resolve: 'gatsby-remark-images',
+                        resolve: `gatsby-remark-images`,
                         options: {
                             quality: 100,
                             maxWidth: 800,
-                            backgroundColor: 'none',
+                            backgroundColor: `none`,
                             withWebp: true,
                         },
                     },
+                    `gatsby-remark-copy-linked-files`,
                     {
-                        resolve: `gatsby-remark-copy-linked-files`,
-                    },
-                    {
-                        resolve: 'gatsby-remark-prismjs',
+                        resolve: `gatsby-remark-prismjs`,
                         options: {
-                            classPrefix: 'language-',
+                            classPrefix: `language-`,
                             noInlineHighlight: true,
                             aliases: {},
                         },
                     },
+                    `gatsby-remark-embedder`,
                     // TODO: It would be awesome to get this plugin to work so I don't have to manually
                     // run ffmpeg locally for my videos
                     // {
@@ -62,7 +61,7 @@ module.exports = {
                     //     options: {
                     //         pipelines: [
                     //             {
-                    //                 name: 'vp9',
+                    //                 name: `vp9`,
                     //                 transcode: chain =>
                     //                     chain
                     //                         .videoCodec('libvpx-vp9')
@@ -70,10 +69,10 @@ module.exports = {
                     //                         .outputOptions(['-crf 20', '-b:v 0']),
                     //                 maxHeight: 720,
                     //                 maxWidth: 1000,
-                    //                 fileExtension: 'webm',
+                    //                 fileExtension: `webm`,
                     //             },
                     //             {
-                    //                 name: 'h264',
+                    //                 name: `h264`,
                     //                 transcode: chain =>
                     //                     chain
                     //                         .videoCodec('libx264')
@@ -81,7 +80,7 @@ module.exports = {
                     //                         .videoBitrate('1000k'),
                     //                 maxHeight: 720,
                     //                 maxWidth: 1000,
-                    //                 fileExtension: 'mp4',
+                    //                 fileExtension: `mp4`,
                     //             },
                     //         ],
                     //     },
@@ -89,29 +88,30 @@ module.exports = {
                 ],
             },
         },
-        'gatsby-plugin-sharp',
-        'gatsby-transformer-sharp',
-        'gatsby-plugin-styled-components',
-        'gatsby-plugin-catch-links',
-        'gatsby-plugin-react-helmet',
-        'gatsby-plugin-typescript',
+        `gatsby-plugin-sharp`,
+        `gatsby-transformer-sharp`,
+        `gatsby-plugin-styled-components`,
+        `gatsby-plugin-catch-links`,
+        `gatsby-plugin-react-helmet`,
+        `gatsby-plugin-typescript`,
+        `gatsby-plugin-twitter`,
         {
-            resolve: 'gatsby-plugin-manifest',
+            resolve: `gatsby-plugin-manifest`,
             options: {
-                name: 'Front-end web developer',
-                short_name: 'Robert',
-                start_url: '/',
-                background_color: '#F9FCFF',
-                theme_color: '#09203A',
-                display: 'standalone',
-                icon: 'assets/logo.png',
+                name: `Front-end web developer`,
+                short_name: `Robert`,
+                start_url: `/`,
+                background_color: `#F9FCFF`,
+                theme_color: `#09203A`,
+                display: `standalone`,
+                icon: `assets/logo.png`,
             },
         },
         {
             resolve: `gatsby-plugin-feed-custom`,
             options: {
-                image_url: 'https://www.robertcooper.me/social-sharing.jpg',
-                language: 'en',
+                image_url: `https://www.robertcooper.me/social-sharing.jpg`,
+                language: `en`,
                 feeds: [
                     {
                         serialize: ({ query: { site, allMdx } }) => {
@@ -159,9 +159,11 @@ module.exports = {
         {
             resolve: `gatsby-plugin-google-analytics`,
             options: {
-                trackingId: 'UA-80196253-8',
+                trackingId: `UA-80196253-8`,
             },
         },
+        `gatsby-plugin-netlify`,
+        `gatsby-plugin-netlify-cache`,
     ],
 };
 /* eslint-enable @typescript-eslint/camelcase */
