@@ -13,6 +13,8 @@ import { PageContext } from '../types/PageContext';
 import { css } from '../lib/styled-components';
 import Newsletter from '../components/Newsletter';
 
+const postContentPadding = `20px`;
+
 const StyledPaddedPageWrapper = styled(PaddedPageWrapper)`
     ${pageWidth.small}
 `;
@@ -95,6 +97,13 @@ const MDXContent = styled.div`
         margin-bottom: 40px;
         /* I can't get this styles to load on initial app load :( */
         /* ${props => props.theme.color === 'dark' && `border: 2px solid ${colors.borderDark}`}; */
+
+        ${media.small`
+            margin-left: -${postContentPadding};
+            margin-right: -${postContentPadding};
+            border-left: 0;
+            border-right: 0;
+        `} 
     }
 
     .gatsby-resp-image-wrapper {
@@ -152,7 +161,7 @@ const PostWrapperStyles = css`
     line-height: 1.5;
     border-radius: 3px;
     border: 2px solid ${({ theme }) => (theme.color === 'light' ? colors.borderLight : colors.borderDark)};
-    padding: 10px 20px;
+    padding: 10px ${postContentPadding};
     transition: border-color ease-in-out ${transitionDuration.normal};
 
     &:hover {
