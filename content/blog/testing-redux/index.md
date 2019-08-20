@@ -123,24 +123,22 @@ export function saveRandomNumberFact() {
 
 // Thunk
 export function getRandomNumberFact() {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(getRandomNumberFactStarted());
-    setTimeout(() => {
-      return axios
-        .get(`http://numbersapi.com/random/math`)
-        .then(res => {
-          dispatch(getRandomNumberFactSuccess(res.data));
-        })
-        .catch(e => {
-          console.error(e.message);
-          dispatch(getRandomNumberFactFailure("Failed to load random error"));
-        });
-    }, 2000);
+    return axios
+      .get(`http://numbersapi.com/random/math`)
+      .then(res => {
+        dispatch(getRandomNumberFactSuccess(res.data));
+      })
+      .catch(e => {
+        console.error(e.message);
+        dispatch(getRandomNumberFactFailure("Failed to load random error"));
+      });
   };
 }
 ```
 
-Notice how the last two action creators are thunks because they both return functions. The `getRandomNumberFact` action creator is where the API call is made. A forced delay of 2 seconds as been added using `setTimeout` to make the loading state more obvious in the UI.
+Notice how the last two action creators are thunks because they both return functions. The `getRandomNumberFact` action creator is where the API call is made.
 
 ### Redux reducers
 
@@ -224,14 +222,13 @@ import { createStore, applyMiddleware } from "redux";
 import rootReducer from "./store/reducers";
 import thunk from "redux-thunk";
 
-const render = (initialStore = {}) => {
+const render = (ui: any, initialStore = {}, options = {}) => {
   const store = createStore(rootReducer, initialStore, applyMiddleware(thunk));
-
-  return rtlRender(
-    <Provider store={store}>
-      <App />
-    </Provider>
+  const Providers = ({ children }: any) => (
+    <Provider store={store}>{children}</Provider>
   );
+
+  return rtlRender(ui, { wrapper: Providers, ...options });
 };
 ```
 
@@ -246,14 +243,12 @@ The above test cases will be tested by simulating DOM events (e.g. click events)
 
 In these integration tests on connected Redux components, you should not be making assertions that check if particular actions have been dispatched or whether the Redux store updates with the correct values. What we are doing is firing DOM events which will trigger the Redux operations that need to happen, and then assert that the DOM has changed appropriately. This way of testing makes sure to test the complete flow of Redux operations, while avoiding to test implementation details.
 
-It should be pointed out that we are mocking the `axios` module in our tests in order to mock API responses. Also note that we are using [jest timer mocks](https://jestjs.io/docs/en/timer-mocks) so we don't have to wait for our `setTimeout`s to execute. Therefore, you'll see the following at the top of our test file:
+It should be pointed out that we are mocking the `axios` module in our tests in order to mock API responses. Therefore, you'll see the following at the top of our test file:
 
 <!-- prettier-ignore -->
 ```js
 import axios from 'axios';
 jest.mock('axios');
-
-jest.useFakeTimers();
 ```
 
 Now, let's visit each test case:
@@ -263,15 +258,13 @@ Now, let's visit each test case:
 it("should display a random fact when clicking the generate button", async () => {
   const randomFactText = "Random fact";
   axios.get.mockResolvedValue({ data: randomFactText });
-  const { getByText, queryByText } = render();
+  const { getByText, queryByText } = render(<App/>);
 
   expect(queryByText(/Save that fact/)).not.toBeInTheDocument();
 
   fireEvent.click(getByText(/Get new fact!/));
 
   expect(queryByText(/Loading.../)).toBeInTheDocument();
-
-  jest.runAllTimers();
 
   await wait(() => {
     expect(queryByText(randomFactText)).toBeInTheDocument();
@@ -280,7 +273,7 @@ it("should display a random fact when clicking the generate button", async () =>
 });
 ```
 
-In this first test, we are firing a click event on the button that says "Get new fact", check that we are displaying our loading state, advance our fake timers so that our `setTimeout` executes the axios API call, and then assert that the random fact shows up in the DOM. We need to use the `[wait](https://testing-library.com/docs/dom-testing-library/api-async#wait)` function in order to wait for the mocked API promise to resolve.
+In this first test, we are firing a click event on the button that says "Get new fact", check that we are displaying our loading state, and then assert that the random fact shows up in the DOM. We need to use the `[wait](https://testing-library.com/docs/dom-testing-library/api-async#wait)` function in order to wait for the mocked API promise to resolve.
 
 <!-- prettier-ignore -->
 ```js
@@ -288,11 +281,10 @@ it("should replace the current random fact with a new random fact", async () => 
   const firstRandomFactText = "First random fact";
   const secondRandomFactText = "Second random fact";
 
-  const { getByText, queryByText } = render();
+  const { getByText, queryByText } = render(<App/>);
 
   axios.get.mockResolvedValue({ data: firstRandomFactText });
   fireEvent.click(getByText(/Get new fact!/));
-  jest.runAllTimers();
 
   await wait(() => {
     expect(queryByText(firstRandomFactText)).toBeInTheDocument();
@@ -300,7 +292,6 @@ it("should replace the current random fact with a new random fact", async () => 
 
   axios.get.mockResolvedValue({ data: secondRandomFactText });
   fireEvent.click(getByText(/Get new fact!/));
-  jest.runAllTimers();
 
   await wait(() => {
     expect(queryByText(secondRandomFactText)).toBeInTheDocument();
@@ -315,7 +306,7 @@ In this second test, we are again firing a click event on the "Get new fact" but
 ```js
 it("should save a random fact when clicking the save button", () => {
   const randomFactText = "Random fact";
-  const { queryByLabelText, getByText, getByRole, queryByRole } = render({
+  const { queryByLabelText, getByText, getByRole, queryByRole } = render(<App/>, {
     randomNumberFacts: aRandomNumberFacts({ currentFact: randomFactText })
   });
 
@@ -340,7 +331,7 @@ In this test, we render the component with an initial store that already contain
 it("should be able to save multiple random facts", async () => {
   const firstRandomFactText = "First random fact";
   const secondRandomFactText = "Second random fact";
-  const { queryByLabelText, getByText, getAllByRole, queryByRole } = render({
+  const { queryByLabelText, getByText, getAllByRole, queryByRole } = render(<App/>, {
     randomNumberFacts: aRandomNumberFacts({ currentFact: firstRandomFactText })
   });
 
@@ -353,7 +344,6 @@ it("should be able to save multiple random facts", async () => {
 
   axios.get.mockResolvedValue({ data: secondRandomFactText });
   fireEvent.click(getByText(/Get new fact!/));
-  jest.runAllTimers();
 
   await wait(() => {
     expect(getByText(/Save that fact/)).toBeInTheDocument();
@@ -451,8 +441,6 @@ it("should create an action to start the fetch of a random fact and another acti
     expect(store.getActions()).toEqual(expectedActions);
     done();
   });
-
-  jest.runAllTimers();
 });
 
 it("should create an action to start the fetch of a random fact and another action to mark the failure of the fetch", done => {
@@ -473,8 +461,6 @@ it("should create an action to start the fetch of a random fact and another acti
     expect(store.getActions()).toEqual(expectedActions);
     done();
   });
-
-  jest.runAllTimers();
 });
 ```
 
