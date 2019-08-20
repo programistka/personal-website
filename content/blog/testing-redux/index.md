@@ -8,6 +8,8 @@ categories: ['react', 'testing']
 banner: './images/banner.png'
 ---
 
+import GithubButton from 'components/mdx/GithubButton';
+
 ![Testing Redux Apps With Integration and Unit Tests](./images/banner.png)
 
 When testing a React app built with Redux it's important to test it using both unit and integration testing. This article will explain which parts of a Redux app should be integration tested, which parts should be unit tested, and why you should be using both testing approaches instead of just one.
@@ -16,10 +18,10 @@ When testing a React app built with Redux it's important to test it using both u
 
 This article uses code from a simple example app I've built specifically for this article. The app allows you to fetch facts about random numbers and save those facts to a list. The app includes an API call to fetch the random facts in order to demonstrate how to mock API calls in tests.
 
-<GithubButton text="View the repo" link="https://github.com/robertcoopercode/redux-testing" />
-
 <Video src="/redux-testing-demo-app" />
 <span class="caption">Demo of the example app that will be referenced throughout the article.</span>
+
+<GithubButton text="View the repo" link="https://github.com/robertcoopercode/redux-testing" />
 
 ### React Component
 
