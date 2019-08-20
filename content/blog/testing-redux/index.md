@@ -405,7 +405,7 @@ it("should create an action for a failed fetch of a random number fact", () => {
 
 These are fairly straightforward tests. We are calling the action creators and the asserting that they return the action we expect.
 
-Next, let's investigate how to test our thunks (action creators that return functions). In order to test thunks, we will be using `[redux-mock-store](https://github.com/dmitry-zaets/redux-mock-store)` in order to have a Redux store from which we can set an initial store value, dispatch actions, get a list of dispatched actions, and subscribe to store changes.
+Next, let's investigate how to test our thunks (action creators that return functions). In order to test thunks, we will be using [`redux-mock-store`](https://github.com/dmitry-zaets/redux-mock-store) in order to have a Redux store from which we can set an initial store value, dispatch actions, get a list of dispatched actions, and subscribe to store changes.
 
 <!-- prettier-ignore -->
 ```js
