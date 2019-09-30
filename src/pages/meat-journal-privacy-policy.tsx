@@ -33,7 +33,7 @@ export const MeatJournalPrivacyPolicy = () => (
             </p>
             <p>
                 If you have any questions or concerns regarding this Privacy Policy, please send us an email at{' '}
-                <Link to="mailto:hi@robertcooper.me">hi@robertcooper.me</Link>.
+                <Link to="mailto:robert@robertcooper.me">robert@robertcooper.me</Link>.
             </p>
         </PageContent>
     </Layout>
