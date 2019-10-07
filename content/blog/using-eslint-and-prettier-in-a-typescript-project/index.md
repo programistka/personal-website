@@ -1,6 +1,7 @@
 ---
 slug: '/using-eslint-and-prettier-in-a-typescript-project'
 date: '2019-02-10'
+updatedAt: '2019-10-06'
 title: 'Using ESLint and Prettier in a TypeScript Project'
 description: "ESLint's large set of linting rules and the increased commitment to use ESLint by the TypeScript team makes ESLint a great tool for linting TypeScript projects."
 categories: ['typescript', 'javascript', 'developer tools']
@@ -169,7 +170,7 @@ If you've also set the `editor.formatOnSave` option to `true` in your `settings.
 
 ## Run ESLint with the CLI
 
-A useful command to add to your [`package.json` scripts](https://docs.npmjs.com/misc/scripts) is a `lint` command that will run the TypeScript compiler and the ESLint linter accross all your files to make sure the code adheres to the compiler settings and formatting/style rules.
+A useful command to add to the [`package.json` scripts](https://docs.npmjs.com/misc/scripts) is a `lint` command that will run the TypeScript compiler and the ESLint linter across all project files to make sure the code adheres to the compiler settings and formatting/style rules.
 
 <!-- prettier-ignore -->
 ```json
@@ -185,6 +186,52 @@ The above script can be run from the command line using `npm run lint` or `yarn 
 -   [TypeScript CLI Options](https://www.typescriptlang.org/docs/handbook/compiler-options.html)
 -   [ESLint CLI Options](https://eslint.org/docs/user-guide/command-line-interface)
 
+## Preventing ESLint and formatting errors from being committed
+
+To ensure all files committed to git don't have any TypeScript, linting, or formatting errors, there is a tool called <Link to="https://github.com/okonet/lint-staged">`lint-staged`</Link> that can be used. `lint-staged` allows to run linting commands on files that are staged to be committed. When `lint-staged` is used in combination with <Link to="https://github.com/typicode/husky">`husky`</Link>, the linting commands specified with `lint-staged` can be executed to staged files on pre-commit (if unfamiliar with git hooks, read about them <Link to="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks">here</Link>).
+
+To configure `lint-staged` and `husky`, add the following configuration to the `package.json` file:
+
+<!-- prettier-ignore -->
+```json
+{
+  "husky": {
+      "hooks": {
+          "pre-commit": "lint-staged"
+      }
+  },
+  "lint-staged": {
+      "*.{js,ts,tsx}": [
+          "eslint . --fix",
+          "git add"
+      ]
+  }
+}
+```
+
+The above configuration will run `lint-staged` when a user tries to commit code to git. `lint-staged` will then run ESLint on any staged files with `.js`, `.ts`, and `.tsx` extensions. Any errors that can be fixed automatically will be fixed and added to the current commit. However, if there are any linting errors that cannot be fixed automatically, the commit will fail and the errors will need to be manually fixed before trying to commit the code again.
+
+Personally, I also like to prevent any commits that would cause the TypeScript compiler to fail, therefore I like to add a check on pre-commit that also checks for TypeScript errors. The `husky` configuration can be modified to do so:
+
+<!-- prettier-ignore -->
+```json
+{
+  "husky": {
+      "hooks": {
+          "pre-commit": "tsc --noEmit && lint-staged"
+      }
+  }
+}
+```
+
+Unfortunately it is not enough to only rely on `lint-staged` and `husky` to prevent linting errors and TypeScript compiler errors since the git hooks can be by-passed if a user commits uses <Link to="https://git-scm.com/docs/git-commit#Documentation/git-commit.txt---no-verify">the `--no-verify` flag</Link>. Therefore, it is also recommended to run a command on a continuous integration (CI) server that will verify that the TypeScript compiler doesn't fail and that there are no linting errors. That command should look like the following:
+
+```bash
+tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet
+```
+
+Notice the above command doesn't pass the `--fix` command to the `eslint` CLI since we want the command to fail if there are any sort of errors. We do not want to CI automatically fixing lint errors since that would indicate that there is code that does not pass the linting checks that has been committed to git.
+
 ---
 
-And there you have it. That's how you can lint a TypeScript project using ESLint. If you want to make sure all the files you commit to git pass the ESLint checks, take a look at <Link to="https://github.com/okonet/lint-staged">lint-staged</Link>, which can run ESLint on files being commited.
+That's how you can lint and format a TypeScript project using ESLint and Prettier 😎
