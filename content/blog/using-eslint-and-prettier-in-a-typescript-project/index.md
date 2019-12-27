@@ -140,7 +140,10 @@ For a good developer experience, it's useful to setup your editor to automatical
 <!-- prettier-ignore -->
 ```json
 {
-  "eslint.autoFixOnSave": true,
+  // "eslint.autoFixOnSave": true, // has been deprecated, use editor.codeActionsOnSave instead
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
   "eslint.validate": [
     "javascript",
     "javascriptreact",
