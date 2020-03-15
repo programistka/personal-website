@@ -23,6 +23,7 @@ const Header = styled.div`
     margin-top: -60px; /* height of the menu */
     display: flex;
     padding: 0 20px;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='rgba(128, 178, 237, 0.2)' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 
     ${media.medium`
         height: unset;
@@ -39,42 +40,9 @@ const StyledPageWrapper = styled(PageWrapper)`
 const HeaderWrapper = styled(PageWrapper)`
     display: flex;
     height: 100%;
-
-    ${media.medium`
-        flex-direction: column;
-    `};
-`;
-
-const HeaderImage = styled(Img)`
-    left: 0;
-    top: 0;
-    width: 100vw;
-    height: 560px;
-
-    ${media.medium`
-        height: 100%;
-    `};
-
-    &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background-color: ${props => (props.theme.color === 'light' ? colors.backgroundLight : colors.backgroundDark)};
-        opacity: 0.5;
-    }
-`;
-
-const HeadshotWrapper = styled.div`
-    z-index: 1;
-    align-self: flex-end;
-    flex-shrink: 0;
-
-    ${media.medium`
-        align-self: center;
-    `};
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 `;
 
 const Headshot = styled(Img)`
@@ -88,29 +56,18 @@ const Headshot = styled(Img)`
     `};
 `;
 
-const Intro = styled.div`
-    align-self: center;
-    margin-top: 20px;
-    margin-left: 40px;
-    z-index: 1;
-
-    ${media.medium`
-        margin-top: 0;
-        margin-left: 0;
-        text-align: center;
-        width: 600px;
-        max-width: 100%;
-    `};
+const IntroTitle = styled.h1`
+    ${textSize.xlarge};
+    ${textColor.title};
+    margin: 0;
+    margin-bottom: 10px;
 `;
 
 const IntroDescription = styled.p`
     ${textSize.large};
     ${textColor.body};
-    margin-bottom: 10px;
-
-    ${media.medium`
-        margin-bottom: 30px;
-    `};
+    margin-top: 0;
+    margin-bottom: 30px;
 `;
 
 const SocialMedia = styled.ul`
@@ -118,13 +75,11 @@ const SocialMedia = styled.ul`
     align-items: center;
     margin: 0 -10px;
     padding: 0;
-
-    ${media.medium`
-        justify-content: center;
-    `};
+    justify-content: center;
 
     svg {
         width: 35px;
+        display: flex;
     }
 `;
 
@@ -270,22 +225,10 @@ export const Home = ({
         <Layout>
             <Header>
                 <HeaderWrapper>
-                    <HeadshotWrapper>
-                        <Headshot fluid={homeHeadshot.childImageSharp.fluid} alt="Robert Cooper's headshot" />
-                    </HeadshotWrapper>
-                    <Intro>
-                        <IntroDescription>
-                            I'm <strong>Robert Cooper</strong>, a front-end web developer that builds web apps and
-                            writes articles on web development ✌🏻
-                        </IntroDescription>
-                        <SocialMediaGroup />
-                    </Intro>
+                    <IntroTitle>Robert Cooper</IntroTitle>
+                    <IntroDescription>Web Developer</IntroDescription>
+                    <SocialMediaGroup />
                 </HeaderWrapper>
-                <HeaderImage
-                    fluid={homeHeader.childImageSharp.fluid}
-                    alt={'Snowy mountains'}
-                    style={{ position: 'absolute' }}
-                />
             </Header>
             <StyledPageWrapper>
                 <RecentPosts>
@@ -338,20 +281,6 @@ export default Home;
 
 export const pageQuery = graphql`
     query {
-        homeHeader: file(name: { eq: "home-header" }) {
-            childImageSharp {
-                fluid(maxWidth: 2000) {
-                    ...GatsbyImageSharpFluid
-                }
-            }
-        }
-        homeHeadshot: file(name: { eq: "home-headshot" }) {
-            childImageSharp {
-                fluid(maxHeight: 460) {
-                    ...GatsbyImageSharpFluid
-                }
-            }
-        }
         posts: allMdx(
             limit: 3
             sort: { fields: frontmatter___date, order: DESC }

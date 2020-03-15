@@ -1,6 +1,6 @@
 const path = require('path');
 
-const PAGINATION_OFFSET = 10;
+const PAGINATION_OFFSET = 20;
 
 const pluckCategories = posts =>
     Object.keys(
