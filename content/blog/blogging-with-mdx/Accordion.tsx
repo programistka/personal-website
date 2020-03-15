@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from '../../../src/lib/styled-components';
+import styled from 'styled-components';
 import { primitiveColors, textSize } from '../../../src/styles/common';
 
 const StyledInput = styled.input`

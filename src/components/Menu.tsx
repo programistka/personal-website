@@ -1,10 +1,10 @@
 import React from 'react';
 import { Location, WindowLocation } from '@reach/router';
-import styled from '../lib/styled-components';
+import styled from 'styled-components';
 import { colors, media, textColor, textSize } from '../styles/common';
 import { useTheme } from '../utils/context';
 import Link from './Link';
-import { PageWrapper, ConstrainedPageWidth } from './Common';
+import { ConstrainedPageWidth } from './Common';
 import ThemeSwitch from './ThemeSwitch';
 
 export const menuHeight = 60;
@@ -95,7 +95,10 @@ const ModifiedThemeSwitch: any = styled(ThemeSwitch)`
 `;
 
 // tslint:disable-next-line prettier
-const NAVIGATION = [{ to: '/blog/', label: 'blog' }, { to: '/projects/', label: 'projects' }];
+const NAVIGATION = [
+    { to: '/blog/', label: 'blog' },
+    { to: '/projects/', label: 'projects' },
+];
 
 const MenuTitleComponent = ({ location, children }: { location: WindowLocation; children: React.ReactNode }) => {
     if (location.pathname === '/') {

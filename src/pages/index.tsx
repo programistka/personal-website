@@ -2,13 +2,13 @@ import Img from 'gatsby-image';
 import React from 'react';
 import { graphql } from 'gatsby';
 import Fade from 'react-reveal/Fade';
+import styled from 'styled-components';
 import BlogList from '../components/BlogList';
 import Github from '../components/icons/Github';
 import Layout from '../components/Layout';
 import Link from '../components/Link';
 import Twitter from '../components/icons/Twitter';
-import styled from '../lib/styled-components';
-import { Button, Divider, PageWrapper, ButtonStyles } from '../components/Common';
+import { Button, Divider, PageWrapper } from '../components/Common';
 import { FluidImage } from '../types/Image';
 import { Post } from '../types/Post';
 import { Project as ProjectType } from '../types/Project';
@@ -20,13 +20,13 @@ import Newsletter from '../components/Newsletter';
 const Header = styled.div`
     position: relative;
     height: 560px;
-    margin-top: -60px; // height of the menu
+    margin-top: -60px; /* height of the menu */
     display: flex;
     padding: 0 20px;
 
     ${media.medium`
         height: unset;
-        margin-top: -140px; // height of the menu
+        margin-top: -140px; /* height of the menu */
         padding-top: calc(140px + 20px);
         padding-bottom: 80px;
     `};
@@ -252,7 +252,7 @@ const WrappedProject = ({
     children: React.ReactNode;
 }) => {
     if (projectPageLink) {
-        return <LinkedProject to={`${projectPageLink}`}>{children}</LinkedProject> as any;
+        return (<LinkedProject to={`${projectPageLink}`}>{children}</LinkedProject>) as any;
     } else {
         return children;
     }

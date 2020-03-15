@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from '../../../src/lib/styled-components';
+import styled from 'styled-components';
 
 const StyledVideo = styled.video`
     max-width: 100%;

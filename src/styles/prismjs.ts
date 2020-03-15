@@ -1,4 +1,4 @@
-import { css } from '../lib/styled-components';
+import { css } from 'styled-components';
 
 export const prismjsStyles = css`
     code[class*='language-'],

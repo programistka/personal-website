@@ -1,6 +1,6 @@
-import { MDXRenderer } from 'gatsby-plugin-mdx';
 import React, { useEffect, useRef } from 'react';
-import styled from 'styled-components';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
+import styled, { css } from 'styled-components';
 import { graphql } from 'gatsby';
 import Helmet from 'react-helmet';
 import Layout from '../components/Layout';
@@ -10,7 +10,6 @@ import { Divider, PaddedPageWrapper } from '../components/Common';
 import { Title } from '../components/Typography';
 import { colors, media, textSize, pageWidth, transitionDuration } from '../styles/common';
 import { PageContext } from '../types/PageContext';
-import { css } from '../lib/styled-components';
 import Newsletter from '../components/Newsletter';
 
 const postContentPadding = `20px`;

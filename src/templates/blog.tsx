@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import Fade from 'react-reveal/Fade';
-import styled from '../lib/styled-components';
+import styled from 'styled-components';
 import BlogList from '../components/BlogList';
 import Layout from '../components/Layout';
 import Link from '../components/Link';

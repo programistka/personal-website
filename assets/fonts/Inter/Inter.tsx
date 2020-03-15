@@ -1,4 +1,4 @@
-import { css } from '../../../src/lib/styled-components';
+import { css } from 'styled-components';
 // @ts-ignore
 import InterBoldWoff from './Inter-Bold.woff';
 // @ts-ignore

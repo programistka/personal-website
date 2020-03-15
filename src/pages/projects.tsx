@@ -2,7 +2,7 @@ import Img from 'gatsby-image';
 import React from 'react';
 import { graphql } from 'gatsby';
 import Fade from 'react-reveal/Fade';
-import styled from '../lib/styled-components';
+import styled from 'styled-components';
 import Layout from '../components/Layout';
 import { PageWrapper, LightButton, DarkButton } from '../components/Common';
 import { Project as ProjectType } from '../types/Project';

@@ -1,4 +1,4 @@
-import styled from '../lib/styled-components';
+import styled from 'styled-components';
 import { media, textColor, textSize } from '../styles/common';
 
 export const Title = styled.h1`

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { ThemeProvider } from 'styled-components';
 import { ContextThemeProvider, useTheme } from './src/utils/context';
-import { ThemeProvider } from './src/lib/styled-components';
 /**
  * Show outline only on keyboard interaction
  *

@@ -1,4 +1,5 @@
-import { css } from '../lib/styled-components';
+import { css } from 'styled-components';
+import { ThemedStyledFunctionBase } from 'styled-components';
 
 export const primitiveColors = {
     aero: '#80B2ED',
@@ -81,7 +82,7 @@ export const transitionDuration = {
 type Media = { [index: string]: any };
 
 // Iterate through the sizes and create a media query template
-export const media: any = Object.keys(sizes).reduce((acc: Media, label) => {
+export const media = Object.keys(sizes).reduce((acc: Media, label) => {
     acc[label] = (...args: any) =>
         css`
             @media (max-width: ${sizes[label]}px) {

@@ -29,8 +29,8 @@ export default {
         ) : (
             <Quote {...props} />
         ),
-    Video: (props: { src: string }) => <Video {...props} />,
-    Youtube: (props: { src: string }) => <Youtube {...props} />,
-    Sandbox: (props: { src: string; title: string }) => <Sandbox {...props} />,
-    Link: (props: { to: string; children: React.ReactNode }) => <Link {...props} />,
+    Video,
+    Youtube,
+    Sandbox,
+    Link,
 };

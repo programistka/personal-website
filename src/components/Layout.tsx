@@ -2,7 +2,7 @@ import Helmet from 'react-helmet';
 import React from 'react';
 import { MDXProvider } from '@mdx-js/react';
 import { withPrefix, StaticQuery, graphql } from 'gatsby';
-import styled, { createGlobalStyle } from '../lib/styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import Inter from '../../assets/fonts/Inter/Inter';
 import { colors, textColor, textSize } from '../styles/common';
 import { prismjsStyles } from '../styles/prismjs';

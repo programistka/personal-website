@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from '../../../src/lib/styled-components';
+import styled from 'styled-components';
 import SubtitleH3 from '../../../src/components/mdx/SubtitleH3';
 import Loader from './Loader';
 

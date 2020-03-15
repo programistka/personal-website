@@ -1,7 +1,7 @@
 import Img from 'gatsby-image';
 import React from 'react';
 import { graphql } from 'gatsby';
-import styled from '../../lib/styled-components';
+import styled from 'styled-components';
 import Layout from '../../components/Layout';
 import { PageWrapper, PaddedPageWrapper, Divider, Button } from '../../components/Common';
 import { Project as ProjectType } from '../../types/Project';
