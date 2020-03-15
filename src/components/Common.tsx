@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { colors, media, transitionDuration, textSize, pageWidth } from '../styles/common';
-import Link from './Link';
+import { Link } from './Link';
 
 export const ConstrainedPageWidth = css`
     ${pageWidth.large}

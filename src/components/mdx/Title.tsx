@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { Title } from '../Typography';
+import { Title as TypographyTitle } from '../Typography';
 
-export default styled(Title)`
+export const Title = styled(TypographyTitle)`
     margin-top: 20px;
     margin-bottom: 20px;
     padding-top: 30px;

@@ -9,7 +9,6 @@ banner: './images/banner.png'
 ---
 
 import GithubButton from 'components/mdx/GithubButton';
-import Quote from "\$components/mdx/Quote";
 
 ![Banner Image.](./images/banner.png)
 

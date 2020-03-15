@@ -7,8 +7,6 @@ categories: ['git']
 banner: './images/banner.png'
 ---
 
-import Link from "$components/Link";
-
 ![Banner Image.](./images/banner.png)
 
 Leveraging aliases when working with git can help make you more efficient with using the popular version control system. Listed below are some of my absolute favourite and most used aliases when working on a project that uses git.

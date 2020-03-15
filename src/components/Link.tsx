@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { colors } from '../styles/common';
 
-const Link = styled.a<{ active: string; to?: string }>`
+const LinkBase = styled.a<{ active: string; to?: string }>`
     color: ${props => {
         if (props.active === 'true') {
             if (props.theme.color === 'light') {
@@ -31,22 +31,20 @@ type LinkComponentProps = {
     active?: string;
 };
 
-const LinkComponent = ({ children, to, active = 'false', ...other }: LinkComponentProps) => {
+export const Link = ({ children, to, active = 'false', ...other }: LinkComponentProps) => {
     const internal = /^\/(?!\/)(?!static\/)/.test(to);
 
     if (internal) {
         return (
-            <Link as={GatsbyLink} to={to} active={active} {...other}>
+            <LinkBase as={GatsbyLink} to={to} active={active} {...other}>
                 {children}
-            </Link>
+            </LinkBase>
         );
     }
 
     return (
-        <Link href={to} active={active} target="_blank" rel="noopener" {...other}>
+        <LinkBase href={to} active={active} target="_blank" rel="noopener" {...other}>
             {children}
-        </Link>
+        </LinkBase>
     );
 };
-
-export default LinkComponent;

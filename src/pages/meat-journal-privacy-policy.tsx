@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import Layout from '../components/Layout';
-import Link from '../components/Link';
-import Title from '../components/mdx/Title';
+import { Link } from '../components/Link';
+import { Title } from '../components/mdx/Title';
 import { PageWrapper } from '../components/Common';
 
 const PageContent = styled(PageWrapper)`

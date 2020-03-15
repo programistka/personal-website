@@ -6,7 +6,7 @@ import Layout from '../../components/Layout';
 import { PageWrapper, PaddedPageWrapper, Divider, Button } from '../../components/Common';
 import { Project as ProjectType } from '../../types/Project';
 import { colors, media, textSize, textColor, pageWidth } from '../../styles/common';
-import Link from '../../components/Link';
+import { Link } from '../../components/Link';
 
 const Header = styled.div<any>`
     padding: 120px 20px;

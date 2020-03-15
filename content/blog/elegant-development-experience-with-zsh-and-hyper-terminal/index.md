@@ -9,9 +9,6 @@ categories: ['developer tools']
 banner: './images/banner.png'
 ---
 
-import Link from "$components/Link";
-import Quote from "$components/mdx/Quote";
-
 ![Banner Image.](./images/banner.png)
 
 Developers spend a lot of time working in their terminal doing the following tasks:

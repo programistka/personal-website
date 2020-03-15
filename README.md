@@ -16,19 +16,19 @@ ffmepg is used to convert the video file formats from the command line. Here are
 
 **WebM format**
 
-```
+```bash
 ffmpeg -i input.mov -c:v libvpx-vp9 -crf 40 -b:v 0 output.webm
 ```
 
 **MP4 format**
 
-```
+```bash
 ffmpeg -i input.mov -b:v 0 -crf 25 -profile:v main -level 4.0 output.mp4
 ```
 
 As a reference, I had to run to following command to get Safari compatibility when converting a GIF as well as to get rid of a "divisible by 2 error":
 
-```
+```bash
 ffmpeg -i mclovin.gif -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" -pix_fmt yuv420p -profile:v main -level 4.0 -b:v 0 -crf 25 mclovin.mp4
 ```
 

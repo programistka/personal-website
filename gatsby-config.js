@@ -93,8 +93,8 @@ module.exports = {
         {
             resolve: `gatsby-plugin-styled-components`,
             options: {
-                displayName: true
-              }
+                displayName: true,
+            },
         },
         `gatsby-plugin-catch-links`,
         `gatsby-plugin-react-helmet`,

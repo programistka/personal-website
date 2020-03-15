@@ -4,7 +4,7 @@ import Fade from 'react-reveal/Fade';
 import styled from 'styled-components';
 import BlogList from '../components/BlogList';
 import Layout from '../components/Layout';
-import Link from '../components/Link';
+import { Link } from '../components/Link';
 import { PaddedPageWrapper } from '../components/Common';
 import { Title } from '../components/Typography';
 import { media } from '../styles/common';

@@ -2,10 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { media } from '../../styles/common';
 
-type YoutubeProps = {
-    src: string;
-};
-
 const StyledIframe = styled.iframe`
     width: 100%;
     margin: 40px 0;
@@ -15,7 +11,11 @@ const StyledIframe = styled.iframe`
     `};
 `;
 
-const Youtube = ({ src }: YoutubeProps) => {
+type YoutubeProps = {
+    src: string;
+};
+
+export const Youtube: React.FC<YoutubeProps> = ({ src }) => {
     return (
         <StyledIframe
             width="560"
@@ -27,5 +27,3 @@ const Youtube = ({ src }: YoutubeProps) => {
         />
     );
 };
-
-export default Youtube;

@@ -1,11 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-type SandboxProps = {
-    src: string;
-    title: string;
-};
-
 const StyledIframe = styled.iframe`
     width: 100%;
     margin: 40px 0;
@@ -15,7 +10,12 @@ const StyledIframe = styled.iframe`
     overflow: hidden;
 `;
 
-const Sandbox = ({ src, title }: SandboxProps) => {
+type SandboxProps = {
+    src: string;
+    title: string;
+};
+
+export const Sandbox: React.FC<SandboxProps> = ({ src, title }) => {
     return (
         <StyledIframe
             src={src}
@@ -25,5 +25,3 @@ const Sandbox = ({ src, title }: SandboxProps) => {
         />
     );
 };
-
-export default Sandbox;

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { colors } from '../styles/common';
-import Link from './Link';
+import { Link } from './Link';
 import { PageWrapper } from './Common';
 
 export const footerHeight = 120;
@@ -44,7 +44,7 @@ const SocialMediaLink = styled(Link)``;
 
 type FooterProps = {};
 
-const FooterComponent = ({  }: FooterProps) => {
+const FooterComponent = ({}: FooterProps) => {
     return (
         <Footer>
             <ModifiedPageWrapper>

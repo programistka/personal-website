@@ -7,8 +7,6 @@ categories: ['javascript', 'react']
 banner: './images/banner.png'
 ---
 
-import Link from "$components/Link";
-
 ![Banner Image.](./images/banner.png)
 
 In the past few months I’ve been doing work with React Native, which is a change of pace from the React web apps I was more familiar with developing. Now that i’ve gained experience with React Native, I’m going to explain a bit how React Native differs from React for the web, and what to expect when developing with React Native.

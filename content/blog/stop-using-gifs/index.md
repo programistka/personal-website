@@ -92,7 +92,7 @@ Personally, what I end up doing is that I convert a .gif file (or .mov if I do a
 
 **Convert .gif to .webm**
 
-```
+```bash
 ffmpeg -i input-name.gif -c:v libvpx-vp9 -b:v 0 -crf 40 output-name.webm
 ```
 
@@ -103,7 +103,7 @@ ffmpeg -i input-name.gif -c:v libvpx-vp9 -b:v 0 -crf 40 output-name.webm
 
 **Convert .gif to .mp4**
 
-```
+```bash
 ffmpeg -i input-name.gif -b:v 0 -crf 25 output.mp4
 ```
 

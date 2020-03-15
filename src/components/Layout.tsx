@@ -6,7 +6,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 import Inter from '../../assets/fonts/Inter/Inter';
 import { colors, textColor, textSize } from '../styles/common';
 import { prismjsStyles } from '../styles/prismjs';
-import mdxComponents from './mdx';
+import { components } from './mdx';
 import Footer, { footerHeight } from './Footer';
 import Menu, { menuHeight } from './Menu';
 
@@ -215,7 +215,7 @@ export const Layout = ({
                             <meta property="og:type" content="website" />
                         </Helmet>
                         {!hideMenu && <Menu />}
-                        <MDXProvider components={mdxComponents}>
+                        <MDXProvider components={components}>
                             <Main>{children}</Main>
                         </MDXProvider>
                         {!hideFooter && <Footer />}

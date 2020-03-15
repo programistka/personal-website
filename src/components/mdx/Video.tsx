@@ -11,12 +11,10 @@ const StyledVideo = styled.video`
     display: block;
 `;
 
-const Video = ({ src }: VideoProps) => {
+export const Video: React.FC<VideoProps> = ({ src }) => {
     return (
         <StyledVideo autoPlay loop muted playsInline>
             <source src={`${src}.mp4`} type="video/mp4" />
         </StyledVideo>
     );
 };
-
-export default Video;

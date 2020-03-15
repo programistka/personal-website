@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { graphql } from 'gatsby';
 import Helmet from 'react-helmet';
 import Layout from '../components/Layout';
-import Link from '../components/Link';
+import { Link } from '../components/Link';
 import ScrollProgress from '../utils/scrollProgress';
 import { Divider, PaddedPageWrapper } from '../components/Common';
 import { Title } from '../components/Typography';

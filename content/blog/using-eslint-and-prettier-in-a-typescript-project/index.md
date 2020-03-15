@@ -8,9 +8,6 @@ categories: ['typescript', 'javascript', 'developer tools']
 banner: './images/banner.png'
 ---
 
-import Link from "$components/Link";
-import Quote from "$components/mdx/Quote";
-
 ![Banner Image.](./images/banner.png)
 
 When it comes to linting TypeScript code, there are two major linting options to choose from: <Link to="https://palantir.github.io/tslint/">TSLint</Link> and <Link to="https://eslint.org/">ESLint</Link>. TSLint is a linter than can only be used for TypeScript, while ESLint supports both JavaScript and TypeScript.

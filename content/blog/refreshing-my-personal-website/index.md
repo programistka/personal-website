@@ -10,7 +10,6 @@ banner: './images/banner.png'
 
 import BlogThemeSwitch from 'components/mdx/BlogThemeSwitch';
 import GithubButton from 'components/mdx/GithubButton';
-import Link from "$components/Link";
 
 ![Banner Image.](./images/banner.png)
 

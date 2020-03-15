@@ -7,8 +7,6 @@ categories: ['javascript']
 banner: './images/banner.png'
 ---
 
-import Link from "$components/Link";
-
 ![Banner Image.](./images/banner.png)
 
 I listened to a great <Link to="https://syntax.fm/">Syntax FM podcast</Link> that summarized useful JavaScript array and object methods. These methods help developers write clean and readable code. A lot of these methods reduce the need to reach for utility libraries like <Link to=""></Link>[Lodash](https://lodash.com/).

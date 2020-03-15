@@ -7,8 +7,6 @@ categories: ['typescript', 'javascript']
 banner: './images/banner.png'
 ---
 
-import Link from "$components/Link";
-
 ![Banner Image.](./images/banner.png)
 
 Based on the <Link to="https://insights.stackoverflow.com/survey/2018/">Stack Overflow Developer survey in 2018</Link>, TypeScript is more "loved" as a programming language than JavaScript. The reason TypeScript is so loved amongst JavaScript developers is because adding types to JavaScript allows you to spot errors before running your code. The errors provided by the TypeScript compiler will give a good indication of how an error can be fixed. Adding types to JavaScript also allows code editors to provide some more advanced features, such as code completion, project-wide refactoring, and automatic module importing.

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { colors, textColor } from '../../styles/common';
+import { colors } from '../../styles/common';
 
-export default styled.div`
+export const Quote = styled.div`
     color: ${colors.textBodyLight};
     background-color: ${props =>
         props.theme.color === 'light' ? colors.quoteBackgroundLight : colors.quoteBackgroundDark};

@@ -20,7 +20,7 @@ When using [yarn](https://yarnpkg.com/en/) to manage NPM dependencies, a `yarn.l
 
 The purpose of a lock file is to **lock** down the versions of the dependencies specified in a `package.json` file. This means that in a `yarn.lock` file, there is an _identifier_ for every dependency and sub dependency that is used for a project. What I mean by _identifier_ is there is a block in the `yarn.lock` file that describes the exact version of an installed dependency. It looks like the following:
 
-```
+```text
 react@16.8.3:
     version "16.8.3"
     resolved "https://registry.yarnpkg.com/react/-/react-16.8.3.tgz#c6f988a2ce895375de216edcfaedd6b9a76451d9"
@@ -34,7 +34,7 @@ react@16.8.3:
 
 The above identifier found in the `yarn.lock` file specifies that react version **16.8.3** is installed, and it gives the registry URL where the package can be installed, an integrity hash (making sure the dependency's files haven't been modified), and a list of sub dependencies (i.e. dependencies required by the dependency). Looking further into the `yarn.lock` file will show the identifiers for the sub dependencies. For example here is another identifier for the _object-assign_ sub-dependency:
 
-```
+```text
 object-assign@^4.1.1: version "4.1.1"
     resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
     integrity sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=
@@ -60,7 +60,7 @@ Let's go over the above scenario again, but with a `yarn.lock` used to lock depe
 
 Taking the same `package.json` file as above and assuming that the current version of lodash is **3.9.1**, when someone goes to install the dependencies, they will end up with the following entry within a `yarn.lock` file:
 
-```
+```text
 lodash@^3.9.1:
     version "3.9.1"
     ...
@@ -80,7 +80,7 @@ Ok, let's stick with the above example with the following dependencies listed in
 
 Remember that with a `yarn.lock` you will have a locked version of lodash (in this example, the locked version is set to **3.9.1**):
 
-```
+```text
 lodash@^3.9.1:
     version "3.9.1"
     ...
@@ -90,7 +90,7 @@ Now, someone might be confused as to why we specify version ranges in a `package
 
 This is where the `yarn upgrade` command comes into play.`yarn upgrade` allows to upgrade all the dependencies listed in a `package.json` to the latest versions specified by the version ranges. So assuming a lock file contains version **3.9.1** of lodash and version **3.10.3** of lodash is available, running `yarn upgrade` will install version **3.10.3** and the `yarn.lock` file will update to the following:
 
-```
+```text
 lodash@^3.9.1:
     version "3.10.3"
     ...
@@ -110,7 +110,7 @@ So for the following dependencies in `package.json`:
 
 If version **4.17.14** of lodash is released, then running `yarn upgrade --latest` will install version **4.17.14** and update the `yarn.lock` file to the following:
 
-```
+```text
 lodash@^4.17.14:
     version "4.17.14"
     ...
@@ -118,7 +118,7 @@ lodash@^4.17.14:
 
 Yarn will also automatically update the version range in the `package.json` to the following:
 
-```
+```text
 "dependencies": {
     "lodash": "^4.17.14"
 }

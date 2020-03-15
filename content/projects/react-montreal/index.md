@@ -10,6 +10,4 @@ detailsPageLink: '/project/react-montreal'
 banner: './images/react-montreal-social-sharing.png'
 ---
 
-import Link from "\$components/Link";
-
 This section can be used in case I want to create individual pages for each project.

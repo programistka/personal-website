@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Fade from 'react-reveal/Fade';
 import { colors, media, transitionDuration, textColor, textSize } from '../styles/common';
 import { Post as PostType } from '../types/Post';
-import Link from './Link';
+import { Link } from './Link';
 
 const Post = styled.section`
     width: 100%;

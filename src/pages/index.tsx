@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import BlogList from '../components/BlogList';
 import Github from '../components/icons/Github';
 import Layout from '../components/Layout';
-import Link from '../components/Link';
+import { Link } from '../components/Link';
 import Twitter from '../components/icons/Twitter';
 import { Button, Divider, PageWrapper } from '../components/Common';
 import { FluidImage } from '../types/Image';

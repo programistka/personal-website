@@ -3,7 +3,7 @@ import { Location, WindowLocation } from '@reach/router';
 import styled from 'styled-components';
 import { colors, media, textColor, textSize } from '../styles/common';
 import { useTheme } from '../utils/context';
-import Link from './Link';
+import { Link } from './Link';
 import { ConstrainedPageWidth } from './Common';
 import ThemeSwitch from './ThemeSwitch';
 
