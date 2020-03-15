@@ -209,7 +209,7 @@ export const Layout = ({
                             <meta property="og:title" content={title} />
                             <meta
                                 property="og:image"
-                                content={`${siteUrl}${publicURL || withPrefix('/social-sharing.jpg')}`}
+                                content={`${siteUrl}${publicURL || withPrefix('/social-sharing.png')}`}
                             />
                             <meta property="og:description" content={description} />
                             <meta property="og:type" content="website" />

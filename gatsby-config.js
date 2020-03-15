@@ -5,8 +5,8 @@ module.exports = {
         siteUrl: `https://www.robertcooper.me`,
         author: `Robert Cooper`,
         title: `Robert Cooper`,
-        description: `The front end web development blog and project portfolio of Robert Cooper, a Canadian web developer based in Montreal 🇨🇦.`,
-        imagePath: `/social-sharing.jpg`,
+        description: `A Canadian web developer based in Montreal, Canada.`,
+        imagePath: `/social-sharing.png`,
     },
     plugins: [
         {
@@ -108,7 +108,7 @@ module.exports = {
         {
             resolve: `gatsby-plugin-feed-custom`,
             options: {
-                image_url: `https://www.robertcooper.me/social-sharing.jpg`,
+                image_url: `https://www.robertcooper.me/social-sharing.png`,
                 language: `en`,
                 feeds: [
                     {
