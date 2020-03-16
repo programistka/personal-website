@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { GatsbyBrowser } from 'gatsby';
 import { ThemeProvider } from 'styled-components';
 import { ContextThemeProvider, useTheme } from './src/utils/context';
 /**
@@ -11,13 +12,13 @@ import { ContextThemeProvider, useTheme } from './src/utils/context';
  */
 import 'focus-visible';
 
-const Wrapper = ({ children }) => {
+const Wrapper: React.FC = ({ children }) => {
     const { theme } = useTheme();
 
     return <ThemeProvider theme={{ color: theme }}>{children}</ThemeProvider>;
 };
 
-export const wrapRootElement = ({ element }) => {
+export const wrapRootElement: GatsbyBrowser['wrapRootElement'] = ({ element }) => {
     return (
         <ContextThemeProvider>
             <Wrapper>{element}</Wrapper>

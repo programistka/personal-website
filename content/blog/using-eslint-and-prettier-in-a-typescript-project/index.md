@@ -1,7 +1,7 @@
 ---
 slug: '/using-eslint-and-prettier-in-a-typescript-project'
 date: '2019-02-10'
-updatedAt: '2019-10-06'
+updatedAt: '2020-03-16'
 title: 'Using ESLint and Prettier in a TypeScript Project'
 description: "ESLint's large set of linting rules and the increased commitment to use ESLint by the TypeScript team makes ESLint a great tool for linting TypeScript projects."
 categories: ['typescript', 'javascript', 'developer tools']
@@ -39,10 +39,6 @@ module.exports = {
   extends: [
     "plugin:@typescript-eslint/recommended" // Uses the recommended rules from the @typescript-eslint/eslint-plugin
   ],
-  parserOptions: {
-    ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
-    sourceType: "module" // Allows for the use of imports
-  },
   rules: {
     // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
     // e.g. "@typescript-eslint/explicit-function-return-type": "off",
@@ -63,8 +59,6 @@ module.exports = {
     "plugin:@typescript-eslint/recommended" // Uses the recommended rules from @typescript-eslint/eslint-plugin
   ],
   parserOptions: {
-    ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
-    sourceType: "module", // Allows for the use of imports
     ecmaFeatures: {
       jsx: true // Allows for the parsing of JSX
     }
@@ -127,6 +121,8 @@ module.exports = {
   }
 };
 ```
+
+> **Note:** make sure that `plugin:prettier/recommended` is the last configuration in the `extends` array
 
 The advantage of having prettier setup as an ESLint rule using `eslint-plugin-prettier` is that code can automatically be fixed using ESLint's `--fix` option.
 

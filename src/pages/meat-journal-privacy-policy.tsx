@@ -23,8 +23,8 @@ export const MeatJournalPrivacyPolicy = () => (
             <LastUpdatedDate>Last Updated: 02/10/2018</LastUpdatedDate>
             <h2>Overview</h2>
             <p>
-                This Privacy Policy describes the information collected by Robert Cooper (’we’, 'our’, ‘us’) through the
-                Meat Journal application we use that information.
+                {`This Privacy Policy describes the information collected by Robert Cooper (’we’, 'our’, ‘us’) through the
+                Meat Journal application we use that information.`}
             </p>
             <h2>We Don’t Collect Your Data</h2>
             <p>

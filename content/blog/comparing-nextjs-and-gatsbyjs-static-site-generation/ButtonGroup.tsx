@@ -20,7 +20,9 @@ const ButtonWrapper = styled.div`
     margin: 20px;
 `;
 
-const ButtonGroup = ({ items }) => {
+type Props = { items: { name: string; link: string }[] };
+
+const ButtonGroup: React.FC<Props> = ({ items }) => {
     return (
         <Wrapper>
             <ButtonRow>

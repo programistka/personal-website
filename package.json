@@ -1,6 +1,7 @@
 {
     "name": "robertcooper.me",
     "dependencies": {
+        "@reach/router": "^1.3.3",
         "focus-visible": "^5.0.2",
         "gatsby-link": "^2.2.30",
         "gatsby-plugin-mdx": "^1.0.82",
@@ -14,8 +15,10 @@
         "react": "^16.13.0",
         "react-dom": "^16.13.0",
         "react-helmet": "^5.2.1",
+        "react-is": "^16.13.0",
         "react-reveal": "^1.2.2",
-        "styled-components": "^5.0.1"
+        "styled-components": "^5.0.1",
+        "webpack": "^4.42.0"
     },
     "devDependencies": {
         "@babel/core": "^7.8.7",
@@ -31,7 +34,6 @@
         "@typescript-eslint/parser": "^2.23.0",
         "babel-plugin-styled-components": "^1.10.7",
         "eslint": "^6.8.0",
-        "eslint-config-landr": "^0.2.1",
         "eslint-config-prettier": "^6.10.0",
         "eslint-plugin-import": "^2.20.1",
         "eslint-plugin-prettier": "^3.1.2",
@@ -55,6 +57,7 @@
         "husky": "^4.2.3",
         "lint-staged": "^10.0.8",
         "prettier": "^1.19.1",
+        "ts-node": "^8.6.2",
         "typescript": "^3.8.3"
     },
     "husky": {

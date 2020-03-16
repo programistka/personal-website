@@ -1,6 +1,7 @@
-import React from 'react';
 import { Link } from '../Link';
 import { Divider } from '../Common';
+import { Anchor } from './Anchor';
+import { Blockquote } from './Blockquote';
 import Paragraph from './Paragraph';
 import SubtitleH2 from './SubtitleH2';
 import SubtitleH3 from './SubtitleH3';
@@ -12,23 +13,14 @@ import { Youtube } from './Youtube';
 import { Sandbox } from './Sandbox';
 
 export const components = {
-    a: (props: { theme: string; href: string; children: React.ReactChild }) => (
-        <Link to={props.href} {...props}>
-            {props.children}
-        </Link>
-    ),
+    a: Anchor,
     h1: Title,
     h2: SubtitleH2,
     h3: SubtitleH3,
     h4: SubtitleH4,
     p: Paragraph,
     hr: Divider,
-    blockquote: (props: { theme: string; className?: string; children: React.ReactChild }) =>
-        props.className && props.className === 'twitter-tweet' ? (
-            <blockquote className={props.className}>{props.children}</blockquote>
-        ) : (
-            <Quote {...props} />
-        ),
+    blockquote: Blockquote,
     Video: Video,
     Youtube: Youtube,
     Sandbox: Sandbox,

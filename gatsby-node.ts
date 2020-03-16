@@ -1,10 +1,29 @@
-const path = require('path');
+import path from 'path';
+import { GatsbyNode, Actions } from 'gatsby';
 
 const PAGINATION_OFFSET = 20;
 
-const pluckCategories = posts =>
+export interface Node {
+    fields: {
+        categories: string[];
+        title: string;
+        slug: string;
+    };
+    id: string;
+    excerpt: string;
+}
+
+interface QueryResult {
+    posts: {
+        edges: {
+            node: Node;
+        }[];
+    };
+}
+
+const pluckCategories = (posts: QueryResult['posts']['edges']): string[] =>
     Object.keys(
-        posts.reduce((acc, value) => {
+        posts.reduce((acc: { [category: string]: string }, value) => {
             value.node.fields.categories.forEach(category => {
                 if (!acc[category]) {
                     acc[category] = category;
@@ -15,8 +34,14 @@ const pluckCategories = posts =>
         }, {}),
     );
 
-const groupByCategory = posts =>
-    posts.reduce((acc, value) => {
+const groupByCategory = (
+    posts: QueryResult['posts']['edges'],
+): {
+    [category: string]: {
+        node: Node;
+    }[];
+} =>
+    posts.reduce((acc: { [category: string]: { node: Node }[] }, value) => {
         value.node.fields.categories.forEach(category => {
             if (!acc[category]) {
                 acc[category] = [];
@@ -26,8 +51,16 @@ const groupByCategory = posts =>
         return acc;
     }, {});
 
-const createPaginatedPages = (createPage, posts, pathPrefix, context) => {
-    const pages = posts.reduce((acc, value, index) => {
+const createPaginatedPages = (
+    createPage: Actions['createPage'],
+    posts: QueryResult['posts']['edges'],
+    pathPrefix: string,
+    context: {
+        categories: string[];
+        activeCategory?: string;
+    },
+): void => {
+    const pages = posts.reduce((acc: string[][], value, index) => {
         const pageIndex = Math.floor(index / PAGINATION_OFFSET);
 
         if (!acc[pageIndex]) {
@@ -60,7 +93,7 @@ const createPaginatedPages = (createPage, posts, pathPrefix, context) => {
     });
 };
 
-const createCategoryPages = (createPage, posts) => {
+const createCategoryPages = (createPage: Actions['createPage'], posts: QueryResult['posts']['edges']): void => {
     const categories = pluckCategories(posts);
 
     const categorizedPosts = groupByCategory(posts);
@@ -73,7 +106,7 @@ const createCategoryPages = (createPage, posts) => {
     });
 };
 
-const createPosts = (createPage, posts) => {
+const createPosts = (createPage: Actions['createPage'], posts: QueryResult['posts']['edges']): void => {
     posts.forEach(({ node }, i) => {
         const prev = i === 0 ? null : posts[i - 1].node;
         const next = i === posts.length - 1 ? null : posts[i + 1].node;
@@ -90,14 +123,14 @@ const createPosts = (createPage, posts) => {
     });
 };
 
-const createBlog = (createPage, posts) => {
+const createBlog = (createPage: Actions['createPage'], posts: QueryResult['posts']['edges']): void => {
     const categories = pluckCategories(posts);
 
     createPaginatedPages(createPage, posts, '/blog', { categories });
 };
 
-exports.createPages = ({ actions, graphql }) =>
-    graphql(`
+export const createPages: GatsbyNode['createPages'] = ({ actions, graphql }) =>
+    graphql<QueryResult>(`
         query {
             posts: allMdx(
                 sort: { order: DESC, fields: [frontmatter___date] }
@@ -122,14 +155,14 @@ exports.createPages = ({ actions, graphql }) =>
         }
 
         // Projects are filtered out at the GraphQL query level
-        const { edges: posts } = data.posts;
+        const { edges: posts } = (data as QueryResult).posts;
 
         createBlog(actions.createPage, posts);
         createPosts(actions.createPage, posts);
         createCategoryPages(actions.createPage, posts);
     });
 
-exports.onCreateWebpackConfig = ({ actions }) => {
+export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ actions }) => {
     actions.setWebpackConfig({
         resolve: {
             modules: [path.resolve(__dirname, 'src'), 'node_modules'],
@@ -140,7 +173,7 @@ exports.onCreateWebpackConfig = ({ actions }) => {
     });
 };
 
-exports.onCreateNode = ({ node, getNode, actions }) => {
+export const onCreateNode: GatsbyNode['onCreateNode'] = ({ node, actions }) => {
     const { createNodeField } = actions;
 
     if (node.internal.type === `Mdx`) {
@@ -153,31 +186,31 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
         createNodeField({
             name: 'title',
             node,
-            value: node.frontmatter.title,
+            value: (node as any).frontmatter.title,
         });
 
         createNodeField({
             name: 'description',
             node,
-            value: node.frontmatter.description,
+            value: (node as any).frontmatter.description,
         });
 
         createNodeField({
             name: 'slug',
             node,
-            value: node.frontmatter.slug,
+            value: (node as any).frontmatter.slug,
         });
 
         createNodeField({
             name: 'date',
             node,
-            value: node.frontmatter.date || '',
+            value: (node as any).frontmatter.date || '',
         });
 
         createNodeField({
             name: 'editLink',
             node,
-            value: `https://github.com/robertcoopercode/personal-website/edit/master${node.fileAbsolutePath.replace(
+            value: `https://github.com/robertcoopercode/personal-website/edit/master${(node as any).fileAbsolutePath.replace(
                 __dirname,
                 '',
             )}`,
@@ -186,19 +219,19 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
         createNodeField({
             name: 'banner',
             node,
-            banner: node.frontmatter.banner,
+            value: (node as any).frontmatter.banner,
         });
 
         createNodeField({
             name: 'categories',
             node,
-            value: node.frontmatter.categories || [],
+            value: (node as any).frontmatter.categories || [],
         });
 
         createNodeField({
             name: 'keywords',
             node,
-            value: node.frontmatter.keywords || [],
+            value: (node as any).frontmatter.keywords || [],
         });
     }
 };

@@ -18,13 +18,6 @@ type Coordinates = {
 };
 
 /**
- * Fallback noop function
- * @method noop
- * @returns {undefined}
- */
-function noop(): void {}
-
-/**
  * ScrollProgress class constructor
  * @constructor ScrollProgress
  * @param {Function} handleUpdate method to call on scroll update
@@ -32,7 +25,7 @@ function noop(): void {}
  */
 const ScrollProgress = (function(this: ScrollProgress, handleUpdate: (x: number, y: number) => void): void {
     // assign function to call on update
-    this._handleUpdate = typeof handleUpdate === 'function' ? handleUpdate : noop;
+    this._handleUpdate = handleUpdate;
 
     // set initial values
     this._viewportHeight = this._getViewportHeight();

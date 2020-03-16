@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors, textColor } from '../../styles/common';
+import { textColor } from '../../styles/common';
 
 export default styled.h4`
     ${textColor.title};
