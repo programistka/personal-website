@@ -176,35 +176,11 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ act
 export const onCreateNode: GatsbyNode['onCreateNode'] = ({ node, actions }) => {
     const { createNodeField } = actions;
 
-    if (node.internal.type === `Mdx`) {
+    if (node.internal.type === `Mdx` && node.frontmatter !== undefined) {
         createNodeField({
             name: 'id',
             node,
             value: node.id,
-        });
-
-        createNodeField({
-            name: 'title',
-            node,
-            value: (node as any).frontmatter.title,
-        });
-
-        createNodeField({
-            name: 'description',
-            node,
-            value: (node as any).frontmatter.description,
-        });
-
-        createNodeField({
-            name: 'slug',
-            node,
-            value: (node as any).frontmatter.slug,
-        });
-
-        createNodeField({
-            name: 'date',
-            node,
-            value: (node as any).frontmatter.date || '',
         });
 
         createNodeField({
@@ -216,22 +192,64 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = ({ node, actions }) => {
             )}`,
         });
 
+        type BlogPostFrontMatter = {
+            title?: string;
+            description?: string;
+            slug?: string;
+            date?: string;
+            categories?: string[];
+            keywords?: string[];
+        };
+
+        const {
+            title,
+            description,
+            slug,
+            date = '',
+            categories = [],
+            keywords = [],
+        } = node.frontmatter as BlogPostFrontMatter;
+
+        if (title) {
+            createNodeField({
+                name: 'title',
+                node,
+                value: title,
+            });
+        }
+
+        if (description) {
+            createNodeField({
+                name: 'description',
+                node,
+                value: description,
+            });
+        }
+
+        if (slug) {
+            createNodeField({
+                name: 'slug',
+                node,
+                value: slug,
+            });
+        }
+
         createNodeField({
-            name: 'banner',
+            name: 'date',
             node,
-            value: (node as any).frontmatter.banner,
+            value: date,
         });
 
         createNodeField({
             name: 'categories',
             node,
-            value: (node as any).frontmatter.categories || [],
+            value: categories,
         });
 
         createNodeField({
             name: 'keywords',
             node,
-            value: (node as any).frontmatter.keywords || [],
+            value: keywords,
         });
     }
 };

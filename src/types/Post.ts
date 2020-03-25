@@ -1,5 +1,3 @@
-import { FluidImage } from './Image';
-
 export type Post = {
     node: {
         id: string;
@@ -8,7 +6,6 @@ export type Post = {
             description: string;
             formattedDate: string;
             dateTimeString: string;
-            banner: FluidImage;
             slug: string;
             categories: string[];
         };

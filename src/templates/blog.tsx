@@ -99,13 +99,6 @@ export const pageQuery = graphql`
                         description
                         formattedDate: date(formatString: "MMMM DD, YYYY")
                         dateTimeString: date(formatString: "YYYY-MM-DD")
-                        banner {
-                            childImageSharp {
-                                fluid(maxHeight: 340, quality: 100) {
-                                    ...GatsbyImageSharpFluid
-                                }
-                            }
-                        }
                         slug
                         categories
                     }

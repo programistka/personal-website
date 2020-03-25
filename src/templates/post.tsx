@@ -265,6 +265,12 @@ const Post = (props: PostProps) => {
                 {mdx.frontmatter.categories.map((category: string) => (
                     <meta key={category} property="article:tag" content={category} />
                 ))}
+                <meta
+                    property="og:image"
+                    content={`https://og-image.robertcooper.me/${encodeURI(mdx.frontmatter.title)}.png?readTime=${
+                        mdx.timeToRead
+                    }`}
+                />
             </Helmet>
             <ProgressContainer>
                 <ProgressBar ref={progressBar} />
@@ -329,18 +335,10 @@ export const pageQuery = graphql`
                 publicationDate: date(formatString: "YYYY-MM-DD")
                 formattedUpdatedAtDate: updatedAt(formatString: "MMMM DD, YYYY")
                 updatedAtDate: updatedAt(formatString: "YYYY-MM-DD")
-                # This banner is used in the layout component
-                banner {
-                    publicURL
-                    childImageSharp {
-                        fluid(maxWidth: 800) {
-                            ...GatsbyImageSharpFluid
-                        }
-                    }
-                }
                 slug
                 categories
             }
+            timeToRead
             fields {
                 editLink
             }

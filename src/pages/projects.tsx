@@ -119,7 +119,10 @@ export default Projects;
 
 export const pageQuery = graphql`
     query {
-        allMdx(filter: { fields: { slug: { eq: null } } }, sort: { order: DESC, fields: [frontmatter___date] }) {
+        allMdx(
+            filter: { fields: { slug: { eq: null }, id: { ne: null } } }
+            sort: { order: DESC, fields: [frontmatter___date] }
+        ) {
             edges {
                 node {
                     fields {

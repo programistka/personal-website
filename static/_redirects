@@ -1,5 +1,5 @@
 # 301 Redirects
-/testing-stateful-functional-react-components-with-react-testing-library              /testing-stateful-react-function-components-with-react-testing-library
+/testing-stateful-functional-react-components-with-react-testing-library /testing-stateful-react-function-components-with-react-testing-library
 
 # Redirect domain aliases to primary domain
 https://robertcooper.ca/* https://www.robertcooper.me/:splat 301!

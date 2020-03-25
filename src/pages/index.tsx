@@ -282,7 +282,7 @@ export default Home;
 export const pageQuery = graphql`
     query {
         posts: allMdx(
-            limit: 3
+            limit: 6
             sort: { fields: frontmatter___date, order: DESC }
             filter: { fields: { slug: { ne: null } } }
         ) {
@@ -294,13 +294,6 @@ export const pageQuery = graphql`
                         description
                         formattedDate: date(formatString: "MMMM DD, YYYY")
                         dateTimeString: date(formatString: "YYYY-MM-DD")
-                        banner {
-                            childImageSharp {
-                                fluid(maxHeight: 340, quality: 100) {
-                                    ...GatsbyImageSharpFluid
-                                }
-                            }
-                        }
                         slug
                         categories
                     }
@@ -311,7 +304,7 @@ export const pageQuery = graphql`
         projects: allMdx(
             limit: 3
             sort: { fields: frontmatter___date, order: DESC }
-            filter: { fields: { slug: { eq: null } } }
+            filter: { fields: { slug: { eq: null }, id: { ne: null } } }
         ) {
             edges {
                 node {

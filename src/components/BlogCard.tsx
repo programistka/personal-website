@@ -10,14 +10,12 @@ const Post = styled.section`
     width: 100%;
     height: 340px;
     margin: 0 0 80px;
-    /* padding: 0 20px; */
 
     ${media.large`
         height: calc(100% - 60px);
         margin: 0 0 60px;
         flex-basis: 400px;
         flex-grow: 1;
-        max-width: 500px;
     `};
 `;
 
@@ -43,7 +41,7 @@ const PostLink = styled(Link)`
 const PostDescription = styled.div`
     ${textColor.body};
     padding: 25px;
-    width: 50%;
+    width: 100%;
     height: 100%;
 
     ${media.large`
@@ -87,21 +85,6 @@ const PostExcerpt = styled.p`
     ${textSize.normal};
 `;
 
-const PostImage = styled(Img)`
-    flex-shrink: 0;
-    width: 50%;
-
-    ${media.large`
-        height: 250px;
-        width: 100%;
-    `};
-
-    ${media.small`
-        height: 200px;
-        width: 100%;
-    `};
-`;
-
 type BlogCardProps = {
     post: PostType['node'];
 };
@@ -125,7 +108,6 @@ const BlogCard = ({ post }: BlogCardProps) => {
                         </MetaInfo>
                         <PostExcerpt>{post.frontmatter.description}</PostExcerpt>
                     </PostDescription>
-                    {post.frontmatter.banner && <PostImage fluid={post.frontmatter.banner.childImageSharp.fluid} />}
                 </PostLink>
             </Post>
         </Fade>

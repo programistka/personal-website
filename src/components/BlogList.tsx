@@ -6,14 +6,22 @@ import BlogCard from './BlogCard';
 
 const BlogList = styled.div`
     display: flex;
-    flex-direction: column;
-    /* margin-left: -20px;
-    margin-right: -20px; */
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+    > * {
+        width: calc(50% - 2 * 10px);
+        margin: 0 10px;
+    }
 
     ${media.large`
-        flex-direction: row;
-        flex-wrap: wrap;
+        flex-direction: column;
         justify-content: center;
+        margin: unset;
+        > * {
+            margin: unset;
+            width: 100%;
+        }
     `};
 `;
 

@@ -32,7 +32,8 @@ type LinkComponentProps = {
 };
 
 export const Link = ({ children, to, active = 'false', ...other }: LinkComponentProps) => {
-    const internal = /^\/(?!\/)(?!static\/)/.test(to);
+    const internal = /^\/(?!static\/)/.test(to);
+    const isHash = /^#/.test(to);
 
     if (internal) {
         return (
@@ -43,7 +44,13 @@ export const Link = ({ children, to, active = 'false', ...other }: LinkComponent
     }
 
     return (
-        <LinkBase href={to} active={active} target="_blank" rel="noopener" {...other}>
+        <LinkBase
+            href={to}
+            active={active}
+            target={!isHash ? '_blank' : undefined}
+            rel={!isHash ? 'noopener' : undefined}
+            {...other}
+        >
             {children}
         </LinkBase>
     );

@@ -4,25 +4,25 @@ import { MDXProvider } from '@mdx-js/react';
 import { withPrefix, StaticQuery, graphql } from 'gatsby';
 import styled, { createGlobalStyle } from 'styled-components';
 import Inter from '../../assets/fonts/Inter/Inter';
-import { colors, textColor, textSize } from '../styles/common';
+import { colors, textColor, textSize, media } from '../styles/common';
 import { prismjsStyles } from '../styles/prismjs';
 import { components } from './mdx';
 import Footer, { footerHeight } from './Footer';
 import Menu, { menuHeight } from './Menu';
 
 const GlobalStyles = createGlobalStyle`
-  ${Inter};
-  ${prismjsStyles}
+    ${Inter};
+    ${prismjsStyles}
 
-  * {
-      box-sizing: border-box;
-  }
+    * {
+        box-sizing: border-box;
+    }
 
-  html {
+    html {
     font-size: 10px;
-  }
+    }
 
-  body {
+    body {
     line-height: 1.8;
     ${textSize.normal};
     ${textColor.body};
@@ -31,54 +31,67 @@ const GlobalStyles = createGlobalStyle`
     font-family: 'Inter', sans-serif;
     background-color: ${props =>
         props.theme && props.theme.color === 'light' ? colors.backgroundLight : colors.backgroundDark};
-  }
+    }
 
-  pre {
-      margin-top: 0;
-  }
+    pre {
+        margin-top: 0;
+    }
 
-  ${() => {
-      return null;
-  }}
+    ${() => {
+        return null;
+    }}
 
-  strong {
-      font-weight: 600;
-  }
+    strong {
+        font-weight: 600;
+    }
 
-  ol,
-  ul {
-      padding: 0;
-      margin: 0;
-      list-style: none;
-      line-height: 1.7;
-      padding-left: 15px;
+    ol,
+    ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        line-height: 1.7;
+        padding-left: 15px;
 
-      li {
-          margin-bottom: 8px;
-      }
-  }
+        li {
+            margin-bottom: 8px;
+        }
+    }
 
-  ul {
-      list-style: none;
+    ul {
+        list-style: none;
 
-      li {
-          position: relative;
+        li {
+            position: relative;
 
-          &::before {
-              content: '-';
-              position: absolute;
-              left: -20px;
-          }
-      }
-  }
+            &::before {
+                content: '-';
+                position: absolute;
+                left: -20px;
+            }
+        }
+    }
 
-  a {
-      color: ${colors.linkInactiveLight};
+    a {
+        color: ${colors.linkInactiveLight};
 
-      &:hover {
-          color: ${colors.linkActiveLight};
-      }
-  }
+        &:hover {
+            color: ${colors.linkActiveLight};
+        }
+    }
+
+    a.anchor {
+        position: absolute;
+        display: inline-flex;
+        transform: translateX(calc(-100% - 6px));
+        top: 2px;
+
+        ${media.medium`
+            position: relative;
+            margin-right: 4px;
+            transform: none;
+        `}
+    }
 
     /**
     * This will hide the focus indicator if the element receives focus via the mouse,
@@ -113,7 +126,7 @@ type LayoutProps = {
     frontmatter?: {
         title: string | null;
         description: string | null;
-        banner: {
+        banner?: {
             publicURL: string | null;
         };
         slug?: string;
@@ -126,14 +139,14 @@ type LayoutProps = {
     isPost?: boolean;
 };
 
-export const Layout = ({
+export const Layout: React.FC<LayoutProps> = ({
     frontmatter = { title: null, description: null, banner: { publicURL: null } },
     title: pageTitle = null,
     hideMenu = false,
     hideFooter = false,
     children,
     isPost = false,
-}: LayoutProps) => {
+}) => {
     return (
         <StaticQuery
             query={graphql`
@@ -154,11 +167,13 @@ export const Layout = ({
                 const {
                     title: frontmatterTitle,
                     description: frontmatterDescription,
-                    banner: { publicURL },
+                    banner,
                     slug,
                     publicationDate,
                     updatedAtDate,
                 } = frontmatter;
+
+                const publicURL = banner?.publicURL;
 
                 const title = pageTitle || frontmatterTitle || siteTitle;
                 const description = frontmatterDescription || siteDescription;
@@ -179,10 +194,14 @@ export const Layout = ({
                         inLanguage: 'en-US',
                         url: `${siteUrl}${slug}`,
                         name: frontmatterTitle,
-                        image: {
-                            '@type': 'ImageObject',
-                            url: `${siteUrl}${publicURL}`,
-                        },
+                        ...(publicURL
+                            ? {
+                                  image: {
+                                      '@type': 'ImageObject',
+                                      url: `${siteUrl}${publicURL}`,
+                                  },
+                              }
+                            : {}),
                         mainEntityOfPage: `${siteUrl}${slug}`,
                         publisher: {
                             '@type': 'Organization',
@@ -201,16 +220,17 @@ export const Layout = ({
                         <Helmet title={title}>
                             <html lang="en" />
                             <meta name="description" content={description} />
-
                             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
                             <meta name="twitter:card" content="summary_large_image" />
                             <meta name="twitter:site" content="@RobertCooper_RC" />
 
                             <meta property="og:title" content={title} />
-                            <meta
-                                property="og:image"
-                                content={`${siteUrl}${publicURL || withPrefix('/social-sharing.png')}`}
-                            />
+                            {publicURL && (
+                                <meta
+                                    property="og:image"
+                                    content={`${siteUrl}${publicURL || withPrefix('/social-sharing.png')}`}
+                                />
+                            )}
                             <meta property="og:description" content={description} />
                             <meta property="og:type" content="website" />
                         </Helmet>
