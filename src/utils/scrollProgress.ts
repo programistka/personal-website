@@ -23,7 +23,7 @@ type Coordinates = {
  * @param {Function} handleUpdate method to call on scroll update
  * @returns {undefined}
  */
-const ScrollProgress = (function(this: ScrollProgress, handleUpdate: (x: number, y: number) => void): void {
+const ScrollProgress = (function (this: ScrollProgress, handleUpdate: (x: number, y: number) => void): void {
     // assign function to call on update
     this._handleUpdate = handleUpdate;
 
@@ -50,7 +50,7 @@ const ScrollProgress = (function(this: ScrollProgress, handleUpdate: (x: number,
  * @method _getViewportHeight
  * @returns {Number}
  */
-ScrollProgress.prototype._getViewportHeight = function(): number {
+ScrollProgress.prototype._getViewportHeight = function (): number {
     return document.body.scrollHeight - window.innerHeight;
 };
 
@@ -59,7 +59,7 @@ ScrollProgress.prototype._getViewportHeight = function(): number {
  * @method _getViewportWidth
  * @returns {Number}
  */
-ScrollProgress.prototype._getViewportWidth = function(): number {
+ScrollProgress.prototype._getViewportWidth = function (): number {
     return document.body.scrollWidth - window.innerWidth;
 };
 
@@ -68,7 +68,7 @@ ScrollProgress.prototype._getViewportWidth = function(): number {
  * @method _getProgress
  * @returns {Object}
  */
-ScrollProgress.prototype._getProgress = function(): Coordinates {
+ScrollProgress.prototype._getProgress = function (): Coordinates {
     const x = typeof window.scrollX === 'undefined' ? window.pageXOffset : window.scrollX;
     const y = typeof window.scrollY === 'undefined' ? window.pageYOffset : window.scrollY;
 
@@ -83,7 +83,7 @@ ScrollProgress.prototype._getProgress = function(): Coordinates {
  * @method _onScroll
  * @returns {undefined}
  */
-ScrollProgress.prototype._onScroll = function(): void {
+ScrollProgress.prototype._onScroll = function (): void {
     this._progress = this._getProgress();
     this._handleUpdate(this._progress.x, this._progress.y);
 };
@@ -93,7 +93,7 @@ ScrollProgress.prototype._onScroll = function(): void {
  * @method _onResize
  * @returns {undefined}
  */
-ScrollProgress.prototype._onResize = function(): void {
+ScrollProgress.prototype._onResize = function (): void {
     this._viewportHeight = this._getViewportHeight();
     this._viewportWidth = this._getViewportWidth();
 
@@ -108,7 +108,7 @@ ScrollProgress.prototype._onResize = function(): void {
  * @method trigger
  * @returns {undefined}
  */
-ScrollProgress.prototype.trigger = function(): void {
+ScrollProgress.prototype.trigger = function (): void {
     this._handleUpdate(this._progress.x, this._progress.y);
 };
 
@@ -117,7 +117,7 @@ ScrollProgress.prototype.trigger = function(): void {
  * @method destroy
  * @returns {undefined}
  */
-ScrollProgress.prototype.destroy = function(): void {
+ScrollProgress.prototype.destroy = function (): void {
     window.removeEventListener('scroll', this._onScroll);
     window.removeEventListener('resize', this._onResize);
     this._handleUpdate = null;

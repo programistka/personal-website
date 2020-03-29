@@ -11,6 +11,7 @@ import { Title } from './Title';
 import { Video } from './Video';
 import { Youtube } from './Youtube';
 import { Sandbox } from './Sandbox';
+import { TwoImages } from './TwoImages';
 
 export const components = {
     a: Anchor,
@@ -26,4 +27,5 @@ export const components = {
     Sandbox: Sandbox,
     Link: Link,
     Quote: Quote,
+    TwoImages: TwoImages,
 };

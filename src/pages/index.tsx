@@ -9,9 +9,6 @@ import Layout from '../components/Layout';
 import { Link } from '../components/Link';
 import Twitter from '../components/icons/Twitter';
 import { Button, Divider, PageWrapper } from '../components/Common';
-import { FluidImage } from '../types/Image';
-import { Post } from '../types/Post';
-import { Project as ProjectType } from '../types/Project';
 import { useTheme } from '../utils/context';
 import { Title } from '../components/Typography';
 import { colors, media, textSize, textColor, transitionDuration } from '../styles/common';
@@ -20,16 +17,14 @@ import Newsletter from '../components/Newsletter';
 const Header = styled.div`
     position: relative;
     height: 560px;
-    margin-top: -60px; /* height of the menu */
     display: flex;
     padding: 0 20px;
     background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='rgba(128, 178, 237, 0.2)' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 
     ${media.medium`
         height: unset;
-        margin-top: -140px; /* height of the menu */
-        padding-top: calc(140px + 20px);
-        padding-bottom: 80px;
+        padding-top: 120px;
+        padding-bottom: 120px;
     `};
 `;
 
@@ -43,17 +38,6 @@ const HeaderWrapper = styled(PageWrapper)`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-`;
-
-const Headshot = styled(Img)`
-    height: 460px;
-    width: 460px;
-
-    ${media.medium`
-        height: 250px;
-        width: 250px;
-        margin-bottom: 40px;
-    `};
 `;
 
 const IntroTitle = styled.h1`
@@ -103,9 +87,9 @@ const RecentPosts = styled(Section)`
 `;
 
 const Projects = styled.div`
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
     justify-content: center;
 `;
 
@@ -177,7 +161,7 @@ const SocialMediaGroup = (): JSX.Element => {
 
     return (
         <SocialMedia>
-            {items.map(item => (
+            {items.map((item) => (
                 <SocialMediaItem key={item.link}>
                     <Link to={item.link}>{item.icon}</Link>
                 </SocialMediaItem>
@@ -186,41 +170,26 @@ const SocialMediaGroup = (): JSX.Element => {
     );
 };
 
-type HomePageProps = {
-    data: {
-        homeHeader: FluidImage;
-        homeHeadshot: FluidImage;
-        posts: {
-            edges: Post[];
-        };
-        projects: {
-            edges: ProjectType[];
-        };
-    };
+type Props = {
+    data: GatsbyTypes.HomeQuery;
 };
 
-const WrappedProject = ({
-    projectPageLink,
-    children,
-}: {
+const WrappedProject: React.FC<{
     projectPageLink: string | undefined;
-    children: React.ReactNode;
-}) => {
+}> = ({ projectPageLink, children }) => {
     if (projectPageLink) {
-        return (<LinkedProject to={`${projectPageLink}`}>{children}</LinkedProject>) as any;
+        return <LinkedProject to={`${projectPageLink}`}>{children}</LinkedProject>;
     } else {
-        return children;
+        return <>children</>;
     }
 };
 
-export const Home = ({
+export const Home: React.FC<Props> = ({
     data: {
-        homeHeader,
-        homeHeadshot,
         posts: { edges: posts },
         projects: { edges: projects },
     },
-}: HomePageProps) => {
+}) => {
     return (
         <Layout>
             <Header>
@@ -248,19 +217,34 @@ export const Home = ({
                         <StyledTitle as="h2">Recent Projects</StyledTitle>
                     </Fade>
                     <Projects>
-                        {projects.map(({ node: project }) => (
-                            <ProjectWrapper key={project.fields.id}>
-                                <WrappedProject projectPageLink={project.frontmatter.detailsPageLink}>
-                                    <Fade top>
-                                        <Project>
-                                            <ProjectImage fluid={project.frontmatter.image.childImageSharp.fluid} />
-                                            <ProjectTitle>{project.frontmatter.title}</ProjectTitle>
-                                            <ProjectDescription>{project.frontmatter.description}</ProjectDescription>
-                                        </Project>
-                                    </Fade>
-                                </WrappedProject>
-                            </ProjectWrapper>
-                        ))}
+                        {projects.map(({ node: project }) => {
+                            const frontmatter = project.frontmatter;
+                            if (frontmatter === undefined) {
+                                return null;
+                            }
+                            const { slug, image, title, description } = frontmatter;
+                            if (
+                                slug === undefined ||
+                                image === undefined ||
+                                title === undefined ||
+                                description === undefined
+                            ) {
+                                return null;
+                            }
+                            return (
+                                <ProjectWrapper key={project.fields?.id}>
+                                    <WrappedProject projectPageLink={`/projects${slug}`}>
+                                        <Fade top>
+                                            <Project>
+                                                <ProjectImage fluid={image.childImageSharp?.fluid} />
+                                                <ProjectTitle>{title}</ProjectTitle>
+                                                <ProjectDescription>{description}</ProjectDescription>
+                                            </Project>
+                                        </Fade>
+                                    </WrappedProject>
+                                </ProjectWrapper>
+                            );
+                        })}
                     </Projects>
                     <Fade bottom>
                         <Button to="/projects">See all projects</Button>
@@ -280,11 +264,11 @@ export const Home = ({
 export default Home;
 
 export const pageQuery = graphql`
-    query {
+    query Home {
         posts: allMdx(
             limit: 6
             sort: { fields: frontmatter___date, order: DESC }
-            filter: { fields: { slug: { ne: null } } }
+            filter: { fileAbsolutePath: { regex: "/content/blog/" } }
         ) {
             edges {
                 node {
@@ -304,7 +288,7 @@ export const pageQuery = graphql`
         projects: allMdx(
             limit: 3
             sort: { fields: frontmatter___date, order: DESC }
-            filter: { fields: { slug: { eq: null }, id: { ne: null } } }
+            filter: { fileAbsolutePath: { regex: "/content/projects/" } }
         ) {
             edges {
                 node {
@@ -316,7 +300,7 @@ export const pageQuery = graphql`
                         title
                         subtitle
                         description
-                        detailsPageLink
+                        slug
                         image {
                             childImageSharp {
                                 fluid(maxWidth: 240) {

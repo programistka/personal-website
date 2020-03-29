@@ -1,9 +1,7 @@
-import Img from 'gatsby-image';
 import React from 'react';
 import styled from 'styled-components';
 import Fade from 'react-reveal/Fade';
 import { colors, media, transitionDuration, textColor, textSize } from '../styles/common';
-import { Post as PostType } from '../types/Post';
 import { Link } from './Link';
 
 const Post = styled.section`
@@ -23,7 +21,7 @@ const PostLink = styled(Link)`
     display: flex;
     text-decoration: none;
     height: 100%;
-    background-color: ${props =>
+    background-color: ${(props) =>
         props.theme.color === 'light' ? colors.backgroundSecondaryLight : colors.backgroundSecondaryDark};
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: all ease-in-out ${transitionDuration.slow};
@@ -85,28 +83,40 @@ const PostExcerpt = styled.p`
     ${textSize.normal};
 `;
 
-type BlogCardProps = {
-    post: PostType['node'];
+type Props = {
+    post: GatsbyTypes.BlogQuery['allMdx']['edges'][0]['node'];
 };
 
-const BlogCard = ({ post }: BlogCardProps) => {
+const BlogCard: React.FC<Props> = ({ post }) => {
+    const frontmatter = post.frontmatter;
+    if (frontmatter === undefined) {
+        return null;
+    }
+    const { slug, title, dateTimeString, formattedDate, description } = frontmatter;
+    if (
+        slug === undefined ||
+        title === undefined ||
+        dateTimeString === undefined ||
+        formattedDate === undefined ||
+        description === undefined
+    ) {
+        return null;
+    }
     return (
         <Fade bottom key={post.id}>
             <Post>
-                <PostLink to={post.frontmatter.slug}>
+                <PostLink to={slug}>
                     <PostDescription>
-                        <PostTitle>{post.frontmatter.title}</PostTitle>
+                        <PostTitle>{title}</PostTitle>
                         <MetaInfo>
-                            <PostDate dateTime={post.frontmatter.dateTimeString}>
-                                {post.frontmatter.formattedDate}
-                            </PostDate>
+                            <PostDate dateTime={dateTimeString}>{formattedDate}</PostDate>
                             <MetaInfoSeparator>•</MetaInfoSeparator>
                             <TimeToRead>
                                 <Clock>🕙</Clock>
                                 {post.timeToRead} min read
                             </TimeToRead>
                         </MetaInfo>
-                        <PostExcerpt>{post.frontmatter.description}</PostExcerpt>
+                        <PostExcerpt>{description}</PostExcerpt>
                     </PostDescription>
                 </PostLink>
             </Post>

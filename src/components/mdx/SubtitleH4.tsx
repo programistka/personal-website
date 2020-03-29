@@ -14,4 +14,8 @@ export default styled.h4`
     * {
         font-size: 1.8rem !important;
     }
+
+    svg {
+        height: 18px;
+    }
 `;

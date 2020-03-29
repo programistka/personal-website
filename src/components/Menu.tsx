@@ -14,11 +14,11 @@ const Menu = styled.div`
     z-index: 1;
     height: ${menuHeight}px;
     padding: 0 20px;
-    background-color: ${props =>
+    background-color: ${(props) =>
         props.theme.color === 'light' ? colors.backgroundSecondaryLight : colors.backgroundSecondaryDark};
 
     border-bottom: 2px solid ${colors.borderLight};
-    border-color: ${props => (props.theme.color === 'light' ? colors.borderLight : colors.borderDark)};
+    border-color: ${(props) => (props.theme.color === 'light' ? colors.borderLight : colors.borderDark)};
 
     ${media.small`
         height: 180px;
@@ -121,7 +121,7 @@ const MenuComponent = () => {
                         </MenuTitleComponent>
                         <Nav>
                             <NavList>
-                                {NAVIGATION.map(navigation => (
+                                {NAVIGATION.map((navigation) => (
                                     <NavListItem key={navigation.label}>
                                         <NavLink
                                             to={navigation.to}

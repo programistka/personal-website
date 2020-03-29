@@ -8,8 +8,8 @@ import { Link } from '../components/Link';
 import { PaddedPageWrapper } from '../components/Common';
 import { Title } from '../components/Typography';
 import { media } from '../styles/common';
-import { Post } from '../types/Post';
 import Newsletter from '../components/Newsletter';
+import { BlogPageContext } from '../types/PageContext';
 
 const StyledTitle = styled(Title)`
     margin-bottom: 100px;
@@ -25,7 +25,7 @@ const Pagination = styled.ul`
 `;
 
 const PaginationItem = styled.li<{ position: string }>`
-    margin-left: ${props => (props.position === 'right' ? 'auto' : 0)};
+    margin-left: ${(props): string | number => (props.position === 'right' ? 'auto' : 0)};
 
     &:before {
         display: none;
@@ -38,25 +38,17 @@ const NewsletterWrapper = styled.div`
     margin-top: 40px;
 `;
 
-type BlogProps = {
-    data: {
-        allMdx: {
-            edges: Post[];
-        };
-    };
-    pageContext: {
-        pagination: {
-            page: string[];
-            nextPagePath: string;
-            previousPagePath: string;
-        };
-    };
+type Props = {
+    data: GatsbyTypes.BlogQuery;
+    pageContext: BlogPageContext;
 };
 
-const Blog = ({ data: { allMdx }, pageContext: { pagination } }: BlogProps) => {
+const Blog: React.FC<Props> = ({ data: { allMdx }, pageContext: { pagination } }) => {
     const { page, nextPagePath, previousPagePath } = pagination;
 
-    const posts = page.map(id => allMdx.edges.find(post => post.node.id === id));
+    const posts = page
+        .map((id) => allMdx.edges.find((post) => post.node.id === id))
+        .filter((post): post is GatsbyTypes.BlogQuery['allMdx']['edges'][0] => post !== undefined);
 
     return (
         <Layout title="Robert Cooper | Blog">
@@ -64,7 +56,7 @@ const Blog = ({ data: { allMdx }, pageContext: { pagination } }: BlogProps) => {
                 <Fade top>
                     <StyledTitle>Blog</StyledTitle>
                 </Fade>
-                <BlogList posts={posts} />
+                {posts !== undefined && <BlogList posts={posts} />}
                 <Pagination>
                     {nextPagePath && (
                         <PaginationItem position="left">
@@ -89,7 +81,7 @@ const Blog = ({ data: { allMdx }, pageContext: { pagination } }: BlogProps) => {
 export default Blog;
 
 export const pageQuery = graphql`
-    query {
+    query Blog {
         allMdx {
             edges {
                 node {

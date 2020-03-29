@@ -14,7 +14,7 @@ type BlogThemeSwitchProps = {};
 const BlogThemeSwitch: BlogThemeSwitchProps = () => {
     const [theme, setTheme] = useState<ThemeEnum>(ThemeEnum.light);
     const toggleTheme = () => {
-        setTheme(previousTheme => (previousTheme === ThemeEnum.light ? ThemeEnum.dark : ThemeEnum.light));
+        setTheme((previousTheme) => (previousTheme === ThemeEnum.light ? ThemeEnum.dark : ThemeEnum.light));
     };
 
     return (

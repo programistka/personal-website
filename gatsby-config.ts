@@ -1,3 +1,10 @@
+import { PluginOptions as TypegenPluginOptions } from 'gatsby-plugin-typegen/types';
+
+type Plugin =
+    | string
+    | { resolve: string; options: object }
+    | { resolve: `gatsby-plugin-typegen`; options: TypegenPluginOptions };
+
 /* eslint-disable @typescript-eslint/camelcase */
 export default {
     pathPrefix: `/`,
@@ -9,6 +16,17 @@ export default {
         imagePath: `/social-sharing.png`,
     },
     plugins: [
+        {
+            resolve: `gatsby-plugin-typegen`,
+            options: {
+                emitSchema: {
+                    'src/__generated__/gatsby-schema.graphql': true,
+                },
+                emitPluginDocuments: {
+                    'src/__generated__/gatsby-plugin-documents.graphql': true,
+                },
+            },
+        },
         {
             resolve: `gatsby-source-filesystem`,
             options: {
@@ -131,7 +149,6 @@ export default {
                         query: `
                             {
                             allMdx(
-                                limit: 1000,
                                 sort: {
                                 order: DESC,
                                 fields: [frontmatter___date]
@@ -168,6 +185,6 @@ export default {
         },
         `gatsby-plugin-netlify`,
         `gatsby-plugin-netlify-cache`,
-    ],
+    ] as Plugin[],
 };
 /* eslint-enable @typescript-eslint/camelcase */

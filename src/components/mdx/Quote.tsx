@@ -3,7 +3,7 @@ import { colors } from '../../styles/common';
 
 export const Quote = styled.div`
     color: ${colors.textBodyLight};
-    background-color: ${props =>
+    background-color: ${(props) =>
         props.theme.color === 'light' ? colors.quoteBackgroundLight : colors.quoteBackgroundDark};
     margin-left: 10px;
     margin-bottom: 20px;
@@ -35,7 +35,7 @@ export const Quote = styled.div`
         width: 10px;
         left: -10px;
         top: 0;
-        background-color: ${props =>
+        background-color: ${(props) =>
             props.theme.color === 'light' ? colors.quoteHighlightLight : colors.quoteHighlightDark};
         height: 100%;
         content: '';

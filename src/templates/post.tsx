@@ -1,18 +1,17 @@
-import React, { useEffect, useRef } from 'react';
-import { MDXRenderer } from 'gatsby-plugin-mdx';
-import styled, { css } from 'styled-components';
 import { graphql } from 'gatsby';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
+import React, { useEffect, useRef } from 'react';
 import Helmet from 'react-helmet';
+import styled, { css } from 'styled-components';
+import { Divider, PaddedPageWrapper } from '../components/Common';
 import Layout from '../components/Layout';
 import { Link } from '../components/Link';
-import ScrollProgress from '../utils/scrollProgress';
-import { Divider, PaddedPageWrapper } from '../components/Common';
-import { Title } from '../components/Typography';
-import { colors, media, textSize, pageWidth, transitionDuration } from '../styles/common';
-import { PageContext } from '../types/PageContext';
 import Newsletter from '../components/Newsletter';
-
-const postContentPadding = `20px`;
+import { Title } from '../components/Typography';
+import { colors, media, pageWidth, textSize, transitionDuration } from '../styles/common';
+import { PageContext } from '../types/PageContext';
+import ScrollProgress from '../utils/scrollProgress';
+import { MDXContent, postContentPadding } from '../components/MdxContent';
 
 const StyledPaddedPageWrapper = styled(PaddedPageWrapper)`
     ${pageWidth.small}
@@ -28,7 +27,7 @@ const ProgressContainer = styled.div`
 
 const ProgressBar = styled.div`
     height: 10px;
-    background: ${props => (props.theme.color === 'light' ? colors.textTitleLight : colors.textTitleDark)};
+    background: ${(props) => (props.theme.color === 'light' ? colors.textTitleLight : colors.textTitleDark)};
 `;
 
 const PostTitle = styled(Title)`
@@ -49,78 +48,6 @@ const Date = styled.time`
     ${media.small`
         text-align: center;
     `};
-`;
-
-const MDXContent = styled.div`
-    hr {
-        + h2,
-        + h3,
-        + h4,
-        + h5 {
-            margin-top: 0px;
-        }
-    }
-
-    h2,
-    h3,
-    h4,
-    h5 {
-        + iframe {
-            margin-top: 20px;
-        }
-    }
-
-    img {
-        max-width: 100%;
-    }
-
-    iframe {
-        margin: 40px 0;
-    }
-
-    code:not([class*='language-']) {
-        font-family: Consolas, Menlo, Monaco, source-code-pro, Courier New, monospace;
-        font-size: 1.6rem;
-        border-radius: 0.3em;
-        background: ${props => (props.theme.color === 'light' ? colors.inlineCodeLight : colors.inlineCodeDark)};
-        padding: 0.15em 0.2em 0.05em;
-        white-space: normal;
-
-        ${media.small`
-          font-size: 1.4rem;
-        `}
-    }
-
-    .gatsby-highlight {
-        margin-top: 40px;
-        margin-bottom: 40px;
-        /* I can't get this styles to load on initial app load :( */
-        /* ${props => props.theme.color === 'dark' && `border: 2px solid ${colors.borderDark}`}; */
-
-        ${media.small`
-            margin-left: -${postContentPadding};
-            margin-right: -${postContentPadding};
-            border-left: 0;
-            border-right: 0;
-        `} 
-    }
-
-    .gatsby-resp-image-wrapper {
-        margin: 40px 0;
-    }
-
-    .token-line {
-        line-height: 1.8;
-    }
-
-    img {
-        display: block;
-        margin: 40px 0;
-    }
-
-    .twitter-tweet {
-        margin: auto;
-    }
 `;
 
 const CategoriesWrapper = styled.div`
@@ -208,11 +135,11 @@ const EditPostWrapper = styled.div`
     margin-bottom: 40px;
 `;
 
-const CategoryList = ({ list = [] }: { list?: string[] }) => (
+const CategoryList: React.FC<{ list: GatsbyTypes.MdxFrontmatter['categories'] }> = ({ list = [] }) => (
     <CategoriesWrapper>
         <CategoriesLabel>Categories:</CategoriesLabel>
         <StyledCategoryList>
-            {list.map(category => (
+            {list.map((category) => (
                 <CategoryListItem key={category}>
                     <Link to={`/categories/${category}`}>{category}</Link>
                 </CategoryListItem>
@@ -222,83 +149,85 @@ const CategoryList = ({ list = [] }: { list?: string[] }) => (
 );
 
 interface PostProps {
-    data: {
-        mdx: any;
-    };
+    data: GatsbyTypes.PostQuery;
     pageContext: PageContext;
 }
 
-const Post = (props: PostProps) => {
-    const {
-        data: { mdx },
-        pageContext: { next, prev },
-    } = props;
+const Post: React.FC<PostProps> = ({ data: { mdx }, pageContext: { next, prev } }) => {
+    const frontmatter = mdx?.frontmatter;
+    const body = mdx?.body;
+    if (!frontmatter || !body) {
+        return null;
+    }
+    const editLink = mdx?.fields?.editLink;
 
-    const { editLink } = mdx.fields;
-
-    const progressBar = useRef({ current: { style: { width: 0 } } } as any);
+    const progressBar = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const progressObserver = new ScrollProgress((x, y) => {
-            progressBar.current.style.width = `${y * 100}%`;
+            if (progressBar.current !== null) {
+                progressBar.current.style.width = `${y * 100}%`;
+            }
         });
 
-        return () => progressObserver.destroy();
+        return (): void => progressObserver.destroy();
     });
 
     const postUpdatedSinceFirstPublic =
-        mdx.frontmatter.formattedUpdatedAtDate !== mdx.frontmatter.formattedPublicationDate &&
-        mdx.frontmatter.formattedUpdatedAtDate !== null;
+        frontmatter.formattedUpdatedAtDate !== frontmatter.formattedPublicationDate &&
+        frontmatter.formattedUpdatedAtDate !== null;
 
     return (
-        <Layout frontmatter={mdx.frontmatter} isPost>
+        <Layout frontmatter={frontmatter} isPost>
             <Helmet>
                 <meta property="og:type" content="article" />
                 <meta property="article:author" content="Robert Cooper" />
-                <meta property="article:published_time" content={mdx.frontmatter.publicationDate} />
+                <meta property="article:published_time" content={frontmatter.publicationDate} />
                 <meta
                     property="article:modified_time"
-                    content={
-                        postUpdatedSinceFirstPublic ? mdx.frontmatter.updatedAtDate : mdx.frontmatter.publicationDate
-                    }
+                    content={postUpdatedSinceFirstPublic ? frontmatter.updatedAtDate : frontmatter.publicationDate}
                 />
-                {mdx.frontmatter.categories.map((category: string) => (
-                    <meta key={category} property="article:tag" content={category} />
-                ))}
-                <meta
-                    property="og:image"
-                    content={`https://og-image.robertcooper.me/${encodeURI(mdx.frontmatter.title)}.png?readTime=${
-                        mdx.timeToRead
-                    }`}
-                />
+                {frontmatter.categories?.map(
+                    (category): JSX.Element => (
+                        <meta key={category} property="article:tag" content={category} />
+                    ),
+                )}
+                {mdx?.timeToRead && (
+                    <meta
+                        property="og:image"
+                        content={`https://og-image.robertcooper.me/${encodeURI(frontmatter.title)}.png?readTime=${
+                            mdx.timeToRead
+                        }`}
+                    />
+                )}
             </Helmet>
             <ProgressContainer>
                 <ProgressBar ref={progressBar} />
             </ProgressContainer>
             <StyledPaddedPageWrapper>
-                <PostTitle>{mdx.frontmatter.title}</PostTitle>
+                <PostTitle>{frontmatter.title}</PostTitle>
                 {postUpdatedSinceFirstPublic ? (
-                    <Date dateTime={mdx.frontmatter.updatedAtDate}>
-                        updated on {mdx.frontmatter.formattedUpdatedAtDate}
-                    </Date>
+                    <Date dateTime={frontmatter.updatedAtDate}>updated on {frontmatter.formattedUpdatedAtDate}</Date>
                 ) : (
-                    <Date dateTime={mdx.frontmatter.publicationDate}>
-                        published on {mdx.frontmatter.formattedPublicationDate}
+                    <Date dateTime={frontmatter.publicationDate}>
+                        published on {frontmatter.formattedPublicationDate}
                     </Date>
                 )}
 
                 <MDXContent>
-                    <MDXRenderer>{mdx.body}</MDXRenderer>
+                    <MDXRenderer>{body}</MDXRenderer>
                 </MDXContent>
 
                 <Divider />
 
-                <EditPostWrapper>
-                    See a typo?&nbsp;
-                    <Link to={editLink}>Edit post on GitHub</Link>
-                </EditPostWrapper>
+                {editLink && (
+                    <EditPostWrapper>
+                        See a typo?&nbsp;
+                        <Link to={editLink}>Edit post on GitHub</Link>
+                    </EditPostWrapper>
+                )}
 
-                <CategoryList list={mdx.frontmatter.categories} />
+                {frontmatter.categories && <CategoryList list={frontmatter.categories} />}
 
                 {(next || prev) && (
                     <OtherPostsWrapper>
@@ -325,7 +254,7 @@ const Post = (props: PostProps) => {
 export default Post;
 
 export const pageQuery = graphql`
-    query($id: String!) {
+    query Post($id: String!) {
         mdx(fields: { id: { eq: $id } }) {
             id
             frontmatter {

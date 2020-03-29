@@ -13,4 +13,8 @@ export default styled.h2`
     * {
         font-size: 2.8rem !important;
     }
+
+    svg {
+        height: 28px;
+    }
 `;

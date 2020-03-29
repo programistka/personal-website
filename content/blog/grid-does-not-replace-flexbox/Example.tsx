@@ -48,7 +48,7 @@ const Column = styled.div<{ type: 'flex' | 'grid' }>`
 const Example: React.FC<{ type: 'flex' | 'grid' }> = ({ type }) => {
     return (
         <Row type={type}>
-            {backgroundColors.map(backgroundColor => (
+            {backgroundColors.map((backgroundColor) => (
                 <Column type={type} style={{ backgroundColor }} key={backgroundColor} />
             ))}
         </Row>

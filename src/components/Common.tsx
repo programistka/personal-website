@@ -30,7 +30,7 @@ export const SectionWrapper = styled(PageWrapper)`
 
 export const Divider = styled.hr`
     border: 1px solid ${colors.borderLight};
-    border-color: ${props => (props.theme.color === 'light' ? colors.borderLight : colors.borderDark)};
+    border-color: ${(props) => (props.theme.color === 'light' ? colors.borderLight : colors.borderDark)};
     margin: 40px;
 `;
 
@@ -41,13 +41,14 @@ export const ButtonStyles = css`
     height: 40px;
     line-height: 37px;
     padding: 0 20px;
-    background-color: ${props =>
+    background-color: ${(props) =>
         props.theme.color === 'light' ? colors.buttonInactiveBackgroundLight : colors.buttonInactiveBackgroundDark};
-    color: ${props => (props.theme.color === 'light' ? colors.buttonInactiveTextLight : colors.buttonInactiveTextDark)};
+    color: ${(props) =>
+        props.theme.color === 'light' ? colors.buttonInactiveTextLight : colors.buttonInactiveTextDark};
     border: 2px solid ${colors.buttonInactiveBorderLight};
     border-radius: 0;
     -webkit-appearance: none;
-    border-color: ${props =>
+    border-color: ${(props) =>
         props.theme.color === 'light' ? colors.buttonInactiveBorderLight : colors.buttonInactiveBorderDark};
     display: inline-block;
     text-decoration: none;
@@ -56,11 +57,12 @@ export const ButtonStyles = css`
     &:hover {
         cursor: pointer;
         text-decoration: none;
-        background-color: ${props =>
+        background-color: ${(props) =>
             props.theme.color === 'light' ? colors.buttonActiveBackgroundLight : colors.buttonActiveBackgroundDark};
-        color: ${props => (props.theme.color === 'light' ? colors.buttonActiveTextLight : colors.buttonActiveTextDark)};
+        color: ${(props) =>
+            props.theme.color === 'light' ? colors.buttonActiveTextLight : colors.buttonActiveTextDark};
         border: 2px solid ${colors.buttonActiveBorderLight};
-        border-color: ${props =>
+        border-color: ${(props) =>
             props.theme.color === 'light' ? colors.buttonActiveBorderLight : colors.buttonActiveBorderDark};
     }
 `;

@@ -7,10 +7,10 @@ import { PageWrapper } from './Common';
 export const footerHeight = 120;
 
 const Footer = styled.footer`
-    background-color: ${props =>
+    background-color: ${(props) =>
         props.theme.color === 'light' ? colors.backgroundSecondaryLight : colors.backgroundSecondaryDark};
     border-top: 2px solid ${colors.borderLight};
-    border-color: ${props => (props.theme.color === 'light' ? colors.borderLight : colors.borderDark)};
+    border-color: ${(props) => (props.theme.color === 'light' ? colors.borderLight : colors.borderDark)};
     height: ${footerHeight}px;
 `;
 
@@ -42,9 +42,9 @@ const SocialMediaListItem = styled.li`
 
 const SocialMediaLink = styled(Link)``;
 
-type FooterProps = {};
+type Props = {};
 
-const FooterComponent = ({}: FooterProps) => {
+const FooterComponent: React.FC<Props> = () => {
     return (
         <Footer>
             <ModifiedPageWrapper>

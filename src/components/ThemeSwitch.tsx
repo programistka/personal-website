@@ -37,7 +37,7 @@ export const StyledThemeSwitch = styled.div`
         transform: scale(1.03);
     }
 
-    ${props => {
+    ${(props) => {
         if (props.theme.color === 'light') {
             return `
                 background-color: #80B2ED;
@@ -92,11 +92,13 @@ export const Star = styled.div<{ size: number; x: number; y: number; index: numb
         top: ${2 + y}px;
         left: ${4 + x}px;
 
-        ${theme.color === 'light' &&
+        ${
+            theme.color === 'light' &&
             `
             opacity: 0;
             transform: translateY(10px);
-        `}
+        `
+        }
     `};
 `;
 

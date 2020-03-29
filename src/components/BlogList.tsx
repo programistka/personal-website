@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { media } from '../styles/common';
-import { Post } from '../types/Post';
 import BlogCard from './BlogCard';
 
-const BlogList = styled.div`
+const StyledBlogList = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -25,20 +24,20 @@ const BlogList = styled.div`
     `};
 `;
 
-type BlogListComponentProps = {
-    posts: (Post | undefined)[];
+type Props = {
+    posts: GatsbyTypes.BlogQuery['allMdx']['edges'];
 };
 
-const BlogListComponent = ({ posts }: BlogListComponentProps) => {
+const BlogList: React.FC<Props> = ({ posts }) => {
     return (
-        <BlogList>
-            {posts.map(post => {
+        <StyledBlogList>
+            {posts.map((post) => {
                 if (post !== undefined) {
                     return <BlogCard key={post.node.id} post={post.node} />;
                 }
             })}
-        </BlogList>
+        </StyledBlogList>
     );
 };
 
-export default BlogListComponent;
+export default BlogList;

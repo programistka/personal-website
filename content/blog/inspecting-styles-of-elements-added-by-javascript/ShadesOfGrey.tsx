@@ -43,7 +43,7 @@ const CirclesWrapper = styled.div`
 const RemainingCircles = () => {
     return (
         <>
-            {shadesOfGrey.slice(1).map(color => (
+            {shadesOfGrey.slice(1).map((color) => (
                 <HiddenCircles color={color} key={color} />
             ))}
         </>

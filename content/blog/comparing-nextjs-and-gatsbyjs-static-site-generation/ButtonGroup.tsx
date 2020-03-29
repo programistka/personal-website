@@ -26,7 +26,7 @@ const ButtonGroup: React.FC<Props> = ({ items }) => {
     return (
         <Wrapper>
             <ButtonRow>
-                {items.map(item => (
+                {items.map((item) => (
                     <ButtonWrapper key={item.name}>
                         <Button to={item.link}>{item.name}</Button>
                     </ButtonWrapper>

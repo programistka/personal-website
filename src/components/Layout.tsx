@@ -29,7 +29,7 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     font-family: 'Inter', sans-serif;
-    background-color: ${props =>
+    background-color: ${(props) =>
         props.theme && props.theme.color === 'light' ? colors.backgroundLight : colors.backgroundDark};
     }
 
@@ -84,7 +84,7 @@ const GlobalStyles = createGlobalStyle`
         position: absolute;
         display: inline-flex;
         transform: translateX(calc(-100% - 6px));
-        top: 2px;
+        top: 0;
 
         ${media.medium`
             position: relative;
@@ -98,7 +98,7 @@ const GlobalStyles = createGlobalStyle`
     * but it will still show up on keyboard focus.
     */
     .js-focus-visible :focus:not(.focus-visible) {
-    outline: none;
+        outline: none;
     }
 
     .caption {
@@ -121,13 +121,13 @@ const Main = styled.main`
     min-height: calc(100vh - ${footerHeight}px - ${menuHeight}px);
 `;
 
-type LayoutProps = {
+type Props = {
     children: React.ReactNode;
     frontmatter?: {
         title: string | null;
-        description: string | null;
+        description: string | null | undefined;
         banner?: {
-            publicURL: string | null;
+            publicURL: string | null | undefined;
         };
         slug?: string;
         publicationDate?: string;
@@ -139,7 +139,7 @@ type LayoutProps = {
     isPost?: boolean;
 };
 
-export const Layout: React.FC<LayoutProps> = ({
+export const Layout: React.FC<Props> = ({
     frontmatter = { title: null, description: null, banner: { publicURL: null } },
     title: pageTitle = null,
     hideMenu = false,
@@ -148,9 +148,9 @@ export const Layout: React.FC<LayoutProps> = ({
     isPost = false,
 }) => {
     return (
-        <StaticQuery
+        <StaticQuery<GatsbyTypes.LayoutQuery>
             query={graphql`
-                query {
+                query Layout {
                     site {
                         siteMetadata {
                             title
@@ -161,8 +161,12 @@ export const Layout: React.FC<LayoutProps> = ({
                     }
                 }
             `}
-            render={data => {
-                const { title: siteTitle, description: siteDescription, siteUrl } = data.site.siteMetadata;
+            render={(data) => {
+                const site = data.site;
+                const siteTitle = site?.siteMetadata?.title;
+                const siteDescription = site?.siteMetadata?.description;
+                const siteUrl = site?.siteMetadata?.siteUrl;
+                const siteAuthor = site?.siteMetadata?.author;
 
                 const {
                     title: frontmatterTitle,
@@ -185,7 +189,7 @@ export const Layout: React.FC<LayoutProps> = ({
                         '@type': 'Article',
                         author: {
                             '@type': 'Person',
-                            name: 'Robert Cooper',
+                            name: siteAuthor,
                         },
                         datePublished: publicationDate,
                         dateModified: updatedAtDate ? updatedAtDate : publicationDate,

@@ -14,4 +14,8 @@ export default styled.h3`
     * {
         font-size: 2rem !important;
     }
+
+    svg {
+        height: 20px;
+    }
 `;

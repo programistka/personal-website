@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { colors } from '../styles/common';
 
 const LinkBase = styled.a<{ active: string; to?: string }>`
-    color: ${props => {
+    color: ${(props) => {
         if (props.active === 'true') {
             if (props.theme.color === 'light') {
                 return colors.linkActiveLight;
@@ -21,17 +21,17 @@ const LinkBase = styled.a<{ active: string; to?: string }>`
     }};
 
     &:hover {
-        color: ${props => (props.theme.color === 'light' ? colors.linkActiveLight : colors.linkActiveDark)};
+        color: ${(props) => (props.theme.color === 'light' ? colors.linkActiveLight : colors.linkActiveDark)};
     }
 `;
 
-type LinkComponentProps = {
+type Props = {
     children: React.ReactNode;
     to: string;
     active?: string;
 };
 
-export const Link = ({ children, to, active = 'false', ...other }: LinkComponentProps) => {
+export const Link: React.FC<Props> = ({ children, to, active = 'false', ...other }) => {
     const internal = /^\/(?!static\/)/.test(to);
     const isHash = /^#/.test(to);
 

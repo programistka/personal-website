@@ -5,19 +5,16 @@ import Fade from 'react-reveal/Fade';
 import styled from 'styled-components';
 import Layout from '../components/Layout';
 import { PageWrapper, LightButton, DarkButton } from '../components/Common';
-import { Project as ProjectType } from '../types/Project';
 import { Title } from '../components/Typography';
 import { colors, media, textSize } from '../styles/common';
 import { ThemeEnum } from '../utils/context';
 
-type ProjectProps = {
+const Project = styled.div<{
     textColor: ThemeEnum;
-};
-
-const Project = styled.div<ProjectProps>`
+}>`
     padding: 120px 20px;
     text-align: center;
-    color: ${props => (props.textColor === 'light' ? colors.textBodyDark : colors.textBodyLight)};
+    color: ${(props) => (props.textColor === 'light' ? colors.textBodyDark : colors.textBodyLight)};
 
     ${media.small`
         padding: 80px 20px;
@@ -48,7 +45,7 @@ const ProjectDescription = styled.p`
 `;
 
 const ProjectImage = styled(Img)`
-    width: 450px;
+    max-height: 420px;
     margin: auto;
     max-width: 100%;
 
@@ -65,52 +62,63 @@ const DarkProjectButton = styled(DarkButton)`
     margin-top: 40px;
 `;
 
-type ProjectsProps = {
-    data: {
-        allMdx: {
-            edges: ProjectType[];
-        };
-    };
-};
-
-const renderProjectButton = ({ to, theme }: { to: string; theme: ThemeEnum }) => {
+export const renderProjectButton = ({
+    to,
+    theme,
+    text = 'Read more',
+}: {
+    to: string;
+    theme: ThemeEnum;
+    text?: string;
+}): JSX.Element => {
     let Button;
     if (theme === ThemeEnum.dark) {
         Button = DarkProjectButton;
     } else {
         Button = LightProjectButton;
     }
-    return <Button to={to}>Read more</Button>;
+    return <Button to={to}>{text}</Button>;
 };
 
-export const Projects = ({
+type Props = {} & { data: GatsbyTypes.ProjectsQuery };
+
+export const Projects: React.FC<Props> = ({
     data: {
         allMdx: { edges: projects },
     },
-}: ProjectsProps) => {
+}) => {
     return (
         <Layout title="Robert Cooper | Projects">
-            {projects.map(({ node: project }, index) => (
-                <Project
-                    key={project.fields.id}
-                    style={{ backgroundColor: project.frontmatter.backgroundColor }}
-                    textColor={project.frontmatter.textColor}
-                >
-                    <Fade {...(index % 2 === 0 ? { left: true } : { right: true })}>
-                        <PageWrapper>
-                            <ProjectImage fluid={project.frontmatter.image.childImageSharp.fluid} />
-                            <ProjectTitle as="h2">{project.frontmatter.title}</ProjectTitle>
-                            <ProjectSubtitle>{project.frontmatter.subtitle}</ProjectSubtitle>
-                            <ProjectDescription>{project.frontmatter.description}</ProjectDescription>
-                            {project.frontmatter.detailsPageLink &&
-                                renderProjectButton({
-                                    to: project.frontmatter.detailsPageLink,
-                                    theme: project.frontmatter.textColor,
-                                })}
-                        </PageWrapper>
-                    </Fade>
-                </Project>
-            ))}
+            {projects.map(({ node: project }, index) => {
+                const textColor = project.frontmatter?.textColor;
+                if (textColor === undefined) {
+                    return null;
+                }
+                return (
+                    <Project
+                        key={project.fields?.id}
+                        style={{ backgroundColor: project.frontmatter?.backgroundColor }}
+                        textColor={textColor as ThemeEnum}
+                    >
+                        <Fade {...(index % 2 === 0 ? { left: true } : { right: true })}>
+                            <PageWrapper>
+                                <ProjectImage
+                                    fluid={project.frontmatter?.image?.childImageSharp?.fluid}
+                                    imgStyle={{ objectFit: 'contain' }}
+                                />
+                                <ProjectTitle as="h2">{project.frontmatter?.title}</ProjectTitle>
+                                <ProjectSubtitle>{project.frontmatter?.subtitle}</ProjectSubtitle>
+                                <ProjectDescription>{project.frontmatter?.description}</ProjectDescription>
+                                {project.frontmatter?.slug &&
+                                    renderProjectButton({
+                                        to: `/projects${project.frontmatter?.slug}`,
+                                        theme: textColor as ThemeEnum,
+                                    })}
+                            </PageWrapper>
+                        </Fade>
+                    </Project>
+                );
+            })}
         </Layout>
     );
 };
@@ -118,10 +126,10 @@ export const Projects = ({
 export default Projects;
 
 export const pageQuery = graphql`
-    query {
+    query Projects {
         allMdx(
-            filter: { fields: { slug: { eq: null }, id: { ne: null } } }
-            sort: { order: DESC, fields: [frontmatter___date] }
+            filter: { fileAbsolutePath: { regex: "/content/projects/" } }
+            sort: { order: ASC, fields: [frontmatter___order] }
         ) {
             edges {
                 node {
@@ -135,10 +143,10 @@ export const pageQuery = graphql`
                         description
                         backgroundColor
                         textColor
-                        detailsPageLink
+                        slug
                         image {
                             childImageSharp {
-                                fluid(maxWidth: 500) {
+                                fluid(maxHeight: 840, quality: 100) {
                                     ...GatsbyImageSharpFluid
                                 }
                             }

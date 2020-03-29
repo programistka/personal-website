@@ -10,11 +10,15 @@ export interface Node {
         slug: string;
     };
     id: string;
-    excerpt: string;
 }
 
 interface QueryResult {
     posts: {
+        edges: {
+            node: Node;
+        }[];
+    };
+    projects: {
         edges: {
             node: Node;
         }[];
@@ -24,7 +28,7 @@ interface QueryResult {
 const pluckCategories = (posts: QueryResult['posts']['edges']): string[] =>
     Object.keys(
         posts.reduce((acc: { [category: string]: string }, value) => {
-            value.node.fields.categories.forEach(category => {
+            value.node.fields.categories.forEach((category) => {
                 if (!acc[category]) {
                     acc[category] = category;
                 }
@@ -42,7 +46,7 @@ const groupByCategory = (
     }[];
 } =>
     posts.reduce((acc: { [category: string]: { node: Node }[] }, value) => {
-        value.node.fields.categories.forEach(category => {
+        value.node.fields.categories.forEach((category) => {
             if (!acc[category]) {
                 acc[category] = [];
             }
@@ -98,7 +102,7 @@ const createCategoryPages = (createPage: Actions['createPage'], posts: QueryResu
 
     const categorizedPosts = groupByCategory(posts);
 
-    Object.keys(categorizedPosts).forEach(category => {
+    Object.keys(categorizedPosts).forEach((category) => {
         createPaginatedPages(createPage, categorizedPosts[category], `/categories/${category}`, {
             categories,
             activeCategory: category,
@@ -123,6 +127,18 @@ const createPosts = (createPage: Actions['createPage'], posts: QueryResult['post
     });
 };
 
+const createProjects = (createPage: Actions['createPage'], projects: QueryResult['projects']['edges']): void => {
+    projects.forEach(({ node }) => {
+        createPage({
+            path: `/projects${node.fields.slug}`,
+            component: path.resolve(`./src/templates/project.tsx`),
+            context: {
+                id: node.id,
+            },
+        });
+    });
+};
+
 const createBlog = (createPage: Actions['createPage'], posts: QueryResult['posts']['edges']): void => {
     const categories = pluckCategories(posts);
 
@@ -134,12 +150,26 @@ export const createPages: GatsbyNode['createPages'] = ({ actions, graphql }) =>
         query {
             posts: allMdx(
                 sort: { order: DESC, fields: [frontmatter___date] }
-                filter: { fields: { slug: { ne: null } } }
+                filter: { fileAbsolutePath: { regex: "/content/blog/" } }
             ) {
                 edges {
                     node {
                         id
-                        excerpt(pruneLength: 250)
+                        fields {
+                            title
+                            slug
+                            categories
+                        }
+                    }
+                }
+            }
+            projects: allMdx(
+                sort: { order: DESC, fields: [frontmatter___date] }
+                filter: { fileAbsolutePath: { regex: "/content/projects/" } }
+            ) {
+                edges {
+                    node {
+                        id
                         fields {
                             title
                             slug
@@ -156,9 +186,11 @@ export const createPages: GatsbyNode['createPages'] = ({ actions, graphql }) =>
 
         // Projects are filtered out at the GraphQL query level
         const { edges: posts } = (data as QueryResult).posts;
+        const { edges: projects } = (data as QueryResult).projects;
 
         createBlog(actions.createPage, posts);
         createPosts(actions.createPage, posts);
+        createProjects(actions.createPage, projects);
         createCategoryPages(actions.createPage, posts);
     });
 
