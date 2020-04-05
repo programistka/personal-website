@@ -7,6 +7,18 @@ const bold = readFileSync(`${__dirname}/../fonts/Inter-Bold.woff2`).toString('ba
 
 function getCss(): string {
     return `
+    `;
+}
+
+export function getHtml(parsedReq: ParsedRequest) {
+    const { text, readTime } = parsedReq;
+    return `
+<!DOCTYPE html>
+<html>
+    <meta charset="utf-8">
+    <title>Generated Image</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
     @font-face {
         font-family: 'Inter';
         font-style:  normal;
@@ -19,14 +31,18 @@ function getCss(): string {
         font-weight: bold;
         src: url(data:font/woff2;charset=utf-8;base64,${bold}) format('woff2');
     }
+    * {
+      box-sizing: border-box;
+    }
     body {
         background: black;
         height: 100vh;
+        margin: 0;
     }
     .container {
-        padding: 200px 80px 200px;
-        width: 2048px;
-        height: 1170px;
+        padding: 100px 100px 100px 40px;
+        width: 1200px;
+        height: 630px;
         background: #051221;
         background: linear-gradient(146deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 80%, rgba(0,212,255,1) 140%);
         display: flex;
@@ -35,7 +51,7 @@ function getCss(): string {
     }
     .heading {
         font-family: 'Inter', sans-serif;
-        font-size: 112px;
+        font-size: 55px;
         font-style: normal;
         color: #eaeaea;
         text-decoration: underline;
@@ -45,22 +61,11 @@ function getCss(): string {
     }
     .readTime {
         font-family: 'Inter', sans-serif;
-        font-size: 70px;
+        font-size: 40px;
         margin-top: 80px;
         font-weight: bold;
         color: #eaeaea
-    }`;
-}
-
-export function getHtml(parsedReq: ParsedRequest) {
-    const { text, readTime } = parsedReq;
-    return `<!DOCTYPE html>
-<html>
-    <meta charset="utf-8">
-    <title>Generated Image</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        ${getCss()}
+    }
     </style>
     <body>
         <div class="container">
@@ -68,5 +73,6 @@ export function getHtml(parsedReq: ParsedRequest) {
             <div class="readTime">${readTime} min${readTime !== '1' ? 's' : ''} read</div>
         </div>
     </body>
-</html>`;
+</html>
+`;
 }
