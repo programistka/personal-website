@@ -1,0 +1,75 @@
+---
+slug: '/deploy-app-to-multiple-environments-zeit-now'
+date: '2020-04-04'
+title: 'Deploy an app to multiple environments with ZEIT Now'
+# Description should be no more than 160 characters in length
+description: 'Learn how to deploy an app using the Now CLI version 17+ to multiple environments accessible at different custom domains.'
+categories: ['deployment']
+---
+
+Since the upgrade to the version 17 of the Now CLI, deploying an app to different environments is done differently than it was in version 16 of the Now CLI. This post will explain the following:
+
+- How to deploy an application to two different environments (e.g. staging & production) which will are accessible at 2 different subdomains (e.g. [staging.app.com](http://staging.app.com) and app.com).
+- Deploy to multiple environments from a local machine that is already authenticated with ZEIT Now using `now login`
+- Deploy to multiple environments from a CI machine that is not authenticated with ZEIT Now
+
+
+## ZEIT Now project setup
+
+In order to deploy an app to 2 different environments, it's required to have a ZEIT Now projects for each environment. In your project directory, you can execute the `now` command to deploy a new project. Once you've deployed the project for one environment (e.g. staging), take note of the `projectId` and `orgId` values found in the generated `.now/project.json` file as those values will be needed later.
+
+Once the `projectId` and `orgId` values have been recorded somewhere for the first environment, delete the `.now` directory and re-execute the `now` command to setup a project for the other environment (e.g. prod). Again, record the `projectId` and `orgId` values found in the generated `.now/project.json` file and then delete the `.now` directory.
+
+> If you've already created a project in ZEIT Now for your app, you can still run the `now` command above since the `now` command will prompt you to either create a new project or link to an existing project.
+
+Each environment will likely have a different set of environment variable values, so make sure to setup 2 different `now.json` [configuration files](https://zeit.co/docs/configuration#introduction/configuration-reference) for each environment. For example you can create a `now.staging.json` and a `now.prod.json` file to map your environment variables to the appropriate [Now secret](https://zeit.co/docs/v2/build-step#adding-secrets).
+
+Make sure to [configure the domain names](https://zeit.co/docs/v2/custom-domains) for each environment in the ZEIT dashboard in order to have the deployed apps accessible at custom domain names.
+
+## Deploy from local machine that is already authenticated with ZEIT Now
+
+With the `projectId` and `orgId` values known for each environment and the Now configuration files set for each environment, it's possible to deploy to both environments using the [Now CLI](https://zeit.co/docs/now-cli#getting-started). 
+
+```bash
+# Deploy to staging environment
+export NOW_PROJECT_ID=xxx && export NOW_ORG_ID=xxx && now --prod --local-config ./now.staging.json
+# Deploy to prod environment
+export NOW_PROJECT_ID=xxx && export NOW_ORG_ID=xxx && now --prod --local-config ./now.prod.json
+```
+
+Replace the `xxx` for `NOW_PROJECT_ID` and `NOW_ORG_ID` with the values of `projectId` and `orgId`, respectively, that correspond with the ZEIT Now project you wish to deploy. The above commands sets the `NOW_PROJECT_ID` and `NOW_ORG_ID` environment variables which are used by the Now CLI to determine to which project the app should be deployed.
+
+Personally, I use the **[dotenv-cli](https://www.npmjs.com/package/dotenv-cli)** library to set the `NOW_PROJECT_ID` and `NOW_ORG_ID` environment variables. It requires installing dotenv-cli and creating a file that will hold the values of the environment variables.
+
+```bash
+# .now.env.staging
+NOW_ORG_ID=xxx
+NOW_PROJECT_ID=xxx
+```
+
+Then the command to deploy to ZEIT Now is as follows:
+
+```bash
+# Deploy to staging environment
+dotenv -e now.env.staging -- now --prod --local-config ./now.staging.json
+# Deploy to prod environment
+dotenv -e now.env.prod -- now --prod --local-config ./now.prod.json
+```
+
+This allows me to store the values of the environment variables in files that can be ignored by git so I don't need to commit secrets to source control.
+
+## Deploy from CI machine that is not authenticated with ZEIT Now
+
+On CI machines, make sure to load the environment variables using the environment variable system that comes with your CI provider. For example, with GitHub actions you would set [GitHub secrets](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) that contain the `projectId` and `orgId` for all your deployment environments and then [map the values](https://help.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables) of those secrets to environment variables specified in a workflow file.
+
+Also, in order to run Now CLI commands from a CI machine, it is required to provide a ZEIT Now token to the Now CLI command to be executed. You can generate a ZEIT token [here](https://zeit.co/account/tokens).
+
+```bash
+now --prod --local-config ./now.staging.json --token xxx
+```
+
+## References
+
+[Spectrum chat discussion on project linking and CI/CD pipelines](https://spectrum.chat/zeit/now/solved-project-linking-and-ci-cd-pipelines~5e6eb62a-9d56-47ac-9e32-0d973a523787)
+
+[GitHub issue comment by Honza Javorek about the environment variables needed to be set](https://github.com/zeit/now/pull/3588#issuecomment-586149881)

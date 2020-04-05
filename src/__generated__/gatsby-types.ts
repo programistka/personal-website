@@ -3259,6 +3259,19 @@ type LayoutQueryVariables = {};
 
 type LayoutQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author' | 'siteUrl'>> }> };
 
+type PostQueryVariables = {
+  id: Scalars['String'];
+};
+
+
+type PostQuery = { readonly mdx: Maybe<(
+    Pick<Mdx, 'id' | 'timeToRead' | 'body'>
+    & { readonly frontmatter: Maybe<(
+      Pick<MdxFrontmatter, 'title' | 'description' | 'slug' | 'categories'>
+      & { formattedPublicationDate: MdxFrontmatter['date'], publicationDate: MdxFrontmatter['date'], formattedUpdatedAtDate: MdxFrontmatter['updatedAt'], updatedAtDate: MdxFrontmatter['updatedAt'] }
+    )>, readonly fields: Maybe<Pick<MdxFields, 'editLink'>> }
+  )> };
+
 type BlogQueryVariables = {};
 
 
@@ -3328,19 +3341,6 @@ type GatsbyImageSharpSizes_withWebp_tracedSVGFragment = Pick<ImageSharpSizes, 't
 type GatsbyImageSharpSizes_noBase64Fragment = Pick<ImageSharpSizes, 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
 
 type GatsbyImageSharpSizes_withWebp_noBase64Fragment = Pick<ImageSharpSizes, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
-
-type PostQueryVariables = {
-  id: Scalars['String'];
-};
-
-
-type PostQuery = { readonly mdx: Maybe<(
-    Pick<Mdx, 'id' | 'timeToRead' | 'body'>
-    & { readonly frontmatter: Maybe<(
-      Pick<MdxFrontmatter, 'title' | 'description' | 'slug' | 'categories'>
-      & { formattedPublicationDate: MdxFrontmatter['date'], publicationDate: MdxFrontmatter['date'], formattedUpdatedAtDate: MdxFrontmatter['updatedAt'], updatedAtDate: MdxFrontmatter['updatedAt'] }
-    )>, readonly fields: Maybe<Pick<MdxFields, 'editLink'>> }
-  )> };
 
 type HomeQueryVariables = {};
 
