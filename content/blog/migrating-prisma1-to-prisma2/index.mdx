@@ -1,0 +1,301 @@
+---
+slug: '/migrating-prisma1-to-prisma2'
+date: '2020-04-13'
+updatedAt: '2020-04-13'
+title: 'Upgrading from Prisma 1 to Prisma 2'
+description: "A guide on how to upgrade from Prisma 1 to Prisma 2 and whether it is worth upgrading to the latest version."
+categories: ['prisma', 'typescript']
+---
+
+import HireMeComponent from "./HireMeComponent";
+
+This post outlines the following:
+
+- [Steps to take to upgrade a Prisma 1 app (built with `nexus-prisma`) to Prisma 2](#steps-to-take-to-upgrade)
+- [Benefits of upgrading to Prisma 2](#benefits-of-upgrading-to-prisma-2)
+- [Considerations to keep in mind regarding the upgrade](#considerations-to-keep-in-mind)
+- [Whether upgrading to Prisma 2 is worth it](#is-upgrading-to-prisma-2-worth-it)
+
+## Steps to take to upgrade
+
+### Clear node modules
+
+```bash
+rm -r node_modules
+```
+
+Clearing the `node_modules` directory eliminates any issues with existing code found in the `node_modules` causing problems with the new prisma and nexus libraries that will be added.
+
+### Remove existing prisma and nexus dependencies
+
+```bash
+yarn remove prisma prisma-client-lib nexus-prisma-generate
+```
+
+- `prisma` was the Prisma 1 CLI. Prisma 2 uses `@prisma/cli`.
+- `prisma-client-lib` was the Prisma 1 client. Prisma 2 uses `@prisma/client`
+- `nexus-prisma-generate` was used to generate code that was used to create a GraphQL schema. The latest nexus relies on `@nexus/schema` to generate the schema.
+
+### Upgrade nexus dependencies
+
+```bash
+yarn upgrade nexus@latest nexus-prisma@latest
+```
+
+### Install new prisma and nexus dependencies
+
+```
+yarn add @nexus/schema @prisma/client @prisma/cli
+```
+
+- `@nexus/schema` includes the functions required to build the nexus GraphQL schema. The functions provided by `@nexus/schema` will be enhanced with prisma-specific methods with the usage of the `nexusPrismaPlugin`, which is imported from `nexus-prisma`. 
+
+> The new nexus documentation is at [nexusjs.org](https://www.nexusjs.org/#/README) and the old nexus documentation is at [nexus.js.org](https://nexus.js.org/). Nexus is moving towards [becoming a framework](https://github.com/graphql-nexus/schema/issues/373), so that is likely why there is a completely new set of documentation for the nexus.
+
+- `@prisma/client` is the Prisma 2 client.
+- `@prisma/cli` is the Prisma 2 CLI which will be used for introspecting the database as well as generating the Prisma client.
+
+> The Prisma 2 CLI can also be used for [database migrations](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-migrate), but it is still in an experimental phase so it's probably a safer bet to rely on another tool for your database migrations, such as [Knex.js](http://knexjs.org/#Migrations).
+
+
+### Create new datamodel file
+
+Prisma 2 uses a [new datamodel](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-schema/data-model). The datamodel contains information about the structure of the database tables.
+
+Create a `schema.prisma` file in the project root:
+
+```yaml
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = "mysql://root:rootPassword@localhost:3306/dbName"
+}
+```
+
+The [datasource configuration](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-schema/data-sources) will be different depending on the type of database you use. You can also use environment variables for the `url` config by using the `env()` function in the datamodel file. The prisma CLI will automatically try to load environment variables found in a `.env` file and use those to replace the environment variables specified in the datamodel file.
+
+```yaml
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+```
+
+> With Prisma 1, it was possible to specify the environment variable filename for the prisma deploy command. With Prisma 2, there [is no way to specify the filename](https://github.com/prisma/prisma/issues/1255) used for the environment variables when running the command to generate the Prisma client. 
+
+### Introspect current database
+
+```bash
+npx prisma introspect
+```
+
+Introspecting the database will populate the `schema.prisma` with models that are based off your database tables and columns. You'll need to manually adjust some of the model fields for some of the information the introspect command is not able to know about. Here are some things you may need to manually adjust:
+
+- All the `createdAt` fields need to have an attribute of `@default(now())`
+- All the `upadtedAt` fields need to have an attribute of `@updatedAt`
+- All `id` fields need to have a default value added to them `@default(cuid())`
+- All enums must be added manually and the fields that use the enums need to be adjusted
+
+### Generate the prisma client
+
+```bash
+npx prisma generate
+```
+
+This will generate the prisma client inside of the `node_modules` directory. The prisma client can now be imported and used anywhere:
+
+```tsx
+import { PrismaClient } from @prisma/client;
+
+const prisma = new PrismaClient();
+```
+
+> Try to instantiate the least number of PrismaClient instances to minimize the number of connections to your database.
+
+### Create schema with nexus
+
+```tsx
+import { makeSchema } from '@nexus/schema';
+import { nexusPrismaPlugin } from 'nexus-prisma';
+import { Query } from './queries';
+import { Mutation } from './mutations';
+
+export const schema = makeSchema({
+    shouldGenerateArtifacts: true,
+    types: [
+        Query,
+        Mutation,
+    ],
+    plugins: [
+        nexusPrismaPlugin(),
+    ],
+    // Tells nexus where to look for types when generating the graphql schema
+    typegenAutoConfig: {
+        sources: [
+            {
+                source: '@prisma/client',
+                alias: 'prisma',
+            },
+        ],
+    },
+    // Tells nexus where to output the generated graphql schema and types
+    outputs: {
+        schema: path.join(__dirname, '../generated/schema.graphql'),
+        typegen: path.join(__dirname, '../generated/nexus.ts'),
+    },
+});
+```
+
+Previously you would have had to import `makePrismaSchema` from `nexus-prisma`, but now you import `makeSchema` from `@nexus/schema`.
+
+In order to take advantage of the [prisma plugin](https://www.nexusjs.org/#/plugins/prisma) for nexus, `nexusPrismaPlugin` needs to be imported from `nexus-prisma` and added to the `plugins` array.
+
+### Create and configure the GraphQL server
+
+```tsx
+import { GraphQLServer } from 'graphql-yoga';
+import { schema } from './schema';
+
+const prisma = new PrismaClient();
+
+const server = new GraphQLServer({
+    schema,
+    // Adds prisma to the graphql context for use inside of mutation and query resolvers
+    context: {
+        prisma,
+    }
+});
+```
+
+The above example uses graphql-yoga, but it should just as easily be done with Apollo Server. All you need to do is pass the `schema` to the graphql server configuration and also add `prisma` to the graphql server's context.
+
+> You may want to consider trying out the Nexus framework, which includes its own server. You would need to install `nexus@next` and follow this [migration guide](https://www.nexusjs.org/#/getting-started/migrate-from-nexus-schema) to get things setup.
+
+### Adjust all queries and mutations
+
+Now it is required to adjust all the queries and mutations that have been defined using the "old nexus" with the "new nexus". Here is what should be changed:
+
+- Imports of `stringArg`, `idArg`, `intArg`, `arg`, etc from `nexus` should now be imported from `@nexus/schema`
+- `prismaObjectType` does not exist anymore. Instead, you should use `mutationType` for mutations, `queryType` for queries, and `objectType` for other schema objects. `mutationType`, `queryType` and `objectType` can all be imported from `@nexus/schema`.
+- Any prisma model you would like to expose need to be exposed by using `objectType` and `t.model`. [`t.model`](https://www.nexusjs.org/#/plugins/prisma?id=tmodel) is used to specify which fields on your Prisma model you wish to expose.
+
+For example given the following Prisma model:
+
+```yaml
+model User {
+    id                     String           @default(cuid()) @id
+    email                  String           @unique
+    hasVerifiedEmail       Boolean?
+    password               String?
+    resetToken             String?
+}
+```
+        
+You could choose expose only the `id`, `email`, and `hasVerifiedEmail` fields through your API by defining the User object type as follows:
+
+```tsx
+import { objectType } from '@nexus/schema';
+
+export const User = objectType({
+    name: 'User',
+    definition(t) {
+        t.model.id();
+        t.model.email();
+        t.model.hasVerifiedEmail();
+    },
+});
+```
+
+- Make sure to add all the objects, queries, and mutations defined with `@nexus/schema` to the `types` property of the `makeSchema` function in order to have all the object types, queries, and mutations added to the generated schema.
+
+```tsx
+export const schema = makeSchema({
+    ...
+    types: [
+        // Object Types
+        BillingInfo,
+        Company,
+        JobApplication,
+        Resume,
+        User,
+
+        // Queries
+        Query,
+
+        // Mutations
+        Mutation,
+    ],
+    ...
+});
+```
+
+- The generated prisma client is slightly different than the prisma client generated with Prisma 1, so rely on TypeScript to tell you which methods/arguments need to change when using the prisma client in your resolvers.
+
+<HireMeComponent/>
+
+### Start the server
+
+```bash
+ts-node --files src/index.ts
+```
+
+Now, all there is left to do is to try starting you server and if all goes well, the server will running and nexus will generate all the types for the api in addition to the graphql schema. The location of the generated nexus code is determined by the `outputs` configuration of the `makeSchema` function.
+
+During the migration, I recommend you comment out your existing queries and mutations defined with nexus and migrate them one at a time. You should regularly try to generate your nexus schema with the newly written migration queries and mutations to make sure no errors exist.
+
+Instead of having to start you server to generate your schema, consider moving the code that generates the schema in it's own file and then run a command to execute that file. That command would like something like:
+
+```bash
+ts-node --transpile-only src/schema
+```
+
+Read more about the recommended project setup [in the Nexus docs](https://www.nexusjs.org/#/components/schema/plugins/prisma?id=project-setup).
+
+## Benefits of upgrading to Prisma 2
+
+- No longer need a seperate server for Prisma. This simplifies a lot of things, from deployments to local development.
+- [VSCode extension](https://marketplace.visualstudio.com/items?itemName=Prisma.prisma) exists for the latest datamodel, unlike the old Prisma 1 datamodel.
+- Prisma 2 is actively maintained and developed, unlike Prisma 1. The main documentation for Prisma is now all for Prisma 2 and you will likely end up on a lot of broken links when trying to access documentation for Prisma 1 through search engines.
+
+## Considerations to keep in mind
+
+You'll have to get comfortable with manipulating databases with SQL when using Prisma 2. Unless you want to try out the experimental [Prisma Migrate](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-migrate), you'll need to setup a tool to handle database migrations, such as [Knex.js](http://knexjs.org/). You can use the prisma introspect command to help figure out how changes to your database are reflected in the prisma datamodel. However, when running the introspection command, any custom modifications previously made to the datamodel file (such as specifying default values) will be erased, so they will need to be added back manually.
+
+I highly recommend that your Prisma 1 project is written in TypeScript before trying to attempt the upgrade to Prisma 2. TypeScript will help guide the migration by indicating what needs to be fixed and makes the upgrade much more manageable. Trying to upgrade without TypeScript would be incredibly difficult to do without introducing a lot of new bugs.
+
+Any sort of deletion behaviour (such as cascading deletes) needs to be implemented at the database level. This means that SQL commands need to be run against your database in order to alter foreign key constraints. Prisma has some [documentation on how to setup foreign key constraints](https://www.prisma.io/docs/guides/database-workflows/cascading-deletes/mysql), but it does not specifically talk about altering existing foreign key contraints, which is what you will need to do.
+
+You'll likely encounter some other challenges during the migration, since it is a significant upgrade. For reference, here are some issues i've encountered and had to work around when upgrading:
+
+- Need special setup for docker images that use a Node Alpine image: [https://github.com/prisma/prisma/issues/1642](https://github.com/prisma/prisma/issues/1642)
+- Missing auto-generated input types for CRUD operations: [https://github.com/graphql-nexus/nexus-schema-plugin-prisma/issues/381](https://github.com/graphql-nexus/nexus-schema-plugin-prisma/issues/381)
+- Passing `null` to create operations causes a run-time error in Prisma 2, but did not cause issues with Prisma 1: [https://github.com/prisma/prisma-client-js/issues/459](https://github.com/prisma/prisma-client-js/issues/459)
+
+## Is upgrading to Prisma 2 worth it?
+
+You should consider upgrading to Prisma 2 if:
+
+- You plan to continue active development of a project that is currently using Prisma 1
+- You want to eliminate the prisma server to save infrastructure costs
+- You want to take advantage of the latest features of Prisma 2
+- Willing to accept you will need to fix a few new bugs introduced from the migration of Prisma 2
+
+You should avoid upgrading to Prisma 2 if:
+
+- Your Prisma 1 project is written in JavaScript. I would first migrate it to TypeScript before attempting to upgrade.
+- Your app only needs occasional maintenance. The upgrade does require a significant amount of time and will likely introduce a few bugs, so it's not worth doing if your app is not actively being developed.
+- You don't mind paying for the additional infrastructure required to run the prisma server that is required with Prisma 1
+
+---
+
+If you'd like to see some examples of projects that use Prisma 2, check out these resources:
+
+- [Tech Job Hunt: Fully fledged application using Prisma 2 and @nexus/schema](https://github.com/robertcoopercode/tech-job-hunt)
+- [Prisma examples repository, filled with a bunch of small examples apps using Prisma 2](https://github.com/prisma/prisma-examples)

@@ -3244,7 +3244,26 @@ type StringQueryOperatorInput = {
   readonly glob: Maybe<Scalars['String']>;
 };
 
+type LayoutQueryVariables = {};
+
+
+type LayoutQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author' | 'siteUrl'>> }> };
+
 type GatsbyImageSharpFluidFragment = Pick<ImageSharpFluid, 'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
+
+type HomeQueryVariables = {};
+
+
+type HomeQuery = { readonly posts: { readonly edges: ReadonlyArray<{ readonly node: (
+        Pick<Mdx, 'id' | 'timeToRead'>
+        & { readonly frontmatter: Maybe<(
+          Pick<MdxFrontmatter, 'title' | 'description' | 'slug' | 'categories'>
+          & { formattedDate: MdxFrontmatter['date'], dateTimeString: MdxFrontmatter['date'] }
+        )> }
+      ) }> }, readonly projects: { readonly edges: ReadonlyArray<{ readonly node: { readonly fields: Maybe<Pick<MdxFields, 'id' | 'slug'>>, readonly frontmatter: Maybe<(
+          Pick<MdxFrontmatter, 'title' | 'subtitle' | 'description' | 'slug'>
+          & { readonly image: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluidFragment> }> }> }
+        )> } }> } };
 
 type ProjectsQueryVariables = {};
 
@@ -3254,10 +3273,16 @@ type ProjectsQuery = { readonly allMdx: { readonly edges: ReadonlyArray<{ readon
           & { readonly image: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluidFragment> }> }> }
         )> } }> } };
 
-type LayoutQueryVariables = {};
+type BlogQueryVariables = {};
 
 
-type LayoutQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author' | 'siteUrl'>> }> };
+type BlogQuery = { readonly allMdx: { readonly edges: ReadonlyArray<{ readonly node: (
+        Pick<Mdx, 'id' | 'timeToRead'>
+        & { readonly frontmatter: Maybe<(
+          Pick<MdxFrontmatter, 'title' | 'description' | 'slug' | 'categories'>
+          & { formattedDate: MdxFrontmatter['date'], dateTimeString: MdxFrontmatter['date'] }
+        )> }
+      ) }> } };
 
 type PostQueryVariables = {
   id: Scalars['String'];
@@ -3271,17 +3296,6 @@ type PostQuery = { readonly mdx: Maybe<(
       & { formattedPublicationDate: MdxFrontmatter['date'], publicationDate: MdxFrontmatter['date'], formattedUpdatedAtDate: MdxFrontmatter['updatedAt'], updatedAtDate: MdxFrontmatter['updatedAt'] }
     )>, readonly fields: Maybe<Pick<MdxFields, 'editLink'>> }
   )> };
-
-type BlogQueryVariables = {};
-
-
-type BlogQuery = { readonly allMdx: { readonly edges: ReadonlyArray<{ readonly node: (
-        Pick<Mdx, 'id' | 'timeToRead'>
-        & { readonly frontmatter: Maybe<(
-          Pick<MdxFrontmatter, 'title' | 'description' | 'slug' | 'categories'>
-          & { formattedDate: MdxFrontmatter['date'], dateTimeString: MdxFrontmatter['date'] }
-        )> }
-      ) }> } };
 
 type ProjectQueryVariables = {
   id: Scalars['String'];
@@ -3341,20 +3355,6 @@ type GatsbyImageSharpSizes_withWebp_tracedSVGFragment = Pick<ImageSharpSizes, 't
 type GatsbyImageSharpSizes_noBase64Fragment = Pick<ImageSharpSizes, 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
 
 type GatsbyImageSharpSizes_withWebp_noBase64Fragment = Pick<ImageSharpSizes, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
-
-type HomeQueryVariables = {};
-
-
-type HomeQuery = { readonly posts: { readonly edges: ReadonlyArray<{ readonly node: (
-        Pick<Mdx, 'id' | 'timeToRead'>
-        & { readonly frontmatter: Maybe<(
-          Pick<MdxFrontmatter, 'title' | 'description' | 'slug' | 'categories'>
-          & { formattedDate: MdxFrontmatter['date'], dateTimeString: MdxFrontmatter['date'] }
-        )> }
-      ) }> }, readonly projects: { readonly edges: ReadonlyArray<{ readonly node: { readonly fields: Maybe<Pick<MdxFields, 'id' | 'slug'>>, readonly frontmatter: Maybe<(
-          Pick<MdxFrontmatter, 'title' | 'subtitle' | 'description' | 'slug'>
-          & { readonly image: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluidFragment> }> }> }
-        )> } }> } };
 
 type PagesQueryQueryVariables = {};
 
