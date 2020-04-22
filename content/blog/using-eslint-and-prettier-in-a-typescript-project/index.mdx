@@ -137,8 +137,8 @@ For a good developer experience, it's useful to setup your editor to automatical
   "eslint.validate": [
     "javascript",
     "javascriptreact",
-    { "language": "typescript", "autoFix": true },
-    { "language": "typescriptreact", "autoFix": true }
+    "typescript",
+    "typescriptreact"
   ]
 }
 ```
@@ -198,8 +198,7 @@ To configure `lint-staged` and `husky`, add the following configuration to the `
   },
   "lint-staged": {
       "*.{js,ts,tsx}": [
-          "eslint --fix",
-          "git add"
+          "eslint --fix"
       ]
   }
 }
