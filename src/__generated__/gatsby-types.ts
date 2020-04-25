@@ -695,9 +695,9 @@ enum FileFieldsEnum {
   childMdx___frontmatter___title = 'childMdx.frontmatter.title',
   childMdx___frontmatter___slug = 'childMdx.frontmatter.slug',
   childMdx___frontmatter___date = 'childMdx.frontmatter.date',
+  childMdx___frontmatter___updatedAt = 'childMdx.frontmatter.updatedAt',
   childMdx___frontmatter___description = 'childMdx.frontmatter.description',
   childMdx___frontmatter___categories = 'childMdx.frontmatter.categories',
-  childMdx___frontmatter___updatedAt = 'childMdx.frontmatter.updatedAt',
   childMdx___frontmatter___subtitle = 'childMdx.frontmatter.subtitle',
   childMdx___frontmatter___image___sourceInstanceName = 'childMdx.frontmatter.image.sourceInstanceName',
   childMdx___frontmatter___image___absolutePath = 'childMdx.frontmatter.image.absolutePath',
@@ -773,9 +773,9 @@ enum FileFieldsEnum {
   childMdx___frontmatter___banner___publicURL = 'childMdx.frontmatter.banner.publicURL',
   childMdx___frontmatter___banner___id = 'childMdx.frontmatter.banner.id',
   childMdx___frontmatter___banner___children = 'childMdx.frontmatter.banner.children',
-  childMdx___frontmatter___website = 'childMdx.frontmatter.website',
-  childMdx___frontmatter___order = 'childMdx.frontmatter.order',
   childMdx___frontmatter___github = 'childMdx.frontmatter.github',
+  childMdx___frontmatter___order = 'childMdx.frontmatter.order',
+  childMdx___frontmatter___website = 'childMdx.frontmatter.website',
   childMdx___body = 'childMdx.body',
   childMdx___excerpt = 'childMdx.excerpt',
   childMdx___headings = 'childMdx.headings',
@@ -1541,9 +1541,9 @@ enum MdxFieldsEnum {
   frontmatter___title = 'frontmatter.title',
   frontmatter___slug = 'frontmatter.slug',
   frontmatter___date = 'frontmatter.date',
+  frontmatter___updatedAt = 'frontmatter.updatedAt',
   frontmatter___description = 'frontmatter.description',
   frontmatter___categories = 'frontmatter.categories',
-  frontmatter___updatedAt = 'frontmatter.updatedAt',
   frontmatter___subtitle = 'frontmatter.subtitle',
   frontmatter___image___sourceInstanceName = 'frontmatter.image.sourceInstanceName',
   frontmatter___image___absolutePath = 'frontmatter.image.absolutePath',
@@ -1669,9 +1669,9 @@ enum MdxFieldsEnum {
   frontmatter___banner___childMdx___timeToRead = 'frontmatter.banner.childMdx.timeToRead',
   frontmatter___banner___childMdx___id = 'frontmatter.banner.childMdx.id',
   frontmatter___banner___childMdx___children = 'frontmatter.banner.childMdx.children',
-  frontmatter___website = 'frontmatter.website',
-  frontmatter___order = 'frontmatter.order',
   frontmatter___github = 'frontmatter.github',
+  frontmatter___order = 'frontmatter.order',
+  frontmatter___website = 'frontmatter.website',
   body = 'body',
   excerpt = 'excerpt',
   headings = 'headings',
@@ -1812,17 +1812,17 @@ type MdxFrontmatter = {
   readonly title: Scalars['String'];
   readonly slug: Maybe<Scalars['String']>;
   readonly date: Maybe<Scalars['Date']>;
+  readonly updatedAt: Maybe<Scalars['Date']>;
   readonly description: Maybe<Scalars['String']>;
   readonly categories: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
-  readonly updatedAt: Maybe<Scalars['Date']>;
   readonly subtitle: Maybe<Scalars['String']>;
   readonly image: Maybe<File>;
   readonly backgroundColor: Maybe<Scalars['String']>;
   readonly textColor: Maybe<Scalars['String']>;
   readonly banner: Maybe<File>;
-  readonly website: Maybe<Scalars['String']>;
-  readonly order: Maybe<Scalars['Int']>;
   readonly github: Maybe<Scalars['String']>;
+  readonly order: Maybe<Scalars['Int']>;
+  readonly website: Maybe<Scalars['String']>;
 };
 
 
@@ -1845,17 +1845,17 @@ type MdxFrontmatterFilterInput = {
   readonly title: Maybe<StringQueryOperatorInput>;
   readonly slug: Maybe<StringQueryOperatorInput>;
   readonly date: Maybe<DateQueryOperatorInput>;
+  readonly updatedAt: Maybe<DateQueryOperatorInput>;
   readonly description: Maybe<StringQueryOperatorInput>;
   readonly categories: Maybe<StringQueryOperatorInput>;
-  readonly updatedAt: Maybe<DateQueryOperatorInput>;
   readonly subtitle: Maybe<StringQueryOperatorInput>;
   readonly image: Maybe<FileFilterInput>;
   readonly backgroundColor: Maybe<StringQueryOperatorInput>;
   readonly textColor: Maybe<StringQueryOperatorInput>;
   readonly banner: Maybe<FileFilterInput>;
-  readonly website: Maybe<StringQueryOperatorInput>;
-  readonly order: Maybe<IntQueryOperatorInput>;
   readonly github: Maybe<StringQueryOperatorInput>;
+  readonly order: Maybe<IntQueryOperatorInput>;
+  readonly website: Maybe<StringQueryOperatorInput>;
 };
 
 type MdxGroupConnection = {
@@ -3265,6 +3265,19 @@ type HomeQuery = { readonly posts: { readonly edges: ReadonlyArray<{ readonly no
           & { readonly image: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluidFragment> }> }> }
         )> } }> } };
 
+type PostQueryVariables = {
+  id: Scalars['String'];
+};
+
+
+type PostQuery = { readonly mdx: Maybe<(
+    Pick<Mdx, 'id' | 'timeToRead' | 'body'>
+    & { readonly frontmatter: Maybe<(
+      Pick<MdxFrontmatter, 'title' | 'description' | 'slug' | 'categories'>
+      & { formattedPublicationDate: MdxFrontmatter['date'], publicationDate: MdxFrontmatter['date'], formattedUpdatedAtDate: MdxFrontmatter['updatedAt'], updatedAtDate: MdxFrontmatter['updatedAt'] }
+    )>, readonly fields: Maybe<Pick<MdxFields, 'editLink'>> }
+  )> };
+
 type ProjectsQueryVariables = {};
 
 
@@ -3283,19 +3296,6 @@ type BlogQuery = { readonly allMdx: { readonly edges: ReadonlyArray<{ readonly n
           & { formattedDate: MdxFrontmatter['date'], dateTimeString: MdxFrontmatter['date'] }
         )> }
       ) }> } };
-
-type PostQueryVariables = {
-  id: Scalars['String'];
-};
-
-
-type PostQuery = { readonly mdx: Maybe<(
-    Pick<Mdx, 'id' | 'timeToRead' | 'body'>
-    & { readonly frontmatter: Maybe<(
-      Pick<MdxFrontmatter, 'title' | 'description' | 'slug' | 'categories'>
-      & { formattedPublicationDate: MdxFrontmatter['date'], publicationDate: MdxFrontmatter['date'], formattedUpdatedAtDate: MdxFrontmatter['updatedAt'], updatedAtDate: MdxFrontmatter['updatedAt'] }
-    )>, readonly fields: Maybe<Pick<MdxFields, 'editLink'>> }
-  )> };
 
 type ProjectQueryVariables = {
   id: Scalars['String'];

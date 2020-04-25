@@ -2,6 +2,7 @@
     "name": "robertcooper.me",
     "dependencies": {
         "@reach/router": "^1.3.3",
+        "eslint-config-prettier": "^6.11.0",
         "focus-visible": "^5.0.2",
         "gatsby-link": "^2.3.1",
         "gatsby-plugin-mdx": "^1.1.3",
@@ -35,7 +36,6 @@
         "@typescript-eslint/parser": "^2.25.0",
         "babel-plugin-styled-components": "^1.10.7",
         "eslint": "^6.8.0",
-        "eslint-config-prettier": "^6.10.1",
         "eslint-plugin-import": "^2.20.2",
         "eslint-plugin-prettier": "^3.1.2",
         "eslint-plugin-react": "^7.19.0",

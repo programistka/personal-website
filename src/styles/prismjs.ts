@@ -147,7 +147,7 @@ export const prismjsStyles = css`
     }
 
     /* Line highlighting makes the font way too big on mobile safari :( Don't know how to fix this bug */
-    /*.gatsby-highlight-code-line {
+    .gatsby-highlight-code-line {
         background-color: hsla(207, 95%, 15%, 1);
         display: block;
         margin-right: -1em;
@@ -155,14 +155,14 @@ export const prismjsStyles = css`
         padding-right: 1em;
         padding-left: 0.75em;
         border-left: 0.25em solid #80b2ed;
-    }/*
+    }
 
-    /*.gatsby-highlight pre[class*='language-'] {
+    .gatsby-highlight pre[class*='language-'] {
         background-color: transparent;
         margin: 0;
         padding: 0;
         overflow: initial;
         float: left;
         min-width: 100%;
-    } */
+    }
 `;

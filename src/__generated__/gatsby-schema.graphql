@@ -807,9 +807,9 @@ enum FileFieldsEnum {
   childMdx___frontmatter___title
   childMdx___frontmatter___slug
   childMdx___frontmatter___date
+  childMdx___frontmatter___updatedAt
   childMdx___frontmatter___description
   childMdx___frontmatter___categories
-  childMdx___frontmatter___updatedAt
   childMdx___frontmatter___subtitle
   childMdx___frontmatter___image___sourceInstanceName
   childMdx___frontmatter___image___absolutePath
@@ -885,9 +885,9 @@ enum FileFieldsEnum {
   childMdx___frontmatter___banner___publicURL
   childMdx___frontmatter___banner___id
   childMdx___frontmatter___banner___children
-  childMdx___frontmatter___website
-  childMdx___frontmatter___order
   childMdx___frontmatter___github
+  childMdx___frontmatter___order
+  childMdx___frontmatter___website
   childMdx___body
   childMdx___excerpt @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   childMdx___headings @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
@@ -1551,9 +1551,9 @@ enum MdxFieldsEnum {
   frontmatter___title
   frontmatter___slug
   frontmatter___date
+  frontmatter___updatedAt
   frontmatter___description
   frontmatter___categories
-  frontmatter___updatedAt
   frontmatter___subtitle
   frontmatter___image___sourceInstanceName
   frontmatter___image___absolutePath
@@ -1679,9 +1679,9 @@ enum MdxFieldsEnum {
   frontmatter___banner___childMdx___timeToRead @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   frontmatter___banner___childMdx___id @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   frontmatter___banner___childMdx___children @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
-  frontmatter___website
-  frontmatter___order
   frontmatter___github
+  frontmatter___order
+  frontmatter___website
   body
   excerpt @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
   headings @deprecated(reason: "Sorting on fields that need arguments to resolve is deprecated.")
@@ -1838,8 +1838,6 @@ type MdxFrontmatter {
     # Configures the locale Moment.js will use to format the date.
     locale: String
   ): Date
-  description: String
-  categories: [String]
   updatedAt(
     # Format the date using Moment.js' date tokens, e.g. `date(formatString: "YYYY
     # MMMM DD")`. See https://momentjs.com/docs/#/displaying/format/ for
@@ -1857,31 +1855,33 @@ type MdxFrontmatter {
     # Configures the locale Moment.js will use to format the date.
     locale: String
   ): Date
+  description: String
+  categories: [String]
   subtitle: String
   image: File
   backgroundColor: String
   textColor: String
   banner: File
-  website: String
-  order: Int
   github: String
+  order: Int
+  website: String
 }
 
 input MdxFrontmatterFilterInput {
   title: StringQueryOperatorInput
   slug: StringQueryOperatorInput
   date: DateQueryOperatorInput
+  updatedAt: DateQueryOperatorInput
   description: StringQueryOperatorInput
   categories: StringQueryOperatorInput
-  updatedAt: DateQueryOperatorInput
   subtitle: StringQueryOperatorInput
   image: FileFilterInput
   backgroundColor: StringQueryOperatorInput
   textColor: StringQueryOperatorInput
   banner: FileFilterInput
-  website: StringQueryOperatorInput
-  order: IntQueryOperatorInput
   github: StringQueryOperatorInput
+  order: IntQueryOperatorInput
+  website: StringQueryOperatorInput
 }
 
 type MdxGroupConnection {
